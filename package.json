@@ -1,0 +1,57 @@
+{
+  "name": "react-material-quizz",
+  "version": "1.0.0",
+  "description": "React JS material quizz",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "React",
+    "ReactJS",
+    "react",
+    "react",
+    "js",
+    "jspm",
+    "starter",
+    "es6",
+    "ES6",
+    "ES2015"
+  ],
+  "author": "Erwan DATIN (MacKentoch)",
+  "license": "MIT",
+  "jspm": {
+    "directories": {},
+    "dependencies": {
+      "clean-css": "npm:clean-css@^3.4.8",
+      "css": "github:systemjs/plugin-css@^0.1.20",
+      "json": "github:systemjs/plugin-json@^0.1.0",
+      "jsx": "npm:jspm-loader-jsx@^0.0.7",
+      "material-design-icons": "github:google/material-design-icons@^2.1.1",
+      "material-design-lite": "github:google/material-design-lite@^1.0.6",
+      "material-ui": "npm:material-ui@^0.14.0-rc1",
+      "react": "npm:react@^0.14.3",
+      "react-dom": "npm:react-dom@^0.14.3",
+      "react-router": "npm:react-router@^1.0.2",
+      "react-tap-event-plugin": "npm:react-tap-event-plugin@^0.2.1",
+      "text": "github:systemjs/plugin-text@^0.0.4"
+    },
+    "devDependencies": {
+      "babel": "npm:babel-core@^5.8.22",
+      "babel-runtime": "npm:babel-runtime@^5.8.20",
+      "core-js": "npm:core-js@^1.1.0"
+    }
+  },
+  "devDependencies": {
+    "gulp": "^3.9.0",
+    "gulp-cached": "^1.1.0",
+    "gulp-concat": "^2.6.0",
+    "gulp-cssmin": "^0.1.7",
+    "gulp-jshint": "^2.0.0",
+    "gulp-notify": "^2.2.0",
+    "gulp-react": "^3.1.0",
+    "gulp-sass": "^2.1.1",
+    "gulp-sourcemaps": "^1.6.0",
+    "jshint": "^2.8.0"
+  }
+}
