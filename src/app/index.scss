@@ -1,11 +1,4 @@
-@import 'shared/material.min.custom';
 @import 'components/ReactMaterialQuizz/reactMaterialQuizz';
-@import 'components/Header/header';
-@import 'components/HeaderTitle/headerTitle';
-@import 'components/HeaderMenuButton/headerMenuButton';
-@import 'components/HeaderMenuList/headerMenuList';
-@import 'components/SideNav/sideNav';
-@import 'components/MainContent/mainContent';
-@import 'components/Routes/routes';
-@import 'views/Quiz/quizz';
-@import 'views/About/about';
+@import 'components/Home/home';
+@import 'components/About/about';
+@import 'components/Quiz/quiz';

@@ -5,12 +5,9 @@ import IconMenu             from 'material-ui/lib/menus/icon-menu';
 import MenuItem             from 'material-ui/lib/menus/menu-item';
 import IconButton           from 'material-ui/lib/icon-button';
 import NavigationMoreVert   from 'material-ui/lib/svg-icons/navigation/more-vert';
-import MainContent          from '../MainContent/MainContent.jsx!';
-
 import navigationModel      from '../../models/navigationModel.json!json';
 
 const HEADER_TITLE      = 'React Material Quizz';
-
 
 export default class ReactMaterialQuizz extends React.Component {
 
@@ -31,8 +28,7 @@ export default class ReactMaterialQuizz extends React.Component {
     
   }
   
-  handleChangeRequestLeftNav(e){
-    e.preventDefault();
+  handleChangeRequestLeftNav(){
     let previousOpenState = this.state.leftNavOpen;
     this.setState({ leftNavOpen: !previousOpenState });    
   }
@@ -45,17 +41,17 @@ export default class ReactMaterialQuizz extends React.Component {
           ref="leftNav" 
           docked={false}
           open={this.state.leftNavOpen}
-          onRequestChange={(e)=>this.handleChangeRequestLeftNav(e)}>
+          onRequestChange={()=>this.handleChangeRequestLeftNav()}>
           <MenuItem index={0}>
-            Menu Item
+            Home
           </MenuItem>
           <MenuItem index={1}>
-            test
+            Quiz
           </MenuItem>
         </LeftNav>				
         <AppBar
           title={this.state.headerTitle}
-          onLeftIconButtonTouchTap={(e)=>this.handleChangeRequestLeftNav(e)}
+          onLeftIconButtonTouchTap={()=>this.handleChangeRequestLeftNav()}
           isInitiallyOpen={true}
           iconElementRight={
             <IconMenu iconButtonElement={<IconButton><NavigationMoreVert /></IconButton>}>
@@ -75,10 +71,3 @@ export default class ReactMaterialQuizz extends React.Component {
  
 }
 
-
-/*
-<div>
-  <Header />
-  <SideNav />
-  <MainContent />
-</div>*/

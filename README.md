@@ -6,7 +6,6 @@ This is a simple dynamic quizz in ReactJS designed with google material
 **feature :** 
 
 - ReactJS (> 0.14)
-- material design lite (for static template)
 - Material UI 
 - ES6 (*or ES2015 as it is now called since recent time*)
 - jspm (*System JS and jspm = speed of light workflow from zero*) 
