@@ -1,22 +1,21 @@
 React JS material quizz
 =========
 
-This is a simple dynamic quizz in ReactJS designed with google material
+This is a simple dynamic quiz in [ReactJS](https://facebook.github.io/react/) designed following [google material guidelines](https://www.google.com/design/spec/material-design/introduction.html) thanks to nice [material UI](http://www.material-ui.com)
 
 **feature :** 
 
 - ReactJS (> 0.14)
 - Material UI 
-- ES6 (*or ES2015 as it is now called since recent time*)
-- jspm (*System JS and jspm = speed of light workflow from zero*) 
+- ES6
+- jspm 
 - babel (<6)
-  - babel6 is a breaking change by itself. A new repo will be created soon with jspm-babel6.
-  Right now (mid-december 2015) automatic `jspm init` will provide babel<6
-- a simple hello world component (see : `./src/app/**`).
 
 
 
 ##Intallation :
+
+Clone or download then :
 
 ```bash
 npm install && jspm install
