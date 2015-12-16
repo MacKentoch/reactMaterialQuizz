@@ -6,13 +6,13 @@ export const styles = {
   slide: {
     minHeight   : '400px'
   },
-  slide1: {
+  intro: {
     background: '#fff',
   },
-  slide2: {
+  questions: {
     background: '#fff',
   },
-  slide3: {
+  end: {
     background: '#fff',
   },
   headline: {
