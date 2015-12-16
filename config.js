@@ -20,6 +20,7 @@ System.config({
     "clean-css": "npm:clean-css@3.4.8",
     "core-js": "npm:core-js@1.2.6",
     "css": "github:systemjs/plugin-css@0.1.20",
+    "flexboxgrid": "github:kristoferjoseph/flexboxgrid@6.3.0",
     "json": "github:systemjs/plugin-json@0.1.0",
     "jsx": "npm:jspm-loader-jsx@0.0.7",
     "material-design-icons": "github:google/material-design-icons@2.1.1",
@@ -28,6 +29,7 @@ System.config({
     "react": "npm:react@0.14.3",
     "react-dom": "npm:react-dom@0.14.3",
     "react-router": "npm:react-router@1.0.2",
+    "react-swipeable-views": "npm:react-swipeable-views@0.3.5",
     "react-tap-event-plugin": "npm:react-tap-event-plugin@0.2.1",
     "text": "github:systemjs/plugin-text@0.0.4",
     "github:jspm/nodelibs-assert@0.1.0": {
@@ -289,6 +291,9 @@ System.config({
     "npm:path-browserify@0.0.0": {
       "process": "github:jspm/nodelibs-process@0.1.2"
     },
+    "npm:performance-now@0.2.0": {
+      "process": "github:jspm/nodelibs-process@0.1.2"
+    },
     "npm:process@0.11.2": {
       "assert": "github:jspm/nodelibs-assert@0.1.0"
     },
@@ -297,6 +302,10 @@ System.config({
       "fs": "github:jspm/nodelibs-fs@0.1.2"
     },
     "npm:punycode@1.3.2": {
+      "process": "github:jspm/nodelibs-process@0.1.2"
+    },
+    "npm:raf@3.1.0": {
+      "performance-now": "npm:performance-now@0.2.0",
       "process": "github:jspm/nodelibs-process@0.1.2"
     },
     "npm:react-addons-create-fragment@0.14.3": {
@@ -314,6 +323,12 @@ System.config({
     "npm:react-dom@0.14.3": {
       "react": "npm:react@0.14.3"
     },
+    "npm:react-motion@0.3.1": {
+      "performance-now": "npm:performance-now@0.2.0",
+      "process": "github:jspm/nodelibs-process@0.1.2",
+      "raf": "npm:raf@3.1.0",
+      "react": "npm:react@0.14.3"
+    },
     "npm:react-router@1.0.2": {
       "child_process": "github:jspm/nodelibs-child_process@0.1.0",
       "fs": "github:jspm/nodelibs-fs@0.1.2",
@@ -321,6 +336,15 @@ System.config({
       "invariant": "npm:invariant@2.2.0",
       "process": "github:jspm/nodelibs-process@0.1.2",
       "warning": "npm:warning@2.1.0"
+    },
+    "npm:react-swipeable-views@0.3.5": {
+      "object-assign": "npm:object-assign@4.0.1",
+      "path": "github:jspm/nodelibs-path@0.1.0",
+      "process": "github:jspm/nodelibs-process@0.1.2",
+      "react": "npm:react@0.14.3",
+      "react-addons-pure-render-mixin": "npm:react-addons-pure-render-mixin@0.14.3",
+      "react-dom": "npm:react-dom@0.14.3",
+      "react-motion": "npm:react-motion@0.3.1"
     },
     "npm:react-tap-event-plugin@0.2.1": {
       "fbjs": "npm:fbjs@0.2.1",
