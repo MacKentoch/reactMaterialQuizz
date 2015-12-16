@@ -1,8 +1,8 @@
 node_modules/
 bower_components/
 jspm_packages/
-typings/
 .vscode/
+.idea/
 *.log
 
 build/

@@ -30,6 +30,7 @@ export default class Quiz extends React.Component {
   constructor(props) {
     super(props);
     this.init();
+    
   }
   
   init(){
@@ -38,15 +39,16 @@ export default class Quiz extends React.Component {
     };
   }
   
-  handleChangeTabs(e){
+  handleChangeTabs(value, e, tab){
    this.setState({
-      slideIndex : e.target.value,
+      slideIndex : value,
     });     
   }
   
-  handleChangeIndex(e){
-   this.setState({
-      slideIndex : e.target.index,
+  handleChangeIndex(index, fromIndex){
+    console.dir(); 
+    this.setState({
+      slideIndex : index,
     });    
   }
   
@@ -55,12 +57,12 @@ export default class Quiz extends React.Component {
       <div className="row" style={{marginTop:'70px'}}>
         <div className="col-md-8 col-md-offset-2" style={{padding:'0px'}}>
           <Paper zDepth={1}>
-            <Tabs onChange={(e)=>this.handleChangeTabs(e)} value={this.state.slideIndex + ''}>
+            <Tabs onChange={(value, e, tab)=>this.handleChangeTabs(value, e, tab)} value={this.state.slideIndex + ''}>
               <Tab label="Tab One" value="0" />
               <Tab label="Tab Two" value="1" />
               <Tab label="Tab Three" value="2" />
             </Tabs>
-            <SwipeableViews index={this.state.slideIndex} onChangeIndex={(e)=>this.handleChangeIndex(e)}>
+            <SwipeableViews index={this.state.slideIndex} onChangeIndex={(index, fromIndex)=>this.handleChangeIndex(index, fromIndex)}>
               <div className="row">
                 <div className="col-xs-10 col-xs-offset-1">
                   <h2 style={styles.headline}>Tabs with slide effect</h2>
