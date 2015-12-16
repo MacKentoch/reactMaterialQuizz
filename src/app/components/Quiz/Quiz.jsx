@@ -3,34 +3,14 @@ import Tabs           from 'material-ui/lib/tabs/tabs';
 import Tab            from 'material-ui/lib/tabs/tab';
 import Paper          from 'material-ui/lib/paper';
 import SwipeableViews from 'react-swipeable-views';
+import {styles}       from './quiz.style.js';
 
-
-
-const styles = {
-  slideContainer: {
-    height: 400
-  },
-  slide: {
-    //padding: 15,
-    color: '#fff',
-  },
-  slide1: {
-    background: '#FEA900',
-  },
-  slide2: {
-    background: '#B3DC4A',
-  },
-  slide3: {
-    background: '#6AC0FF',
-  },
-};
 
 export default class Quiz extends React.Component {
 
   constructor(props) {
     super(props);
     this.init();
-    
   }
   
   init(){
@@ -45,8 +25,7 @@ export default class Quiz extends React.Component {
     });     
   }
   
-  handleChangeIndex(index, fromIndex){
-    console.dir(); 
+  handleChangeIndex(index, fromIndex){ 
     this.setState({
       slideIndex : index,
     });    
@@ -54,27 +33,56 @@ export default class Quiz extends React.Component {
   
   render(){
     return (
-      <div className="row" style={{marginTop:'70px'}}>
-        <div className="col-md-8 col-md-offset-2" style={{padding:'0px'}}>
+      <div className="row">
+        <div className="col-md-8 col-md-offset-2" 
+             style={Object.assign({}, styles.quiz)}>
           <Paper zDepth={1}>
-            <Tabs onChange={(value, e, tab)=>this.handleChangeTabs(value, e, tab)} value={this.state.slideIndex + ''}>
-              <Tab label="Tab One" value="0" />
-              <Tab label="Tab Two" value="1" />
-              <Tab label="Tab Three" value="2" />
+            <Tabs onChange={(value, e, tab)=>this.handleChangeTabs(value, e, tab)} 
+                  value={this.state.slideIndex + ''}>
+              <Tab label="Question1" 
+                   value="0" />
+              <Tab label="Question2" 
+                   value="1" />
+              <Tab label="Question3" 
+                   value="2" />
             </Tabs>
-            <SwipeableViews index={this.state.slideIndex} onChangeIndex={(index, fromIndex)=>this.handleChangeIndex(index, fromIndex)}>
-              <div className="row">
+            <SwipeableViews index={parseInt(this.state.slideIndex, 10)} 
+                            onChangeIndex={(index, fromIndex)=>this.handleChangeIndex(index, fromIndex)}>
+              
+              <div className="row"
+                   style={Object.assign({}, styles.slide, styles.slide1)}>
                 <div className="col-xs-10 col-xs-offset-1">
-                  <h2 style={styles.headline}>Tabs with slide effect</h2>
-                  <p>Swipe to see the next slide.</p>
+                  <h2 style={styles.headline}>
+                    question 1 : 
+                  </h2>
+                  <p>note : this content is swipeable</p>
                 </div>
               </div>
-              <div style={styles.slide}>
-                slide n°2
+              
+              <div className="row" 
+                   style={Object.assign({}, styles.slide, styles.slide2)}>
+                <div className="col-xs-10 col-xs-offset-1">
+                  <h2 style={styles.headline}>
+                    question 2 : 
+                  </h2>
+                  <p>
+                    note : this content is swipeable
+                  </p>
+                </div>
               </div>
-              <div style={styles.slide}>
-                slide n°3
+              
+              <div className="row"
+                   style={Object.assign({}, styles.slide, styles.slide3)}>
+                <div className="col-xs-10 col-xs-offset-1">
+                  <h2 style={Object.assign({}, styles.headline)}>
+                    question 3 : 
+                  </h2>
+                  <p>
+                    note : this content is swipeable
+                  </p>
+                </div>
               </div>
+              
             </SwipeableViews> 
           </Paper>
         </div>
