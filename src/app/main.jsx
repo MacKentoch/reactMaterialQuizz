@@ -5,7 +5,7 @@ import 'flexboxgrid/dist/flexboxgrid.min.css!'; //flexboxgrid css
 import React                    from 'react';
 import ReactDOM                 from 'react-dom';
 import Router, { 
-  Route, 
+  Route,
   DefaultRoute, 
   NotFoundRoute, 
   Redirect, 
