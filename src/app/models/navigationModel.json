@@ -1,14 +1,16 @@
 [
+   {
+    "id"        : 1,
+    "name"      : "home",
+    "label"     : "home",
+    "href"      : "/home",
+    "className" : "fa fa-home"
+  }, 
   {
-    "id"    : 1,
-    "name"  : "quiz",
-    "label" : "quiz",
-    "href"  : "/quiz"
-  },
-  {
-    "id"    : 2,
-    "name"  : "about",
-    "label" : "about",
-    "href"  : "/about"
+    "id"        : 2,
+    "name"      : "quiz",
+    "label"     : "quiz",
+    "href"      : "/quiz",
+    "className" : "fa fa-list-alt"
   }
 ]

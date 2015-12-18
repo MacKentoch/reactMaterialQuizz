@@ -10,6 +10,7 @@ import ListDivider          from 'material-ui/lib/lists/list-divider';
 import ListItem             from 'material-ui/lib/lists/list-item';
 import IconButton           from 'material-ui/lib/icon-button';
 import NavigationMoreVert   from 'material-ui/lib/svg-icons/navigation/more-vert';
+import FontIcon             from 'material-ui/lib/font-icon';
 import ThemeManager         from 'material-ui/lib/styles/theme-manager';
 import MyRawTheme           from '../../shared/quizRawTheme';
 import MarginTop            from '../MarginTop/MarginTop.jsx!';
@@ -69,13 +70,17 @@ export default class ReactMaterialQuizz extends React.Component {
       if((menu.key || 0)  > 0){
         _ListDivider = <ListDivider inset={false}/>;
       }
+      let _icon;
+      if(menu.text === 'github')    _icon = <FontIcon className="fa fa-github" /> 
+      if(menu.text === 'language')  _icon = <TranslateIcon />;
+      
       return (
         <div key={menu.key}>
           {_ListDivider}
           <ListItem
             key={menu.key}
             primaryText={menu.text} 
-            leftIcon={<TranslateIcon />} />
+            leftIcon={_icon} />
         </div>
       );
     });
@@ -84,13 +89,17 @@ export default class ReactMaterialQuizz extends React.Component {
       let _marginTop;
       if((navList.id || 0) === 1){
         _marginTop = <MarginTop marginTopValue={15} marginTopUnit={'px'}  />;
-      }            
+      } 
+      
+      let _icon = <FontIcon className={navList.className} />;
+                    
       return (        
         <div key={navList.key}>
           {_marginTop}
           <ListItem
+            key={navList.key}
             primaryText={navList.label} 
-            leftIcon={<TranslateIcon />} />
+            leftIcon={_icon} />
         </div>        
       );             
     });
@@ -136,19 +145,3 @@ export default class ReactMaterialQuizz extends React.Component {
 // ReactMaterialQuizz.childContextTypes = {
 //   muiTheme  : React.PropTypes.object
 // };
-
-
-
-
-
-              // {
-              //   this.state.appBarMenuModel.map((listItem)=>{
-              //     return (
-              //       <List key={listItem.id}>  
-              //         <ListItem 
-              //           primaryText="Language" 
-              //           leftIcon={<TranslateIcon />} />                    
-              //       </List>
-              //     )
-              //   })
-              // }

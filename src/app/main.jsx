@@ -1,5 +1,6 @@
-import './style.css!';  //import application custom style
-import 'flexboxgrid/dist/flexboxgrid.min.css!'; //flexboxgrid css 
+import './style.css!';                            //import application custom style
+import 'flexboxgrid/dist/flexboxgrid.min.css!';   //flexboxgrid css 
+import 'font-awesome';                            //font-awesome icons
 
 
 import React                    from 'react';
