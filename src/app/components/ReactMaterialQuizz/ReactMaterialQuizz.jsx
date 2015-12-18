@@ -33,6 +33,10 @@ export default class ReactMaterialQuizz extends React.Component {
     muiTheme: React.PropTypes.object,
   }
   
+  static contextTypes = {
+    router: React.PropTypes.func
+  }
+  
   constructor(props) {
     super(props);
     this.init();
@@ -61,7 +65,23 @@ export default class ReactMaterialQuizz extends React.Component {
     let previousOpenState = this.state.leftNavOpen;
     this.setState({ leftNavOpen: !previousOpenState });    
   }
-
+  
+  
+  // Get the selected item in LeftMenu
+  getSelectedIndex() {
+    let currentItem;
+    for (let i = this.navigationList.length - 1; i >= 0; i--) {
+      currentItem = this.navigationList[i];
+      if (currentItem.route && this.context.router.isActive(currentItem.route)) {
+        return i;
+      }
+    }
+  }
+ 
+  onLeftNavChange(e, key, payload) {
+    // Do DOM Diff refresh
+    this.context.router.transitionTo(payload.route);
+  }
 
   render(){
     
@@ -111,7 +131,8 @@ export default class ReactMaterialQuizz extends React.Component {
           ref="leftNav" 
           docked={false}
           open={this.state.leftNavOpen}
-          onRequestChange={()=>this.handleChangeRequestLeftNav()}>
+          
+          onChange={(e, key, payload)=>this.onLeftNavChange(e, key, payload)}>
         <MarginTop 
           marginTopValue={60}
           marginTopUnit={'px'}  /> 
@@ -134,7 +155,7 @@ export default class ReactMaterialQuizz extends React.Component {
             </List>
           </IconMenu>
           } />
-          <Quiz /> 
+          {this.props.children}
 			</div>
     );
   }
@@ -145,3 +166,5 @@ export default class ReactMaterialQuizz extends React.Component {
 // ReactMaterialQuizz.childContextTypes = {
 //   muiTheme  : React.PropTypes.object
 // };
+
+

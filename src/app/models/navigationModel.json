@@ -4,6 +4,7 @@
     "name"      : "home",
     "label"     : "home",
     "href"      : "/home",
+    "route"     : "/",
     "className" : "fa fa-home"
   }, 
   {
@@ -11,6 +12,15 @@
     "name"      : "quiz",
     "label"     : "quiz",
     "href"      : "/quiz",
+    "route"     : "quiz",
     "className" : "fa fa-list-alt"
-  }
+  },
+  {
+    "id"        : 3,
+    "name"      : "about",
+    "label"     : "about",
+    "href"      : "/about",
+    "route"     : "about",
+    "className" : "fa fa-info"
+  }  
 ]

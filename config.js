@@ -22,6 +22,7 @@ System.config({
     "css": "github:systemjs/plugin-css@0.1.20",
     "flexboxgrid": "github:kristoferjoseph/flexboxgrid@6.3.0",
     "font-awesome": "npm:font-awesome@4.5.0",
+    "history": "npm:history@1.16.0",
     "json": "github:systemjs/plugin-json@0.1.0",
     "jsx": "npm:jspm-loader-jsx@0.0.7",
     "material-design-icons": "github:google/material-design-icons@2.1.1",
@@ -189,6 +190,15 @@ System.config({
       "qs": "npm:qs@4.0.0",
       "warning": "npm:warning@2.1.0"
     },
+    "npm:history@1.16.0": {
+      "child_process": "github:jspm/nodelibs-child_process@0.1.0",
+      "deep-equal": "npm:deep-equal@1.0.1",
+      "fs": "github:jspm/nodelibs-fs@0.1.2",
+      "invariant": "npm:invariant@2.2.0",
+      "process": "github:jspm/nodelibs-process@0.1.2",
+      "query-string": "npm:query-string@3.0.0",
+      "warning": "npm:warning@2.1.0"
+    },
     "npm:https-browserify@0.0.0": {
       "http": "github:jspm/nodelibs-http@1.7.1"
     },
@@ -307,6 +317,9 @@ System.config({
     },
     "npm:punycode@1.3.2": {
       "process": "github:jspm/nodelibs-process@0.1.2"
+    },
+    "npm:query-string@3.0.0": {
+      "strict-uri-encode": "npm:strict-uri-encode@1.0.2"
     },
     "npm:raf@3.1.0": {
       "performance-now": "npm:performance-now@0.2.0",

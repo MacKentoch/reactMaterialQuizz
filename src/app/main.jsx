@@ -7,11 +7,13 @@ import React                    from 'react';
 import ReactDOM                 from 'react-dom';
 import Router, { 
   Route,
+  IndexRoute,
   DefaultRoute, 
   NotFoundRoute, 
   Redirect, 
   Link 
  }                              from 'react-router';
+import createBrowserHistory     from 'history/lib/createBrowserHistory'
 import injectTapEventPlugin     from 'react-tap-event-plugin'; //Material UI needed until v1.0.x is released
 import Routes                   from './components/Routes/Routes.jsx!';
 import ReactMaterialQuizz       from './components/ReactMaterialQuizz/ReactMaterialQuizz.jsx!'; //APP
@@ -20,8 +22,15 @@ import Quiz                     from './components/Quiz/Quiz.jsx!';   //Quiz vie
 import About                    from './components/About/About.jsx!'; //About view
 
 injectTapEventPlugin(); //needed for Material-UI click and tap event...
+ 
 
 ReactDOM.render(
-  <ReactMaterialQuizz />,
+  <Router history={createBrowserHistory()}>
+    <Route path='/' component={ReactMaterialQuizz}>
+      <IndexRoute component={Home} />
+      <Route path='about' component={About} />
+      <Route name="quiz" handler={Quiz} />
+    </Route>
+  </Router>,
   document.getElementById('root')
 );
