@@ -11,20 +11,6 @@ body {
 .routeAnimated-leave.routeAnimated-leave-active {
   opacity: 0; }
 
-.route-enter {
-  opacity: 0.01; }
-
-.route-enter.route-enter-active {
-  opacity: 1;
-  transition: opacity 500ms ease-in; }
-
-.route-leave {
-  opacity: 1; }
-
-.route-leave.route-leave-active {
-  opacity: 0.01;
-  transition: opacity 300ms ease-in; }
-
 .swap-enter {
   opacity: 0.01;
   transform: translateX(5em);
@@ -56,10 +42,3 @@ body {
 
 .example-leave.example-leave-active {
   opacity: 0; }
-
-.example-appear {
-  opacity: 0.01; }
-
-.example-appear.example-appear-active {
-  opacity: 1;
-  transition: opacity .5s ease-in; }

@@ -7,16 +7,12 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<meta name="description" content="ReactJS material quizz">
 		<meta name="author" content="Erwan DATIN (MacKentoch)">
-    <link rel="stylesheet" href="./public/css/font-awesome.min.css">
+    <link rel="stylesheet" href="./css/font-awesome.min.css">
 	</head>
 	<body>
 		<div id="root"></div>
-		<!--dev mode :  -->
-		<script src="jspm_packages/system.js"></script>
-		<script src="config.js"></script>
-		<script>
-				System.import('./src/app/main.jsx!');
-		</script>			
+		<!--jspm prod mode :  -->
+		<script src="./js/appBundle.js"></script>
 	</body>
 </html>
 	

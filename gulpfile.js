@@ -21,6 +21,7 @@ var cssmin 			= require('gulp-cssmin');
 var sass 				= require('gulp-sass');
 var notify			= require('gulp-notify');
 var sourcemaps	= require('gulp-sourcemaps');
+var connect			= require('gulp-connect');
 var exec      	= require('child_process').exec;
 var config 			= require('./src/gulp/gulpConfig');
    
@@ -109,6 +110,8 @@ gulp.task('app:bundle:sfx:min', ['jshint:jsx:es6', 'app:sass'], function (cb) {
  * default task
  */
 gulp.task('default', [
+  'jshint:jsx:es6', 
+	'app:sass',
 	'app:bundle:sfx',
 ]);
 
@@ -131,4 +134,14 @@ gulp.task('dist', [
 	'app:bundle:sfx:min',
 ]);
 
+
+/**
+ * server (other than jspm-server)
+ */
+gulp.task('connect', ['default'],  function() {
+  connect.server({
+    port: 8080,
+		root: 'public'
+  });
+});
 

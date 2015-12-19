@@ -6,7 +6,7 @@ This is a simple dynamic quiz in [ReactJS](https://facebook.github.io/react/) de
 **feature :** 
 
 - ReactJS (> 0.14)
-- react-router
+- react-router (> 1.0.0)
 - Material UI (+ *react-tap-event-plugin*)
 - flexboxgrid (reponsive layout)
 - animate.css
