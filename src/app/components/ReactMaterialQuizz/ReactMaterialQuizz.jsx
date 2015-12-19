@@ -1,5 +1,8 @@
 import React 		            from 'react';
-import { RouteHandler }     from 'react-router';
+import { 
+  RouteHandler, 
+  Link 
+}                           from 'react-router';
 import AppBar               from 'material-ui/lib/app-bar';
 import LeftNav              from 'material-ui/lib/left-nav';
 import IconMenu             from 'material-ui/lib/menus/icon-menu';
@@ -18,7 +21,6 @@ import {styles}             from './ReactMaterialQuizz.style';
 
 import TranslateIcon        from 'material-ui/lib/svg-icons/action/translate';
 
-
 import navigationModel      from '../../models/navigationModel.json!json';
 import appBarMenuModel      from '../../models/appBarMenuModel.json!json';
 import Quiz                 from '../Quiz/Quiz.jsx!';
@@ -33,9 +35,6 @@ export default class ReactMaterialQuizz extends React.Component {
     muiTheme: React.PropTypes.object,
   }
   
-  static contextTypes = {
-    router: React.PropTypes.func
-  }
   
   constructor(props) {
     super(props);
@@ -66,21 +65,13 @@ export default class ReactMaterialQuizz extends React.Component {
     this.setState({ leftNavOpen: !previousOpenState });    
   }
   
-  
-  // Get the selected item in LeftMenu
-  getSelectedIndex() {
-    let currentItem;
-    for (let i = this.navigationList.length - 1; i >= 0; i--) {
-      currentItem = this.navigationList[i];
-      if (currentItem.route && this.context.router.isActive(currentItem.route)) {
-        return i;
-      }
-    }
-  }
- 
-  onLeftNavChange(e, key, payload) {
-    // Do DOM Diff refresh
-    this.context.router.transitionTo(payload.route);
+   
+  navigationTo(event, selectedRoute) {
+    //more info on react router v1.0.0+ : http://stackoverflow.com/questions/31079081/programmatically-navigate-using-react-router
+    this.props.history.pushState(null, selectedRoute); 
+
+    let previousOpenState = this.state.leftNavOpen;
+    this.setState({ leftNavOpen: !previousOpenState });     
   }
 
   render(){
@@ -114,11 +105,12 @@ export default class ReactMaterialQuizz extends React.Component {
       let _icon = <FontIcon className={navList.className} />;
                     
       return (        
-        <div key={navList.key}>
+        <div key={navList.id}>
           {_marginTop}
           <ListItem
-            key={navList.key}
-            primaryText={navList.label} 
+            key={navList.id}
+            primaryText={navList.text}
+            onClick={(event, navIndex)=>this.navigationTo(event, navList.route)}
             leftIcon={_icon} />
         </div>        
       );             
@@ -131,8 +123,7 @@ export default class ReactMaterialQuizz extends React.Component {
           ref="leftNav" 
           docked={false}
           open={this.state.leftNavOpen}
-          
-          onChange={(e, key, payload)=>this.onLeftNavChange(e, key, payload)}>
+          onRequestChange={()=>this.handleChangeRequestLeftNav()}>
         <MarginTop 
           marginTopValue={60}
           marginTopUnit={'px'}  /> 

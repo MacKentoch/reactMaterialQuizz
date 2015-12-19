@@ -2,24 +2,21 @@
    {
     "id"        : 1,
     "name"      : "home",
-    "label"     : "home",
-    "href"      : "/home",
+    "text"      : "home",
     "route"     : "/",
     "className" : "fa fa-home"
   }, 
   {
     "id"        : 2,
     "name"      : "quiz",
-    "label"     : "quiz",
-    "href"      : "/quiz",
+    "text"      : "quiz",
     "route"     : "quiz",
     "className" : "fa fa-list-alt"
   },
   {
     "id"        : 3,
     "name"      : "about",
-    "label"     : "about",
-    "href"      : "/about",
+    "text"      : "about",
     "route"     : "about",
     "className" : "fa fa-info"
   }  

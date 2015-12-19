@@ -29,7 +29,7 @@ ReactDOM.render(
     <Route path='/' component={ReactMaterialQuizz}>
       <IndexRoute component={Home} />
       <Route path='about' component={About} />
-      <Route name="quiz" handler={Quiz} />
+      <Route path="quiz" component={Quiz} />
     </Route>
   </Router>,
   document.getElementById('root')
