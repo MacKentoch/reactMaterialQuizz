@@ -1,29 +1,31 @@
-import React 		            from 'react';
+import React 		               from 'react';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 import { 
   RouteHandler, 
   Link 
-}                           from 'react-router';
-import AppBar               from 'material-ui/lib/app-bar';
-import LeftNav              from 'material-ui/lib/left-nav';
-import IconMenu             from 'material-ui/lib/menus/icon-menu';
-import Menu                 from 'material-ui/lib/menus/menu';
-import MenuItem             from 'material-ui/lib/menus/menu-item';
-import List                 from 'material-ui/lib/lists/list';
-import ListDivider          from 'material-ui/lib/lists/list-divider';
-import ListItem             from 'material-ui/lib/lists/list-item';
-import IconButton           from 'material-ui/lib/icon-button';
-import NavigationMoreVert   from 'material-ui/lib/svg-icons/navigation/more-vert';
-import FontIcon             from 'material-ui/lib/font-icon';
-import ThemeManager         from 'material-ui/lib/styles/theme-manager';
-import MyRawTheme           from '../../shared/quizRawTheme';
-import MarginTop            from '../MarginTop/MarginTop.jsx!';
-import {styles}             from './ReactMaterialQuizz.style';
+}                               from 'react-router';
+//import RouteCSSTransitionGroup  from '../RouteCSSTransitionGroup/RouteCSSTransitionGroup.jsx!';
+import AppBar                   from 'material-ui/lib/app-bar';
+import LeftNav                  from 'material-ui/lib/left-nav';
+import IconMenu                 from 'material-ui/lib/menus/icon-menu';
+import Menu                     from 'material-ui/lib/menus/menu';
+import MenuItem                 from 'material-ui/lib/menus/menu-item';
+import List                     from 'material-ui/lib/lists/list';
+import ListDivider              from 'material-ui/lib/lists/list-divider';
+import ListItem                 from 'material-ui/lib/lists/list-item';
+import IconButton               from 'material-ui/lib/icon-button';
+import NavigationMoreVert       from 'material-ui/lib/svg-icons/navigation/more-vert';
+import FontIcon                 from 'material-ui/lib/font-icon';
+import ThemeManager             from 'material-ui/lib/styles/theme-manager';
+import MyRawTheme               from '../../shared/quizRawTheme';
+import MarginTop                from '../MarginTop/MarginTop.jsx!';
+import {styles}                 from './ReactMaterialQuizz.style';
 
-import TranslateIcon        from 'material-ui/lib/svg-icons/action/translate';
+import TranslateIcon            from 'material-ui/lib/svg-icons/action/translate';
 
-import navigationModel      from '../../models/navigationModel.json!json';
-import appBarMenuModel      from '../../models/appBarMenuModel.json!json';
-import Quiz                 from '../Quiz/Quiz.jsx!';
+import navigationModel          from '../../models/navigationModel.json!json';
+import appBarMenuModel          from '../../models/appBarMenuModel.json!json';
+import Quiz                     from '../Quiz/Quiz.jsx!';
 
 const HEADER_TITLE = 'React Material Quizz';
 
@@ -69,7 +71,7 @@ export default class ReactMaterialQuizz extends React.Component {
   navigationTo(event, selectedRoute) {
     //more info on react router v1.0.0+ : http://stackoverflow.com/questions/31079081/programmatically-navigate-using-react-router
     this.props.history.pushState(null, selectedRoute); 
-
+ 
     let previousOpenState = this.state.leftNavOpen;
     this.setState({ leftNavOpen: !previousOpenState });     
   }
@@ -116,6 +118,11 @@ export default class ReactMaterialQuizz extends React.Component {
       );             
     });
   
+    
+    const { pathname } = this.props.location
+    console.info(`app pathname : ${pathname}`);
+    // Only take the first-level part of the path as key, instead of the whole path.
+    const key = pathname.split('/')[1] || 'root'
 
     return (
 			<div>
@@ -146,7 +153,15 @@ export default class ReactMaterialQuizz extends React.Component {
             </List>
           </IconMenu>
           } />
-          {this.props.children}
+          
+        <ReactCSSTransitionGroup
+            component="div"
+            transitionName="example" 
+            transitionEnterTimeout={500} 
+            transitionLeaveTimeout={300}>
+          {React.cloneElement(this.props.children || <div />, { key: pathname })}
+        </ReactCSSTransitionGroup>
+                  
 			</div>
     );
   }

@@ -1,2 +1,58 @@
 body {
   margin: 0px; }
+
+routeAnimated.ng-enter {
+  animation: zoomIn 0.3s both ease-in;
+  z-index: 9999; }
+
+routeAnimated.ng-leave {
+  opacity: 1; }
+
+routeAnimated.ng-leave-active {
+  opacity: 0; }
+
+.route-enter {
+  opacity: 0.01; }
+
+.route-enter.route-enter-active {
+  opacity: 1;
+  transition: opacity 500ms ease-in; }
+
+.route-leave {
+  opacity: 1; }
+
+.route-leave.route-leave-active {
+  opacity: 0.01;
+  transition: opacity 300ms ease-in; }
+
+.swap-enter {
+  opacity: 0.01;
+  transform: translateX(5em);
+  transition: all .5s ease-in; }
+
+.swap-enter.swap-enter-active {
+  opacity: 1;
+  transform: translateX(0); }
+
+.swap-leave {
+  opacity: 1;
+  transform: translateX(0);
+  transition: all .5s ease-in; }
+
+.swap-leave.swap-leave-active {
+  opacity: 0;
+  transform: translateX(-5em); }
+
+.example-enter {
+  opacity: 0.01;
+  transition: opacity .5s ease-in; }
+
+.example-enter.example-enter-active {
+  opacity: 1; }
+
+.example-leave {
+  opacity: 1;
+  transition: opacity .5s ease-in; }
+
+.example-leave.example-leave-active {
+  opacity: 0; }

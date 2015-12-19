@@ -29,8 +29,10 @@ System.config({
     "material-design-lite": "github:google/material-design-lite@1.0.6",
     "material-ui": "npm:material-ui@0.14.0-rc1",
     "react": "npm:react@0.14.3",
+    "react-addons-css-transition-group": "npm:react-addons-css-transition-group@0.14.3",
     "react-dom": "npm:react-dom@0.14.3",
     "react-router": "npm:react-router@1.0.2",
+    "react-static-container": "npm:react-static-container@1.0.0",
     "react-swipeable-views": "npm:react-swipeable-views@0.3.5",
     "react-tap-event-plugin": "npm:react-tap-event-plugin@0.2.1",
     "text": "github:systemjs/plugin-text@0.0.4",
@@ -328,6 +330,9 @@ System.config({
     "npm:react-addons-create-fragment@0.14.3": {
       "react": "npm:react@0.14.3"
     },
+    "npm:react-addons-css-transition-group@0.14.3": {
+      "react": "npm:react@0.14.3"
+    },
     "npm:react-addons-pure-render-mixin@0.14.3": {
       "react": "npm:react@0.14.3"
     },
@@ -353,6 +358,10 @@ System.config({
       "invariant": "npm:invariant@2.2.0",
       "process": "github:jspm/nodelibs-process@0.1.2",
       "warning": "npm:warning@2.1.0"
+    },
+    "npm:react-static-container@1.0.0": {
+      "process": "github:jspm/nodelibs-process@0.1.2",
+      "react": "npm:react@0.14.3"
     },
     "npm:react-swipeable-views@0.3.5": {
       "object-assign": "npm:object-assign@4.0.1",

@@ -2,7 +2,6 @@ import './style.css!';                            //import application custom st
 import 'flexboxgrid/dist/flexboxgrid.min.css!';   //flexboxgrid css 
 import 'font-awesome';                            //font-awesome icons
 
-
 import React                    from 'react';
 import ReactDOM                 from 'react-dom';
 import Router, { 
@@ -16,6 +15,7 @@ import Router, {
 import createBrowserHistory     from 'history/lib/createBrowserHistory'
 import injectTapEventPlugin     from 'react-tap-event-plugin'; //Material UI needed until v1.0.x is released
 import Routes                   from './components/Routes/Routes.jsx!';
+
 import ReactMaterialQuizz       from './components/ReactMaterialQuizz/ReactMaterialQuizz.jsx!'; //APP
 import Home                     from './components/Home/Home.jsx!';   //Home view
 import Quiz                     from './components/Quiz/Quiz.jsx!';   //Quiz view
@@ -25,6 +25,7 @@ injectTapEventPlugin(); //needed for Material-UI click and tap event...
  
 
 ReactDOM.render(
+  
   <Router history={createBrowserHistory()}>
     <Route path='/' component={ReactMaterialQuizz}>
       <IndexRoute component={Home} />
