@@ -15,6 +15,7 @@ System.config({
   },
 
   map: {
+    "animateCss": "github:daneden/animate.css@3.5.0",
     "babel": "npm:babel-core@5.8.34",
     "babel-runtime": "npm:babel-runtime@5.8.34",
     "clean-css": "npm:clean-css@3.4.8",

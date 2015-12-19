@@ -3,45 +3,24 @@ body{
 }
 
 
-
-routeAnimated.ng-enter{
+//route animation
+.routeAnimated-enter{
 	animation: zoomIn 0.3s both ease-in;
 	z-index: 9999;	
 }
 
-routeAnimated.ng-leave {
+.routeAnimated-leave {
 	opacity: 1;
 }
 
-routeAnimated.ng-leave-active {
+.routeAnimated-leave.routeAnimated-leave-active {
 	opacity: 0;
 }
 
 
 
 
-
-
-.route-enter {
-  opacity: 0.01;
-}
-
-.route-enter.route-enter-active {
-  opacity: 1;
-  transition: opacity 500ms ease-in;
-}
-
-.route-leave {
-  opacity: 1;
-}
-
-.route-leave.route-leave-active {
-  opacity: 0.01;
-  transition: opacity 300ms ease-in;
-}
-
-
-
+//another (not used) route animation
 .swap-enter {
   opacity: 0.01;
   transform: translateX(5em);
@@ -64,6 +43,8 @@ routeAnimated.ng-leave-active {
   transform: translateX(-5em);
 }
 
+
+//basic route animation (not used)
 .example-enter {
   opacity: 0.01;
   transition: opacity .5s ease-in;
@@ -75,7 +56,7 @@ routeAnimated.ng-leave-active {
 
 .example-leave {
   opacity: 1;
-  transition: opacity .5s ease-in;
+  transition: opacity .01s ease-in;
 }
 
 .example-leave.example-leave-active {

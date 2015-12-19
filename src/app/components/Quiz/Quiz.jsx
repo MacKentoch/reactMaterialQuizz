@@ -7,7 +7,7 @@ import QuizIntro      from '../QuizIntro/QuizIntro.jsx!';
 import QuizQuestions  from '../QuizIntro/QuizIntro.jsx!';
 import QuizEnd        from '../QuizEnd/QuizEnd.jsx!';
 import {styles}       from './quiz.style.js';
-
+import quizModel      from '../../models/quizModel.json!json';
 
 export default class Quiz extends React.Component {
 
@@ -18,8 +18,12 @@ export default class Quiz extends React.Component {
   
   init(){
     this.state ={
-      slideIndex : 0
+      slideIndex  : 0,
+      quizModel   : quizModel
     };
+    
+    console.info('check Quiz init state');
+    console.dir(this.state);
   }
   
   handleChangeTabs(value, e, tab){
@@ -57,7 +61,12 @@ export default class Quiz extends React.Component {
               <div className="row"
                    style={Object.assign({}, styles.slide, styles.intro)}>
                 <div className="col-xs-10 col-xs-offset-1">
-                  <QuizIntro />
+                  <QuizIntro 
+                    title={this.state.quizModel.intro.title_translate_id}
+                    subtitle={this.state.quizModel.intro.content_1_translate_id}
+                    body={this.state.quizModel.intro.content_2_translate_id}
+                    goBtnText={this.state.quizModel.intro.go_button_text_id}
+                    />
                 </div>
               </div>
               

@@ -7,8 +7,10 @@ This is a simple dynamic quiz in [ReactJS](https://facebook.github.io/react/) de
 
 - ReactJS (> 0.14)
 - react-router
-- Material UI 
+- Material UI (+ *react-tap-event-plugin*)
 - flexboxgrid (reponsive layout)
+- animate.css
+- font-awesome
 - ES6
 - jspm 
 - babel (<6)

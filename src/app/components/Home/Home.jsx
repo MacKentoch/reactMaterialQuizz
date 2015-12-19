@@ -10,7 +10,7 @@ export default class Home extends React.Component {
   }
   
   init(){
-    
+
   }
 
   render(){
@@ -18,7 +18,9 @@ export default class Home extends React.Component {
       <div className="row">
         <div className="col-md-8 col-md-offset-2" 
              style={Object.assign({}, styles.home)}>
-          <Paper zDepth={1}>
+          <Paper 
+            zDepth={1} 
+            style={{postion : 'absolute'}}>
             <h1>Home view</h1>
           </Paper>  
         </div>

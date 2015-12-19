@@ -4,7 +4,6 @@ import {
   RouteHandler, 
   Link 
 }                               from 'react-router';
-//import RouteCSSTransitionGroup  from '../RouteCSSTransitionGroup/RouteCSSTransitionGroup.jsx!';
 import AppBar                   from 'material-ui/lib/app-bar';
 import LeftNav                  from 'material-ui/lib/left-nav';
 import IconMenu                 from 'material-ui/lib/menus/icon-menu';
@@ -120,9 +119,9 @@ export default class ReactMaterialQuizz extends React.Component {
   
     
     const { pathname } = this.props.location
-    console.info(`app pathname : ${pathname}`);
+    //console.info(`app pathname : ${pathname}`);
     // Only take the first-level part of the path as key, instead of the whole path.
-    const key = pathname.split('/')[1] || 'root'
+    //const key = pathname.split('/')[1] || 'root'
 
     return (
 			<div>
@@ -153,12 +152,11 @@ export default class ReactMaterialQuizz extends React.Component {
             </List>
           </IconMenu>
           } />
-          
         <ReactCSSTransitionGroup
             component="div"
-            transitionName="example" 
+            transitionName="routeAnimated" 
             transitionEnterTimeout={500} 
-            transitionLeaveTimeout={300}>
+            transitionLeaveTimeout={500}>      
           {React.cloneElement(this.props.children || <div />, { key: pathname })}
         </ReactCSSTransitionGroup>
                   
