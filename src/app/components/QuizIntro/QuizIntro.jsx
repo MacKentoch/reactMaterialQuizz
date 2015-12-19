@@ -8,7 +8,7 @@ export default class QuizIntro extends React.Component{
 	}
 	
 	init(){
-    console.info('props are ');
+    console.info('check QuizIntro init state');
     console.dir({
       title     : this.props.title,
       subtitle  : this.props.subtitle,
@@ -23,6 +23,8 @@ export default class QuizIntro extends React.Component{
 				<div className="col-xs-12">
 					<h1>
 						Introduction
+            <h2>{this.props.title}</h2>
+            <p>this.props.subtitle</p>
 					</h1>
 				</div>
 			</div>

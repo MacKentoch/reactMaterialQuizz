@@ -14,7 +14,7 @@ import Router, {
   Link 
  }                              from 'react-router';
 import createBrowserHistory     from 'history/lib/createBrowserHistory'
-import injectTapEventPlugin     from 'react-tap-event-plugin'; //Material UI needed until v1.0.x is released
+import injectTapEventPlugin     from 'react-tap-event-plugin';        //Material UI needed until v1.0.x is released
 import Routes                   from './components/Routes/Routes.jsx!';
 
 import ReactMaterialQuizz       from './components/ReactMaterialQuizz/ReactMaterialQuizz.jsx!'; //APP

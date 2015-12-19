@@ -16,7 +16,7 @@ export default class Home extends React.Component {
   render(){
     return (
       <div className="row">
-        <div className="col-md-8 col-md-offset-2" 
+        <div className="col-xs-10 col-xs-offset-1 col-md-8 col-md-offset-2" 
              style={Object.assign({}, styles.home)}>
           <Paper 
             zDepth={1} 

@@ -156,8 +156,10 @@ export default class ReactMaterialQuizz extends React.Component {
             component="div"
             transitionName="routeAnimated" 
             transitionEnterTimeout={500} 
-            transitionLeaveTimeout={500}>      
-          {React.cloneElement(this.props.children || <div />, { key: pathname })}
+            transitionLeaveTimeout={500}> 
+          <div key={pathname}>
+            {this.props.children}
+          </div>       
         </ReactCSSTransitionGroup>
                   
 			</div>
@@ -172,3 +174,4 @@ export default class ReactMaterialQuizz extends React.Component {
 // };
 
 
+//{React.cloneElement(this.props.children || <div />, { key: pathname })}

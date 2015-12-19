@@ -21,18 +21,19 @@ export default class Quiz extends React.Component {
       slideIndex  : 0,
       quizModel   : quizModel
     };
-    
     console.info('check Quiz init state');
     console.dir(this.state);
   }
   
   handleChangeTabs(value, e, tab){
+    console.info('check Quiz tabChange');
    this.setState({
       slideIndex : value,
     });     
   }
   
   handleChangeIndex(index, fromIndex){ 
+    console.info('check Quiz swipeable index change');
     this.setState({
       slideIndex : index,
     });    
@@ -41,20 +42,18 @@ export default class Quiz extends React.Component {
   render(){
     return (
       <div className="row">
-        <div className="col-md-8 col-md-offset-2" 
+        <div className="col-xs-10 col-xs-offset-1 col-md-8 col-md-offset-2" 
              style={Object.assign({}, styles.quiz)}>
           <Paper zDepth={1}>
-          
             <Tabs onChange={(value, e, tab)=>this.handleChangeTabs(value, e, tab)} 
                   value={this.state.slideIndex + ''}>
               <Tab label="Introduction" 
-                   value="0" />
+                   value="0" />                  
               <Tab label="Question" 
-                   value="1" />
+                   value="1" />                 
               <Tab label="Quiz end" 
-                   value="2" />
-            </Tabs>
-            
+                   value="2" />                  
+            </Tabs> 
             <SwipeableViews index={parseInt(this.state.slideIndex, 10)} 
                             onChangeIndex={(index, fromIndex)=>this.handleChangeIndex(index, fromIndex)}>
               
@@ -83,8 +82,7 @@ export default class Quiz extends React.Component {
                   <QuizEnd />
                 </div>
               </div>
-              
-            </SwipeableViews> 
+            </SwipeableViews>                    
           </Paper>
         </div>
       </div>
