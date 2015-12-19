@@ -39,38 +39,49 @@ export default class Quiz extends React.Component {
     });    
   }
   
+  handleQuizStart(quiz){
+    if(quiz.start){
+     this.setState({
+       slideIndex : this.state.slideIndex + 1
+     }); 
+    }
+  }
+  
   render(){
     return (
       <div className="row">
-        <div className="col-xs-10 col-xs-offset-1 col-md-8 col-md-offset-2" 
-             style={Object.assign({}, styles.quiz)}>
+        <div 
+          className="col-xs-10 col-xs-offset-1 col-md-8 col-md-offset-2" 
+          style={Object.assign({}, styles.quiz)}>
           <Paper zDepth={1}>
-            <Tabs onChange={(value, e, tab)=>this.handleChangeTabs(value, e, tab)} 
-                  value={this.state.slideIndex + ''}>
-              <Tab label="Introduction" 
-                   value="0" />                  
-              <Tab label="Question" 
-                   value="1" />                 
-              <Tab label="Quiz end" 
-                   value="2" />                  
+            <Tabs 
+              onChange={(value, e, tab)=>this.handleChangeTabs(value, e, tab)} 
+              style={Object.assign({}, styles.tab)}    
+              value={this.state.slideIndex + ''}>
+              <Tab 
+                label="Introduction"     
+                value="0" />                  
+              <Tab 
+                label="Question" 
+                value="1" />                 
+              <Tab 
+                label="Quiz end" 
+                 value="2" />                  
             </Tabs> 
-            <SwipeableViews index={parseInt(this.state.slideIndex, 10)} 
-                            onChangeIndex={(index, fromIndex)=>this.handleChangeIndex(index, fromIndex)}>
-              
-              <div className="row"
-                   style={Object.assign({}, styles.slide, styles.intro)}>
-                <div className="col-xs-10 col-xs-offset-1">
-                  <QuizIntro 
-                    title={this.state.quizModel.intro.title_translate_id}
-                    subtitle={this.state.quizModel.intro.content_1_translate_id}
-                    body={this.state.quizModel.intro.content_2_translate_id}
-                    goBtnText={this.state.quizModel.intro.go_button_text_id}
-                    />
-                </div>
-              </div>
-              
-              <div className="row" 
-                   style={Object.assign({}, styles.slide, styles.questions)}>
+            <SwipeableViews 
+              index={parseInt(this.state.slideIndex, 10)} 
+              onChangeIndex={(index, fromIndex)=>this.handleChangeIndex(index, fromIndex)}>
+              <QuizIntro 
+                title={this.state.quizModel.intro.title_translate_id}
+                subtitle={this.state.quizModel.intro.content_1_translate_id}
+                body={this.state.quizModel.intro.content_2_translate_id}
+                goBtnText={this.state.quizModel.intro.go_button_text_id}
+                onStartQuizClick={(quiz)=>this.handleQuizStart(quiz)}
+                />
+
+              <div 
+                className="row" 
+                style={Object.assign({}, styles.slide, styles.questions)}>
                 <div className="col-xs-10 col-xs-offset-1">
                   <QuizQuestions />
                 </div>
