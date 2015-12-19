@@ -13,7 +13,11 @@ import Router, {
   Redirect, 
   Link 
  }                              from 'react-router';
-import createBrowserHistory     from 'history/lib/createBrowserHistory'
+//import createBrowserHistory     from 'history/lib/createBrowserHistory'
+import { 
+  createHistory, 
+  useBasename 
+}                               from 'history';
 import injectTapEventPlugin     from 'react-tap-event-plugin';        //Material UI needed until v1.0.x is released
 import Routes                   from './components/Routes/Routes.jsx!';
 
@@ -24,10 +28,15 @@ import About                    from './components/About/About.jsx!'; //About vi
 
 injectTapEventPlugin(); //needed for Material-UI click and tap event...
  
-
+ 
+ 
+const browserHistory = useBasename(createHistory)({
+    basename: "/"
+}); 
+ 
 ReactDOM.render(
   
-  <Router history={createBrowserHistory()}>
+  <Router history={browserHistory}>
     <Route path='/' component={ReactMaterialQuizz}>
       <IndexRoute component={Home} />
       <Route path='about' component={About} />
