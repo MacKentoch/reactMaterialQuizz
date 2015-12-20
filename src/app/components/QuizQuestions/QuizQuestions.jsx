@@ -39,7 +39,7 @@ export default class QuizQuestions extends React.Component{
           <Checkbox
             key={choice.choix} 
             name={choice.nom + '-' + choice.choix}
-            value={choice.valeur_defaut}
+            value={choice.valeur_defaut + ''}
             label={choice.nom}
             defaultChecked={choice.valeur_defaut} />
         );
@@ -55,7 +55,7 @@ export default class QuizQuestions extends React.Component{
         );
       }
       return (
-        <div>
+        <div key={choice.choix}>
           {choiceTemplate}
         </div>
       );
@@ -65,6 +65,7 @@ export default class QuizQuestions extends React.Component{
       actionTemplate = (
         <div>
           <RaisedButton 
+            key={1}
             label={this.props.goNextBtnText} 
             secondary={true}
             onClick={()=>this.handleGoNextQuestionClick()} 
@@ -77,6 +78,7 @@ export default class QuizQuestions extends React.Component{
       actionTemplate = (
         <div>        
           <RaisedButton 
+            key={1}
             label={this.props.goPreviousBtnText} 
             secondary={true}
             onClick={()=>this.handleGoPreviousQuestionClick()} 
@@ -90,11 +92,13 @@ export default class QuizQuestions extends React.Component{
       actionTemplate = (
         <div>
           <RaisedButton 
+            key={1}
             label={this.props.goNextBtnText} 
             secondary={true}
             onClick={()=>this.handleGoNextQuestionClick()} 
           />                  
-          <RaisedButton 
+          <RaisedButton
+            key={2} 
             label={this.props.goPreviousBtnText} 
             secondary={true}
             onClick={()=>this.handleGoPreviousQuestionClick()} 

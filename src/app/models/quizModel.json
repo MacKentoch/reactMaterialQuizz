@@ -36,7 +36,7 @@
 			"liste_choix"			: [							
 				{"choix" : 1, "type"	: "checkbox", "nom" : "yes", 						"translateId" : "YES_WORD", 					"valeur_defaut": false},
 				{"choix" : 2, "type"	: "checkbox", "nom" : "no", 						"translateId" : "NO_WORD", 						"valeur_defaut": false},
-				{"choix" : 2, "type"	: "checkbox", "nom" : "what is it", 		"translateId" : "WHAT_IS_MATERIAL_Q", "valeur_defaut": false}		
+				{"choix" : 3, "type"	: "checkbox", "nom" : "what is it", 		"translateId" : "WHAT_IS_MATERIAL_Q", "valeur_defaut": false}		
 			],
 			"nombre_minimum_choix" 	: "1",
 			"nombre_maximum_choix" 	: "1"
