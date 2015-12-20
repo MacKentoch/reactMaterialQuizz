@@ -27,10 +27,7 @@ export default class QuizQuestions extends React.Component{
     let choicesTemplate; 
     let actionTemplate;
     
-    let sortedChoices = _.sortBy(this.props.question.liste_choix, 'user'); //sort choices by "choix" property : 
-    
-    console.info(`check list choices are sorted : `);
-    console.dir(sortedChoices);
+    let sortedChoices = _.sortBy(this.props.question.liste_choix, 'choix'); //sort choices by "choix" property : 
       
     choicesTemplate = sortedChoices.map((choice)=>{
       let choiceTemplate;

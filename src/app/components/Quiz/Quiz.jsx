@@ -1,4 +1,5 @@
 import React          from 'react';
+import _              from 'lodash';
 import Tabs           from 'material-ui/lib/tabs/tabs';
 import Tab            from 'material-ui/lib/tabs/tab';
 import Paper          from 'material-ui/lib/paper';
@@ -17,11 +18,14 @@ export default class Quiz extends React.Component {
   }
   
   init(){
-    console.info('check Quiz init');
+    console.info('check Quiz init');  
+    const orderedQuestions = _.sortBy(quizModel.questions, 'numero'); //sort questions by "numero" property
     this.state ={
-      slideIndex    : 0,
-      questionIndex : 0, //questionIndex is base 1 whereas slideIndex is index 0 (slideIndex = 0 is not a question but introduction)
-      quizModel     : quizModel
+      slideIndex            : 0,
+      questionIndex         : 0, //questionIndex is base 1 whereas slideIndex is index 0 (slideIndex = 0 is not a question but introduction)
+      questionMaxIndex      : quizModel.questions.length, 
+      quizModel             : quizModel, 
+      quizOrderedQuestions  : orderedQuestions,    
     };
   }
   
@@ -57,9 +61,44 @@ export default class Quiz extends React.Component {
     this.setState({
       slideIndex : parseInt(previsousIndex, 10) - 1,
     }, ()=>console.info(`slideIndex after decrement : ${this.state.slideIndex}`)); 
-  }   
+  }  
+  
+  getTabQuestionsTemplate(){
+    const tabsTemplate = this.state.quizOrderedQuestions.map((question)=>{
+      return (
+        <Tab
+          key={question.numero + ''}
+          label={question.Q_translate_id}     
+          value={question.numero + ''}          
+        />
+      );
+    });
+    return tabsTemplate;  
+  } 
+  
+  getSwipableViewsQuestionsTemplate(){
+    const swipeableViewTemplate = this.state.quizOrderedQuestions.map((question)=>{
+      return (
+        <QuizQuestions 
+          key={question.numero + ''}
+          onNextQuestionClick={()=>this.handleQuizNextQuestion()}
+          onPreviousQuestionClick={()=>this.handleQuizPreviousQuestion()}
+          question={question}
+          isFirstQuestion={question.numero === 1 ? true : false}
+          isLastQuestion={question.numero === this.state.questionMaxIndex ? true : false}
+          goNextBtnText={'next'}
+          goPreviousBtnText={'prev'}
+        />           
+      );
+    });
+    return swipeableViewTemplate;
+  }
   
   render(){
+
+   const tabsTemplate           = this.getTabQuestionsTemplate();
+   const swipeableViewTemplate  = this.getSwipableViewsQuestionsTemplate();
+   const tabEndIndex            = (this.state.questionMaxIndex + 1) + '';      
     return (
       <div className="row">
         <div 
@@ -71,16 +110,15 @@ export default class Quiz extends React.Component {
               style={Object.assign({}, styles.tab)}    
               value={this.state.slideIndex + ''} >
               <Tab 
+                key="0"
                 label="Introduction"     
                 value="0" 
               />                  
-              <Tab 
-                label="Question" 
-                value="1" 
-              />                 
-              <Tab 
+              {tabsTemplate}                 
+              <Tab
+                key={tabEndIndex}  
                 label="Quiz end" 
-                 value="2" 
+                value={tabEndIndex} 
                />                  
             </Tabs> 
             <SwipeableViews 
@@ -88,6 +126,7 @@ export default class Quiz extends React.Component {
               onChangeIndex={(index, fromIndex)=>this.handleChangeIndex(index, fromIndex)} >
                         
               <QuizIntro 
+                key="0"
                 title={this.state.quizModel.intro.title_translate_id}
                 subtitle={this.state.quizModel.intro.content_1_translate_id}
                 body={this.state.quizModel.intro.content_2_translate_id}
@@ -95,17 +134,9 @@ export default class Quiz extends React.Component {
                 onStartQuizClick={(quiz)=>this.handleQuizStart(quiz)}
               />
             
-              <QuizQuestions 
-                onNextQuestionClick={()=>this.handleQuizNextQuestion()}
-                onPreviousQuestionClick={()=>this.handleQuizPreviousQuestion()}
-                question={this.state.quizModel.questions[parseInt(this.state.slideIndex, 10)]}
-                isFirstQuestion={true}
-                isLastQuestion={false}
-                goNextBtnText={'next'}
-                goPreviousBtnText={'prev'}
-              />
+             {swipeableViewTemplate}
 
-             <QuizEnd />
+             <QuizEnd key={tabEndIndex} />
              
             </SwipeableViews>                    
           </Paper>
