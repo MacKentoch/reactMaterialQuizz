@@ -13,13 +13,13 @@ export const styles = {
      borderColor  : '#fff'
   },
   intro: {
-    background: '#fff',
+    background: '#fff'
   },
   questions: {
-    background: '#fff',
+    background: '#fff'
   },
   end: {
-    background: '#fff',
+    background: '#fff'
   },
   headline: {
     color               : '#rgba(0,0,0,0.54)',

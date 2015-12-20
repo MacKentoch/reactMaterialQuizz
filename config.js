@@ -26,6 +26,7 @@ System.config({
     "history": "npm:history@1.16.0",
     "json": "github:systemjs/plugin-json@0.1.0",
     "jsx": "npm:jspm-loader-jsx@0.0.7",
+    "lodash": "npm:lodash@3.10.1",
     "material-design-icons": "github:google/material-design-icons@2.1.1",
     "material-design-lite": "github:google/material-design-lite@1.0.6",
     "material-ui": "npm:material-ui@0.14.0-rc1",
@@ -276,6 +277,9 @@ System.config({
       "lodash._getnative": "npm:lodash._getnative@3.9.1",
       "lodash._isiterateecall": "npm:lodash._isiterateecall@3.0.9",
       "lodash.isarray": "npm:lodash.isarray@3.0.4"
+    },
+    "npm:lodash@3.10.1": {
+      "process": "github:jspm/nodelibs-process@0.1.2"
     },
     "npm:loose-envify@1.1.0": {
       "js-tokens": "npm:js-tokens@1.0.2",

@@ -5,6 +5,8 @@ import CardActions    from 'material-ui/lib/card/card-actions';
 import CardText       from 'material-ui/lib/card/card-text';
 import CardTitle      from 'material-ui/lib/card/card-title';
 import InkBar         from 'material-ui/lib/ink-bar';
+import {styles}       from './quizIntro.style';
+
 
 export default class QuizIntro extends React.Component{
 	
@@ -14,13 +16,7 @@ export default class QuizIntro extends React.Component{
 	}
 	
 	init(){
-    console.info('check QuizIntro init state');
-    console.dir({
-      title     : this.props.title,
-      subtitle  : this.props.subtitle,
-      body      : this.props.body,
-      goBtnText : this.props.goBtnText
-    });		
+    console.info('check QuizIntro init state');		
 	}
   
   handleStartQuizClick(){
@@ -31,7 +27,7 @@ export default class QuizIntro extends React.Component{
 		return (
 			<div className="row">
 				<div className="col-xs-12">
-          <Card>
+          <Card style={Object.assign({}, styles.container)}>
             <CardTitle 
               primary={true}
               title={this.props.title}/>
@@ -41,7 +37,7 @@ export default class QuizIntro extends React.Component{
             </CardText>
             <CardActions>
               <div className="row">
-                <div className="col-xs-2 col-xs-offset-5">
+                <div className="col-xs-4 col-xs-offset-4">
                   <RaisedButton 
                     label={this.props.goBtnText} 
                     secondary={true}
@@ -50,7 +46,6 @@ export default class QuizIntro extends React.Component{
               </div>
             </CardActions>            
           </Card>
-          
 				</div>
 			</div>
 		);
