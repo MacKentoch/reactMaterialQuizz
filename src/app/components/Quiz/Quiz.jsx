@@ -25,7 +25,8 @@ export default class Quiz extends React.Component {
       questionIndex         : 0, //questionIndex is base 1 whereas slideIndex is index 0 (slideIndex = 0 is not a question but introduction)
       questionMaxIndex      : quizModel.questions.length, 
       quizModel             : quizModel, 
-      quizOrderedQuestions  : orderedQuestions,    
+      quizOrderedQuestions  : orderedQuestions, 
+      answers               : []   
     };
   }
   
@@ -68,7 +69,19 @@ export default class Quiz extends React.Component {
     this.setState({
       slideIndex : parseInt(previsousIndex, 10) + 1,
     }, ()=>console.info(`slideIndex after increment : ${this.state.slideIndex}`));    
-  }   
+  } 
+  
+  handleCheckBoxChecked(answer){
+    console.info('handleCheckBoxChecked');
+    
+    let previousAnswers = [].concat(this.state.answers);
+    this.setState({
+      answers : previousAnswers.push(answer)
+    }, ()=>console.dir(this.state.answers));
+    
+   
+    
+  }  
   
   getTabQuestionsTemplate(){
     const tabsTemplate = this.state.quizOrderedQuestions.map((question)=>{
@@ -91,6 +104,7 @@ export default class Quiz extends React.Component {
           onNextQuestionClick={()=>this.handleQuizNextQuestion()}
           onPreviousQuestionClick={()=>this.handleQuizPreviousQuestion()}
           onFinishQuizClick={()=>this.handleQuizFinished()}
+          onCheckBoxChecked={(answer)=>this.handleCheckBoxChecked(answer)}
           question={question}
           isFirstQuestion={question.numero === 1 ? true : false}
           isLastQuestion={question.numero === this.state.questionMaxIndex ? true : false}

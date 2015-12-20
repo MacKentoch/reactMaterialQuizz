@@ -18,29 +18,69 @@ export default class QuizQuestions extends React.Component{
 	
 	init(){
 		console.info('check QuizQuestions init');
+    this.state = {
+      answer : ''
+    }
 	}
+
+  handleCheckboxChanged(event, checked, index){
+    console.info(`
+    checkbox checked state changed
+    - at index : ${index}
+    - changed its value to ${checked}
+    - question numero : ${this.props.question.numero}
+    - event.target  :${event.target}
+    `);
+    
+     this.props.onCheckBoxChecked({
+        questionId : this.props.question.numero,
+        choiceId   : index,
+        newValue   : checked
+      });
+  }
+  
+  handleGoNextQuestionClick(){
+    this.props.onNextQuestionClick();
+  }
+  
+  handleGoPreviousQuestionClick(){
+    this.props.onPreviousQuestionClick();
+  }
+  
+  handleGoFinishQuizClick(){
+    this.props.onFinishQuizClick();
+  }  
+  
+  
+  
 	
-  currentQuestion(){
+  renderCurrentQuestion(){
 
     let actionTemplate;
     
     const sortedChoices = _.sortBy(this.props.question.liste_choix, 'choix'); //sort choices by "choix" property : 
+    
     const choicesTemplate = sortedChoices.map((choice)=>{
       let choiceTemplate;
       if(choice.type === 'checkbox')  {
         choiceTemplate= (
           <Checkbox
             key={choice.choix} 
+            choiceIndex={choice.choix}
             name={choice.nom + '-' + choice.choix}
-            value={choice.valeur_defaut + ''}
+            value={choice.saisie + ''}
+            onCheck={(event, checked)=>this.handleCheckboxChanged(event, checked, choice.choix)}
             label={choice.nom}
-            defaultChecked={choice.valeur_defaut} />
+            defaultChecked={choice.valeur_defaut} 
+          />
         );
       }
       if(choice.type === 'textarea')  {
         choiceTemplate= (
           <TextField
             key={choice.choix}
+            choiceIndex={choice.choix}
+            value={choice.saisie}
             hintText={choice.translateId}
             floatingLabelText={choice.translateId}
             multiLine={true} 
@@ -124,21 +164,11 @@ export default class QuizQuestions extends React.Component{
       </Card>          
     );
   }
+    
   
-  handleGoNextQuestionClick(){
-    this.props.onNextQuestionClick();
-  }
-  
-  handleGoPreviousQuestionClick(){
-    this.props.onPreviousQuestionClick();
-  }
-  
-  handleGoFinishQuizClick(){
-    this.props.onFinishQuizClick();
-  }  
   
 	render(){
-    const currentQuestionTemplate = this.currentQuestion();
+    const currentQuestionTemplate = this.renderCurrentQuestion();
 		return (
 			<div className="row">
 				<div className="col-xs-12">
@@ -154,6 +184,7 @@ QuizQuestions.propTypes = {
   onNextQuestionClick     : React.PropTypes.func.isRequired, 
   onPreviousQuestionClick : React.PropTypes.func.isRequired, 
   onFinishQuizClick       : React.PropTypes.func.isRequired,
+  onCheckBoxChecked       : React.PropTypes.func,
 	question                : React.PropTypes.shape({
       "numero"                : React.PropTypes.number,
       "question"              : React.PropTypes.string,
