@@ -18,18 +18,14 @@ export default class QuizQuestions extends React.Component{
 	
 	init(){
 		console.info('check QuizQuestions init');
-    
-    console.dir(this.props);
 	}
 	
   currentQuestion(){
-    let questionTemplate;
-    let choicesTemplate; 
+
     let actionTemplate;
     
-    let sortedChoices = _.sortBy(this.props.question.liste_choix, 'choix'); //sort choices by "choix" property : 
-      
-    choicesTemplate = sortedChoices.map((choice)=>{
+    const sortedChoices = _.sortBy(this.props.question.liste_choix, 'choix'); //sort choices by "choix" property : 
+    const choicesTemplate = sortedChoices.map((choice)=>{
       let choiceTemplate;
       if(choice.type === 'checkbox')  {
         choiceTemplate= (
@@ -64,7 +60,7 @@ export default class QuizQuestions extends React.Component{
           <RaisedButton 
             key={1}
             label={this.props.goNextBtnText} 
-            secondary={true}
+            primary={true}
             onClick={()=>this.handleGoNextQuestionClick()} 
           />
         </div>         
@@ -77,8 +73,14 @@ export default class QuizQuestions extends React.Component{
           <RaisedButton 
             key={1}
             label={this.props.goPreviousBtnText} 
-            secondary={true}
+            primary={true}
             onClick={()=>this.handleGoPreviousQuestionClick()} 
+          />
+          <RaisedButton 
+            key={2}
+            label={this.props.goFinishQuizBtnText}
+            primary={true}
+            onClick={()=>this.handleGoFinishQuizClick()}            
           />
         </div>                   
       );
@@ -87,27 +89,28 @@ export default class QuizQuestions extends React.Component{
     if(!this.props.isFirstQuestion && 
        !this.props.isLastQuestion) {
       actionTemplate = (
-        <div>
-          <RaisedButton 
-            key={1}
-            label={this.props.goNextBtnText} 
-            secondary={true}
-            onClick={()=>this.handleGoNextQuestionClick()} 
-          />                  
+        <div>                 
           <RaisedButton
-            key={2} 
+            key={1} 
             label={this.props.goPreviousBtnText} 
-            secondary={true}
+            primary={true}
             onClick={()=>this.handleGoPreviousQuestionClick()} 
           />
-        </div>         
+          <RaisedButton 
+            key={2}
+            label={this.props.goNextBtnText} 
+            primary={true}
+            onClick={()=>this.handleGoNextQuestionClick()} 
+          />
+        </div>                            
       );
     }
 
     return (
       <Card style={Object.assign({}, styles.container)}>
         <CardTitle 
-          title={this.props.question.Q_translate_id} />
+          title={this.props.question.Q_translate_id} 
+        />
         <CardText>
           {choicesTemplate}  
         </CardText>
@@ -130,10 +133,12 @@ export default class QuizQuestions extends React.Component{
     this.props.onPreviousQuestionClick();
   }
   
+  handleGoFinishQuizClick(){
+    this.props.onFinishQuizClick();
+  }  
   
 	render(){
-    let currentQuestionTemplate = this.currentQuestion();
-    
+    const currentQuestionTemplate = this.currentQuestion();
 		return (
 			<div className="row">
 				<div className="col-xs-12">
@@ -148,6 +153,7 @@ export default class QuizQuestions extends React.Component{
 QuizQuestions.propTypes = {
   onNextQuestionClick     : React.PropTypes.func.isRequired, 
   onPreviousQuestionClick : React.PropTypes.func.isRequired, 
+  onFinishQuizClick       : React.PropTypes.func.isRequired,
 	question                : React.PropTypes.shape({
       "numero"                : React.PropTypes.number,
       "question"              : React.PropTypes.string,
@@ -159,5 +165,6 @@ QuizQuestions.propTypes = {
   isFirstQuestion         : React.PropTypes.bool.isRequired,
   isLastQuestion          : React.PropTypes.bool.isRequired,
   goNextBtnText           : React.PropTypes.string.isRequired,
-  goPreviousBtnText       : React.PropTypes.string.isRequired
+  goPreviousBtnText       : React.PropTypes.string.isRequired,
+  goFinishQuizBtnText     : React.PropTypes.string.isRequired
 };

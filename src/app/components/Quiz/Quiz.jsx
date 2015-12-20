@@ -61,7 +61,14 @@ export default class Quiz extends React.Component {
     this.setState({
       slideIndex : parseInt(previsousIndex, 10) - 1,
     }, ()=>console.info(`slideIndex after decrement : ${this.state.slideIndex}`)); 
-  }  
+  } 
+  
+  handleQuizFinished(){
+    let previsousIndex = this.state.slideIndex;
+    this.setState({
+      slideIndex : parseInt(previsousIndex, 10) + 1,
+    }, ()=>console.info(`slideIndex after increment : ${this.state.slideIndex}`));    
+  }   
   
   getTabQuestionsTemplate(){
     const tabsTemplate = this.state.quizOrderedQuestions.map((question)=>{
@@ -83,11 +90,13 @@ export default class Quiz extends React.Component {
           key={question.numero + ''}
           onNextQuestionClick={()=>this.handleQuizNextQuestion()}
           onPreviousQuestionClick={()=>this.handleQuizPreviousQuestion()}
+          onFinishQuizClick={()=>this.handleQuizFinished()}
           question={question}
           isFirstQuestion={question.numero === 1 ? true : false}
           isLastQuestion={question.numero === this.state.questionMaxIndex ? true : false}
           goNextBtnText={'next'}
           goPreviousBtnText={'prev'}
+          goFinishQuizBtnText={'finish'}
         />           
       );
     });
@@ -95,7 +104,6 @@ export default class Quiz extends React.Component {
   }
   
   render(){
-
    const tabsTemplate           = this.getTabQuestionsTemplate();
    const swipeableViewTemplate  = this.getSwipableViewsQuestionsTemplate();
    const tabEndIndex            = (this.state.questionMaxIndex + 1) + '';      
@@ -123,8 +131,7 @@ export default class Quiz extends React.Component {
             </Tabs> 
             <SwipeableViews 
               index={parseInt(this.state.slideIndex, 10)} 
-              onChangeIndex={(index, fromIndex)=>this.handleChangeIndex(index, fromIndex)} >
-                        
+              onChangeIndex={(index, fromIndex)=>this.handleChangeIndex(index, fromIndex)} >        
               <QuizIntro 
                 key="0"
                 title={this.state.quizModel.intro.title_translate_id}
@@ -133,17 +140,13 @@ export default class Quiz extends React.Component {
                 goBtnText={this.state.quizModel.intro.go_button_text_id}
                 onStartQuizClick={(quiz)=>this.handleQuizStart(quiz)}
               />
-            
              {swipeableViewTemplate}
-
              <QuizEnd key={tabEndIndex} />
-             
             </SwipeableViews>                    
           </Paper>
         </div>
       </div>
     );
   }
-
 
 }

@@ -29,7 +29,7 @@ export default class QuizIntro extends React.Component{
 				<div className="col-xs-12">
           <Card style={Object.assign({}, styles.container)}>
             <CardTitle 
-              primary={true}
+              secondary={true}
               title={this.props.title}/>
             <CardText>
               <h2>{this.props.subtitle}</h2>
@@ -40,7 +40,7 @@ export default class QuizIntro extends React.Component{
                 <div className="col-xs-4 col-xs-offset-4">
                   <RaisedButton 
                     label={this.props.goBtnText} 
-                    secondary={true}
+                    primary={true}
                     onClick={()=>this.handleStartQuizClick()} />  
                 </div>
               </div>
