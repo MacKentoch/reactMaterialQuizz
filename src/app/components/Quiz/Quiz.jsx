@@ -17,10 +17,11 @@ export default class Quiz extends React.Component {
   }
   
   init(){
-    console.info('check Quiz init state');
+    console.info('check Quiz init');
     this.state ={
-      slideIndex  : 0,
-      quizModel   : quizModel
+      slideIndex    : 0,
+      questionIndex : 0, //questionIndex is base 1 whereas slideIndex is index 0 (slideIndex = 0 is not a question but introduction)
+      quizModel     : quizModel
     };
   }
   
@@ -44,7 +45,19 @@ export default class Quiz extends React.Component {
     }, ()=>console.info(`slideIndex after increment : ${this.state.slideIndex}`)); 
   }
   
+  handleQuizNextQuestion(){ 
+    let previsousIndex = this.state.slideIndex;
+    this.setState({
+      slideIndex : parseInt(previsousIndex, 10) + 1,
+    }, ()=>console.info(`slideIndex after increment : ${this.state.slideIndex}`)); 
+  }  
   
+  handleQuizPreviousQuestion(){ 
+    let previsousIndex = this.state.slideIndex;
+    this.setState({
+      slideIndex : parseInt(previsousIndex, 10) - 1,
+    }, ()=>console.info(`slideIndex after decrement : ${this.state.slideIndex}`)); 
+  }   
   
   render(){
     return (
@@ -82,7 +95,15 @@ export default class Quiz extends React.Component {
                 onStartQuizClick={(quiz)=>this.handleQuizStart(quiz)}
               />
             
-              <QuizQuestions />
+              <QuizQuestions 
+                onNextQuestionClick={()=>this.handleQuizNextQuestion()}
+                onPreviousQuestionClick={()=>this.handleQuizPreviousQuestion()}
+                question={this.state.quizModel.questions[parseInt(this.state.slideIndex, 10)]}
+                isFirstQuestion={true}
+                isLastQuestion={false}
+                goNextBtnText={'next'}
+                goPreviousBtnText={'prev'}
+              />
 
              <QuizEnd />
              

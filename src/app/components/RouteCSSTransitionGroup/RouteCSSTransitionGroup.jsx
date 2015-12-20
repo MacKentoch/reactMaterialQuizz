@@ -2,6 +2,7 @@ import React 										from 'react';
 import ReactCSSTransitionGroup 	from 'react-addons-css-transition-group'
 import StaticContainer 					from 'react-static-container'
 
+//NOT USED right now
 
 /**
  * <RouteCSSTransitionGroup> renders twice on a route change. On the first

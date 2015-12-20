@@ -1,5 +1,13 @@
 import React          from 'react';
 import _              from 'lodash';
+import Card           from 'material-ui/lib/card/card';
+import CardActions    from 'material-ui/lib/card/card-actions';
+import CardText       from 'material-ui/lib/card/card-text';
+import CardTitle      from 'material-ui/lib/card/card-title';
+import TextField      from 'material-ui/lib/text-field';
+import RaisedButton   from 'material-ui/lib/raised-button';
+import Checkbox       from 'material-ui/lib/checkbox';
+import {styles}       from './quizQuestions.style';
 
 export default class QuizQuestions extends React.Component{
 	
@@ -9,7 +17,9 @@ export default class QuizQuestions extends React.Component{
 	}
 	
 	init(){
-		
+		console.info('check QuizQuestions init');
+    
+    console.dir(this.props);
 	}
 	
   currentQuestion(){
@@ -37,6 +47,7 @@ export default class QuizQuestions extends React.Component{
       if(choice.type === 'textarea')  {
         choiceTemplate= (
           <TextField
+            key={choice.choix}
             hintText={choice.translateId}
             floatingLabelText={choice.translateId}
             multiLine={true} 
@@ -44,7 +55,9 @@ export default class QuizQuestions extends React.Component{
         );
       }
       return (
-        {choiceTemplate}
+        <div>
+          {choiceTemplate}
+        </div>
       );
     });
     
@@ -118,10 +131,12 @@ export default class QuizQuestions extends React.Component{
   
   
 	render(){
+    let currentQuestionTemplate = this.currentQuestion();
+    
 		return (
 			<div className="row">
 				<div className="col-xs-12">
-          {()=>this.currentQuestion()}
+          {currentQuestionTemplate}
 				</div>
 			</div>
 		);
