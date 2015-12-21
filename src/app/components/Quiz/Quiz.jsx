@@ -170,7 +170,10 @@ export default class Quiz extends React.Component {
                 onStartQuizClick={(quiz)=>this.handleQuizStart(quiz)}
               />
              {swipeableViewTemplate}
-             <QuizEnd key={tabEndIndex} />
+             <QuizEnd 
+              key={tabEndIndex}
+               
+             />
             </SwipeableViews>                    
           </Paper>
         </div>

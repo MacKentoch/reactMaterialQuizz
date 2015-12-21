@@ -15,6 +15,9 @@ import ListItem                 from 'material-ui/lib/lists/list-item';
 import IconButton               from 'material-ui/lib/icon-button';
 import NavigationMoreVert       from 'material-ui/lib/svg-icons/navigation/more-vert';
 import FontIcon                 from 'material-ui/lib/font-icon';
+import Dialog                   from 'material-ui/lib/dialog';
+import RadioButton              from 'material-ui/lib/radio-button';
+import RadioButtonGroup         from 'material-ui/lib/radio-button-group';
 import ThemeManager             from 'material-ui/lib/styles/theme-manager';
 import MyRawTheme               from '../../shared/quizRawTheme';
 import MarginTop                from '../MarginTop/MarginTop.jsx!';
@@ -34,6 +37,7 @@ export default class ReactMaterialQuizz extends React.Component {
   //You could even use ES7 decorator see : material-ui/lib/styles/theme-decorator
   static childContextTypes = {
     muiTheme: React.PropTypes.object,
+    language: React.PropTypes.string 
   }
   
   
@@ -44,16 +48,19 @@ export default class ReactMaterialQuizz extends React.Component {
 
   getChildContext() {
     return {
-      muiTheme: ThemeManager.getMuiTheme(MyRawTheme)
+      muiTheme: ThemeManager.getMuiTheme(MyRawTheme),
+      language: this.state.language
     };
   }
   
   init(){
     this.state = {
+      language        : (navigator.language || navigator.browserLanguage).split('-')[0] || 'en', //en is fallback lang
       navigationList  : navigationModel,
       appBarMenuList  : appBarMenuModel,
       headerTitle     : HEADER_TITLE,
-      leftNavOpen     : false
+      leftNavOpen     : false,
+      langDialogOpened: false
     };
   }
   
@@ -66,6 +73,21 @@ export default class ReactMaterialQuizz extends React.Component {
     this.setState({ leftNavOpen: !previousOpenState });    
   }
   
+  handleOpenLanguageDialog(){
+    this.setState({
+      langDialogOpened: true
+    });
+  }
+  
+  handleCloseLanguageDialog(){
+    this.setState({
+      langDialogOpened: false
+    });
+  }  
+  
+  handleLanguageSelect(){
+    //TODO setState to language selected
+  }
    
   navigationTo(event, selectedRoute) {
     //more info on react router v1.0.0+ : http://stackoverflow.com/questions/31079081/programmatically-navigate-using-react-router
@@ -74,6 +96,38 @@ export default class ReactMaterialQuizz extends React.Component {
     let previousOpenState = this.state.leftNavOpen;
     this.setState({ leftNavOpen: !previousOpenState });     
   }
+
+  getLanguageSelectDialog(){
+    let standardActions = [
+      { text: 'Cancel' },
+      { text: 'Valid', ref: 'valid' }
+    ];
+    
+    return (
+      <Dialog
+        title="Select your language"
+        actions={standardActions}
+        actionFocus="valid"
+        open={this.state.langDialogOpened}
+        onRequestClose={()=>this.handleCloseLanguageDialog()}>
+        
+        <RadioButtonGroup 
+          name="languageSelection" 
+          defaultSelected="en">
+        <RadioButton
+          value="en"
+          label="english"
+          style={{marginBottom:16}} />
+        <RadioButton
+          value="fr"
+          label="french"
+          style={{marginBottom:16}}/>
+        </RadioButtonGroup>        
+        
+      </Dialog>      
+    );
+  }
+
 
   render(){
     
@@ -84,7 +138,8 @@ export default class ReactMaterialQuizz extends React.Component {
       }
       let _icon;
       if(menu.text === 'github')    _icon = <FontIcon className="fa fa-github" /> 
-      if(menu.text === 'language')  _icon = <TranslateIcon />;
+      if(menu.text === 'language')  _icon = <TranslateIcon />
+      
       
       return (
         <div key={menu.key}>
@@ -92,7 +147,9 @@ export default class ReactMaterialQuizz extends React.Component {
           <ListItem
             key={menu.key}
             primaryText={menu.text} 
-            leftIcon={_icon} />
+            leftIcon={_icon}
+            onClick={()=>this.handleOpenLanguageDialog()} 
+          />
         </div>
       );
     });
@@ -123,6 +180,7 @@ export default class ReactMaterialQuizz extends React.Component {
     // Only take the first-level part of the path as key, instead of the whole path.
     //const key = pathname.split('/')[1] || 'root'
 
+    const languageDialog = this.getLanguageSelectDialog();
     return (
 			<div>
         <LeftNav 
@@ -161,7 +219,7 @@ export default class ReactMaterialQuizz extends React.Component {
             {this.props.children}
           </div>       
         </ReactCSSTransitionGroup>
-                  
+        {languageDialog}          
 			</div>
     );
   }
