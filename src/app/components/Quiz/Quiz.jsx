@@ -71,6 +71,11 @@ export default class Quiz extends React.Component {
     }, ()=>console.info(`slideIndex after increment : ${this.state.slideIndex}`));    
   } 
   
+  
+  updateQuizOrderedQuestionsState(qestionId, ChoiceId, value){
+    
+  }
+  
   handleCheckBoxChecked(answer){
     console.info('handleCheckBoxChecked');
     
@@ -79,8 +84,17 @@ export default class Quiz extends React.Component {
       answers : previousAnswers.push(answer)
     }, ()=>console.dir(this.state.answers));
     
-   
+    this.updateQuizOrderedQuestionsState(answer.questionId, answer.choiceId, answer.newValue)
+  }  
+  
+  handleTextAreaChanged(answer){
+    console.info('handleTextAreaChanged');
+    console.dir(answer);
     
+    let previousAnswers = [].concat(this.state.answers);
+    this.setState({
+      answers : previousAnswers.push(answer)
+    }, ()=>console.dir(this.state.answers));    
   }  
   
   getTabQuestionsTemplate(){
@@ -105,6 +119,7 @@ export default class Quiz extends React.Component {
           onPreviousQuestionClick={()=>this.handleQuizPreviousQuestion()}
           onFinishQuizClick={()=>this.handleQuizFinished()}
           onCheckBoxChecked={(answer)=>this.handleCheckBoxChecked(answer)}
+          onTextAreaChanged={(answer)=>this.handleTextAreaChanged(answer)}
           question={question}
           isFirstQuestion={question.numero === 1 ? true : false}
           isLastQuestion={question.numero === this.state.questionMaxIndex ? true : false}

@@ -24,20 +24,28 @@ export default class QuizQuestions extends React.Component{
 	}
 
   handleCheckboxChanged(event, checked, index){
-    console.info(`
-    checkbox checked state changed
-    - at index : ${index}
-    - changed its value to ${checked}
-    - question numero : ${this.props.question.numero}
-    - event.target  :${event.target}
-    `);
-    
      this.props.onCheckBoxChecked({
         questionId : this.props.question.numero,
         choiceId   : index,
         newValue   : checked
       });
   }
+  
+  handleTextAreaChanged(event, index){
+    console.info(`
+    checkbox checked state changed
+    - at index : ${index}
+    - changed its value to ${event.target.value}
+    - question numero : ${this.props.question.numero}
+    `);
+    
+     this.props.onTextAreaChanged({
+        questionId : this.props.question.numero,
+        choiceId   : index,
+        newValue   : event.target.value
+      });    
+  }
+  
   
   handleGoNextQuestionClick(){
     this.props.onNextQuestionClick();
@@ -66,6 +74,7 @@ export default class QuizQuestions extends React.Component{
         choiceTemplate= (
           <Checkbox
             key={choice.choix} 
+            style={Object.assign({}, styles.checkbox)}
             choiceIndex={choice.choix}
             name={choice.nom + '-' + choice.choix}
             value={choice.saisie + ''}
@@ -79,11 +88,13 @@ export default class QuizQuestions extends React.Component{
         choiceTemplate= (
           <TextField
             key={choice.choix}
+            style={Object.assign({}, styles.textarea)}
             choiceIndex={choice.choix}
-            value={choice.saisie}
+            onChange={(e)=>this.handleTextAreaChanged(e, choice.choix)}
             hintText={choice.translateId}
             floatingLabelText={choice.translateId}
             multiLine={true} 
+            rows={4}
           />          
         );
       }
@@ -99,6 +110,7 @@ export default class QuizQuestions extends React.Component{
         <div>
           <RaisedButton 
             key={1}
+            style={Object.assign({}, styles.buttonsNext)}
             label={this.props.goNextBtnText} 
             primary={true}
             onClick={()=>this.handleGoNextQuestionClick()} 
@@ -112,12 +124,14 @@ export default class QuizQuestions extends React.Component{
         <div>        
           <RaisedButton 
             key={1}
+            style={Object.assign({}, styles.buttonPrevious)}
             label={this.props.goPreviousBtnText} 
             primary={true}
             onClick={()=>this.handleGoPreviousQuestionClick()} 
           />
           <RaisedButton 
             key={2}
+            style={Object.assign({}, styles.buttonFinish)}
             label={this.props.goFinishQuizBtnText}
             primary={true}
             onClick={()=>this.handleGoFinishQuizClick()}            
@@ -132,12 +146,14 @@ export default class QuizQuestions extends React.Component{
         <div>                 
           <RaisedButton
             key={1} 
+            style={Object.assign({}, styles.buttonPrevious)}
             label={this.props.goPreviousBtnText} 
             primary={true}
             onClick={()=>this.handleGoPreviousQuestionClick()} 
           />
           <RaisedButton 
             key={2}
+            style={Object.assign({}, styles.buttonsNext)}
             label={this.props.goNextBtnText} 
             primary={true}
             onClick={()=>this.handleGoNextQuestionClick()} 
@@ -148,15 +164,23 @@ export default class QuizQuestions extends React.Component{
 
     return (
       <Card style={Object.assign({}, styles.container)}>
-        <CardTitle 
-          title={this.props.question.Q_translate_id} 
-        />
+        <CardText> 
+           <div className="row">
+            <div className="col-xs-8 col-xs-offset-2">
+              <h3>{this.props.question.Q_translate_id}</h3> 
+            </div>
+          </div>          
+        </CardText>
         <CardText>
-          {choicesTemplate}  
+          <div className="row">
+            <div className="col-xs-8 col-xs-offset-2">
+              {choicesTemplate}  
+            </div>
+          </div>
         </CardText>
         <CardActions>
           <div className="row">
-            <div className="col-xs-12">
+            <div className="col-xs-8 col-xs-offset-2">
               {actionTemplate}
             </div>
           </div>
@@ -171,7 +195,7 @@ export default class QuizQuestions extends React.Component{
     const currentQuestionTemplate = this.renderCurrentQuestion();
 		return (
 			<div className="row">
-				<div className="col-xs-12">
+        <div className="col-xs-12">
           {currentQuestionTemplate}
 				</div>
 			</div>
@@ -185,6 +209,7 @@ QuizQuestions.propTypes = {
   onPreviousQuestionClick : React.PropTypes.func.isRequired, 
   onFinishQuizClick       : React.PropTypes.func.isRequired,
   onCheckBoxChecked       : React.PropTypes.func,
+  onTextAreaChanged       : React.PropTypes.func,
 	question                : React.PropTypes.shape({
       "numero"                : React.PropTypes.number,
       "question"              : React.PropTypes.string,
