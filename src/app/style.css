@@ -1,5 +1,6 @@
 body {
-  margin: 0px; }
+  margin: 0px;
+  color: rgba(0, 0, 0, 0.87); }
 
 .routeAnimated-enter {
   animation: zoomIn 0.3s both ease-in;

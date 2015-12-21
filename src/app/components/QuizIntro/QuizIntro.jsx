@@ -30,7 +30,11 @@ export default class QuizIntro extends React.Component{
           <Card style={Object.assign({}, styles.container)}>
             <CardTitle 
               secondary={true}
-              title={this.props.title}/>
+              title={this.props.title} 
+            />
+            <InkBar 
+              primary={true}  
+            />
             <CardText>
               <h2>{this.props.subtitle}</h2>
               <p>{this.props.body}</p>
@@ -41,7 +45,8 @@ export default class QuizIntro extends React.Component{
                   <RaisedButton 
                     label={this.props.goBtnText} 
                     primary={true}
-                    onClick={()=>this.handleStartQuizClick()} />  
+                    onClick={()=>this.handleStartQuizClick()} 
+                   />  
                 </div>
               </div>
             </CardActions>            

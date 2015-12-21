@@ -1,4 +1,7 @@
 export const styles = {
+  common : {
+        color: 'rgba(0,0,0,0.54)'
+  },
   container : {
     minHeight : '450px'
   },
