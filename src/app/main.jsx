@@ -12,8 +12,7 @@ import {Routes}                 from './components/Routes/Routes.jsx!';
 injectTapEventPlugin(); //needed for Material-UI click and tap event...
  
 
-ReactDOM.render(<div>{Routes}</div> ,document.getElementById('root')
-);
+ReactDOM.render(<Routes /> ,document.getElementById('root'));
 
 
 

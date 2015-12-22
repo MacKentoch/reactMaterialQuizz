@@ -13,8 +13,9 @@ import Home                     from '../Home/Home.jsx!';   //Home view
 import Quiz                     from '../Quiz/Quiz.jsx!';   //Quiz view
 import About                    from '../About/About.jsx!'; //About view
  
-
-export const Routes = (
+//NOTE : Route is written as a "stateless functionnal component" (= ES6 arrow function is enough to describe it - see React V0.14 major changes) 
+export const Routes = ()=>{
+  return (
     <Router history={createBrowserHistory()}>
       <Route path='/' component={ReactMaterialQuizz}>
         <IndexRoute component={Home} />
@@ -22,4 +23,5 @@ export const Routes = (
         <Route path="quiz" component={Quiz} />
       </Route>
     </Router>
-);
+  );
+}

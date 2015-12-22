@@ -84,7 +84,10 @@ export default class ReactMaterialQuizz extends React.Component {
   
   handleOpenLanguageDialog(){
     this.setState({
-      langDialogOpened: true
+      langDialogOpened        : true,
+      snackbarOpened          : true,
+      snackbarMessage         : `Current language is set to :  ${this.state.language}`,
+      snackbarAction          : 'close' 
     });
   }
   
@@ -98,10 +101,7 @@ export default class ReactMaterialQuizz extends React.Component {
   
   handleLanguageSelect(event, selected){
     this.setState({
-      language                : selected,
-      snackbarOpened          : true,
-      snackbarMessage         : `Language changed to ${this.state.language}`,
-      snackbarAction          : 'close'        
+      language                : selected     
     });
   }
    
