@@ -18,6 +18,7 @@ import FontIcon                 from 'material-ui/lib/font-icon';
 import Dialog                   from 'material-ui/lib/dialog';
 import RadioButton              from 'material-ui/lib/radio-button';
 import RadioButtonGroup         from 'material-ui/lib/radio-button-group';
+import Snackbar                 from 'material-ui/lib/snackbar';
 import ThemeManager             from 'material-ui/lib/styles/theme-manager';
 import MyRawTheme               from '../../shared/quizRawTheme';
 import MarginTop                from '../MarginTop/MarginTop.jsx!';
@@ -46,6 +47,7 @@ export default class ReactMaterialQuizz extends React.Component {
     this.init();
   }
 
+
   getChildContext() {
     return {
       muiTheme: ThemeManager.getMuiTheme(MyRawTheme),
@@ -53,14 +55,19 @@ export default class ReactMaterialQuizz extends React.Component {
     };
   }
   
+  
   init(){
     this.state = {
-      language        : (navigator.language || navigator.browserLanguage).split('-')[0] || 'en', //en is fallback lang
-      navigationList  : navigationModel,
-      appBarMenuList  : appBarMenuModel,
-      headerTitle     : HEADER_TITLE,
-      leftNavOpen     : false,
-      langDialogOpened: false
+      language                : (navigator.language || navigator.browserLanguage).split('-')[0] || 'en', //en is fallback lang
+      navigationList          : navigationModel,
+      appBarMenuList          : appBarMenuModel,
+      headerTitle             : HEADER_TITLE,
+      leftNavOpen             : false,
+      langDialogOpened        : false,
+      snakBarAutoHideDuration : 1000,
+      snackbarOpened          : false,
+      snackbarMessage         : '',
+      snackbarAction          : ''  
     };
   }
   
@@ -68,10 +75,12 @@ export default class ReactMaterialQuizz extends React.Component {
     
   }
   
+  
   handleChangeRequestLeftNav(){
     let previousOpenState = this.state.leftNavOpen;
     this.setState({ leftNavOpen: !previousOpenState });    
   }
+  
   
   handleOpenLanguageDialog(){
     this.setState({
@@ -79,15 +88,23 @@ export default class ReactMaterialQuizz extends React.Component {
     });
   }
   
+  
   handleCloseLanguageDialog(){
     this.setState({
       langDialogOpened: false
     });
   }  
   
-  handleLanguageSelect(){
-    //TODO setState to language selected
+  
+  handleLanguageSelect(event, selected){
+    this.setState({
+      language                : selected,
+      snackbarOpened          : true,
+      snackbarMessage         : `Language changed to ${this.state.language}`,
+      snackbarAction          : 'close'        
+    });
   }
+   
    
   navigationTo(event, selectedRoute) {
     //more info on react router v1.0.0+ : http://stackoverflow.com/questions/31079081/programmatically-navigate-using-react-router
@@ -96,6 +113,7 @@ export default class ReactMaterialQuizz extends React.Component {
     let previousOpenState = this.state.leftNavOpen;
     this.setState({ leftNavOpen: !previousOpenState });     
   }
+
 
   getLanguageSelectDialog(){
     let standardActions = [
@@ -113,7 +131,8 @@ export default class ReactMaterialQuizz extends React.Component {
         
         <RadioButtonGroup 
           name="languageSelection" 
-          defaultSelected="en">
+          defaultSelected={this.state.language}
+          onChange={(event, selected)=>this.handleLanguageSelect(event, selected)}>
         <RadioButton
           value="en"
           label="english"
@@ -129,31 +148,7 @@ export default class ReactMaterialQuizz extends React.Component {
   }
 
 
-  render(){
-    
-    const _menuList = this.state.appBarMenuList.map((menu)=>{
-      let _ListDivider;
-      if((menu.key || 0)  > 0){
-        _ListDivider = <ListDivider inset={false}/>;
-      }
-      let _icon;
-      if(menu.text === 'github')    _icon = <FontIcon className="fa fa-github" /> 
-      if(menu.text === 'language')  _icon = <TranslateIcon />
-      
-      
-      return (
-        <div key={menu.key}>
-          {_ListDivider}
-          <ListItem
-            key={menu.key}
-            primaryText={menu.text} 
-            leftIcon={_icon}
-            onClick={()=>this.handleOpenLanguageDialog()} 
-          />
-        </div>
-      );
-    });
-    
+  getLeftnavListTemplate(){
     const _leftNavList = this.state.navigationList.map((navList)=>{
       let _marginTop;
       if((navList.id || 0) === 1){
@@ -173,14 +168,46 @@ export default class ReactMaterialQuizz extends React.Component {
         </div>        
       );             
     });
+    return _leftNavList;  
+  }
   
+  
+  getAppBarMenuListTemplate(){
+    const _menuList = this.state.appBarMenuList.map((menu)=>{
+      let _ListDivider;
+      if((menu.key || 0)  > 0){
+        _ListDivider = <ListDivider inset={false}/>;
+      }
+      let _icon;
+      if(menu.text === 'github')    _icon = <FontIcon className="fa fa-github" /> 
+      if(menu.text === 'language')  _icon = <TranslateIcon />
+      
+      return (
+        <div key={menu.key}>
+          {_ListDivider}
+          <ListItem
+            key={menu.key}
+            primaryText={menu.text} 
+            leftIcon={_icon}
+            onClick={()=>this.handleOpenLanguageDialog()} 
+          />
+        </div>
+      );
+    });
+    return _menuList;   
+  }
+
+
+  render(){
     
-    const { pathname } = this.props.location
+    const _menuList       = this.getAppBarMenuListTemplate();
+    const _leftNavList    = this.getLeftnavListTemplate();
+    const languageDialog  = this.getLanguageSelectDialog();
+    const { pathname }    = this.props.location
     //console.info(`app pathname : ${pathname}`);
     // Only take the first-level part of the path as key, instead of the whole path.
     //const key = pathname.split('/')[1] || 'root'
 
-    const languageDialog = this.getLanguageSelectDialog();
     return (
 			<div>
         <LeftNav 
@@ -219,7 +246,16 @@ export default class ReactMaterialQuizz extends React.Component {
             {this.props.children}
           </div>       
         </ReactCSSTransitionGroup>
-        {languageDialog}          
+        <div>
+          {languageDialog}
+        </div>
+        <Snackbar
+          open={this.state.snackbarOpened}
+          modal={true}
+          message={this.state.snackbarMessage}
+          action={this.state.snackbarAction}
+          autoHideDuration={this.state.snakBarAutoHideDuration} 
+         />        
 			</div>
     );
   }
