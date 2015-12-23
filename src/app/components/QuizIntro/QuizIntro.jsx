@@ -10,6 +10,7 @@ import ToolbarGroup     from 'material-ui/lib/toolbar/toolbar-group';
 import ToolbarSeparator from 'material-ui/lib/toolbar/toolbar-separator';
 import ToolbarTitle     from 'material-ui/lib/toolbar/toolbar-title';
 
+import Colors           from 'material-ui/lib/styles/colors';
 import {styles}         from './quizIntro.style';
 
 
@@ -21,8 +22,30 @@ export default class QuizIntro extends React.Component{
 	}
 	
 	init(){
-    console.info('check QuizIntro init state');		
+    console.info('check QuizIntro init state');	
+    //console.dir(this.context); //=> context does not exist here
+
 	}
+  
+  componentWillMount(){
+    
+    console.dir(this.context); //context exists here
+    
+    let newMuiTheme = this.context.muiTheme;
+    newMuiTheme.toolbar.backgroundColor = Colors.blue800;
+    
+    this.setState({
+      muiTheme : newMuiTheme
+    });
+    
+  }
+  
+  getChildContext() {
+    return {
+      muiTheme: this.state.muiTheme,
+      language: this.context.language
+    };
+  }  
   
   handleStartQuizClick(){
     this.props.onStartQuizClick({start : true});
@@ -72,11 +95,12 @@ QuizIntro.propTypes = {
 };
 
 
+QuizIntro.contextTypes = {
+  muiTheme: React.PropTypes.object,
+  language: React.PropTypes.string
+}
 
-            // <CardTitle 
-            //   secondary={true}
-            //   title={this.props.title} 
-            // />
-            // <InkBar 
-            //   primary={true}  
-            // />
+QuizIntro.childContextTypes = {
+  muiTheme: React.PropTypes.object,
+  language: React.PropTypes.string
+};
