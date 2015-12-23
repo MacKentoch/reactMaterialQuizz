@@ -8,7 +8,7 @@ System.config({
       "runtime",
       "optimisation.modules.system"
     ],
-    "blacklist" : []
+    "blacklist": []
   },
   paths: {
     "github:*": "jspm_packages/github/*",

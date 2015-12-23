@@ -34,7 +34,7 @@
       "lodash": "npm:lodash@^3.10.1",
       "material-design-icons": "github:google/material-design-icons@^2.1.1",
       "material-design-lite": "github:google/material-design-lite@^1.0.6",
-      "material-ui": "npm:material-ui@0.14.0-rc2",
+      "material-ui": "npm:material-ui@^0.14.0-rc2",
       "react": "npm:react@^0.14.3",
       "react-addons-css-transition-group": "npm:react-addons-css-transition-group@^0.14.3",
       "react-dom": "npm:react-dom@^0.14.3",
@@ -48,6 +48,11 @@
       "babel": "npm:babel-core@^5.8.22",
       "babel-runtime": "npm:babel-runtime@^5.8.20",
       "core-js": "npm:core-js@^1.1.0"
+    },
+    "overrides": {
+      "github:callemall/material-ui@master": {
+        "registry": "npm"
+      }
     }
   },
   "devDependencies": {
