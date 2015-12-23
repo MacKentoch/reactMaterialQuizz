@@ -10,7 +10,8 @@ import IconMenu                 from 'material-ui/lib/menus/icon-menu';
 import Menu                     from 'material-ui/lib/menus/menu';
 import MenuItem                 from 'material-ui/lib/menus/menu-item';
 import List                     from 'material-ui/lib/lists/list';
-import ListDivider              from 'material-ui/lib/lists/list-divider';
+import Divider                  from 'material-ui/lib/divider';
+import FlatButton               from 'material-ui/lib/flat-button';
 import ListItem                 from 'material-ui/lib/lists/list-item';
 import IconButton               from 'material-ui/lib/icon-button';
 import NavigationMoreVert       from 'material-ui/lib/svg-icons/navigation/more-vert';
@@ -32,14 +33,16 @@ import Quiz                     from '../Quiz/Quiz.jsx!';
 
 const HEADER_TITLE = 'React Material Quizz';
 
+export let __liveReload = true;
+
 export default class ReactMaterialQuizz extends React.Component {
   
-  //in pure ES6 go around lines 90 or in ES6+ you can use static :
+  //in pure ES6 go end class definition or in ES6+ you can use static :
   //You could even use ES7 decorator see : material-ui/lib/styles/theme-decorator
-  static childContextTypes = {
-    muiTheme: React.PropTypes.object,
-    language: React.PropTypes.string 
-  }
+  // static childContextTypes = {
+  //   muiTheme: React.PropTypes.object,
+  //   language: React.PropTypes.string 
+  // }
   
   
   constructor(props) {
@@ -96,7 +99,7 @@ export default class ReactMaterialQuizz extends React.Component {
     this.setState({
       langDialogOpened: false
     });
-  }  
+  }   
   
   
   handleLanguageSelect(event, selected){
@@ -115,17 +118,23 @@ export default class ReactMaterialQuizz extends React.Component {
   }
 
 
-  getLanguageSelectDialog(){
-    let standardActions = [
-      { text: 'Cancel' },
-      { text: 'Valid', ref: 'valid' }
-    ];
+  getLanguageSelectDialog(){    
+    let customActions = [
+      <FlatButton
+        label="Cancel"
+        secondary={false}
+        onTouchTap={()=>this.handleCloseLanguageDialog()} />,
+      <FlatButton
+        label="Valid"
+        primary={false}
+        onTouchTap={()=>this.handleCloseLanguageDialog()} />
+    ];    
     
     return (
       <Dialog
         title="Select your language"
-        actions={standardActions}
-        actionFocus="valid"
+        actions={customActions}
+        contentStyle={{ width : '300px', zIndex: 10 }}
         open={this.state.langDialogOpened}
         onRequestClose={()=>this.handleCloseLanguageDialog()}>
         
@@ -135,7 +144,7 @@ export default class ReactMaterialQuizz extends React.Component {
           onChange={(event, selected)=>this.handleLanguageSelect(event, selected)}>
         <RadioButton
           value="en"
-          label="english"
+          label="english" 
           style={{marginBottom:16}} />
         <RadioButton
           value="fr"
@@ -143,7 +152,7 @@ export default class ReactMaterialQuizz extends React.Component {
           style={{marginBottom:16}}/>
         </RadioButtonGroup>        
         
-      </Dialog>      
+      </Dialog>    
     );
   }
 
@@ -162,6 +171,7 @@ export default class ReactMaterialQuizz extends React.Component {
           {_marginTop}
           <ListItem
             key={navList.id}
+            
             primaryText={navList.text}
             onClick={(event, navIndex)=>this.navigationTo(event, navList.route)}
             leftIcon={_icon} />
@@ -174,9 +184,9 @@ export default class ReactMaterialQuizz extends React.Component {
   
   getAppBarMenuListTemplate(){
     const _menuList = this.state.appBarMenuList.map((menu)=>{
-      let _ListDivider;
+      let _Divider;
       if((menu.key || 0)  > 0){
-        _ListDivider = <ListDivider inset={false}/>;
+        _Divider = <Divider inset={false}/>;
       }
       let _icon;
       if(menu.text === 'github')    _icon = <FontIcon className="fa fa-github" /> 
@@ -184,10 +194,10 @@ export default class ReactMaterialQuizz extends React.Component {
       
       return (
         <div key={menu.key}>
-          {_ListDivider}
+          {_Divider}
           <ListItem
-            key={menu.key}
-            primaryText={menu.text} 
+            key={menu.key}   
+            primaryText={menu.text}
             leftIcon={_icon}
             onClick={()=>this.handleOpenLanguageDialog()} 
           />
@@ -198,7 +208,7 @@ export default class ReactMaterialQuizz extends React.Component {
   }
 
 
-  render(){
+  render(){ 
     
     const _menuList       = this.getAppBarMenuListTemplate();
     const _leftNavList    = this.getLeftnavListTemplate();
@@ -218,11 +228,11 @@ export default class ReactMaterialQuizz extends React.Component {
         <MarginTop 
           marginTopValue={60}
           marginTopUnit={'px'}  /> 
-        <ListDivider inset={false}/>  
+        <Divider inset={false}/>  
         <List subheader="navigation">
           {_leftNavList}
         </List>
-        <ListDivider inset={false}/>   
+        <Divider inset={false}/>   
         </LeftNav>				
         <AppBar
           title={this.state.headerTitle}
@@ -263,9 +273,8 @@ export default class ReactMaterialQuizz extends React.Component {
  
 }
 
-// ReactMaterialQuizz.childContextTypes = {
-//   muiTheme  : React.PropTypes.object
-// };
+ReactMaterialQuizz.childContextTypes = {
+  muiTheme: React.PropTypes.object,
+  language: React.PropTypes.string
+};
 
-
-//{React.cloneElement(this.props.children || <div />, { key: pathname })}

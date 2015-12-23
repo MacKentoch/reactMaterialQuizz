@@ -1,11 +1,16 @@
-import React          from 'react';
-import RaisedButton   from 'material-ui/lib/raised-button';
-import Card           from 'material-ui/lib/card/card';
-import CardActions    from 'material-ui/lib/card/card-actions';
-import CardText       from 'material-ui/lib/card/card-text';
-import CardTitle      from 'material-ui/lib/card/card-title';
-import InkBar         from 'material-ui/lib/ink-bar';
-import {styles}       from './quizIntro.style';
+import React            from 'react';
+import RaisedButton     from 'material-ui/lib/raised-button';
+import Card             from 'material-ui/lib/card/card';
+import CardActions      from 'material-ui/lib/card/card-actions';
+import CardText         from 'material-ui/lib/card/card-text';
+import CardTitle        from 'material-ui/lib/card/card-title';
+
+import Toolbar          from 'material-ui/lib/toolbar/toolbar';
+import ToolbarGroup     from 'material-ui/lib/toolbar/toolbar-group';
+import ToolbarSeparator from 'material-ui/lib/toolbar/toolbar-separator';
+import ToolbarTitle     from 'material-ui/lib/toolbar/toolbar-title';
+
+import {styles}         from './quizIntro.style';
 
 
 export default class QuizIntro extends React.Component{
@@ -28,13 +33,13 @@ export default class QuizIntro extends React.Component{
 			<div className="row">
 				<div className="col-xs-12">
           <Card style={Object.assign({}, styles.container)}>
-            <CardTitle 
-              secondary={true}
-              title={this.props.title} 
-            />
-            <InkBar 
-              primary={true}  
-            />
+          <Toolbar>
+            <ToolbarGroup 
+              key={0} 
+              float="left">
+              <ToolbarTitle text={this.props.title} />
+            </ToolbarGroup>
+          </Toolbar>
             <CardText>
               <h2>{this.props.subtitle}</h2>
               <p>{this.props.body}</p>
@@ -65,3 +70,13 @@ QuizIntro.propTypes = {
   body		         : React.PropTypes.string.isRequired,
   goBtnText        : React.PropTypes.string.isRequired
 };
+
+
+
+            // <CardTitle 
+            //   secondary={true}
+            //   title={this.props.title} 
+            // />
+            // <InkBar 
+            //   primary={true}  
+            // />

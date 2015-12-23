@@ -7,7 +7,8 @@ System.config({
     "optional": [
       "runtime",
       "optimisation.modules.system"
-    ]
+    ],
+    "blacklist" : []
   },
   paths: {
     "github:*": "jspm_packages/github/*",
@@ -29,7 +30,7 @@ System.config({
     "lodash": "npm:lodash@3.10.1",
     "material-design-icons": "github:google/material-design-icons@2.1.1",
     "material-design-lite": "github:google/material-design-lite@1.0.6",
-    "material-ui": "npm:material-ui@0.14.0-rc1",
+    "material-ui": "npm:material-ui@0.14.0-rc2",
     "react": "npm:react@0.14.3",
     "react-addons-css-transition-group": "npm:react-addons-css-transition-group@0.14.3",
     "react-dom": "npm:react-dom@0.14.3",
@@ -96,7 +97,7 @@ System.config({
       "process": "github:jspm/nodelibs-process@0.1.2"
     },
     "npm:browserslist@1.0.1": {
-      "caniuse-db": "npm:caniuse-db@1.0.30000377",
+      "caniuse-db": "npm:caniuse-db@1.0.30000380",
       "fs": "github:jspm/nodelibs-fs@0.1.2",
       "path": "github:jspm/nodelibs-path@0.1.0",
       "process": "github:jspm/nodelibs-process@0.1.2",
@@ -116,7 +117,7 @@ System.config({
     },
     "npm:caniuse-api@1.4.1": {
       "browserslist": "npm:browserslist@1.0.1",
-      "caniuse-db": "npm:caniuse-db@1.0.30000377",
+      "caniuse-db": "npm:caniuse-db@1.0.30000380",
       "fs": "github:jspm/nodelibs-fs@0.1.2",
       "lodash.memoize": "npm:lodash.memoize@2.4.1",
       "lodash.uniq": "npm:lodash.uniq@3.2.2",
@@ -168,14 +169,14 @@ System.config({
     "npm:fbjs@0.2.1": {
       "core-js": "npm:core-js@1.2.6",
       "process": "github:jspm/nodelibs-process@0.1.2",
-      "promise": "npm:promise@7.0.4",
+      "promise": "npm:promise@7.1.1",
       "whatwg-fetch": "npm:whatwg-fetch@0.9.0"
     },
     "npm:fbjs@0.3.2": {
       "core-js": "npm:core-js@1.2.6",
       "loose-envify": "npm:loose-envify@1.1.0",
       "process": "github:jspm/nodelibs-process@0.1.2",
-      "promise": "npm:promise@7.0.4",
+      "promise": "npm:promise@7.1.1",
       "ua-parser-js": "npm:ua-parser-js@0.7.10",
       "whatwg-fetch": "npm:whatwg-fetch@0.9.0"
     },
@@ -287,7 +288,7 @@ System.config({
       "stream": "github:jspm/nodelibs-stream@0.1.0",
       "util": "github:jspm/nodelibs-util@0.1.0"
     },
-    "npm:material-ui@0.14.0-rc1": {
+    "npm:material-ui@0.14.0-rc2": {
       "fs": "github:jspm/nodelibs-fs@0.1.2",
       "inline-style-prefixer": "npm:inline-style-prefixer@0.5.4",
       "lodash.throttle": "npm:lodash.throttle@3.0.4",
@@ -318,7 +319,7 @@ System.config({
     "npm:process@0.11.2": {
       "assert": "github:jspm/nodelibs-assert@0.1.0"
     },
-    "npm:promise@7.0.4": {
+    "npm:promise@7.1.1": {
       "asap": "npm:asap@2.0.3",
       "fs": "github:jspm/nodelibs-fs@0.1.2"
     },
