@@ -134,7 +134,8 @@ export default class ReactMaterialQuizz extends React.Component {
       <Dialog
         title="Select your language"
         actions={customActions}
-        contentStyle={{ width : '300px', zIndex: 10 }}
+        width={'300px'}
+        contentStyle={{ zIndex: 10 }}
         open={this.state.langDialogOpened}
         onRequestClose={()=>this.handleCloseLanguageDialog()}>
         
@@ -256,9 +257,7 @@ export default class ReactMaterialQuizz extends React.Component {
             {this.props.children}
           </div>       
         </ReactCSSTransitionGroup>
-        <div>
-          {languageDialog}
-        </div>
+        {languageDialog}
         <Snackbar
           open={this.state.snackbarOpened}
           modal={true}

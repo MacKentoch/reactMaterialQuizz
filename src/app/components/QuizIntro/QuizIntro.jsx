@@ -33,7 +33,11 @@ export default class QuizIntro extends React.Component{
     
     let newMuiTheme = this.context.muiTheme;
     newMuiTheme.toolbar.backgroundColor = Colors.blue800;
-    
+    newMuiTheme.toolbar.titleColor = '#fff';//'rgba(255,255,255,0.6)';
+    newMuiTheme.zIndex.layer = 5;
+    newMuiTheme.zIndex.popover = 100000;
+    newMuiTheme.leftNav.zIndex = 10000;
+        
     this.setState({
       muiTheme : newMuiTheme
     });
@@ -60,7 +64,10 @@ export default class QuizIntro extends React.Component{
             <ToolbarGroup 
               key={0} 
               float="left">
-              <ToolbarTitle text={this.props.title} />
+              <ToolbarTitle 
+                text={this.props.title}
+                style={Object.assign({}, styles.title)} 
+              />
             </ToolbarGroup>
           </Toolbar>
             <CardText>

@@ -72,29 +72,82 @@ export default class Quiz extends React.Component {
   } 
   
   
-  updateQuizOrderedQuestionsState(qestionId, ChoiceId, value){
-    
-  }
+  // updateQuizOrderedQuestionsState(qestionId, ChoiceId, value){
+  //   
+  // }
   
   handleCheckBoxChecked(answer){
     console.info('handleCheckBoxChecked');
     
-    let previousAnswers = [].concat(this.state.answers);
+    const newAnswer = {
+      questionId  : answer.questionId,
+      choiceId    : answer.choiceId,
+      value       : answer.newValue
+     };
+     
+    let AllAnswer = [].concat(this.state.answers);
+    let newAnswers;
+    let found = false;    
+    if(AllAnswer.length === 0){
+      newAnswers = [].concat(newAnswer);
+      //console.info('concat first answer');
+    }else{
+      newAnswers = AllAnswer.map((answer)=>{
+        //console.info('mapping answers');
+        if(answer.choiceId !== newAnswer.choiceId) return answer;
+        if(answer.choiceId === newAnswer.choiceId) {
+          found = true;
+          return newAnswer;
+        }
+      });
+      if(!found){
+        newAnswers = newAnswers.concat(newAnswer);
+      }     
+    }   
+    console.info(`state.answers will be `);
+    console.dir(newAnswers);
+     
     this.setState({
-      answers : previousAnswers.push(answer)
-    }, ()=>console.dir(this.state.answers));
+      answers : newAnswers
+    });
     
-    this.updateQuizOrderedQuestionsState(answer.questionId, answer.choiceId, answer.newValue)
+    //this.updateQuizOrderedQuestionsState(answer.questionId, answer.choiceId, answer.newValue)
   }  
   
   handleTextAreaChanged(answer){
     console.info('handleTextAreaChanged');
-    console.dir(answer);
-    
-    let previousAnswers = [].concat(this.state.answers);
+
+    const newAnswer = {
+      questionId  : answer.questionId,
+      choiceId    : answer.choiceId,
+      value       : answer.newValue
+     };
+     
+    let AllAnswer = [].concat(this.state.answers);
+    let newAnswers;
+    let found = false;    
+    if(AllAnswer.length === 0){
+      newAnswers = [].concat(newAnswer);
+      //console.info('concat first answer');
+    }else{
+      newAnswers = AllAnswer.map((answer)=>{
+        //console.info('mapping answers');
+        if(answer.choiceId !== newAnswer.choiceId) return answer;
+        if(answer.choiceId === newAnswer.choiceId) {
+          found = true;
+          return newAnswer;
+        }
+      });
+      if(!found){
+        newAnswers = newAnswers.concat(newAnswer);
+      }     
+    }   
+    console.info(`state.answers will be `);
+    console.dir(newAnswers);
+     
     this.setState({
-      answers : previousAnswers.push(answer)
-    }, ()=>console.dir(this.state.answers));    
+      answers : newAnswers
+    });    
   }  
   
   getTabQuestionsTemplate(){
@@ -112,6 +165,11 @@ export default class Quiz extends React.Component {
   
   getSwipableViewsQuestionsTemplate(){
     const swipeableViewTemplate = this.state.quizOrderedQuestions.map((question)=>{
+      
+      const answers = this.state.answers.map((answer)=>{
+        if(answer.questionId === question.numero) return answer;
+      });
+      
       return (
         <QuizQuestions 
           key={question.numero + ''}
@@ -121,6 +179,8 @@ export default class Quiz extends React.Component {
           onCheckBoxChecked={(answer)=>this.handleCheckBoxChecked(answer)}
           onTextAreaChanged={(answer)=>this.handleTextAreaChanged(answer)}
           question={question}
+          numQuestion={question.numero}
+          answers={answers}
           isFirstQuestion={question.numero === 1 ? true : false}
           isLastQuestion={question.numero === this.state.questionMaxIndex ? true : false}
           goNextBtnText={'next'}

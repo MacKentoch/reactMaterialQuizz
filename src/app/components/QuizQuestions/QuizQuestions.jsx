@@ -19,31 +19,25 @@ export default class QuizQuestions extends React.Component{
 	init(){
 		console.info('check QuizQuestions init');
     this.state = {
-      answer : ''
+      answers : []
     }
 	}
 
   handleCheckboxChanged(event, checked, index){
-     this.props.onCheckBoxChecked({
-        questionId : this.props.question.numero,
-        choiceId   : index,
-        newValue   : checked
-      });
+ 
+    this.props.onCheckBoxChecked({
+      questionId : this.props.question.numero,
+      choiceId   : index,
+      newValue   : checked
+    });
   }
   
-  handleTextAreaChanged(event, index){
-    console.info(`
-    checkbox checked state changed
-    - at index : ${index}
-    - changed its value to ${event.target.value}
-    - question numero : ${this.props.question.numero}
-    `);
-    
+  handleTextAreaChanged(event, index){    
      this.props.onTextAreaChanged({
-        questionId : this.props.question.numero,
-        choiceId   : index,
-        newValue   : event.target.value
-      });    
+      questionId : this.props.question.numero,
+      choiceId   : index,
+      newValue   : event.target.value
+     });    
   }
   
   
@@ -59,8 +53,7 @@ export default class QuizQuestions extends React.Component{
     this.props.onFinishQuizClick();
   }  
   
-  
-  
+
 	
   renderCurrentQuestion(){
 
@@ -70,6 +63,18 @@ export default class QuizQuestions extends React.Component{
     
     const choicesTemplate = sortedChoices.map((choice)=>{
       let choiceTemplate;
+      let answer;
+      if(typeof this.props.answers !== 'undefined'){
+        this.props.answers.forEach((_answer)=>{ 
+          if(typeof _answer !== 'undefined'){      
+            if(choice.choix === _answer.choiceId){
+              answer = _answer;
+            }
+          }              
+        });        
+      }
+      let answerValue = typeof answer !== 'undefined' ? answer.value || '' : '';
+      
       if(choice.type === 'checkbox')  {
         choiceTemplate= (
           <Checkbox
@@ -77,7 +82,7 @@ export default class QuizQuestions extends React.Component{
             style={Object.assign({}, styles.checkbox)}
             choiceIndex={choice.choix}
             name={choice.nom + '-' + choice.choix}
-            value={choice.saisie + ''}
+            checked={answerValue}
             onCheck={(event, checked)=>this.handleCheckboxChanged(event, checked, choice.choix)}
             label={choice.nom}
             defaultChecked={choice.valeur_defaut} 
@@ -90,6 +95,7 @@ export default class QuizQuestions extends React.Component{
             key={choice.choix}
             style={Object.assign({}, styles.textarea)}
             choiceIndex={choice.choix}
+            value={answerValue}
             onChange={(e)=>this.handleTextAreaChanged(e, choice.choix)}
             hintText={choice.translateId}
             floatingLabelText={choice.translateId}
@@ -210,14 +216,16 @@ QuizQuestions.propTypes = {
   onFinishQuizClick       : React.PropTypes.func.isRequired,
   onCheckBoxChecked       : React.PropTypes.func,
   onTextAreaChanged       : React.PropTypes.func,
+  numQuestion             : React.PropTypes.number.isRequired,
 	question                : React.PropTypes.shape({
-      "numero"                : React.PropTypes.number,
-      "question"              : React.PropTypes.string,
-      "Q_translate_id"        : React.PropTypes.string,
-      "liste_choix"           : React.PropTypes.array,
-      "nombre_minimum_choix"  : React.PropTypes.string,
-      "nombre_maximum_choix"  : React.PropTypes.string    
+      "numero"                : React.PropTypes.number.isRequired,
+      "question"              : React.PropTypes.string.isRequired,
+      "Q_translate_id"        : React.PropTypes.string.isRequired,
+      "liste_choix"           : React.PropTypes.array.isRequired,
+      "nombre_minimum_choix"  : React.PropTypes.string.isRequired,
+      "nombre_maximum_choix"  : React.PropTypes.string.isRequired    
   }).isRequired,
+  answers                 : React.PropTypes.array,
   isFirstQuestion         : React.PropTypes.bool.isRequired,
   isLastQuestion          : React.PropTypes.bool.isRequired,
   goNextBtnText           : React.PropTypes.string.isRequired,

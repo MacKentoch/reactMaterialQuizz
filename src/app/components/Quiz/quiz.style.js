@@ -7,10 +7,10 @@ export const styles = {
     minHeight   : '400px'
   },
   tab : {
-     height : '0px',
-     borderWidth : '0',
-     backgroundColor : '#fff',
-     borderColor  : '#fff'
+     height           : '0px',
+     borderWidth      : '0',
+     backgroundColor  : '#fff',
+     borderColor      : '#fff'
   },
   intro: {
     background: '#fff'
