@@ -44,7 +44,7 @@ npm install jspm -g
 jspm-server
 ```
 
-1- **fast way** : start a server 
+1- **fast way** : just click 
 [preview here](https://rawgit.com/MacKentoch/reactMaterialQuizz/master/public/index.html)
 
 
