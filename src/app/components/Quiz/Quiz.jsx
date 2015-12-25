@@ -90,10 +90,8 @@ export default class Quiz extends React.Component {
     let found = false;    
     if(AllAnswer.length === 0){
       newAnswers = [].concat(newAnswer);
-      //console.info('concat first answer');
     }else{
       newAnswers = AllAnswer.map((answer)=>{
-        //console.info('mapping answers');
         if(answer.choiceId !== newAnswer.choiceId) return answer;
         if(answer.choiceId === newAnswer.choiceId) {
           found = true;
@@ -104,9 +102,6 @@ export default class Quiz extends React.Component {
         newAnswers = newAnswers.concat(newAnswer);
       }     
     }   
-    console.info(`state.answers will be `);
-    console.dir(newAnswers);
-     
     this.setState({
       answers : newAnswers
     });
@@ -128,10 +123,8 @@ export default class Quiz extends React.Component {
     let found = false;    
     if(AllAnswer.length === 0){
       newAnswers = [].concat(newAnswer);
-      //console.info('concat first answer');
     }else{
       newAnswers = AllAnswer.map((answer)=>{
-        //console.info('mapping answers');
         if(answer.choiceId !== newAnswer.choiceId) return answer;
         if(answer.choiceId === newAnswer.choiceId) {
           found = true;
@@ -142,9 +135,7 @@ export default class Quiz extends React.Component {
         newAnswers = newAnswers.concat(newAnswer);
       }     
     }   
-    console.info(`state.answers will be `);
-    console.dir(newAnswers);
-     
+    
     this.setState({
       answers : newAnswers
     });    
