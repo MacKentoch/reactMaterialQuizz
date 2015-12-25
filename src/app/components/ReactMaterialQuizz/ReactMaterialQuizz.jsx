@@ -30,6 +30,8 @@ import TranslateIcon            from 'material-ui/lib/svg-icons/action/translate
 import navigationModel          from '../../models/navigationModel.json!json';
 import appBarMenuModel          from '../../models/appBarMenuModel.json!json';
 import Quiz                     from '../Quiz/Quiz.jsx!jsx';
+import localEN                  from '../../i18n/local_en.json!json';
+import localFR                  from '../../i18n/local_fr.json!json';
 
 const HEADER_TITLE = 'React Material Quizz';
 
@@ -53,15 +55,19 @@ export default class ReactMaterialQuizz extends React.Component {
 
   getChildContext() {
     return {
-      muiTheme: ThemeManager.getMuiTheme(MyRawTheme),
-      language: this.state.language
+      muiTheme  : ThemeManager.getMuiTheme(MyRawTheme),
+      language  : this.state.language,
+      translate : this.state.translate
     };
   }
   
   
   init(){
+    const navigatorLanguage = (navigator.language || navigator.browserLanguage).split('-')[0] || 'en'; //en is fallback lang
+    
     this.state = {
-      language                : (navigator.language || navigator.browserLanguage).split('-')[0] || 'en', //en is fallback lang
+      language                : navigatorLanguage,
+      translate               : this.getTranslations(navigatorLanguage), 
       navigationList          : navigationModel,
       appBarMenuList          : appBarMenuModel,
       headerTitle             : HEADER_TITLE,
@@ -74,8 +80,15 @@ export default class ReactMaterialQuizz extends React.Component {
     };
   }
   
+  getTranslations(currentLanguage){
+    let translation = Object.assign({}, localEN); //fallback language is En
+    if(currentLanguage === 'en') translation = Object.assign({}, localEN);
+    if(currentLanguage === 'fr') translation = Object.assign({}, localFR);
+    return translation;
+  }
+  
   componentWillMount() {
-    
+
   }
   
   
@@ -104,7 +117,8 @@ export default class ReactMaterialQuizz extends React.Component {
   
   handleLanguageSelect(event, selected){
     this.setState({
-      language                : selected     
+      language    : selected,
+      translate   : this.getTranslations(selected)             
     });
   }
    
@@ -121,18 +135,18 @@ export default class ReactMaterialQuizz extends React.Component {
   getLanguageSelectDialog(){    
     let customActions = [
       <FlatButton
-        label="Cancel"
+        label={this.state.translate.CANCEL_WORD}
         secondary={false}
         onTouchTap={()=>this.handleCloseLanguageDialog()} />,
       <FlatButton
-        label="Valid"
+        label={this.state.translate.VALID_WORD}
         primary={false}
         onTouchTap={()=>this.handleCloseLanguageDialog()} />
     ];    
     
     return (
       <Dialog
-        title="Select your language"
+        title={this.state.translate.CHOOSE_LANGUAGE}
         actions={customActions}
         width={'300px'}
         contentStyle={{ zIndex: 10 }}
@@ -145,11 +159,11 @@ export default class ReactMaterialQuizz extends React.Component {
           onChange={(event, selected)=>this.handleLanguageSelect(event, selected)}>
         <RadioButton
           value="en"
-          label="english" 
+          label={this.state.translate.ANGLAIS_WORD} 
           style={{marginBottom:16}} />
         <RadioButton
           value="fr"
-          label="french"
+          label={this.state.translate.FRANCAIS_WORD}
           style={{marginBottom:16}}/>
         </RadioButtonGroup>        
         
@@ -273,7 +287,8 @@ export default class ReactMaterialQuizz extends React.Component {
 }
 
 ReactMaterialQuizz.childContextTypes = {
-  muiTheme: React.PropTypes.object,
-  language: React.PropTypes.string
+  muiTheme  : React.PropTypes.object,
+  language  : React.PropTypes.string,
+  translate : React.PropTypes.object
 };
 

@@ -28,7 +28,10 @@ export default class Quiz extends React.Component {
       quizOrderedQuestions  : orderedQuestions, 
       answers               : []   
     };
+    
+    
   }
+  
   
   handleChangeTabs(value, e, tab){
    this.setState({
