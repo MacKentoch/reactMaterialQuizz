@@ -1,8 +1,10 @@
 {
 	"HELLO_WORD" 			: "Bonjour",
-	"LANGUAGE_WORD" 	: "language",
+	"LANGUAGE_WORD" 	: "langue",
+  "GITHUB_WORD"     : "github",
 	"HOME_WORD"				: "Accueil",
 	"QUIZZ_WORD"			: "Quizz",
+  "ABOUT_WORD"		  : "A propos",
 	"NAVIGATION_WORD"	: "navigation",
 	"SETTINGS_WORD"		: "configuration",
 	"FRANCAIS_WORD"		: "français",

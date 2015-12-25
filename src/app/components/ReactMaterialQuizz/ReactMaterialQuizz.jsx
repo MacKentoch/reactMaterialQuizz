@@ -186,8 +186,7 @@ export default class ReactMaterialQuizz extends React.Component {
           {_marginTop}
           <ListItem
             key={navList.id}
-            
-            primaryText={navList.text}
+            primaryText={this.state.translate[navList.translate_id]}
             onClick={(event, navIndex)=>this.navigationTo(event, navList.route)}
             leftIcon={_icon} />
         </div>        
@@ -204,15 +203,16 @@ export default class ReactMaterialQuizz extends React.Component {
         _Divider = <Divider inset={false}/>;
       }
       let _icon;
-      if(menu.text === 'github')    _icon = <FontIcon className="fa fa-github" /> 
-      if(menu.text === 'language')  _icon = <TranslateIcon />
+      let menuText;
+      if(menu.text === 'github')    _icon = <FontIcon className="fa fa-github" />;
+      if(menu.text === 'language')  _icon = <TranslateIcon />;
       
       return (
         <div key={menu.key}>
           {_Divider}
           <ListItem
             key={menu.key}   
-            primaryText={menu.text}
+            primaryText={this.state.translate[menu.translate_id]}
             leftIcon={_icon}
             onClick={()=>this.handleOpenLanguageDialog()} 
           />
@@ -244,7 +244,7 @@ export default class ReactMaterialQuizz extends React.Component {
           marginTopValue={60}
           marginTopUnit={'px'}  /> 
         <Divider inset={false}/>  
-        <List subheader="navigation">
+        <List subheader={this.state.translate.NAVIGATION_WORD} >
           {_leftNavList}
         </List>
         <Divider inset={false}/>   

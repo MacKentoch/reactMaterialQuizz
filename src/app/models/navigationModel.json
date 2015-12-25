@@ -1,23 +1,26 @@
 [
    {
-    "id"        : 1,
-    "name"      : "home",
-    "text"      : "home",
-    "route"     : "/",
-    "className" : "fa fa-home"
+    "id"            : 1,
+    "name"          : "home",
+    "text"          : "home",
+    "translate_id"  : "HOME_WORD",
+    "route"         : "/",
+    "className"     : "fa fa-home"
   }, 
   {
-    "id"        : 2,
-    "name"      : "quiz",
-    "text"      : "quiz",
-    "route"     : "quiz",
-    "className" : "fa fa-list-alt"
+    "id"            : 2,
+    "name"          : "quiz",
+    "text"          : "quiz",
+    "translate_id"  : "QUIZZ_WORD",
+    "route"         : "quiz",
+    "className"     : "fa fa-list-alt"
   },
   {
-    "id"        : 3,
-    "name"      : "about",
-    "text"      : "about",
-    "route"     : "about",
-    "className" : "fa fa-info"
+    "id"            : 3,
+    "name"          : "about",
+    "text"          : "about",
+    "translate_id"  : "ABOUT_WORD",
+    "route"         : "about",
+    "className"     : "fa fa-info"
   }  
 ]

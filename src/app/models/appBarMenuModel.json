@@ -2,11 +2,13 @@
 	{
 		"key" : 0, 
 		"text": "language",
+    "translate_id" : "LANGUAGE_WORD",
 		"href": ""
 	},
 	{
 		"key" : 1, 
 		"text": "github",
+    "translate_id" : "GITHUB_WORD",
 		"href": ""
 	}
 ]
