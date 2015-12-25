@@ -4,10 +4,10 @@ import Tabs           from 'material-ui/lib/tabs/tabs';
 import Tab            from 'material-ui/lib/tabs/tab';
 import Paper          from 'material-ui/lib/paper';
 import SwipeableViews from 'react-swipeable-views';
-import QuizIntro      from '../QuizIntro/QuizIntro.jsx!';
-import QuizQuestions  from '../QuizQuestions/QuizQuestions.jsx!';
-import QuizEnd        from '../QuizEnd/QuizEnd.jsx!';
-import {styles}       from './quiz.style.js';
+import QuizIntro      from '../QuizIntro/QuizIntro.jsx!jsx';
+import QuizQuestions  from '../QuizQuestions/QuizQuestions.jsx!jsx';
+import QuizEnd        from '../QuizEnd/QuizEnd.jsx!jsx';
+import {styles}       from './quiz.style.jsx!jsx';
 import quizModel      from '../../models/quizModel.json!json';
 
 export default class Quiz extends React.Component {

@@ -1,6 +1,6 @@
 import React    from 'react';
 import Paper    from 'material-ui/lib/paper';
-import {styles} from './about.style';
+import {styles} from './about.style.jsx!jsx';
 
 export default class About extends React.Component {
 
@@ -18,7 +18,7 @@ export default class About extends React.Component {
       <div className="row">
         <div className="col-xs-10 col-xs-offset-1 col-md-8 col-md-offset-2" 
              style={Object.assign({}, styles.about)}>
-          <Paper 
+          <Paper  
             zDepth={1}
             style={{postion : 'absolute'}}>
             <h1>About view</h1>

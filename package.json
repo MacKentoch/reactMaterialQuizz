@@ -30,6 +30,7 @@
       "font-awesome": "npm:font-awesome@^4.5.0",
       "history": "npm:history@^1.16.0",
       "json": "github:systemjs/plugin-json@^0.1.0",
+      "jsonp": "npm:jsonp@^0.2.0",
       "jsx": "github:floatdrop/plugin-jsx@^1.1.0",
       "lodash": "npm:lodash@^3.10.1",
       "material-design-icons": "github:google/material-design-icons@^2.1.1",

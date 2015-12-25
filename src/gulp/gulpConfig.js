@@ -19,7 +19,7 @@ module.exports = {
 	},
 	
 	jspm : {
-		main : './src/app/main.jsx',
+		main : './src/app/main.jsx!',
 		dest : './public/js/appBundle.js'	
 	}
 	

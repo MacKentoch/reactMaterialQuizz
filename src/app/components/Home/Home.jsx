@@ -1,6 +1,6 @@
 import React    from 'react';
 import Paper    from 'material-ui/lib/paper';
-import {styles} from './home.style';
+import {styles} from './home.style.jsx!jsx';
 
 export default class Home extends React.Component {
 

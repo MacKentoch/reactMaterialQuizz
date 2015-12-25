@@ -11,7 +11,7 @@ import ToolbarSeparator from 'material-ui/lib/toolbar/toolbar-separator';
 import ToolbarTitle     from 'material-ui/lib/toolbar/toolbar-title';
 
 import Colors           from 'material-ui/lib/styles/colors';
-import {styles}         from './quizIntro.style';
+import {styles}         from './quizIntro.style.jsx!jsx';
 
 
 export default class QuizIntro extends React.Component{

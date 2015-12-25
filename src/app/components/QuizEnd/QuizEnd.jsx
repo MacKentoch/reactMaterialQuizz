@@ -5,7 +5,7 @@ import CardActions    from 'material-ui/lib/card/card-actions';
 import CardText       from 'material-ui/lib/card/card-text';
 import CardTitle      from 'material-ui/lib/card/card-title';
 import InkBar         from 'material-ui/lib/ink-bar';
-import {styles}       from './quizEnd.style';
+import {styles}       from './quizEnd.style.jsx!jsx';
 
 export default class QuizEnd extends React.Component{
 	

@@ -21,15 +21,15 @@ import RadioButton              from 'material-ui/lib/radio-button';
 import RadioButtonGroup         from 'material-ui/lib/radio-button-group';
 import Snackbar                 from 'material-ui/lib/snackbar';
 import ThemeManager             from 'material-ui/lib/styles/theme-manager';
-import MyRawTheme               from '../../shared/quizRawTheme';
-import MarginTop                from '../MarginTop/MarginTop.jsx!';
-import {styles}                 from './ReactMaterialQuizz.style';
+import MyRawTheme               from '../../shared/quizRawTheme.jsx!jsx';
+import MarginTop                from '../MarginTop/MarginTop.jsx!jsx';
+import {styles}                 from './ReactMaterialQuizz.style.jsx!jsx';
 
 import TranslateIcon            from 'material-ui/lib/svg-icons/action/translate';
 
 import navigationModel          from '../../models/navigationModel.json!json';
 import appBarMenuModel          from '../../models/appBarMenuModel.json!json';
-import Quiz                     from '../Quiz/Quiz.jsx!';
+import Quiz                     from '../Quiz/Quiz.jsx!jsx';
 
 const HEADER_TITLE = 'React Material Quizz';
 

@@ -7,7 +7,7 @@ import CardTitle      from 'material-ui/lib/card/card-title';
 import TextField      from 'material-ui/lib/text-field';
 import RaisedButton   from 'material-ui/lib/raised-button';
 import Checkbox       from 'material-ui/lib/checkbox';
-import {styles}       from './quizQuestions.style';
+import {styles}       from './quizQuestions.style.jsx!jsx';
 
 export default class QuizQuestions extends React.Component{
 	
@@ -19,7 +19,7 @@ export default class QuizQuestions extends React.Component{
 	init(){
 		console.info('check QuizQuestions init');
     this.state = {
-      answers : []
+      answers : [] 
     }
 	}
 
