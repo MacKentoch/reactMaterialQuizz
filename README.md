@@ -22,7 +22,8 @@ This is a simple dynamic quiz in [ReactJS](https://facebook.github.io/react/) de
 Clone or download then :
 
 ```bash
-npm install && jspm install
+$ npm install 
+$ jspm install
 ```
 
 *Note :*
@@ -38,11 +39,13 @@ npm install jspm -g
 
 ##Launch  : 
 
-1- start a server 
+1- **warrior way** : start a server 
 ```bash
 jspm-server
 ```
 
+1- **fast way** : start a server 
+[preview here](https://rawgit.com/MacKentoch/reactMaterialQuizz/master/public/index.html)
 
 
 ##License
