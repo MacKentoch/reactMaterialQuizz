@@ -30,3 +30,8 @@ export default class About extends React.Component {
 
 
 }
+
+About.contextTypes = {
+  muiTheme: React.PropTypes.object,
+  language: React.PropTypes.string
+}

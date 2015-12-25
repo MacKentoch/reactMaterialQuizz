@@ -16,8 +16,15 @@ export default class QuizEnd extends React.Component{
 	init(){
 		console.info('check QuizEnd init state');
 	}
+  
+  handleEndQuizClick(){
+    return this.props.onValidQuizClick({});
+  }
 	
 	render(){
+    
+    
+    
 		return (
 			<div className="row">
 				<div className="col-xs-12">
@@ -35,7 +42,7 @@ export default class QuizEnd extends React.Component{
                   <RaisedButton 
                     label={this.props.endBtnText} 
                     primary={true}
-                    onClick={()=>this.handleStartQuizClick()} />  
+                    onClick={()=>this.handleEndQuizClick()} />  
                 </div>
               </div>
             </CardActions>            
@@ -46,10 +53,15 @@ export default class QuizEnd extends React.Component{
 	}
 }
 
+QuizEnd.contextTypes = {
+  muiTheme: React.PropTypes.object,
+  language: React.PropTypes.string
+}
 
 
 QuizEnd.propTypes = {
-  //onValidQuizClick : React.PropTypes.func.isRequired, 
+  onValidQuizClick : React.PropTypes.func.isRequired, 
+  questions        : React.PropTypes.array.isRequired,
 	title	           : React.PropTypes.string.isRequired,
   prevBtnText      : React.PropTypes.string.isRequired,
   endBtnText       : React.PropTypes.string.isRequired,

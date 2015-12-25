@@ -30,3 +30,8 @@ export default class Home extends React.Component {
 
 
 }
+
+Home.contextTypes = {
+  muiTheme: React.PropTypes.object,
+  language: React.PropTypes.string
+}

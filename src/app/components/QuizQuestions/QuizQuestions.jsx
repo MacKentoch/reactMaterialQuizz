@@ -232,3 +232,9 @@ QuizQuestions.propTypes = {
   goPreviousBtnText       : React.PropTypes.string.isRequired,
   goFinishQuizBtnText     : React.PropTypes.string.isRequired
 };
+
+
+QuizQuestions.contextTypes = {
+  muiTheme: React.PropTypes.object,
+  language: React.PropTypes.string
+}

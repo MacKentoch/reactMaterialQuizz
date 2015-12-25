@@ -64,7 +64,7 @@ export default class Quiz extends React.Component {
     }, ()=>console.info(`slideIndex after decrement : ${this.state.slideIndex}`)); 
   } 
   
-  handleQuizFinished(){
+  handleQuizFinished(quiz){
     let previsousIndex = this.state.slideIndex;
     this.setState({
       slideIndex : parseInt(previsousIndex, 10) + 1,
@@ -224,8 +224,10 @@ export default class Quiz extends React.Component {
              <QuizEnd 
               key={tabEndIndex}
               title={this.state.quizModel.end.title_translate_id}
+              questions={this.state.quizOrderedQuestions}
               prevBtnText={this.state.quizModel.end.prev_button_text}
-              endBtnText={this.state.quizModel.end.end_button_text} 
+              endBtnText={this.state.quizModel.end.end_button_text}
+              onValidQuizClick={(quiz)=>this.handleQuizFinished(quiz)} 
              />
             </SwipeableViews>                    
           </Paper>
@@ -234,4 +236,9 @@ export default class Quiz extends React.Component {
     );
   }
 
+}
+
+Quiz.contextTypes = {
+  muiTheme: React.PropTypes.object,
+  language: React.PropTypes.string
 }
