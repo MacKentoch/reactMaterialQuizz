@@ -25,3 +25,17 @@ export const Routes = ()=>{
     </Router>
   );
 }
+
+
+//html5 style but can't static website :
+// export const Routes = ()=>{
+//   return (
+//     <Router history={createBrowserHistory()}>
+//       <Route path='/' component={ReactMaterialQuizz}>
+//         <IndexRoute component={Home} />
+//         <Route path='about' component={About} />
+//         <Route path="quiz" component={Quiz} />
+//       </Route>
+//     </Router>
+//   );
+// }
