@@ -75,10 +75,6 @@ export default class Quiz extends React.Component {
   } 
   
   
-  // updateQuizOrderedQuestionsState(qestionId, ChoiceId, value){
-  //   
-  // }
-  
   handleCheckBoxChecked(answer){
     console.info('handleCheckBoxChecked');
     
@@ -177,9 +173,9 @@ export default class Quiz extends React.Component {
           answers={answers}
           isFirstQuestion={question.numero === 1 ? true : false}
           isLastQuestion={question.numero === this.state.questionMaxIndex ? true : false}
-          goNextBtnText={'next'}
-          goPreviousBtnText={'prev'}
-          goFinishQuizBtnText={'finish'}
+          goNextBtnText={'QUIZZ_NEXT_BUTTON'}
+          goPreviousBtnText={'QUIZZ_PREVIOUS_BUTTON'}
+          goFinishQuizBtnText={'QUIZZ_VALID_BUTTON'}
         />           
       );
     });
@@ -241,7 +237,3 @@ export default class Quiz extends React.Component {
 
 }
 
-Quiz.contextTypes = {
-  muiTheme: React.PropTypes.object,
-  language: React.PropTypes.string
-}

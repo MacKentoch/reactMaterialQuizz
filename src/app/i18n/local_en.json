@@ -26,7 +26,8 @@
 	"QUIZZ_NEXT_BUTTON"				: "next",
 	"QUIZZ_PREVIOUS_BUTTON"		: "prev",
 	"QUIZZ_MODIFY_BUTTON"			: "modify",
-	"QUIZZ_VALID_BUTTON"			: "valid",		
+	"QUIZZ_VALID_BUTTON"			: "valid",
+  "QUIZZ_END_BUTTON_TEXT"   : "end",		
 	
 	"NOM_APPLICATION_WORD"    : "application name",
 	"AUTRE_WORD"							: "other",	
@@ -42,6 +43,7 @@
 	"SOMETHING_2_SAY_WORD"		: "something to say",
   
   "VALID_WORD"              : "Valid",
+  "CLOSE_WORD"              : "Close",
   "CANCEL_WORD"             : "Cancel",
 	
 	"QUIZZ_Q1"	              : "you like to dev",

@@ -31,16 +31,16 @@ export default class QuizEnd extends React.Component{
           <Card style={Object.assign({}, styles.container)}>
             <CardTitle 
               secondary={true}
-              title={this.props.title} 
+              title={this.context.translate[this.props.title]} 
             />
             <CardText>
-              <h2>content here</h2>
+              <h2>TODO : content here</h2>
             </CardText>
             <CardActions>
               <div className="row">
                 <div className="col-xs-4 col-xs-offset-4">
                   <RaisedButton 
-                    label={this.props.endBtnText} 
+                    label={this.context.translate[this.props.endBtnText]} 
                     primary={true}
                     onClick={()=>this.handleEndQuizClick()} />  
                 </div>
@@ -54,8 +54,7 @@ export default class QuizEnd extends React.Component{
 }
 
 QuizEnd.contextTypes = {
-  muiTheme: React.PropTypes.object,
-  language: React.PropTypes.string
+  translate   : React.PropTypes.object
 }
 
 

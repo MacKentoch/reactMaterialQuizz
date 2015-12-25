@@ -139,7 +139,7 @@ export default class ReactMaterialQuizz extends React.Component {
         secondary={false}
         onTouchTap={()=>this.handleCloseLanguageDialog()} />,
       <FlatButton
-        label={this.state.translate.VALID_WORD}
+        label={this.state.translate.CLOSE_WORD}
         primary={false}
         onTouchTap={()=>this.handleCloseLanguageDialog()} />
     ];    

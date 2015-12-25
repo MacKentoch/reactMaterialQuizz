@@ -84,7 +84,7 @@ export default class QuizQuestions extends React.Component{
             name={choice.nom + '-' + choice.choix}
             checked={answerValue === true? true : false}
             onCheck={(event, checked)=>this.handleCheckboxChanged(event, checked, choice.choix)}
-            label={choice.nom}
+            label={this.context.translate[choice.translateId]}
             defaultChecked={choice.valeur_defaut} 
           />
         );
@@ -97,8 +97,8 @@ export default class QuizQuestions extends React.Component{
             choiceIndex={choice.choix}
             value={answerValue}
             onChange={(e)=>this.handleTextAreaChanged(e, choice.choix)}
-            hintText={choice.translateId}
-            floatingLabelText={choice.translateId}
+            hintText={this.context.translate[choice.translateId]}
+            floatingLabelText={this.context.translate[choice.translateId]}
             multiLine={true} 
             rows={4}
           />          
@@ -117,7 +117,7 @@ export default class QuizQuestions extends React.Component{
           <RaisedButton 
             key={1}
             style={Object.assign({}, styles.buttonsNext)}
-            label={this.props.goNextBtnText} 
+            label={this.context.translate[this.props.goNextBtnText]} 
             primary={true}
             onClick={()=>this.handleGoNextQuestionClick()} 
           />
@@ -131,14 +131,14 @@ export default class QuizQuestions extends React.Component{
           <RaisedButton 
             key={1}
             style={Object.assign({}, styles.buttonPrevious)}
-            label={this.props.goPreviousBtnText} 
+            label={this.context.translate[this.props.goPreviousBtnText]} 
             primary={true}
             onClick={()=>this.handleGoPreviousQuestionClick()} 
           />
           <RaisedButton 
             key={2}
             style={Object.assign({}, styles.buttonFinish)}
-            label={this.props.goFinishQuizBtnText}
+            label={this.context.translate[this.props.goFinishQuizBtnText]}
             primary={true}
             onClick={()=>this.handleGoFinishQuizClick()}            
           />
@@ -153,14 +153,14 @@ export default class QuizQuestions extends React.Component{
           <RaisedButton
             key={1} 
             style={Object.assign({}, styles.buttonPrevious)}
-            label={this.props.goPreviousBtnText} 
+            label={this.context.translate[this.props.goPreviousBtnText]} 
             primary={true}
             onClick={()=>this.handleGoPreviousQuestionClick()} 
           />
           <RaisedButton 
             key={2}
             style={Object.assign({}, styles.buttonsNext)}
-            label={this.props.goNextBtnText} 
+            label={this.context.translate[this.props.goNextBtnText]} 
             primary={true}
             onClick={()=>this.handleGoNextQuestionClick()} 
           />
@@ -173,7 +173,7 @@ export default class QuizQuestions extends React.Component{
         <CardText> 
            <div className="row">
             <div className="col-xs-8 col-xs-offset-2">
-              <h3>{this.props.question.Q_translate_id}</h3> 
+              <h3>{this.context.translate[this.props.question.Q_translate_id]}</h3> 
             </div>
           </div>          
         </CardText>
@@ -235,6 +235,5 @@ QuizQuestions.propTypes = {
 
 
 QuizQuestions.contextTypes = {
-  muiTheme: React.PropTypes.object,
-  language: React.PropTypes.string
+  translate   : React.PropTypes.object
 }

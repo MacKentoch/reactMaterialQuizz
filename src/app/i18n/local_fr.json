@@ -26,7 +26,8 @@
 	"QUIZZ_NEXT_BUTTON"				: "suivant",
 	"QUIZZ_PREVIOUS_BUTTON"		: "précédent",
 	"QUIZZ_MODIFY_BUTTON"			: "modifier",
-	"QUIZZ_VALID_BUTTON"			: "valider",	
+	"QUIZZ_VALID_BUTTON"			: "valider",
+  "QUIZZ_END_BUTTON_TEXT"   : "terminer",	
 		
 	"NOM_APPLICATION_WORD"    : "nom de l'application",
 	"AUTRE_WORD"							: "autre",	
@@ -43,6 +44,7 @@
   
   "VALID_WORD"              : "Valider",
   "CANCEL_WORD"             : "Annuler",
+  "CLOSE_WORD"              : "Fermer",
 	
 	"QUIZZ_Q1"								: "vous aimez programmez",
 	"QUIZZ_Q2"								: "vous aimez material design?",

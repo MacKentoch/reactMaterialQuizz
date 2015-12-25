@@ -27,10 +27,7 @@ export default class QuizIntro extends React.Component{
 
 	}
   
-  componentWillMount(){
-    
-    console.dir(this.context); //context exists here
-    
+  componentWillMount(){ 
     let newMuiTheme = this.context.muiTheme;
     newMuiTheme.toolbar.backgroundColor = Colors.blue800;
     newMuiTheme.toolbar.titleColor = '#fff';//'rgba(255,255,255,0.6)';
@@ -46,8 +43,7 @@ export default class QuizIntro extends React.Component{
   
   getChildContext() {
     return {
-      muiTheme: this.state.muiTheme,
-      language: this.context.language
+      muiTheme: this.state.muiTheme
     };
   }  
   
@@ -65,20 +61,20 @@ export default class QuizIntro extends React.Component{
               key={0} 
               float="left">
               <ToolbarTitle 
-                text={this.props.title}
+                text={this.context.translate[this.props.title]}
                 style={Object.assign({}, styles.title)} 
               />
             </ToolbarGroup>
           </Toolbar>
             <CardText>
-              <h2>{this.props.subtitle}</h2>
-              <p>{this.props.body}</p>
+              <h2>{this.context.translate[this.props.subtitle]}</h2>
+              <p>{this.context.translate[this.props.body]}</p>
             </CardText>
             <CardActions>
               <div className="row">
                 <div className="col-xs-4 col-xs-offset-4">
                   <RaisedButton 
-                    label={this.props.goBtnText} 
+                    label={this.context.translate[this.props.goBtnText]} 
                     primary={true}
                     onClick={()=>this.handleStartQuizClick()} 
                    />  
@@ -103,11 +99,11 @@ QuizIntro.propTypes = {
 
 
 QuizIntro.contextTypes = {
-  muiTheme: React.PropTypes.object,
-  language: React.PropTypes.string
+  muiTheme  : React.PropTypes.object,
+  language  : React.PropTypes.string,
+  translate : React.PropTypes.object
 }
 
 QuizIntro.childContextTypes = {
-  muiTheme: React.PropTypes.object,
-  language: React.PropTypes.string
+  muiTheme  : React.PropTypes.object
 };
