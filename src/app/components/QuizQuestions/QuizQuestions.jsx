@@ -82,7 +82,7 @@ export default class QuizQuestions extends React.Component{
             style={Object.assign({}, styles.checkbox)}
             choiceIndex={choice.choix}
             name={choice.nom + '-' + choice.choix}
-            checked={answerValue}
+            checked={answerValue === true? true : false}
             onCheck={(event, checked)=>this.handleCheckboxChanged(event, checked, choice.choix)}
             label={choice.nom}
             defaultChecked={choice.valeur_defaut} 

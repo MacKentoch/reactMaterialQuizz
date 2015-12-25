@@ -7,8 +7,9 @@
 	},
 	"end" : {
 		"title_translate_id" 		: "QUIZZ_END_TITLE",
-		"content_translate_id" 	: "QUIZZ_END_CONTENT"	
-		
+		"content_translate_id" 	: "QUIZZ_END_CONTENT",
+    "prev_button_text"       : "QUIZZ_END_BUTTON_TEXT",	
+		"end_button_text"       : "QUIZZ_END_BUTTON_TEXT"
 	},	
 	
 	"questions" : [	

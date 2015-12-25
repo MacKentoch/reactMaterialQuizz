@@ -223,7 +223,9 @@ export default class Quiz extends React.Component {
              {swipeableViewTemplate}
              <QuizEnd 
               key={tabEndIndex}
-               
+              title={this.state.quizModel.end.title_translate_id}
+              prevBtnText={this.state.quizModel.end.prev_button_text}
+              endBtnText={this.state.quizModel.end.end_button_text} 
              />
             </SwipeableViews>                    
           </Paper>

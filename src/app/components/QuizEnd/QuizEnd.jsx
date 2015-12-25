@@ -4,7 +4,6 @@ import Card           from 'material-ui/lib/card/card';
 import CardActions    from 'material-ui/lib/card/card-actions';
 import CardText       from 'material-ui/lib/card/card-text';
 import CardTitle      from 'material-ui/lib/card/card-title';
-import InkBar         from 'material-ui/lib/ink-bar';
 import {styles}       from './quizEnd.style.jsx!jsx';
 
 export default class QuizEnd extends React.Component{
@@ -27,18 +26,14 @@ export default class QuizEnd extends React.Component{
               secondary={true}
               title={this.props.title} 
             />
-            <InkBar 
-              primary={true}  
-            />
             <CardText>
-              <h2>{this.props.subtitle}</h2>
-              <p>{this.props.body}</p>
+              <h2>content here</h2>
             </CardText>
             <CardActions>
               <div className="row">
                 <div className="col-xs-4 col-xs-offset-4">
                   <RaisedButton 
-                    label={this.props.goBtnText} 
+                    label={this.props.endBtnText} 
                     primary={true}
                     onClick={()=>this.handleStartQuizClick()} />  
                 </div>
@@ -50,3 +45,12 @@ export default class QuizEnd extends React.Component{
 		);
 	}
 }
+
+
+
+QuizEnd.propTypes = {
+  //onValidQuizClick : React.PropTypes.func.isRequired, 
+	title	           : React.PropTypes.string.isRequired,
+  prevBtnText      : React.PropTypes.string.isRequired,
+  endBtnText       : React.PropTypes.string.isRequired,
+};
