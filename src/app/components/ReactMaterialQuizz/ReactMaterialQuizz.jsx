@@ -104,6 +104,9 @@ export default class ReactMaterialQuizz extends React.Component {
         langDialogOpened        : true
       });      
     }
+    if(menuKey === 1){
+      location.href = 'https://github.com/MacKentoch/reactMaterialQuizz';
+    }
   }
   
   
@@ -206,7 +209,7 @@ export default class ReactMaterialQuizz extends React.Component {
       }
       let _icon;
       let menuText;
-      if(menu.text === 'github')    _icon = <a href="https://github.com/MacKentoch/reactMaterialQuizz"><FontIcon className="fa fa-github" /></a>;
+      if(menu.text === 'github')    _icon = <FontIcon className="fa fa-github" />;
       if(menu.text === 'language')  _icon = <TranslateIcon />;
       
       return (
