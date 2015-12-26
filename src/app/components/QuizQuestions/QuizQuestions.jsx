@@ -16,22 +16,21 @@ export default class QuizQuestions extends React.Component{
 		this.init();
 	}
 	
+  
 	init(){
-		console.info('check QuizQuestions init');
     this.state = {
       answers : [] 
     }
 	}
 
   handleCheckboxChanged(event, checked, index){
- 
     this.props.onCheckBoxChecked({
       questionId : this.props.question.numero,
       choiceId   : index,
       newValue   : checked
     });
   }
-  
+    
   handleTextAreaChanged(event, index){    
      this.props.onTextAreaChanged({
       questionId : this.props.question.numero,
@@ -39,8 +38,7 @@ export default class QuizQuestions extends React.Component{
       newValue   : event.target.value
      });    
   }
-  
-  
+   
   handleGoNextQuestionClick(){
     this.props.onNextQuestionClick();
   }
@@ -53,12 +51,8 @@ export default class QuizQuestions extends React.Component{
     this.props.onFinishQuizClick();
   }  
   
-
-	
   renderCurrentQuestion(){
-
     let actionTemplate;
-    
     const sortedChoices = _.sortBy(this.props.question.liste_choix, 'choix'); //sort choices by "choix" property : 
     
     const choicesTemplate = sortedChoices.map((choice)=>{
@@ -207,8 +201,6 @@ export default class QuizQuestions extends React.Component{
     );
   }
     
-  
-  
 	render(){
     const currentQuestionTemplate = this.renderCurrentQuestion();
 		return (

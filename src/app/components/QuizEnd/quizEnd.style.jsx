@@ -2,6 +2,9 @@ export const styles = {
   common : {
         color: 'rgba(0,0,0,0.54)'
   },
+  title : {
+    color : '#fff'
+  },  
   container : {
     minHeight : '450px'
   },

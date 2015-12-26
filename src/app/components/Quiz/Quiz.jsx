@@ -18,20 +18,25 @@ export default class Quiz extends React.Component {
   }
   
   init(){
-    console.info('check Quiz init');  
-    const orderedQuestions = _.sortBy(quizModel.questions, 'numero'); //sort questions by "numero" property
     this.state ={
-      slideIndex            : 0,
-      questionIndex         : 0, //questionIndex is base 1 whereas slideIndex is index 0 (slideIndex = 0 is not a question but introduction)
-      questionMaxIndex      : quizModel.questions.length, 
-      quizModel             : quizModel, 
-      quizOrderedQuestions  : orderedQuestions, 
-      answers               : []   
+      slideIndex  : 0, 
+      answers     : []   
     };
-    
-    
   }
   
+  componentWillMount(){
+    const rawQuizModel      = Object.assign({}, quizModel);
+    const orderedQuestions  = _.sortBy(quizModel.questions, 'numero'); //sort questions by "numero" property
+    const questionIndex     = 0;
+    const questionMaxIndex  = quizModel.questions.length;
+    
+    this.setState({
+      questionIndex         : questionIndex, //questionIndex is base 1 whereas slideIndex is index 0 (slideIndex = 0 is not a question but introduction)
+      questionMaxIndex      : questionMaxIndex, 
+      quizModel             : rawQuizModel, 
+      quizOrderedQuestions  : orderedQuestions     
+    });
+  }
   
   handleChangeTabs(value, e, tab){
    this.setState({
@@ -40,7 +45,6 @@ export default class Quiz extends React.Component {
   }
   
   handleChangeIndex(index, fromIndex){ 
-    console.info('check Quiz swipeable index change');
     this.setState({
       slideIndex : index,
     });    
@@ -50,34 +54,36 @@ export default class Quiz extends React.Component {
     let previsousIndex = this.state.slideIndex;
     this.setState({
       slideIndex : parseInt(previsousIndex, 10) + 1,
-    }, ()=>console.info(`slideIndex after increment : ${this.state.slideIndex}`)); 
+    }); 
   }
   
   handleQuizNextQuestion(){ 
     let previsousIndex = this.state.slideIndex;
     this.setState({
       slideIndex : parseInt(previsousIndex, 10) + 1,
-    }, ()=>console.info(`slideIndex after increment : ${this.state.slideIndex}`)); 
+    }); 
   }  
   
   handleQuizPreviousQuestion(){ 
     let previsousIndex = this.state.slideIndex;
     this.setState({
       slideIndex : parseInt(previsousIndex, 10) - 1,
-    }, ()=>console.info(`slideIndex after decrement : ${this.state.slideIndex}`)); 
+    }); 
   } 
   
-  handleQuizFinished(quiz){
+  handleQuizEndShowSummmary(){
     let previsousIndex = this.state.slideIndex;
     this.setState({
       slideIndex : parseInt(previsousIndex, 10) + 1,
-    }, ()=>console.info(`slideIndex after increment : ${this.state.slideIndex}`));    
+    });     
+  }
+  
+  handleQuizFinished(quiz){
+    this.props.history.pushState(null, '/');    
   } 
   
   
-  handleCheckBoxChecked(answer){
-    console.info('handleCheckBoxChecked');
-    
+  handleCheckBoxChecked(answer){    
     const newAnswer = {
       questionId  : answer.questionId,
       choiceId    : answer.choiceId,
@@ -104,13 +110,9 @@ export default class Quiz extends React.Component {
     this.setState({
       answers : newAnswers
     });
-    
-    //this.updateQuizOrderedQuestionsState(answer.questionId, answer.choiceId, answer.newValue)
   }  
   
   handleTextAreaChanged(answer){
-    console.info('handleTextAreaChanged');
-
     const newAnswer = {
       questionId  : answer.questionId,
       choiceId    : answer.choiceId,
@@ -166,7 +168,7 @@ export default class Quiz extends React.Component {
           isDisabled={false}
           onNextQuestionClick={()=>this.handleQuizNextQuestion()}
           onPreviousQuestionClick={()=>this.handleQuizPreviousQuestion()}
-          onFinishQuizClick={()=>this.handleQuizFinished()}
+          onFinishQuizClick={()=>this.handleQuizEndShowSummmary()}
           onCheckBoxChecked={(answer)=>this.handleCheckBoxChecked(answer)}
           onTextAreaChanged={(answer)=>this.handleTextAreaChanged(answer)}
           question={question}

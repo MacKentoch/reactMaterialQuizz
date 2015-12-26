@@ -1,11 +1,17 @@
-import React          from 'react';
-import RaisedButton   from 'material-ui/lib/raised-button';
-import Card           from 'material-ui/lib/card/card';
-import CardActions    from 'material-ui/lib/card/card-actions';
-import CardText       from 'material-ui/lib/card/card-text';
-import CardTitle      from 'material-ui/lib/card/card-title';
-import QuizQuestions  from '../QuizQuestions/QuizQuestions.jsx!jsx';
-import {styles}       from './quizEnd.style.jsx!jsx';
+import React            from 'react';
+import RaisedButton     from 'material-ui/lib/raised-button';
+import Card             from 'material-ui/lib/card/card';
+import CardActions      from 'material-ui/lib/card/card-actions';
+import CardText         from 'material-ui/lib/card/card-text';
+import CardTitle        from 'material-ui/lib/card/card-title';
+import QuizQuestions    from '../QuizQuestions/QuizQuestions.jsx!jsx';
+import Toolbar          from 'material-ui/lib/toolbar/toolbar';
+import ToolbarGroup     from 'material-ui/lib/toolbar/toolbar-group';
+import ToolbarSeparator from 'material-ui/lib/toolbar/toolbar-separator';
+import ToolbarTitle     from 'material-ui/lib/toolbar/toolbar-title';
+
+import Colors           from 'material-ui/lib/styles/colors';
+import {styles}         from './quizEnd.style.jsx!jsx';
 
 export default class QuizEnd extends React.Component{
 	
@@ -15,8 +21,32 @@ export default class QuizEnd extends React.Component{
 	}
 	
 	init(){
-		console.info('check QuizEnd init state');
+		console.info(`
+    check QuizEnd init state : init twice...
+    TODO : 
+    - to fix (should be tab or swipeableview origin)
+    - to remove when fixed
+    `);
 	}
+  
+  componentWillMount(){ 
+    let newMuiTheme = this.context.muiTheme;
+    newMuiTheme.toolbar.backgroundColor = Colors.blue800;
+    newMuiTheme.toolbar.titleColor = '#fff';//'rgba(255,255,255,0.6)';
+    newMuiTheme.zIndex.layer = 5;
+    newMuiTheme.zIndex.popover = 100000;
+    newMuiTheme.leftNav.zIndex = 10000;
+        
+    this.setState({
+      muiTheme : newMuiTheme
+    });
+  }  
+  
+  getChildContext() {
+    return {
+      muiTheme: this.state.muiTheme
+    };
+  }    
   
   handleEndQuizClick(){
     return this.props.onValidQuizClick({});
@@ -61,14 +91,18 @@ export default class QuizEnd extends React.Component{
 			<div className="row">
 				<div className="col-xs-12">
           <Card style={Object.assign({}, styles.container)}>
-            <CardTitle 
-              secondary={true}
-              title={this.context.translate[this.props.title]} 
-            />
+            <Toolbar>
+              <ToolbarGroup 
+                key={0} 
+                float="left">
+                <ToolbarTitle 
+                  text={this.context.translate[this.props.title]}
+                  style={Object.assign({}, styles.title)} 
+                />
+              </ToolbarGroup>
+            </Toolbar>    
             <CardText>
-              <h1>Answers Summary</h1>
               <div>
-                
                 {answersSummary}
               </div>
             </CardText>
@@ -89,10 +123,6 @@ export default class QuizEnd extends React.Component{
 	}
 }
 
-QuizEnd.contextTypes = {
-  translate   : React.PropTypes.object
-}
-
 
 QuizEnd.propTypes = {
   onValidQuizClick : React.PropTypes.func.isRequired, 
@@ -101,4 +131,14 @@ QuizEnd.propTypes = {
 	title	           : React.PropTypes.string.isRequired,
   prevBtnText      : React.PropTypes.string.isRequired,
   endBtnText       : React.PropTypes.string.isRequired,
+};
+
+
+QuizEnd.contextTypes = {
+  muiTheme    : React.PropTypes.object,
+  translate   : React.PropTypes.object
+};
+
+QuizEnd.childContextTypes = {
+  muiTheme  : React.PropTypes.object
 };

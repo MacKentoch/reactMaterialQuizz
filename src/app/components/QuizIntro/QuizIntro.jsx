@@ -22,9 +22,7 @@ export default class QuizIntro extends React.Component{
 	}
 	
 	init(){
-    console.info('check QuizIntro init state');	
     //console.dir(this.context); //=> context does not exist here
-
 	}
   
   componentWillMount(){ 
@@ -56,16 +54,16 @@ export default class QuizIntro extends React.Component{
 			<div className="row">
 				<div className="col-xs-12">
           <Card style={Object.assign({}, styles.container)}>
-          <Toolbar>
-            <ToolbarGroup 
-              key={0} 
-              float="left">
-              <ToolbarTitle 
-                text={this.context.translate[this.props.title]}
-                style={Object.assign({}, styles.title)} 
-              />
-            </ToolbarGroup>
-          </Toolbar>
+            <Toolbar>
+              <ToolbarGroup 
+                key={0} 
+                float="left">
+                <ToolbarTitle 
+                  text={this.context.translate[this.props.title]}
+                  style={Object.assign({}, styles.title)} 
+                />
+              </ToolbarGroup>
+            </Toolbar>
             <CardText>
               <h2>{this.context.translate[this.props.subtitle]}</h2>
               <p>{this.context.translate[this.props.body]}</p>
@@ -102,7 +100,7 @@ QuizIntro.contextTypes = {
   muiTheme  : React.PropTypes.object,
   language  : React.PropTypes.string,
   translate : React.PropTypes.object
-}
+};
 
 QuizIntro.childContextTypes = {
   muiTheme  : React.PropTypes.object
