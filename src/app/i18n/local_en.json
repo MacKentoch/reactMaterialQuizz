@@ -12,7 +12,7 @@
 	"CHOOSE_LANGUAGE"          : "Choose language",
 	"LAYOUT_THANK_YOU"				 : "thank you",
 	"PROGRESSION_WORD"				 : "Progress",
-	"HOME_TITRE_1_QUIZZ" 			 : "ngMaterialQuizz",
+	"HOME_TITRE_1_QUIZZ" 			 : "reactMaterialQuizz",
 	"HOME_TITRE_2_QUIZZ" 			 : "a nice ReactJS quizz material designed (material UI)",
 	"HOME_DETAIL_TEXT"				 : "So easy : just update the JSON model quizz then you are done",
 	

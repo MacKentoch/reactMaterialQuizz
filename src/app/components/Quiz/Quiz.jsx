@@ -224,6 +224,7 @@ export default class Quiz extends React.Component {
               key={tabEndIndex}
               title={this.state.quizModel.end.title_translate_id}
               questions={this.state.quizOrderedQuestions}
+              answers={this.state.answers}
               prevBtnText={this.state.quizModel.end.prev_button_text}
               endBtnText={this.state.quizModel.end.end_button_text}
               onValidQuizClick={(quiz)=>this.handleQuizFinished(quiz)} 
