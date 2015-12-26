@@ -26,6 +26,7 @@ export const Routes = ()=>{
   );
 }
 
+
 // html5 style : static website would not work like that
 // export const Routes = ()=>{
 //   return (
