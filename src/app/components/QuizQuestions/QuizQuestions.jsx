@@ -183,9 +183,11 @@ export default class QuizQuestions extends React.Component{
       );
     }
 
+    let questionStyle = Object.assign({}, styles.common)
+    if(!this.props.isDisabled) questionStyle = Object.assign({}, questionStyle, styles.container)
 
     return (
-      <Card style={Object.assign({}, styles.container)}>
+      <Card style={questionStyle}>
         <CardText> 
            <div className="row">
             <div className="col-xs-8 col-xs-offset-2">
