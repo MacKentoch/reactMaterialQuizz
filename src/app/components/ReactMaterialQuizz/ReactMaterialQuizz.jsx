@@ -112,7 +112,8 @@ export default class ReactMaterialQuizz extends React.Component {
   
   handleCloseLanguageDialog(){
     this.setState({
-      langDialogOpened: false
+      langDialogOpened: false,
+      snackbarOpened  : false,
     });
   }   
   
