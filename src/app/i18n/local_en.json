@@ -53,6 +53,8 @@
 	"QUIZZ_NEXT_ALERT_MESSAGE"			: "done",
 	"QUIZZ_NEXT_NOT_VALID_MESSAGE"	: "not a valid answer",
 	"QUIZZ_MIN_ANSWER_IS"						: "minium anwser",
-	"QUIZZ_MAX_ANSWER_IS"						: "maximum"	
+	"QUIZZ_MAX_ANSWER_IS"						: "maximum",
+  
+  "SNACKBAR_CHANGE_LANG_MSG"      : "Current language is set to :" 	
 
 }

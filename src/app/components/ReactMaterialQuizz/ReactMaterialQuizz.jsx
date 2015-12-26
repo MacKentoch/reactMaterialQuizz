@@ -73,7 +73,7 @@ export default class ReactMaterialQuizz extends React.Component {
       headerTitle             : HEADER_TITLE,
       leftNavOpen             : false,
       langDialogOpened        : false,
-      snakBarAutoHideDuration : 1000,
+      snakBarAutoHideDuration : 2000,
       snackbarOpened          : false,
       snackbarMessage         : '',
       snackbarAction          : ''  
@@ -100,10 +100,7 @@ export default class ReactMaterialQuizz extends React.Component {
   
   handleOpenLanguageDialog(){
     this.setState({
-      langDialogOpened        : true,
-      snackbarOpened          : true,
-      snackbarMessage         : `Current language is set to :  ${this.state.language}`,
-      snackbarAction          : 'close' 
+      langDialogOpened        : true
     });
   }
   
@@ -117,8 +114,11 @@ export default class ReactMaterialQuizz extends React.Component {
   
   handleLanguageSelect(event, selected){
     this.setState({
-      language    : selected,
-      translate   : this.getTranslations(selected)             
+      language        : selected,
+      snackbarOpened  : true,
+      snackbarMessage : `${this.getTranslations(selected).SNACKBAR_CHANGE_LANG_MSG} ${selected}`,
+      snackbarAction  : `${this.getTranslations(selected).CLOSE_WORD}`,       
+      translate       : this.getTranslations(selected)             
     });
   }
    
@@ -149,7 +149,7 @@ export default class ReactMaterialQuizz extends React.Component {
         title={this.state.translate.CHOOSE_LANGUAGE}
         actions={customActions}
         width={'300px'}
-        contentStyle={{ zIndex: 10 }}
+        
         open={this.state.langDialogOpened}
         onRequestClose={()=>this.handleCloseLanguageDialog()}>
         
@@ -274,10 +274,8 @@ export default class ReactMaterialQuizz extends React.Component {
         {languageDialog}
         <Snackbar
           open={this.state.snackbarOpened}
-          modal={true}
           message={this.state.snackbarMessage}
           action={this.state.snackbarAction}
-          autoHideDuration={this.state.snakBarAutoHideDuration} 
          />        
 			</div>
     );

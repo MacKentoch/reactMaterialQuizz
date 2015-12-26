@@ -31,7 +31,7 @@ System.config({
     "lodash": "npm:lodash@3.10.1",
     "material-design-icons": "github:google/material-design-icons@2.1.1",
     "material-design-lite": "github:google/material-design-lite@1.0.6",
-    "material-ui": "npm:material-ui@0.14.0-rc2",
+    "material-ui": "npm:material-ui@0.14.0",
     "react": "npm:react@0.14.3",
     "react-addons-css-transition-group": "npm:react-addons-css-transition-group@0.14.3",
     "react-dom": "npm:react-dom@0.14.3",
@@ -472,6 +472,9 @@ System.config({
       "lodash.pairs": "npm:lodash.pairs@3.0.1",
       "process": "github:jspm/nodelibs-process@0.1.2"
     },
+    "npm:lodash._basefor@3.0.2": {
+      "process": "github:jspm/nodelibs-process@0.1.2"
+    },
     "npm:lodash._baseisequal@3.0.7": {
       "lodash.isarray": "npm:lodash.isarray@3.0.4",
       "lodash.istypedarray": "npm:lodash.istypedarray@3.0.2",
@@ -482,14 +485,28 @@ System.config({
       "lodash._cacheindexof": "npm:lodash._cacheindexof@3.0.2",
       "lodash._createcache": "npm:lodash._createcache@3.1.2"
     },
+    "npm:lodash._createassigner@3.1.1": {
+      "lodash._bindcallback": "npm:lodash._bindcallback@3.0.1",
+      "lodash._isiterateecall": "npm:lodash._isiterateecall@3.0.9",
+      "lodash.restparam": "npm:lodash.restparam@3.6.1"
+    },
     "npm:lodash._createcache@3.1.2": {
       "lodash._getnative": "npm:lodash._getnative@3.9.1"
     },
     "npm:lodash.debounce@3.1.1": {
       "lodash._getnative": "npm:lodash._getnative@3.9.1"
     },
+    "npm:lodash.isplainobject@3.2.0": {
+      "lodash._basefor": "npm:lodash._basefor@3.0.2",
+      "lodash.isarguments": "npm:lodash.isarguments@3.0.4",
+      "lodash.keysin": "npm:lodash.keysin@3.0.8"
+    },
     "npm:lodash.keys@3.1.2": {
       "lodash._getnative": "npm:lodash._getnative@3.9.1",
+      "lodash.isarguments": "npm:lodash.isarguments@3.0.4",
+      "lodash.isarray": "npm:lodash.isarray@3.0.4"
+    },
+    "npm:lodash.keysin@3.0.8": {
       "lodash.isarguments": "npm:lodash.isarguments@3.0.4",
       "lodash.isarray": "npm:lodash.isarray@3.0.4"
     },
@@ -497,12 +514,29 @@ System.config({
       "lodash._keyprefix": "npm:lodash._keyprefix@2.4.2",
       "lodash.isfunction": "npm:lodash.isfunction@2.4.1"
     },
+    "npm:lodash.merge@3.3.2": {
+      "lodash._arraycopy": "npm:lodash._arraycopy@3.0.0",
+      "lodash._arrayeach": "npm:lodash._arrayeach@3.0.0",
+      "lodash._createassigner": "npm:lodash._createassigner@3.1.1",
+      "lodash._getnative": "npm:lodash._getnative@3.9.1",
+      "lodash.isarguments": "npm:lodash.isarguments@3.0.4",
+      "lodash.isarray": "npm:lodash.isarray@3.0.4",
+      "lodash.isplainobject": "npm:lodash.isplainobject@3.2.0",
+      "lodash.istypedarray": "npm:lodash.istypedarray@3.0.2",
+      "lodash.keys": "npm:lodash.keys@3.1.2",
+      "lodash.keysin": "npm:lodash.keysin@3.0.8",
+      "lodash.toplainobject": "npm:lodash.toplainobject@3.0.0"
+    },
     "npm:lodash.pairs@3.0.1": {
       "lodash.keys": "npm:lodash.keys@3.1.2",
       "process": "github:jspm/nodelibs-process@0.1.2"
     },
     "npm:lodash.throttle@3.0.4": {
       "lodash.debounce": "npm:lodash.debounce@3.1.1"
+    },
+    "npm:lodash.toplainobject@3.0.0": {
+      "lodash._basecopy": "npm:lodash._basecopy@3.0.1",
+      "lodash.keysin": "npm:lodash.keysin@3.0.8"
     },
     "npm:lodash.uniq@3.2.2": {
       "lodash._basecallback": "npm:lodash._basecallback@3.3.1",
@@ -520,11 +554,11 @@ System.config({
       "stream": "github:jspm/nodelibs-stream@0.1.0",
       "util": "github:jspm/nodelibs-util@0.1.0"
     },
-    "npm:material-ui@0.14.0-rc2": {
+    "npm:material-ui@0.14.0": {
       "fs": "github:jspm/nodelibs-fs@0.1.2",
       "inline-style-prefixer": "npm:inline-style-prefixer@0.5.4",
+      "lodash.merge": "npm:lodash.merge@3.3.2",
       "lodash.throttle": "npm:lodash.throttle@3.0.4",
-      "path": "github:jspm/nodelibs-path@0.1.0",
       "process": "github:jspm/nodelibs-process@0.1.2",
       "react": "npm:react@0.14.3",
       "react-addons-create-fragment": "npm:react-addons-create-fragment@0.14.3",
