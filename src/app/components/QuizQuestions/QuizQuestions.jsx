@@ -83,6 +83,7 @@ export default class QuizQuestions extends React.Component{
             choiceIndex={choice.choix}
             name={choice.nom + '-' + choice.choix}
             checked={answerValue === true? true : false}
+            disabled={this.props.isDisabled}
             onCheck={(event, checked)=>this.handleCheckboxChanged(event, checked, choice.choix)}
             label={this.context.translate[choice.translateId]}
             defaultChecked={choice.valeur_defaut} 
@@ -96,6 +97,7 @@ export default class QuizQuestions extends React.Component{
             style={Object.assign({}, styles.textarea)}
             choiceIndex={choice.choix}
             value={answerValue}
+            disabled={this.props.isDisabled}
             onChange={(e)=>this.handleTextAreaChanged(e, choice.choix)}
             hintText={this.context.translate[choice.translateId]}
             floatingLabelText={this.context.translate[choice.translateId]}
@@ -167,6 +169,20 @@ export default class QuizQuestions extends React.Component{
         </div>                            
       );
     }
+    
+    let questionFooter = '';
+    if(!this.props.isDisabled){
+      questionFooter= (
+        <CardActions>
+          <div className="row">
+            <div className="col-xs-8 col-xs-offset-2">
+              {actionTemplate}
+            </div>
+          </div>
+        </CardActions>        
+      );
+    }
+
 
     return (
       <Card style={Object.assign({}, styles.container)}>
@@ -184,13 +200,7 @@ export default class QuizQuestions extends React.Component{
             </div>
           </div>
         </CardText>
-        <CardActions>
-          <div className="row">
-            <div className="col-xs-8 col-xs-offset-2">
-              {actionTemplate}
-            </div>
-          </div>
-        </CardActions>            
+        {questionFooter}    
       </Card>          
     );
   }
@@ -226,6 +236,7 @@ QuizQuestions.propTypes = {
       "nombre_maximum_choix"  : React.PropTypes.string.isRequired    
   }).isRequired,
   answers                 : React.PropTypes.array,
+  isDisabled              : React.PropTypes.bool.isRequired,
   isFirstQuestion         : React.PropTypes.bool.isRequired,
   isLastQuestion          : React.PropTypes.bool.isRequired,
   goNextBtnText           : React.PropTypes.string.isRequired,

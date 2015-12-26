@@ -32,6 +32,7 @@ export default class QuizEnd extends React.Component{
       return (
         <QuizQuestions 
           key={question.numero + ''}
+          isDisabled={true}
           onNextQuestionClick={()=>true}
           onPreviousQuestionClick={()=>true}
           onFinishQuizClick={()=>true}

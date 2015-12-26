@@ -163,6 +163,7 @@ export default class Quiz extends React.Component {
       return (
         <QuizQuestions 
           key={question.numero + ''}
+          isDisabled={false}
           onNextQuestionClick={()=>this.handleQuizNextQuestion()}
           onPreviousQuestionClick={()=>this.handleQuizPreviousQuestion()}
           onFinishQuizClick={()=>this.handleQuizFinished()}
