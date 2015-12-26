@@ -8,6 +8,7 @@ import QuizIntro      from '../QuizIntro/QuizIntro.jsx!jsx';
 import QuizQuestions  from '../QuizQuestions/QuizQuestions.jsx!jsx';
 import QuizEnd        from '../QuizEnd/QuizEnd.jsx!jsx';
 import LinearProgress from 'material-ui/lib/linear-progress';
+import Snackbar       from 'material-ui/lib/snackbar';
 import {styles}       from './quiz.style.jsx!jsx';
 import quizModel      from '../../models/quizModel.json!json';
 
@@ -20,8 +21,11 @@ export default class Quiz extends React.Component {
   
   init(){
     this.state ={
-      slideIndex  : 0, 
-      answers     : []   
+      slideIndex      : 0, 
+      answers         : [],
+      snackbarOpened  : false,
+      snackbarMessage : '',
+      snackbarAction  : '',   
     };
   }
   
@@ -37,7 +41,9 @@ export default class Quiz extends React.Component {
       pourcentageDone       : 0,
       showProgress          : false, 
       quizModel             : rawQuizModel, 
-      quizOrderedQuestions  : orderedQuestions     
+      quizOrderedQuestions  : orderedQuestions,
+      snackbarMessage       : '',
+      snackbarAction        : `${this.context.translate.CLOSE_WORD}`,            
     });
   }
   
@@ -62,31 +68,39 @@ export default class Quiz extends React.Component {
   }
   
   handleQuizNextQuestion(){ 
-    let previsousIndex = this.state.slideIndex;
-    let percentageDone = ((parseInt(previsousIndex, 10)) / this.state.questionMaxIndex)*100;
+    let previsousIndex    = this.state.slideIndex;
+    let percentageDone    = ((parseInt(previsousIndex, 10)) / this.state.questionMaxIndex)*100;
+    let roundPercentDone  = Math.round(percentageDone);
     
     this.setState({
       slideIndex      : parseInt(previsousIndex, 10) + 1,
-      pourcentageDone : percentageDone
+      pourcentageDone : percentageDone,
+      snackbarOpened  : true,
+      snackbarMessage : `${this.context.translate.QUIZZ_GRATZ_PERCENT1} ${roundPercentDone}${this.context.translate.QUIZZ_GRATZ_PERCENT2}`,
     }); 
   }  
   
   handleQuizPreviousQuestion(){ 
-    let previsousIndex = this.state.slideIndex;
-    let percentageDone = ((parseInt(previsousIndex, 10) - 2) / this.state.questionMaxIndex)*100;
+    let previsousIndex    = this.state.slideIndex;
+    let percentageDone    = ((parseInt(previsousIndex, 10) - 2) / this.state.questionMaxIndex)*100;
+    
     this.setState({
       slideIndex      : parseInt(previsousIndex, 10) - 1,
-      pourcentageDone : percentageDone, 
+      pourcentageDone : percentageDone,       
     }); 
   } 
   
   handleQuizEndShowSummmary(){
-    let previsousIndex = this.state.slideIndex;
-    let percentageDone = ((parseInt(previsousIndex, 10)) / this.state.questionMaxIndex)*100;
+    let previsousIndex    = this.state.slideIndex;
+    let percentageDone    = ((parseInt(previsousIndex, 10)) / this.state.questionMaxIndex)*100;
+    let roundPercentDone  = Math.round(percentageDone);
+    
     this.setState({
       slideIndex      : parseInt(previsousIndex, 10) + 1,
       pourcentageDone : percentageDone,
-      showProgress    : true
+      showProgress    : true,
+      snackbarOpened  : true,
+      snackbarMessage : `${this.context.translate.QUIZZ_GRATZ_PERCENT3}`,      
     });     
   }
   
@@ -266,9 +280,19 @@ export default class Quiz extends React.Component {
             </SwipeableViews>                    
           </Paper>
         </div>
+        <Snackbar
+          open={this.state.snackbarOpened}
+          message={this.state.snackbarMessage}
+          action={this.state.snackbarAction}
+          autoHideDuration={800}
+         />          
       </div>
     );
   }
 
 }
 
+
+Quiz.contextTypes = {
+  translate : React.PropTypes.object
+};

@@ -21,7 +21,10 @@
 	"QUIZZ_INTRO_CONTENT2"		: "Ici un deuxième contenu de l'introduction du quizz",
 	"QUIZZ_INTRO_TITLE"				: "Quizz ",
 	"QUIZZ_END_TITLE"					: "Quizz terminé",
-	"QUIZZ_END_CONTENT"				: "merci pour votre participation",	
+	"QUIZZ_END_CONTENT"				: "merci pour votre participation",
+  "QUIZZ_GRATZ_PERCENT1"    : "Super,",
+  "QUIZZ_GRATZ_PERCENT2"    : "% terminé",		
+	"QUIZZ_GRATZ_PERCENT3"    : "Félicitation 100% du quiz terminé!",  	
 	
 	"QUIZZ_NEXT_BUTTON"				: "suivant",
 	"QUIZZ_PREVIOUS_BUTTON"		: "précédent",

@@ -27,8 +27,11 @@
 	"QUIZZ_PREVIOUS_BUTTON"		: "prev",
 	"QUIZZ_MODIFY_BUTTON"			: "modify",
 	"QUIZZ_VALID_BUTTON"			: "valid",
-  "QUIZZ_END_BUTTON_TEXT"   : "end",		
-	
+  "QUIZZ_END_BUTTON_TEXT"   : "end",
+  "QUIZZ_GRATZ_PERCENT1"    : "Nice,",
+  "QUIZZ_GRATZ_PERCENT2"    : "% done",		
+	"QUIZZ_GRATZ_PERCENT3"    : "Congratulations quiz is 100% done!",
+  
 	"NOM_APPLICATION_WORD"    : "application name",
 	"AUTRE_WORD"							: "other",	
 	"NODE_JS_WORD"						: "NodeJS",
