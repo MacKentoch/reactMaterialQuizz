@@ -14,13 +14,5 @@
     "translate_id"  : "QUIZZ_WORD",
     "route"         : "quiz",
     "className"     : "fa fa-list-alt"
-  },
-  {
-    "id"            : 3,
-    "name"          : "about",
-    "text"          : "about",
-    "translate_id"  : "ABOUT_WORD",
-    "route"         : "about",
-    "className"     : "fa fa-info"
-  }  
+  }
 ]

@@ -19,7 +19,6 @@ export const Routes = ()=>{
     <Router >
       <Route path='/' component={ReactMaterialQuizz}>
         <IndexRoute component={Home} />
-        <Route path='about' component={About} />
         <Route path="quiz" component={Quiz} />
       </Route>
     </Router>
