@@ -7,6 +7,7 @@ import SwipeableViews from 'react-swipeable-views';
 import QuizIntro      from '../QuizIntro/QuizIntro.jsx!jsx';
 import QuizQuestions  from '../QuizQuestions/QuizQuestions.jsx!jsx';
 import QuizEnd        from '../QuizEnd/QuizEnd.jsx!jsx';
+import LinearProgress from 'material-ui/lib/linear-progress';
 import {styles}       from './quiz.style.jsx!jsx';
 import quizModel      from '../../models/quizModel.json!json';
 
@@ -32,7 +33,9 @@ export default class Quiz extends React.Component {
     
     this.setState({
       questionIndex         : questionIndex, //questionIndex is base 1 whereas slideIndex is index 0 (slideIndex = 0 is not a question but introduction)
-      questionMaxIndex      : questionMaxIndex, 
+      questionMaxIndex      : questionMaxIndex,
+      pourcentageDone       : 0,
+      showProgress          : false, 
       quizModel             : rawQuizModel, 
       quizOrderedQuestions  : orderedQuestions     
     });
@@ -53,28 +56,37 @@ export default class Quiz extends React.Component {
   handleQuizStart(quiz){ 
     let previsousIndex = this.state.slideIndex;
     this.setState({
-      slideIndex : parseInt(previsousIndex, 10) + 1,
+      slideIndex    : parseInt(previsousIndex, 10) + 1,
+      showProgress  : true
     }); 
   }
   
   handleQuizNextQuestion(){ 
     let previsousIndex = this.state.slideIndex;
+    let percentageDone = ((parseInt(previsousIndex, 10)) / this.state.questionMaxIndex)*100;
+    
     this.setState({
-      slideIndex : parseInt(previsousIndex, 10) + 1,
+      slideIndex      : parseInt(previsousIndex, 10) + 1,
+      pourcentageDone : percentageDone
     }); 
   }  
   
   handleQuizPreviousQuestion(){ 
     let previsousIndex = this.state.slideIndex;
+    let percentageDone = ((parseInt(previsousIndex, 10) - 2) / this.state.questionMaxIndex)*100;
     this.setState({
-      slideIndex : parseInt(previsousIndex, 10) - 1,
+      slideIndex      : parseInt(previsousIndex, 10) - 1,
+      pourcentageDone : percentageDone, 
     }); 
   } 
   
   handleQuizEndShowSummmary(){
     let previsousIndex = this.state.slideIndex;
+    let percentageDone = ((parseInt(previsousIndex, 10)) / this.state.questionMaxIndex)*100;
     this.setState({
-      slideIndex : parseInt(previsousIndex, 10) + 1,
+      slideIndex      : parseInt(previsousIndex, 10) + 1,
+      pourcentageDone : percentageDone,
+      showProgress    : true
     });     
   }
   
@@ -185,16 +197,35 @@ export default class Quiz extends React.Component {
     return swipeableViewTemplate;
   }
   
+  getProgressTemplate(){
+    let template = (
+      <LinearProgress 
+        style={Object.assign({}, styles.percentageBarContainer)}
+        mode="determinate" 
+        value={this.state.pourcentageDone} 
+      />       
+    );
+    
+    if(this.state.showProgress)   return template;
+    if(!this.state.showProgress)  return <div></div>
+  }
+  
   render(){
-   const tabsTemplate           = this.getTabQuestionsTemplate();
-   const swipeableViewTemplate  = this.getSwipableViewsQuestionsTemplate();
-   const tabEndIndex            = (this.state.questionMaxIndex + 1) + '';      
+    const progressTemplate       = this.getProgressTemplate(); 
+    const tabsTemplate           = this.getTabQuestionsTemplate();
+    const swipeableViewTemplate  = this.getSwipableViewsQuestionsTemplate();
+    const tabEndIndex            = (this.state.questionMaxIndex + 1) + '';      
     return (
       <div className="row">
         <div 
           className="col-xs-10 col-xs-offset-1 col-md-8 col-md-offset-2" 
           style={Object.assign({}, styles.quiz)}>
-          <Paper zDepth={1}>
+          <div className="row">
+            <div className="col-xs-12">
+              {progressTemplate}
+            </div>
+          </div>
+          <Paper zDepth={1}>                        
             <Tabs 
               onChange={(value, e, tab)=>this.handleChangeTabs(value, e, tab)} 
               style={Object.assign({}, styles.tab)}    

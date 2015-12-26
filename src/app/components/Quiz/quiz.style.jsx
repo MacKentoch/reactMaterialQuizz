@@ -1,7 +1,7 @@
 export const styles = {
   quiz : {
-    marginTop : '70px',
-    padding   : '0px'
+    marginTop   : '70px',
+    padding     : '0px'
   },
   slide: {
     minHeight   : '400px'
@@ -13,13 +13,21 @@ export const styles = {
      borderColor      : '#fff'
   },
   intro: {
-    background: '#fff'
+    background : '#fff'
   },
   questions: {
-    background: '#fff'
+    background : '#fff'
   },
   end: {
-    background: '#fff'
+    background : '#fff'
+  },
+  percentageBarContainer : {
+    // paddingTop      : '10px',
+    // paddingBottom   : '10px',
+    
+    marginTop      : '10px',
+    marginBottom   : '10px',    
+    //background      : '#fff'
   },
   headline: {
     color               : '#rgba(0,0,0,0.54)',

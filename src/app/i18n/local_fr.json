@@ -17,8 +17,8 @@
 	"HOME_DETAIL_TEXT"				: "Il suffit juste de modifier le modèle JSON pour personnaliser le quizz.",
 	
 	"QUIZZ_START_BUTTON_TEXT"	: "démarrer le quizz",
-	"QUIZZ_INTRO_CONTENT1"		: "Ici un premier contenu de l'instroduction du quizz",
-	"QUIZZ_INTRO_CONTENT2"		: "Ici un deuxième contenu de l'instroduction du quizz",
+	"QUIZZ_INTRO_CONTENT1"		: "Ici un premier contenu de l'introduction du quizz",
+	"QUIZZ_INTRO_CONTENT2"		: "Ici un deuxième contenu de l'introduction du quizz",
 	"QUIZZ_INTRO_TITLE"				: "Quizz ",
 	"QUIZZ_END_TITLE"					: "Quizz terminé",
 	"QUIZZ_END_CONTENT"				: "merci pour votre participation",	

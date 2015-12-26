@@ -182,8 +182,8 @@ export default class QuizQuestions extends React.Component{
 
     return (
       <Card style={questionStyle}>
-        <CardText> 
-           <div className="row">
+        <CardText>  
+          <div className="row">
             <div className="col-xs-8 col-xs-offset-2">
               <h3>{this.context.translate[this.props.question.Q_translate_id]}</h3> 
             </div>
