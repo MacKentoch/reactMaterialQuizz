@@ -16,7 +16,7 @@ import About                    from '../About/About.jsx!jsx'; //About view
 //NOTE : Route is written as a "stateless functionnal component" (= ES6 arrow function is enough to describe it - see React V0.14 major changes) 
 export const Routes = ()=>{
   return (
-    <Router history={createBrowserHistory()}>
+    <Router >
       <Route path='/' component={ReactMaterialQuizz}>
         <IndexRoute component={Home} />
         <Route path='about' component={About} />
@@ -26,3 +26,15 @@ export const Routes = ()=>{
   );
 }
 
+// html5 style : static website would not work like that
+// export const Routes = ()=>{
+//   return (
+//     <Router history={createBrowserHistory()}>
+//       <Route path='/' component={ReactMaterialQuizz}>
+//         <IndexRoute component={Home} />
+//         <Route path='about' component={About} />
+//         <Route path="quiz" component={Quiz} />
+//       </Route>
+//     </Router>
+//   );
+// }
