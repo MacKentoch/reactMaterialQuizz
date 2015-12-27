@@ -283,7 +283,7 @@ export default class Quiz extends React.Component {
           open={this.state.snackbarOpened}
           message={this.state.snackbarMessage}
           action={this.state.snackbarAction}
-          autoHideDuration={800}
+          autoHideDuration={1500}
          />          
       </div>
     );
