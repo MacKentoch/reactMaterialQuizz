@@ -1,6 +1,7 @@
 export const styles = {
   container : {
-    minHeight : '450px'
+    height : '100%',
+    width : '100%'
   },
   title : {
     color : '#fff'

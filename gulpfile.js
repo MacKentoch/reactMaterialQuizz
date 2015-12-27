@@ -140,8 +140,7 @@ gulp.task('dist', [
  */
 gulp.task('connect', ['default'],  function() {
   connect.server({
-    port: 8080,
-		root: 'public'
+    port: 8080
   });
 });
 

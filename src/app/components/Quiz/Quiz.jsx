@@ -256,6 +256,7 @@ export default class Quiz extends React.Component {
                />                  
             </Tabs> 
             <SwipeableViews 
+              
               index={parseInt(this.state.slideIndex, 10)} 
               onChangeIndex={(index, fromIndex)=>this.handleChangeIndex(index, fromIndex)} >        
               <QuizIntro 

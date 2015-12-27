@@ -3,7 +3,8 @@ export const styles = {
         color: 'rgba(0,0,0,0.54)'
   },
   container : {
-    minHeight : '550px'
+    height : '100%',
+    width : '100%'    
   },
   textarea : {
     minWidth : '450px'

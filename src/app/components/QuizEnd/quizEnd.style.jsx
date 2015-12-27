@@ -6,7 +6,8 @@ export const styles = {
     color : '#fff'
   },  
   container : {
-    minHeight : '450px'
+    height : '100%',
+    width : '100%'
   },
   textarea : {
     minWidth : '450px'

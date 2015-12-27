@@ -4,11 +4,12 @@ export const styles = {
     padding     : '0px'
   },
   slide: {
-    minHeight   : '400px'
+    height  : '100%',
+    width   : '100%'
   },
   tab : {
      height           : '0px',
-     borderWidth      : '0',
+     borderWidth      : '0px',
      backgroundColor  : '#fff',
      borderColor      : '#fff'
   },
