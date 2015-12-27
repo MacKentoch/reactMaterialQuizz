@@ -230,7 +230,18 @@ QuizQuestions.propTypes = {
       "nombre_minimum_choix"  : React.PropTypes.string.isRequired,
       "nombre_maximum_choix"  : React.PropTypes.string.isRequired    
   }).isRequired,
-  answers                 : React.PropTypes.array,
+  answers                     : React.PropTypes.arrayOf(
+    React.PropTypes.shape({
+      "choix"                 : React.PropTypes.number.isRequired,
+      "type"                  : React.PropTypes.oneOf([
+        'checkbox', 
+        'textarea'
+      ]).isRequired,
+      "nom"                   : React.PropTypes.string.isRequired,
+      "translateId"           : React.PropTypes.string.isRequired,
+      "valeur_defaut"         : React.PropTypes.any.isRequired, //can be bool or string value
+      "saisie"                : React.PropTypes.any.isRequired  //can be bool or string value  
+  }).isRequired).isRequired,
   isDisabled              : React.PropTypes.bool.isRequired,
   isFirstQuestion         : React.PropTypes.bool.isRequired,
   isLastQuestion          : React.PropTypes.bool.isRequired,
