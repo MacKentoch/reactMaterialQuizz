@@ -55,7 +55,7 @@ export default class QuizQuestions extends React.Component{
     let actionTemplate;
     const sortedChoices = _.sortBy(this.props.question.liste_choix, 'choix'); //sort choices by "choix" property : 
     
-    const choicesTemplate = sortedChoices.map((choice)=>{
+    const choicesTemplate = sortedChoices.map((choice, index)=>{
       let choiceTemplate;
       let answer;
       if(typeof this.props.answers !== 'undefined'){
@@ -73,7 +73,7 @@ export default class QuizQuestions extends React.Component{
       if(choice.type === 'checkbox')  {
         choiceTemplate= (
           <Checkbox
-            key={choice.choix} 
+            key={index + 'checkbox'} 
             style={Object.assign({}, styles.checkbox)}
             choiceIndex={choice.choix}
             name={choice.nom + '-' + choice.choix}
@@ -88,7 +88,7 @@ export default class QuizQuestions extends React.Component{
       if(choice.type === 'textarea')  {
         choiceTemplate= (
           <TextField
-            key={choice.choix}
+            key={index+'textarea'}
             style={Object.assign({}, styles.textarea)}
             choiceIndex={choice.choix}
             value={answerValue}
@@ -102,7 +102,7 @@ export default class QuizQuestions extends React.Component{
         );
       }
       return (
-        <div key={choice.choix}>
+        <div key={index}>
           {choiceTemplate}
         </div>
       );
@@ -110,7 +110,7 @@ export default class QuizQuestions extends React.Component{
     
     if(this.props.isFirstQuestion) {
       actionTemplate = (
-        <div>
+        <div key={'actionBtn'}>
           <RaisedButton 
             key={1}
             style={Object.assign({}, styles.buttonsNext)}
@@ -124,7 +124,7 @@ export default class QuizQuestions extends React.Component{
 
     if(this.props.isLastQuestion) {
       actionTemplate = (
-        <div>        
+        <div key={'actionBtn'}>        
           <RaisedButton 
             key={1}
             style={Object.assign({}, styles.buttonPrevious)}
@@ -146,7 +146,7 @@ export default class QuizQuestions extends React.Component{
     if(!this.props.isFirstQuestion && 
        !this.props.isLastQuestion) {
       actionTemplate = (
-        <div>                 
+        <div key={'actionBtn'}>                 
           <RaisedButton
             key={1} 
             style={Object.assign({}, styles.buttonPrevious)}
@@ -226,22 +226,26 @@ QuizQuestions.propTypes = {
       "numero"                : React.PropTypes.number.isRequired,
       "question"              : React.PropTypes.string.isRequired,
       "Q_translate_id"        : React.PropTypes.string.isRequired,
-      "liste_choix"           : React.PropTypes.array.isRequired,
+      "liste_choix"           : React.PropTypes.arrayOf(
+        React.PropTypes.shape({
+          "choix"           : React.PropTypes.number.isRequired,
+          "type"            : React.PropTypes.oneOf(['checkbox', 'textarea']).isRequired,
+          "nom"             : React.PropTypes.string.isRequired,
+          "translateId"     : React.PropTypes.string.isRequired,
+          "valeur_defaut"   : React.PropTypes.any.isRequired, //can be bool or string value
+          "saisie"          : React.PropTypes.any.isRequired  //can be bool or string value  
+        }).isRequired).isRequired,
       "nombre_minimum_choix"  : React.PropTypes.string.isRequired,
       "nombre_maximum_choix"  : React.PropTypes.string.isRequired    
   }).isRequired,
+  
   answers                     : React.PropTypes.arrayOf(
     React.PropTypes.shape({
-      "choix"                 : React.PropTypes.number.isRequired,
-      "type"                  : React.PropTypes.oneOf([
-        'checkbox', 
-        'textarea'
-      ]).isRequired,
-      "nom"                   : React.PropTypes.string.isRequired,
-      "translateId"           : React.PropTypes.string.isRequired,
-      "valeur_defaut"         : React.PropTypes.any.isRequired, //can be bool or string value
-      "saisie"                : React.PropTypes.any.isRequired  //can be bool or string value  
-  }).isRequired).isRequired,
+      "questionId"            : React.PropTypes.number.isRequired,
+      "choiceId"              : React.PropTypes.number.isRequired,
+      "value"                 : React.PropTypes.any.isRequired    
+  })),
+  
   isDisabled              : React.PropTypes.bool.isRequired,
   isFirstQuestion         : React.PropTypes.bool.isRequired,
   isLastQuestion          : React.PropTypes.bool.isRequired,
