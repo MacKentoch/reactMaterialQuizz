@@ -61,7 +61,8 @@ export default class QuizQuestions extends React.Component{
       if(typeof this.props.answers !== 'undefined'){
         this.props.answers.forEach((_answer)=>{ 
           if(typeof _answer !== 'undefined'){      
-            if(choice.choix === _answer.choiceId){
+            if(choice.choix === _answer.choiceId &&
+               _answer.questionId === this.props.numQuestion){
               answer = _answer;
             }
           }              

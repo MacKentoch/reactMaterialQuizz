@@ -115,63 +115,56 @@ export default class Quiz extends React.Component {
   } 
   
   
-  handleCheckBoxChecked(answer){    
-    const newAnswer = {
+  applyToAnswerState(answer){
+   const newAnswer = {
       questionId  : answer.questionId,
       choiceId    : answer.choiceId,
       value       : answer.newValue
      };
      
-    let AllAnswer = [].concat(this.state.answers);
+    let AllAnswer = [].concat.apply([], this.state.answers);//[].concat(this.state.answers);    
     let newAnswers;
     let found = false;    
     if(AllAnswer.length === 0){
-      newAnswers = [].concat(newAnswer);
-    }else{
-      newAnswers = AllAnswer.map((answer)=>{
-        if(answer.choiceId !== newAnswer.choiceId) return answer;
-        if(answer.choiceId === newAnswer.choiceId) {
+      newAnswers = [].concat(newAnswer);      
+    }else{      
+      newAnswers = AllAnswer.map((answer)=>{        
+        if(answer.choiceId !== newAnswer.choiceId) {
+          return answer;
+        }
+        
+        if(answer.choiceId    === newAnswer.choiceId &&
+          answer.questionId   !== newAnswer.questionId) {
+          return answer;
+        }        
+        
+        if( answer.choiceId    === newAnswer.choiceId &&
+           answer.questionId   === newAnswer.questionId) {
           found = true;
           return newAnswer;
         }
+        
       });
-      if(!found){
-        newAnswers = newAnswers.concat(newAnswer);
-      }     
+      
+      if(!found){      
+        
+        let previousAnswers = [].concat.apply([], newAnswers); //[].concat(newAnswers);     
+        newAnswers = previousAnswers.concat(newAnswer);
+      }
     }   
+    
+
     this.setState({
-      answers : newAnswers
-    });
+      answers : [].concat(newAnswers)
+    });    
+  }
+  
+  handleCheckBoxChecked(answer){    
+    this.applyToAnswerState(answer);
   }  
   
   handleTextAreaChanged(answer){
-    const newAnswer = {
-      questionId  : answer.questionId,
-      choiceId    : answer.choiceId,
-      value       : answer.newValue
-     };
-     
-    let AllAnswer = [].concat(this.state.answers);
-    let newAnswers;
-    let found = false;    
-    if(AllAnswer.length === 0){
-      newAnswers = [].concat(newAnswer);
-    }else{
-      newAnswers = AllAnswer.map((answer)=>{
-        if(answer.choiceId !== newAnswer.choiceId) return answer;
-        if(answer.choiceId === newAnswer.choiceId) {
-          found = true;
-          return newAnswer;
-        }
-      });
-      if(!found){
-        newAnswers = newAnswers.concat(newAnswer);
-      }     
-    }   
-    
-    this.setState({
-      answers : newAnswers
-    });    
+    this.applyToAnswerState(answer);  
   }  
   
   getTabQuestionsTemplate(){
