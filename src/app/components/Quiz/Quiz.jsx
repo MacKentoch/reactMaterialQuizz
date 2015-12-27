@@ -62,8 +62,9 @@ export default class Quiz extends React.Component {
   handleQuizStart(quiz){ 
     let previsousIndex = this.state.slideIndex;
     this.setState({
-      slideIndex    : parseInt(previsousIndex, 10) + 1,
-      showProgress  : true
+      slideIndex      : parseInt(previsousIndex, 10) + 1,
+      showProgress    : true,
+      snackbarOpened  : false,
     }); 
   }
   
@@ -86,7 +87,8 @@ export default class Quiz extends React.Component {
     
     this.setState({
       slideIndex      : parseInt(previsousIndex, 10) - 1,
-      pourcentageDone : percentageDone,       
+      pourcentageDone : percentageDone, 
+      snackbarOpened  : false,      
     }); 
   } 
   
@@ -105,6 +107,10 @@ export default class Quiz extends React.Component {
   }
   
   handleQuizFinished(quiz){
+    this.setState({ 
+      snackbarOpened  : false      
+    });     
+    
     this.props.history.pushState(null, '/');    
   } 
   

@@ -101,7 +101,8 @@ export default class ReactMaterialQuizz extends React.Component {
   handleOpenLanguageDialog(menuKey){
     if(menuKey === 0){
       this.setState({
-        langDialogOpened        : true
+        langDialogOpened  : true,
+        snackbarOpened    : false,
       });      
     }
     if(menuKey === 1){
@@ -117,6 +118,12 @@ export default class ReactMaterialQuizz extends React.Component {
     });
   }   
   
+  handleOpenSnackBarFromQuiz(message){
+      this.setState({
+        snackbarOpened  : true,
+        snackbarMessage : message,        
+      });
+  } 
   
   handleLanguageSelect(event, selected){
     this.setState({
