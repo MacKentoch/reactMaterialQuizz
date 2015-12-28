@@ -27,7 +27,8 @@
 				{"choix" : 6, "type"	: "textarea", "nom" : "autre", 			"translateId" : "AUTRE_WORD", 	"valeur_defaut": "", "saisie" : ""}		
 			],
 			"nombre_minimum_choix" 	: "1",
-			"nombre_maximum_choix" 	: "6"
+			"nombre_maximum_choix" 	: "6",
+      "shouldUpdate"          : true
 		},
 		
 		{
@@ -40,7 +41,8 @@
 				{"choix" : 3, "type"	: "checkbox", "nom" : "what is it", 		"translateId" : "WHAT_IS_MATERIAL_Q", "valeur_defaut": false, "saisie" : false}		
 			],
 			"nombre_minimum_choix" 	: "1",
-			"nombre_maximum_choix" 	: "1"
+			"nombre_maximum_choix" 	: "1",
+      "shouldUpdate"          : true
 		},		
 	
 		{
@@ -53,7 +55,8 @@
 				{"choix" : 3, "type"	: "textarea", "nom" : "something to say", "translateId" : "SOMETHING_2_SAY_WORD", "valeur_defaut": "", "saisie" : ""}		
 			],
 			"nombre_minimum_choix" 	: "1",
-			"nombre_maximum_choix" 	: "1"
+			"nombre_maximum_choix" 	: "1",
+      "shouldUpdate"          : true
 		}		
 		
 	]

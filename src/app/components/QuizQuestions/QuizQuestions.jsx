@@ -16,12 +16,21 @@ export default class QuizQuestions extends React.Component{
 		this.init();
 	}
 	
-  
 	init(){
     this.state = {
       answers : [] 
     }
 	}
+  
+  // shouldComponentUpdate(newsProps, newState){
+  //   //update or not based on question.shouldUpdate
+  //   
+  // }
+  // 
+  // componentDidUpdate(prevProps, prevState){
+  //   //to set question.shouldUpdate to false
+  //    
+  // }
 
   handleCheckboxChanged(event, checked, index){
     this.props.onCheckBoxChecked({
@@ -38,7 +47,7 @@ export default class QuizQuestions extends React.Component{
       newValue   : event.target.value
      });    
   }
-   
+      
   handleGoNextQuestionClick(){
     this.props.onNextQuestionClick();
   }
@@ -224,7 +233,8 @@ QuizQuestions.propTypes = {
           "saisie"          : React.PropTypes.any.isRequired  //can be bool or string value  
         }).isRequired).isRequired,
       "nombre_minimum_choix"  : React.PropTypes.string.isRequired,
-      "nombre_maximum_choix"  : React.PropTypes.string.isRequired    
+      "nombre_maximum_choix"  : React.PropTypes.string.isRequired,
+      "shouldUpdate"          : React.PropTypes.bool.isRequired    
   }).isRequired,
   
   answers                     : React.PropTypes.arrayOf(
