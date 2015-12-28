@@ -13,14 +13,14 @@
 	"LAYOUT_THANK_YOU"				 : "thank you",
 	"PROGRESSION_WORD"				 : "Progress",
 	"HOME_TITRE_1_QUIZZ" 			 : "reactMaterialQuizz",
-	"HOME_TITRE_2_QUIZZ" 			 : "a nice ReactJS quizz material designed (material UI)",
+	"HOME_TITRE_2_QUIZZ" 			 : "a nice ReactJS quiz material designed (material UI)",
 	"HOME_DETAIL_TEXT"				 : "So easy : just update the JSON model quizz then you are done",
 	
-	"QUIZZ_START_BUTTON_TEXT"	 : "start quizz",
+	"QUIZZ_START_BUTTON_TEXT"	 : "start quiz",
 	"QUIZZ_INTRO_CONTENT1"		 : "Here a first introduction content",
 	"QUIZZ_INTRO_CONTENT2"		 : "Here a second introduction content",
-	"QUIZZ_INTRO_TITLE"				 : "Quizz ",
-	"QUIZZ_END_TITLE"					 : "Quizz done",
+	"QUIZZ_INTRO_TITLE"				 : "Quiz ",
+	"QUIZZ_END_TITLE"					 : "Quiz done",
 	"QUIZZ_END_CONTENT"				 : "Thank you",	
 	
 	"QUIZZ_NEXT_BUTTON"				: "next",

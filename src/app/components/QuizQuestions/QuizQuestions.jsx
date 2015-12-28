@@ -238,8 +238,6 @@ QuizQuestions.propTypes = {
   onNextQuestionClick     : React.PropTypes.func.isRequired, 
   onPreviousQuestionClick : React.PropTypes.func.isRequired, 
   onFinishQuizClick       : React.PropTypes.func.isRequired,
-  // onCheckBoxChecked       : React.PropTypes.func,
-  // onTextAreaChanged       : React.PropTypes.func,
   questionIndex           : React.PropTypes.number.isRequired,
 	question                : React.PropTypes.shape({
       "numero"                : React.PropTypes.number.isRequired,
@@ -258,14 +256,6 @@ QuizQuestions.propTypes = {
       "nombre_maximum_choix"  : React.PropTypes.string.isRequired,
       "shouldUpdate"          : React.PropTypes.bool.isRequired    
   }).isRequired,
-  
-  // answers                     : React.PropTypes.arrayOf(
-  //   React.PropTypes.shape({
-  //     "questionId"            : React.PropTypes.number.isRequired,
-  //     "choiceId"              : React.PropTypes.number.isRequired,
-  //     "value"                 : React.PropTypes.any.isRequired    
-  // })),
-  
   isDisabled              : React.PropTypes.bool.isRequired,
   isFirstQuestion         : React.PropTypes.bool.isRequired,
   isLastQuestion          : React.PropTypes.bool.isRequired,

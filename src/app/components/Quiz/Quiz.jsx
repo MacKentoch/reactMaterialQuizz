@@ -22,7 +22,8 @@ export default class Quiz extends React.Component {
   init(){
     this.state ={
       slideIndex      : 0, 
-      answers         : [],
+      pourcentageDone : 0,
+      showProgress    : false,       
       snackbarOpened  : false,
       snackbarMessage : '',
       snackbarAction  : '',   
@@ -32,30 +33,27 @@ export default class Quiz extends React.Component {
   componentWillMount(){
     const rawQuizModel      = Object.assign({}, quizModel);
     const orderedQuestions  = _.sortBy(quizModel.questions, 'numero'); //sort questions by "numero" property
-    const questionIndex     = 0;
     const questionMaxIndex  = quizModel.questions.length;
     
     this.setState({
-      questionIndex         : questionIndex, //questionIndex is base 1 whereas slideIndex is index 0 (slideIndex = 0 is not a question but introduction)
       questionMaxIndex      : questionMaxIndex,
-      pourcentageDone       : 0,
-      showProgress          : false, 
       quizModel             : rawQuizModel, 
       quizOrderedQuestions  : orderedQuestions,
-      snackbarMessage       : '',
       snackbarAction        : `${this.context.translate.CLOSE_WORD}`,            
     });
   }
   
   handleChangeTabs(value, e, tab){
    this.setState({
-      slideIndex : value,
+      slideIndex      : value,
+      snackbarOpened  : false,
     });     
   }
   
   handleChangeIndex(index, fromIndex){ 
     this.setState({
-      slideIndex : index,
+      slideIndex      : index,
+      snackbarOpened  : false,
     });    
   }
   
@@ -118,12 +116,12 @@ export default class Quiz extends React.Component {
     });     
   }
   
-  handleQuizFinished(quiz){
+  handleQuizFinished(){
+    //here : should save quiz answers to database
     this.setState({ 
       snackbarOpened  : false      
     });     
-    
-    this.props.history.pushState(null, '/');    
+    this.props.history.pushState(null, '/');   //job done so return home now 
   } 
   
   getTabQuestionsTemplate(){    
@@ -151,7 +149,7 @@ export default class Quiz extends React.Component {
           question={question}
           questionIndex={questionIndex}
           isFirstQuestion={questionIndex === 0 ? true : false}
-          isLastQuestion={questionIndex === this.state.questionMaxIndex ? true : false}
+          isLastQuestion={questionIndex === this.state.questionMaxIndex - 1 ? true : false}
           goNextBtnText={'QUIZZ_NEXT_BUTTON'}
           goPreviousBtnText={'QUIZZ_PREVIOUS_BUTTON'}
           goFinishQuizBtnText={'QUIZZ_VALID_BUTTON'}
@@ -169,7 +167,6 @@ export default class Quiz extends React.Component {
         value={this.state.pourcentageDone} 
       />       
     );
-    
     if(this.state.showProgress)   return template;
     if(!this.state.showProgress)  return <div></div>
   }
@@ -207,7 +204,6 @@ export default class Quiz extends React.Component {
                />                  
             </Tabs> 
             <SwipeableViews 
-              
               index={parseInt(this.state.slideIndex, 10)} 
               onChangeIndex={(index, fromIndex)=>this.handleChangeIndex(index, fromIndex)} >        
               <QuizIntro 
@@ -223,10 +219,9 @@ export default class Quiz extends React.Component {
               key={tabEndIndex}
               title={this.state.quizModel.end.title_translate_id}
               questions={this.state.quizOrderedQuestions}
-              answers={this.state.answers}
               prevBtnText={this.state.quizModel.end.prev_button_text}
               endBtnText={this.state.quizModel.end.end_button_text}
-              onValidQuizClick={(quiz)=>this.handleQuizFinished(quiz)} 
+              onValidQuizClick={()=>this.handleQuizFinished()} 
              />
             </SwipeableViews>                    
           </Paper>

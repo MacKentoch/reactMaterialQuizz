@@ -27,11 +27,12 @@ export default class QuizIntro extends React.Component{
   
   componentWillMount(){ 
     let newMuiTheme = this.context.muiTheme;
+    
     newMuiTheme.toolbar.backgroundColor = Colors.blue800;
-    newMuiTheme.toolbar.titleColor = '#fff';//'rgba(255,255,255,0.6)';
-    newMuiTheme.zIndex.layer = 5;
-    newMuiTheme.zIndex.popover = 100000;
-    newMuiTheme.leftNav.zIndex = 10000;
+    newMuiTheme.toolbar.titleColor      = '#fff';//'rgba(255,255,255,0.6)';
+    newMuiTheme.zIndex.layer            = 5;
+    newMuiTheme.zIndex.popover          = 100000;
+    newMuiTheme.leftNav.zIndex          = 10000;
         
     this.setState({
       muiTheme : newMuiTheme
@@ -98,7 +99,6 @@ QuizIntro.propTypes = {
 
 QuizIntro.contextTypes = {
   muiTheme  : React.PropTypes.object,
-  language  : React.PropTypes.string,
   translate : React.PropTypes.object
 };
 

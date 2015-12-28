@@ -31,11 +31,12 @@ export default class QuizEnd extends React.Component{
   
   componentWillMount(){ 
     let newMuiTheme = this.context.muiTheme;
+    
     newMuiTheme.toolbar.backgroundColor = Colors.blue800;
-    newMuiTheme.toolbar.titleColor = '#fff';//'rgba(255,255,255,0.6)';
-    newMuiTheme.zIndex.layer = 5;
-    newMuiTheme.zIndex.popover = 100000;
-    newMuiTheme.leftNav.zIndex = 10000;
+    newMuiTheme.toolbar.titleColor      = '#fff';//'rgba(255,255,255,0.6)';
+    newMuiTheme.zIndex.layer            = 5;
+    newMuiTheme.zIndex.popover          = 100000;
+    newMuiTheme.leftNav.zIndex          = 10000;
         
     this.setState({
       muiTheme : newMuiTheme
@@ -49,12 +50,11 @@ export default class QuizEnd extends React.Component{
   }    
   
   handleEndQuizClick(){
-    return this.props.onValidQuizClick({});
+    return this.props.onValidQuizClick();
   }
 	
   getAllAnswersTemplate(){
     const answersSummary = this.props.questions.map((question, questionIndex)=>{
-      
       return (
         <QuizQuestions 
           key={questionIndex}
@@ -64,8 +64,8 @@ export default class QuizEnd extends React.Component{
           onFinishQuizClick={()=>true}
           question={question}
           questionIndex={questionIndex}
-          isFirstQuestion={question.numero === 1 ? true : false}
-          isLastQuestion={question.numero === this.props.questions.length ? true : false}
+          isFirstQuestion={questionIndex === 0 ? true : false}
+          isLastQuestion={questionIndex=== this.props.questions.length - 1 ? true : false}
           goNextBtnText={'QUIZZ_NEXT_BUTTON'}
           goPreviousBtnText={'QUIZZ_PREVIOUS_BUTTON'}
           goFinishQuizBtnText={'QUIZZ_VALID_BUTTON'}
@@ -75,11 +75,8 @@ export default class QuizEnd extends React.Component{
     return answersSummary;
   }
   
-  
 	render(){
-    
     const answersSummary = this.getAllAnswersTemplate();
-    
 		return (
 			<div className="row">
 				<div className="col-xs-12">
