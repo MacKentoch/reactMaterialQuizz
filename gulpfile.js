@@ -138,9 +138,10 @@ gulp.task('dist', [
 /**
  * server (other than jspm-server)
  */
-gulp.task('connect', ['default'],  function() {
+gulp.task('connect', [],  function() {
   connect.server({
-    port: 8080
+    port: 8080,
+    root: ['public', 'jspm_packages'],
   });
 });
 

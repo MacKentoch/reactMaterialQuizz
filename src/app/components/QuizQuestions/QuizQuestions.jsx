@@ -57,19 +57,7 @@ export default class QuizQuestions extends React.Component{
     
     const choicesTemplate = sortedChoices.map((choice, index)=>{
       let choiceTemplate;
-      let answer;
-      if(typeof this.props.answers !== 'undefined'){
-        this.props.answers.forEach((_answer)=>{ 
-          if(typeof _answer !== 'undefined'){      
-            if(choice.choix === _answer.choiceId &&
-               _answer.questionId === this.props.numQuestion){
-              answer = _answer;
-            }
-          }              
-        });        
-      }
-      let answerValue = typeof answer !== 'undefined' ? answer.value || '' : '';
-      
+
       if(choice.type === 'checkbox')  {
         choiceTemplate= (
           <Checkbox
@@ -77,7 +65,7 @@ export default class QuizQuestions extends React.Component{
             style={Object.assign({}, styles.checkbox)}
             choiceIndex={choice.choix}
             name={choice.nom + '-' + choice.choix}
-            checked={answerValue === true? true : false}
+            checked={choice.saisie === true? true : false}
             disabled={this.props.isDisabled}
             onCheck={(event, checked)=>this.handleCheckboxChanged(event, checked, choice.choix)}
             label={this.context.translate[choice.translateId]}
@@ -91,7 +79,7 @@ export default class QuizQuestions extends React.Component{
             key={index+'textarea'}
             style={Object.assign({}, styles.textarea)}
             choiceIndex={choice.choix}
-            value={answerValue}
+            value={choice.saisie}
             disabled={this.props.isDisabled}
             onChange={(e)=>this.handleTextAreaChanged(e, choice.choix)}
             hintText={this.context.translate[choice.translateId]}

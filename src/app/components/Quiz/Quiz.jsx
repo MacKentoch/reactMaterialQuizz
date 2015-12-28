@@ -115,56 +115,30 @@ export default class Quiz extends React.Component {
   } 
   
   
-  applyToAnswerState(answer){
-   const newAnswer = {
-      questionId  : answer.questionId,
-      choiceId    : answer.choiceId,
-      value       : answer.newValue
-     };
-     
-    let AllAnswer = [].concat.apply([], this.state.answers);//[].concat(this.state.answers);    
-    let newAnswers;
-    let found = false;    
-    if(AllAnswer.length === 0){
-      newAnswers = [].concat(newAnswer);      
-    }else{      
-      newAnswers = AllAnswer.map((answer)=>{        
-        if(answer.choiceId !== newAnswer.choiceId) {
-          return answer;
-        }
-        
-        if(answer.choiceId    === newAnswer.choiceId &&
-          answer.questionId   !== newAnswer.questionId) {
-          return answer;
-        }        
-        
-        if( answer.choiceId    === newAnswer.choiceId &&
-           answer.questionId   === newAnswer.questionId) {
-          found = true;
-          return newAnswer;
-        }
-        
-      });
-      
-      if(!found){      
-        
-        let previousAnswers = [].concat.apply([], newAnswers); //[].concat(newAnswers);     
-        newAnswers = previousAnswers.concat(newAnswer);
+  updateQuizState(answer){    
+    const questionsUpdated = this.state.quizOrderedQuestions.map((question, questionIndex)=>{
+      if(question.numero === answer.questionId){
+        const choicesUpdated = question.liste_choix.map((choice, choiceIndex)=>{
+          if(choice.choix === answer.choiceId){
+            choice.saisie = answer.newValue;
+          }
+          return choice;
+        });
       }
-    }   
-    
-
+      return question;
+    });
+        
     this.setState({
-      answers : [].concat(newAnswers)
-    });    
+      quizOrderedQuestions : questionsUpdated
+    });
   }
   
   handleCheckBoxChecked(answer){    
-    this.applyToAnswerState(answer);
+    this.updateQuizState(answer);
   }  
   
-  handleTextAreaChanged(answer){
-    this.applyToAnswerState(answer);  
+  handleTextAreaChanged(answer){  
+    this.updateQuizState(answer);
   }  
   
   getTabQuestionsTemplate(){
