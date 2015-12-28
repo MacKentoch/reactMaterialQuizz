@@ -14,7 +14,7 @@
 	"PROGRESSION_WORD"				 : "Progress",
 	"HOME_TITRE_1_QUIZZ" 			 : "reactMaterialQuizz",
 	"HOME_TITRE_2_QUIZZ" 			 : "a nice ReactJS quiz material designed (material UI)",
-	"HOME_DETAIL_TEXT"				 : "So easy : just update the JSON model quizz then you are done",
+	"HOME_DETAIL_TEXT"				 : "So easy : just update the JSON model quiz then you are done",
 	
 	"QUIZZ_START_BUTTON_TEXT"	 : "start quiz",
 	"QUIZZ_INTRO_CONTENT1"		 : "Here a first introduction content",

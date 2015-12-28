@@ -12,8 +12,13 @@ export default class MarginTop extends React.Component {
   }
 
   render(){
+    const marginTopValue = [
+      this.props.marginTopValue, 
+      this.props.marginTopUnit
+    ].join('');
+    
     return (
-      	<div style={ {marginTop : this.props.marginTopValue + this.props.marginTopUnit} }></div>	
+      	<div style={ {marginTop : marginTopValue} }></div>	
     );
   }
 
