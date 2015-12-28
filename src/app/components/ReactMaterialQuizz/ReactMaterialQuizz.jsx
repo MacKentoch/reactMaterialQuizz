@@ -33,9 +33,9 @@ import Quiz                     from '../Quiz/Quiz.jsx!jsx';
 import localEN                  from '../../i18n/local_en.json!json';
 import localFR                  from '../../i18n/local_fr.json!json';
 
-const HEADER_TITLE = 'React Material Quizz';
+const HEADER_TITLE  = 'React Material Quizz';
+const GITHUB_LINK   = 'https://github.com/MacKentoch/reactMaterialQuizz';
 
-export let __liveReload = true;
 
 export default class ReactMaterialQuizz extends React.Component {
   
@@ -46,24 +46,13 @@ export default class ReactMaterialQuizz extends React.Component {
   //   language: React.PropTypes.string 
   // }
   
-  
   constructor(props) {
     super(props);
     this.init();
   }
 
-
-  getChildContext() {
-    return {
-      muiTheme  : ThemeManager.getMuiTheme(MyRawTheme),
-      language  : this.state.language,
-      translate : this.state.translate
-    };
-  }
-  
-  
   init(){
-    const navigatorLanguage = (navigator.language || navigator.browserLanguage).split('-')[0] || 'en'; //en is fallback lang
+    const navigatorLanguage = (navigator.language || navigator.browserLanguage).split('-')[0] || 'en'; //en is fallback language
     
     this.state = {
       language                : navigatorLanguage,
@@ -80,6 +69,14 @@ export default class ReactMaterialQuizz extends React.Component {
     };
   }
   
+  getChildContext() {
+    return {
+      muiTheme  : ThemeManager.getMuiTheme(MyRawTheme),
+      language  : this.state.language,
+      translate : this.state.translate
+    };
+  }  
+  
   getTranslations(currentLanguage){
     let translation = Object.assign({}, localEN); //fallback language is En
     if(currentLanguage === 'en') translation = Object.assign({}, localEN);
@@ -91,12 +88,10 @@ export default class ReactMaterialQuizz extends React.Component {
 
   }
   
-  
   handleChangeRequestLeftNav(){
     let previousOpenState = this.state.leftNavOpen;
     this.setState({ leftNavOpen: !previousOpenState });    
   }
-  
   
   handleOpenLanguageDialog(menuKey){
     if(menuKey === 0){
@@ -106,10 +101,9 @@ export default class ReactMaterialQuizz extends React.Component {
       });      
     }
     if(menuKey === 1){
-      location.href = 'https://github.com/MacKentoch/reactMaterialQuizz';
+      location.href = GITHUB_LINK;
     }
   }
-  
   
   handleCloseLanguageDialog(){
     this.setState({
@@ -237,15 +231,11 @@ export default class ReactMaterialQuizz extends React.Component {
 
 
   render(){ 
-    
     const _menuList       = this.getAppBarMenuListTemplate();
     const _leftNavList    = this.getLeftnavListTemplate();
     const languageDialog  = this.getLanguageSelectDialog();
     const { pathname }    = this.props.location
-    //console.info(`app pathname : ${pathname}`);
-    // Only take the first-level part of the path as key, instead of the whole path.
-    //const key = pathname.split('/')[1] || 'root'
-
+    
     return (
 			<div>
         <LeftNav 

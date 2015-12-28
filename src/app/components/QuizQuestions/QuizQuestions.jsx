@@ -24,20 +24,10 @@ export default class QuizQuestions extends React.Component{
   
   componentWillReceiveProps(newProps){
     this.setState({
-      question : newProps.question 
+      question : newProps.question
     });
   }
   
-  // shouldComponentUpdate(newsProps, newState){
-  //   //update or not based on question.shouldUpdate
-  //   
-  // }
-  // 
-  // componentDidUpdate(prevProps, prevState){
-  //   //to set question.shouldUpdate to false
-  //    
-  // }
-
   updateQuestionState(choiceNewValue, choiceIndex){
     let questionUpdated = Object.assign({}, this.state.question);
     questionUpdated.liste_choix[choiceIndex].saisie = choiceNewValue;
@@ -49,20 +39,10 @@ export default class QuizQuestions extends React.Component{
 
   handleCheckboxChanged(event, checked, index){
     this.updateQuestionState(checked, index);
-    // this.props.onCheckBoxChecked({
-    //   questionId : this.props.question.numero,
-    //   choiceId   : index,
-    //   newValue   : checked
-    // });
   }
     
   handleTextAreaChanged(event, index){
-    this.updateQuestionState(event.target.value, index);    
-    //  this.props.onTextAreaChanged({
-    //   questionId : this.props.question.numero,
-    //   choiceId   : index,
-    //   newValue   : event.target.value
-    //  });    
+    this.updateQuestionState(event.target.value, index);
   }
       
   handleGoNextQuestionClick(){
@@ -79,7 +59,7 @@ export default class QuizQuestions extends React.Component{
   
   handleGoFinishQuizClick(){
     const question      = Object.assign({}, this.state.question); 
-    const questionIndex = this.props.questionIndex;   
+    const questionIndex = this.props.questionIndex;
     this.props.onFinishQuizClick(question, questionIndex);
   }  
   
