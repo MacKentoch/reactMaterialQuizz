@@ -18,9 +18,15 @@ export default class QuizQuestions extends React.Component{
 	
 	init(){
     this.state = {
-      answers : [] 
+      question : {} 
     }
 	}
+  
+  componentWillReceiveProps(newProps){
+    this.setState({
+      question : newProps.question 
+    });
+  }
   
   // shouldComponentUpdate(newsProps, newState){
   //   //update or not based on question.shouldUpdate
@@ -32,41 +38,57 @@ export default class QuizQuestions extends React.Component{
   //    
   // }
 
-  handleCheckboxChanged(event, checked, index){
-    this.props.onCheckBoxChecked({
-      questionId : this.props.question.numero,
-      choiceId   : index,
-      newValue   : checked
+  updateQuestionState(choiceNewValue, choiceIndex){
+    let questionUpdated = Object.assign({}, this.state.question);
+    questionUpdated.liste_choix[choiceIndex].saisie = choiceNewValue;
+    
+    this.setState({
+      question : questionUpdated
     });
   }
+
+  handleCheckboxChanged(event, checked, index){
+    this.updateQuestionState(checked, index);
+    // this.props.onCheckBoxChecked({
+    //   questionId : this.props.question.numero,
+    //   choiceId   : index,
+    //   newValue   : checked
+    // });
+  }
     
-  handleTextAreaChanged(event, index){    
-     this.props.onTextAreaChanged({
-      questionId : this.props.question.numero,
-      choiceId   : index,
-      newValue   : event.target.value
-     });    
+  handleTextAreaChanged(event, index){
+    this.updateQuestionState(event.target.value, index);    
+    //  this.props.onTextAreaChanged({
+    //   questionId : this.props.question.numero,
+    //   choiceId   : index,
+    //   newValue   : event.target.value
+    //  });    
   }
       
   handleGoNextQuestionClick(){
-    this.props.onNextQuestionClick();
+    const question      = Object.assign({}, this.state.question);
+    const questionIndex = this.props.questionIndex;
+    this.props.onNextQuestionClick(question, questionIndex); //updated question callbacked to parent Quiz component
   }
   
   handleGoPreviousQuestionClick(){
-    this.props.onPreviousQuestionClick();
+    const question      = Object.assign({}, this.state.question);
+    const questionIndex = this.props.questionIndex;
+    this.props.onPreviousQuestionClick(question, questionIndex);
   }
   
   handleGoFinishQuizClick(){
-    this.props.onFinishQuizClick();
+    const question      = Object.assign({}, this.state.question); 
+    const questionIndex = this.props.questionIndex;   
+    this.props.onFinishQuizClick(question, questionIndex);
   }  
   
   renderCurrentQuestion(){
     let actionTemplate;
-    const sortedChoices = _.sortBy(this.props.question.liste_choix, 'choix'); //sort choices by "choix" property : 
-    
+    const sortedChoices   = _.sortBy(this.state.question.liste_choix, 'choix'); //sort choices by "choix" property : 
     const choicesTemplate = sortedChoices.map((choice, index)=>{
+      
       let choiceTemplate;
-
       if(choice.type === 'checkbox')  {
         choiceTemplate= (
           <Checkbox
@@ -76,7 +98,7 @@ export default class QuizQuestions extends React.Component{
             name={choice.nom + '-' + choice.choix}
             checked={choice.saisie === true? true : false}
             disabled={this.props.isDisabled}
-            onCheck={(event, checked)=>this.handleCheckboxChanged(event, checked, choice.choix)}
+            onCheck={(event, checked)=>this.handleCheckboxChanged(event, checked, index)}
             label={this.context.translate[choice.translateId]}
             defaultChecked={choice.valeur_defaut} 
           />
@@ -90,7 +112,7 @@ export default class QuizQuestions extends React.Component{
             choiceIndex={choice.choix}
             value={choice.saisie}
             disabled={this.props.isDisabled}
-            onChange={(e)=>this.handleTextAreaChanged(e, choice.choix)}
+            onChange={(e)=>this.handleTextAreaChanged(e, index)}
             hintText={this.context.translate[choice.translateId]}
             floatingLabelText={this.context.translate[choice.translateId]}
             multiLine={true} 
@@ -216,9 +238,9 @@ QuizQuestions.propTypes = {
   onNextQuestionClick     : React.PropTypes.func.isRequired, 
   onPreviousQuestionClick : React.PropTypes.func.isRequired, 
   onFinishQuizClick       : React.PropTypes.func.isRequired,
-  onCheckBoxChecked       : React.PropTypes.func,
-  onTextAreaChanged       : React.PropTypes.func,
-  numQuestion             : React.PropTypes.number.isRequired,
+  // onCheckBoxChecked       : React.PropTypes.func,
+  // onTextAreaChanged       : React.PropTypes.func,
+  questionIndex           : React.PropTypes.number.isRequired,
 	question                : React.PropTypes.shape({
       "numero"                : React.PropTypes.number.isRequired,
       "question"              : React.PropTypes.string.isRequired,
@@ -237,12 +259,12 @@ QuizQuestions.propTypes = {
       "shouldUpdate"          : React.PropTypes.bool.isRequired    
   }).isRequired,
   
-  answers                     : React.PropTypes.arrayOf(
-    React.PropTypes.shape({
-      "questionId"            : React.PropTypes.number.isRequired,
-      "choiceId"              : React.PropTypes.number.isRequired,
-      "value"                 : React.PropTypes.any.isRequired    
-  })),
+  // answers                     : React.PropTypes.arrayOf(
+  //   React.PropTypes.shape({
+  //     "questionId"            : React.PropTypes.number.isRequired,
+  //     "choiceId"              : React.PropTypes.number.isRequired,
+  //     "value"                 : React.PropTypes.any.isRequired    
+  // })),
   
   isDisabled              : React.PropTypes.bool.isRequired,
   isFirstQuestion         : React.PropTypes.bool.isRequired,

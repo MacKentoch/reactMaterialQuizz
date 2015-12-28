@@ -53,24 +53,17 @@ export default class QuizEnd extends React.Component{
   }
 	
   getAllAnswersTemplate(){
-    const answersSummary = this.props.questions.map((question)=>{
-      
-      const answers = this.props.answers.map((answer)=>{
-        if(answer.questionId === question.numero) return answer;
-      });
+    const answersSummary = this.props.questions.map((question, questionIndex)=>{
       
       return (
         <QuizQuestions 
-          key={question.numero + ''}
+          key={questionIndex}
           isDisabled={true}
           onNextQuestionClick={()=>true}
           onPreviousQuestionClick={()=>true}
           onFinishQuizClick={()=>true}
-          onCheckBoxChecked={(answer)=>true}
-          onTextAreaChanged={(answer)=>true}
           question={question}
-          numQuestion={question.numero}
-          answers={answers}
+          questionIndex={questionIndex}
           isFirstQuestion={question.numero === 1 ? true : false}
           isLastQuestion={question.numero === this.props.questions.length ? true : false}
           goNextBtnText={'QUIZZ_NEXT_BUTTON'}
@@ -127,7 +120,6 @@ export default class QuizEnd extends React.Component{
 QuizEnd.propTypes = {
   onValidQuizClick : React.PropTypes.func.isRequired, 
   questions        : React.PropTypes.array.isRequired,
-  answers          : React.PropTypes.array, 
 	title	           : React.PropTypes.string.isRequired,
   prevBtnText      : React.PropTypes.string.isRequired,
   endBtnText       : React.PropTypes.string.isRequired,

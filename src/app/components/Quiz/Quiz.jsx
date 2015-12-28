@@ -68,41 +68,53 @@ export default class Quiz extends React.Component {
     }); 
   }
   
-  handleQuizNextQuestion(){ 
-    let previsousIndex    = this.state.slideIndex;
-    let percentageDone    = ((parseInt(previsousIndex, 10)) / this.state.questionMaxIndex)*100;
-    let roundPercentDone  = Math.round(percentageDone);
+  handleQuizNextQuestion(question, questionIndex){ 
+    let previsousIndex        = this.state.slideIndex;
+    let percentageDone        = ((parseInt(previsousIndex, 10)) / this.state.questionMaxIndex)*100;
+    let roundPercentDone      = Math.round(percentageDone);
+    let updatedQuestionsModel = [].concat(this.state.quizOrderedQuestions);
+    
+    updatedQuestionsModel[questionIndex] = question;
     
     this.setState({
-      slideIndex      : parseInt(previsousIndex, 10) + 1,
-      pourcentageDone : percentageDone,
-      snackbarOpened  : true,
-      snackbarMessage : `${this.context.translate.QUIZZ_GRATZ_PERCENT1} ${roundPercentDone}${this.context.translate.QUIZZ_GRATZ_PERCENT2}`,
+      quizOrderedQuestions  : updatedQuestionsModel,
+      slideIndex            : parseInt(previsousIndex, 10) + 1,
+      pourcentageDone       : percentageDone,
+      snackbarOpened        : true,
+      snackbarMessage       : `${this.context.translate.QUIZZ_GRATZ_PERCENT1} ${roundPercentDone}${this.context.translate.QUIZZ_GRATZ_PERCENT2}`,
     }); 
   }  
   
-  handleQuizPreviousQuestion(){ 
-    let previsousIndex    = this.state.slideIndex;
-    let percentageDone    = ((parseInt(previsousIndex, 10) - 2) / this.state.questionMaxIndex)*100;
+  handleQuizPreviousQuestion(question, questionIndex){ 
+    let previsousIndex        = this.state.slideIndex;
+    let percentageDone        = ((parseInt(previsousIndex, 10) - 2) / this.state.questionMaxIndex)*100;
+    let updatedQuestionsModel = [].concat(this.state.quizOrderedQuestions);
     
+    updatedQuestionsModel[questionIndex] = question;
+        
     this.setState({
-      slideIndex      : parseInt(previsousIndex, 10) - 1,
-      pourcentageDone : percentageDone, 
-      snackbarOpened  : false,      
+      quizOrderedQuestions  : updatedQuestionsModel,
+      slideIndex            : parseInt(previsousIndex, 10) - 1,
+      pourcentageDone       : percentageDone, 
+      snackbarOpened        : false,      
     }); 
   } 
   
-  handleQuizEndShowSummmary(){
-    let previsousIndex    = this.state.slideIndex;
-    let percentageDone    = ((parseInt(previsousIndex, 10)) / this.state.questionMaxIndex)*100;
-    let roundPercentDone  = Math.round(percentageDone);
+  handleQuizEndShowSummmary(question, questionIndex){
+    let previsousIndex        = this.state.slideIndex;
+    let percentageDone        = ((parseInt(previsousIndex, 10)) / this.state.questionMaxIndex)*100;
+    let roundPercentDone      = Math.round(percentageDone);
+    let updatedQuestionsModel = [].concat(this.state.quizOrderedQuestions);
     
+    updatedQuestionsModel[questionIndex] = question;
+        
     this.setState({
-      slideIndex      : parseInt(previsousIndex, 10) + 1,
-      pourcentageDone : percentageDone,
-      showProgress    : true,
-      snackbarOpened  : true,
-      snackbarMessage : `${this.context.translate.QUIZZ_GRATZ_PERCENT3}`,      
+      quizOrderedQuestions  : updatedQuestionsModel,
+      slideIndex            : parseInt(previsousIndex, 10) + 1,
+      pourcentageDone       : percentageDone,
+      showProgress          : true,
+      snackbarOpened        : true,
+      snackbarMessage       : `${this.context.translate.QUIZZ_GRATZ_PERCENT3}`,      
     });     
   }
   
@@ -114,40 +126,13 @@ export default class Quiz extends React.Component {
     this.props.history.pushState(null, '/');    
   } 
   
-  
-  updateQuizState(answer){    
-    const questionsUpdated = this.state.quizOrderedQuestions.map((question, questionIndex)=>{
-      if(question.numero === answer.questionId){
-        const choicesUpdated = question.liste_choix.map((choice, choiceIndex)=>{
-          if(choice.choix === answer.choiceId){
-            choice.saisie = answer.newValue;
-          }
-          return choice;
-        });
-      }
-      return question;
-    });
-        
-    this.setState({
-      quizOrderedQuestions : questionsUpdated
-    });
-  }
-  
-  handleCheckBoxChecked(answer){    
-    this.updateQuizState(answer);
-  }  
-  
-  handleTextAreaChanged(answer){  
-    this.updateQuizState(answer);
-  }  
-  
-  getTabQuestionsTemplate(){
-    const tabsTemplate = this.state.quizOrderedQuestions.map((question)=>{
+  getTabQuestionsTemplate(){    
+    const tabsTemplate = this.state.quizOrderedQuestions.map((question, questionIndex)=>{
       return (
         <Tab
-          key={question.numero + ''}
+          key={questionIndex}
           label={question.Q_translate_id}     
-          value={question.numero + ''}          
+          value={questionIndex}          
         />
       );
     });
@@ -155,26 +140,18 @@ export default class Quiz extends React.Component {
   } 
   
   getSwipableViewsQuestionsTemplate(){
-    const swipeableViewTemplate = this.state.quizOrderedQuestions.map((question)=>{
-      
-      const answers = this.state.answers.map((answer)=>{
-        if(answer.questionId === question.numero) return answer;
-      });
-      
+    const swipeableViewTemplate = this.state.quizOrderedQuestions.map((question, questionIndex)=>{
       return (
         <QuizQuestions 
-          key={question.numero + ''}
+          key={questionIndex}
           isDisabled={false}
-          onNextQuestionClick={()=>this.handleQuizNextQuestion()}
-          onPreviousQuestionClick={()=>this.handleQuizPreviousQuestion()}
-          onFinishQuizClick={()=>this.handleQuizEndShowSummmary()}
-          onCheckBoxChecked={(answer)=>this.handleCheckBoxChecked(answer)}
-          onTextAreaChanged={(answer)=>this.handleTextAreaChanged(answer)}
+          onNextQuestionClick={(question, questionIndex)=>this.handleQuizNextQuestion(question, questionIndex)}
+          onPreviousQuestionClick={(question, questionIndex)=>this.handleQuizPreviousQuestion(question, questionIndex)}
+          onFinishQuizClick={(question, questionIndex)=>this.handleQuizEndShowSummmary(question, questionIndex)}
           question={question}
-          numQuestion={question.numero}
-          answers={answers}
-          isFirstQuestion={question.numero === 1 ? true : false}
-          isLastQuestion={question.numero === this.state.questionMaxIndex ? true : false}
+          questionIndex={questionIndex}
+          isFirstQuestion={questionIndex === 0 ? true : false}
+          isLastQuestion={questionIndex === this.state.questionMaxIndex ? true : false}
           goNextBtnText={'QUIZZ_NEXT_BUTTON'}
           goPreviousBtnText={'QUIZZ_PREVIOUS_BUTTON'}
           goFinishQuizBtnText={'QUIZZ_VALID_BUTTON'}
