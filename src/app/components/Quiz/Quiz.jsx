@@ -172,6 +172,11 @@ export default class Quiz extends React.Component {
   }
   
   render(){
+    console.info(`
+    
+    quiz renders now
+    `);
+    
     const progressTemplate       = this.getProgressTemplate(); 
     const tabsTemplate           = this.getTabQuestionsTemplate();
     const swipeableViewTemplate  = this.getSwipableViewsQuestionsTemplate();

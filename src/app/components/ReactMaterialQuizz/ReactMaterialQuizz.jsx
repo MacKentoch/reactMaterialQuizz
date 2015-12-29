@@ -135,7 +135,7 @@ export default class ReactMaterialQuizz extends React.Component {
     this.props.history.pushState(null, selectedRoute); 
  
     let previousOpenState = this.state.leftNavOpen;
-    this.setState({ leftNavOpen: !previousOpenState });     
+    if(previousOpenState)   this.setState({ leftNavOpen: !previousOpenState });     
   }
 
 
@@ -270,9 +270,7 @@ export default class ReactMaterialQuizz extends React.Component {
             transitionName="routeAnimated" 
             transitionEnterTimeout={500} 
             transitionLeaveTimeout={500}> 
-          <div key={pathname}>
-            {this.props.children}
-          </div>       
+          {React.cloneElement(this.props.children, { key: pathname })}                   
         </ReactCSSTransitionGroup>
         {languageDialog}
         <Snackbar

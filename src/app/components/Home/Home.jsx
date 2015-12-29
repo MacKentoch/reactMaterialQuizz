@@ -18,6 +18,10 @@ export default class Home extends React.Component {
   }
 
   render(){
+    console.info(`
+    
+    home renders now
+    `);    
     return (
       <div className="row">
         <div className="col-xs-10 col-xs-offset-1 col-md-8 col-md-offset-2" 

@@ -51,6 +51,8 @@ export default class QuizIntro extends React.Component{
   }
 	
 	render(){
+    console.info(' |_ QuizIntro renders now');
+    
 		return (
 			<div className="row">
 				<div className="col-xs-12">

@@ -21,12 +21,12 @@ export default class QuizEnd extends React.Component{
 	}
 	
 	init(){
-		console.info(`
-    check QuizEnd init state : init twice...
-    TODO : 
-    - to fix (should be tab or swipeableview origin)
-    - to remove when fixed
-    `);
+		// console.info(`
+    // check QuizEnd init state : init twice...
+    // TODO : 
+    // - to fix (should be tab or swipeableview origin)
+    // - to remove when fixed
+    // `);
 	}
   
   componentWillMount(){ 
@@ -76,6 +76,8 @@ export default class QuizEnd extends React.Component{
   }
   
 	render(){
+    console.info(' |_ QuizEnd renders now');
+    
     const answersSummary = this.getAllAnswersTemplate();
 		return (
 			<div className="row">
