@@ -10,6 +10,7 @@ export default class MdlMenu extends React.Component{
     componentHandler.upgradeDom(); // MDL - React trick This upgrades all upgradable components (i.e. with 'mdl-js-*' class)
   }
   
+  
   render(){
     const {
       materialIcon,
