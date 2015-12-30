@@ -99,13 +99,13 @@ export default class ReactMaterialQuizz extends React.Component {
     const { pathname }    = this.props.location
     
     return (
-			<div class="mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header">
+			<div className="mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header">
         
         <MdlAppToolbar title={'test'} />
         
 
-        <main class="mdl-layout__content">
-          <div class="page-content">
+        <main className="mdl-layout__content">
+          <div className="page-content">
             <ReactCSSTransitionGroup
                 component="div"
                 transitionName="routeAnimated" 

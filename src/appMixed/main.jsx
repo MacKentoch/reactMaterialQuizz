@@ -1,4 +1,4 @@
-import '../../public/css/custom-material.min.css'                       
+import '../../public/css/custom-material.min.css!'                       
 import '../../jspm_packages/github/google/material-design-lite@1.0.6/material.min.js'
 
 import React                    from 'react';
