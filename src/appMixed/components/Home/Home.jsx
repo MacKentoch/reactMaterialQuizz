@@ -23,17 +23,10 @@ export default class Home extends React.Component {
     home renders now
     `);    
     return (
-      <div className="row">
-        <div className="col-xs-10 col-xs-offset-1 col-md-8 col-md-offset-2" 
-             style={Object.assign({}, styles.home)}>
-          <Card>
-            <CardText>
-              <h1>{this.context.translate.HOME_TITRE_1_QUIZZ}</h1>
-              <h2>{this.context.translate.HOME_TITRE_2_QUIZZ}</h2>
-              <p>{this.context.translate.HOME_DETAIL_TEXT}</p>
-            </CardText>            
-          </Card>  
-        </div>
+      <div style={{height:'100%'}}>
+        <h1>{this.context.translate.HOME_TITRE_1_QUIZZ}</h1>
+        <h2>{this.context.translate.HOME_TITRE_2_QUIZZ}</h2>
+        <p>{this.context.translate.HOME_DETAIL_TEXT}</p>
       </div>
     );
   }

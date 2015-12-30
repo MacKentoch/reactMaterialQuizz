@@ -33,7 +33,10 @@ import Quiz                     from '../Quiz/Quiz.jsx!jsx';
 import localEN                  from '../../i18n/local_en.json!json';
 import localFR                  from '../../i18n/local_fr.json!json';
 
+
+import MdlLayoutContainer            from '../mdl/MdlLayoutContainer.jsx!jsx';
 import MdlAppToolbar            from '../mdl/MdlAppToolbar.jsx!jsx';
+import MdlDrawer                from '../mdl/MdlDrawer.jsx!jsx';
 
 
 const HEADER_TITLE  = 'React Material Quizz';
@@ -96,14 +99,19 @@ export default class ReactMaterialQuizz extends React.Component {
   }  
   
   render(){ 
-    const { pathname }    = this.props.location
-    
+    const { pathname }    = this.props.location;
+    const navigation = [
+      {label : 'home'},
+      {label : 'quiz'}
+    ];
     return (
-			<div className="mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header">
-        
+      <MdlLayoutContainer>        
         <MdlAppToolbar title={'test'} />
-        
-
+        <MdlDrawer 
+          title={HEADER_TITLE}
+          navigation={navigation}
+          onSelection={()=>true}
+        />
         <main className="mdl-layout__content">
           <div className="page-content">
             <ReactCSSTransitionGroup
@@ -115,9 +123,7 @@ export default class ReactMaterialQuizz extends React.Component {
             </ReactCSSTransitionGroup>        
           </div>
         </main>
-
-         
-			</div>
+      </MdlLayoutContainer>
     );
   }
 

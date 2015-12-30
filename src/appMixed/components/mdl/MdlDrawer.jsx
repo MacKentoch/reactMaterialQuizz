@@ -26,7 +26,7 @@ export default class MdlDrawer extends React.Component {
   componentDidUpdate() {
     componentHandler.upgradeDom(); // MDL - React trick This upgrades all upgradable components (i.e. with 'mdl-js-*' class)
   }
-
+    
   handleMenuClick(event, navigationItemLabel){
     this.props.onSelection(event, navigationItemLabel);
   }
@@ -39,7 +39,7 @@ export default class MdlDrawer extends React.Component {
     } = this.props;
     
     return (
-      <div className="mdl-layout__drawer mdl-shadow--2dp" {..others}>
+      <div className="mdl-layout__drawer mdl-shadow--2dp" {...others}>
         <span className="mdl-layout-title">{title}</span>
         <nav className="mdl-navigation">
           {
@@ -53,7 +53,7 @@ export default class MdlDrawer extends React.Component {
                   {navigationItem.label}
                 </a>
               );              
-            });
+            })
           }
         </nav>
       </div>
@@ -65,7 +65,7 @@ export default class MdlDrawer extends React.Component {
 MdlDrawer.propTypes = {
   title         : React.PropTypes.string,
   navigation    : React.PropTypes.arrayOf(
-    React.propTypes.shape({
+    React.PropTypes.shape({
       "label"       : React.PropTypes.string.isRequired,
     }).isRequired
   ).isRequired,
