@@ -15,10 +15,6 @@ export default class MdlMain extends React.Component {
     super(props);
   }
 
-  componentDidUpdate() {
-    componentHandler.upgradeDom(); // MDL - React trick This upgrades all upgradable components (i.e. with 'mdl-js-*' class)
-  }
-
   render(){    
     return (
       <main className="mdl-layout__content">

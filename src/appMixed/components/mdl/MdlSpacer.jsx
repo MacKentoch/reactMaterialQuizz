@@ -14,10 +14,6 @@ export default class MdlSpacer extends React.Component {
     super(props);
   }
 
-  componentDidUpdate() {
-    componentHandler.upgradeDom(); // MDL - React trick This upgrades all upgradable components (i.e. with 'mdl-js-*' class)
-  }
-
   render(){    
     return (
       <div className="mdl-layout-spacer"></div>

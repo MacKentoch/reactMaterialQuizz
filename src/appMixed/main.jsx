@@ -1,5 +1,6 @@
+import 'material-design-lite/material.css!'
 import '../../public/css/custom-material.min.css!'                       
-import '../../jspm_packages/github/google/material-design-lite@1.0.6/material.min.js'
+import 'material-design-lite/material'
 
 import React                    from 'react';
 import ReactDOM                 from 'react-dom';

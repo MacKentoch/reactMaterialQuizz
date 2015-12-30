@@ -23,10 +23,6 @@ export default class MdlDrawer extends React.Component {
     super(props);
   }
 
-  componentDidUpdate() {
-    componentHandler.upgradeDom(); // MDL - React trick This upgrades all upgradable components (i.e. with 'mdl-js-*' class)
-  }
-    
   handleMenuClick(event, navigationItemLabel){
     this.props.onSelection(event, navigationItemLabel);
   }

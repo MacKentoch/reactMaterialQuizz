@@ -24,11 +24,6 @@ export default class MdlMenu extends React.Component{
     super(props);
   }
   
-  componentDidUpdate() {
-    componentHandler.upgradeDom(); // MDL - React trick This upgrades all upgradable components (i.e. with 'mdl-js-*' class)
-  }
-  
-  
   handleMenuClick(event, menuId, menuItemIndex){
     if(typeof this.props.onSelection !== 'undefined'){
       this.props.onSelection(event, menuId, menuItemIndex);
@@ -38,7 +33,7 @@ export default class MdlMenu extends React.Component{
   renderMenuItems(){
     const {menuId, menus} = this.props;
     const MenuItemsTemplate = menus.map((menuItem, menuItemIndex)=>{
-      if(menu.disabled){
+      if(menuItem.disabled){
         return (
           <li 
             key={menuItemIndex}
@@ -73,13 +68,15 @@ export default class MdlMenu extends React.Component{
     const MenuItemsTemplate = this.renderMenuItems();
     
     return (
-      <div {..others}>
-        <button id={menuId}
-                className="mdl-button mdl-js-button mdl-button--icon">
+      <div {...others}>
+        <button 
+          id={menuId}
+          className="mdl-button mdl-js-button mdl-button--icon">
           <i className="material-icons">{materialIcon}</i>
         </button>
-        <ul className="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect"
-            htmlFor={menuId}>
+        <ul 
+          className="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect"
+          htmlFor={menuId}>
           {MenuItemsTemplate}
         </ul>
       </div>      
@@ -93,7 +90,7 @@ MdlMenu.propTypes = {
   menuId        : React.PropTypes.string.isRequired,
   materialIcon  : React.PropTypes.string,
   menus         : React.PropTypes.arrayOf(
-    React.propTypes.shape({
+    React.PropTypes.shape({
       "name"        : React.PropTypes.string.isRequired,
       "disabled"    : React.PropTypes.bool.isRequired
     }).isRequired

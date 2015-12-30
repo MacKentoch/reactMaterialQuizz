@@ -38,6 +38,7 @@ import MdlLayoutContainer       from '../mdl/MdlLayoutContainer.jsx!jsx';
 import MdlAppNavBar             from '../mdl/MdlAppNavBar.jsx!jsx';
 import MdlDrawer                from '../mdl/MdlDrawer.jsx!jsx';
 import MdlMain                  from '../mdl/MdlMain.jsx!jsx';
+import MdlMenu                  from '../mdl/MdlMenu.jsx!jsx';
 
 
 const HEADER_TITLE  = 'React Material Quizz';
@@ -91,30 +92,34 @@ export default class ReactMaterialQuizz extends React.Component {
     return translation;
   }
   
-  componentWillMount() {
-
-  }
-  
-  // componentDidUpdate() {
-  //   componentHandler.upgradeDom(); // MDL - React trick This upgrades all upgradable components (i.e. with 'mdl-js-*' class)
-  // }  
-  
   render(){ 
     const { pathname }    = this.props.location;
+    
     const navigation = [
       {label : 'home'},
       {label : 'quiz'}
     ];
+    
+    const menuItems = [
+      {name: 'language', disabled: false},
+      {name: 'github', disabled: false}  
+    ];
+    
     return (
       <MdlLayoutContainer>        
-        <MdlAppNavBar />
+        <MdlAppNavBar>
+          <MdlMenu 
+            menuId={'topMainMenu'}
+            menus={menuItems}
+            onSelection={(event, menuId, menuItemIndex)=>console.info(`clicked on menu : ${menuId} at menuItemIndex :  ${menuItemIndex}`)}
+          />
+        </MdlAppNavBar>
         <MdlDrawer 
           title={HEADER_TITLE}
           navigation={navigation}
-          onSelection={()=>true}
+          onSelection={(event, navigationItemLabel)=>console.info(`clicked on navigation item :  ${navigationItemLabel}`)}
         />
-      <main className="mdl-layout__content">
-        <div className="page-content">
+        <MdlMain >
           <ReactCSSTransitionGroup
               component="div"
               transitionName="routeAnimated" 
@@ -122,8 +127,7 @@ export default class ReactMaterialQuizz extends React.Component {
               transitionLeaveTimeout={500}> 
             {React.cloneElement(this.props.children, { key: pathname })}                   
           </ReactCSSTransitionGroup>        
-        </div>
-      </main>
+        </MdlMain>    
       </MdlLayoutContainer>
     );
   }
