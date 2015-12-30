@@ -23,10 +23,12 @@ export default class Home extends React.Component {
     home renders now
     `);    
     return (
-      <div style={{height:'100%'}}>
-        <h1>{this.context.translate.HOME_TITRE_1_QUIZZ}</h1>
-        <h2>{this.context.translate.HOME_TITRE_2_QUIZZ}</h2>
-        <p>{this.context.translate.HOME_DETAIL_TEXT}</p>
+      <div className="mdl-grid">
+        <div className="mdl-cell mdl-cell--12-col">
+          <h1>{this.context.translate.HOME_TITRE_1_QUIZZ}</h1>
+          <h2>{this.context.translate.HOME_TITRE_2_QUIZZ}</h2>
+          <p>{this.context.translate.HOME_DETAIL_TEXT}</p>          
+        </div>
       </div>
     );
   }
