@@ -11,7 +11,8 @@
 *     - Menu_Object   : {Object} :  REQUIRED - no default
 *       - Menu_Object.name        : {string}    :  REQUIRED   - no default
 *       - Menu_Object.disabled    : {bool}      :  REQUIRED   - no default
-*       - Menu_Object.onSelection : {function(event, menuId, Menu_Object_Index)}  :  optional  - no default
+*
+*   - onSelection : {function(event, menuId, menuItemIndex)}  :  optional  - no default
 *        
 **/
 
@@ -30,7 +31,7 @@ export default class MdlMenu extends React.Component{
   
   handleMenuClick(event, menuId, menuItemIndex){
     if(typeof this.props.onSelection !== 'undefined'){
-      this.props.onSelection(menuId, menuItemIndex);
+      this.props.onSelection(event, menuId, menuItemIndex);
     }
   }
   
@@ -94,10 +95,10 @@ MdlMenu.propTypes = {
   menus         : React.PropTypes.arrayOf(
     React.propTypes.shape({
       "name"        : React.PropTypes.string.isRequired,
-      "disabled"    : React.PropTypes.bool.isRequired,
-      "onSelection" : React.PropTypes.func
+      "disabled"    : React.PropTypes.bool.isRequired
     }).isRequired
-  )
+  ).isRequired,
+  onSelection   : React.PropTypes.func  
 };
 
 MdlMenu.defaultProps = {
