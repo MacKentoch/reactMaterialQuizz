@@ -4,8 +4,6 @@ import {
   RouteHandler, 
   Link 
 }                               from 'react-router';
-import AppBar                   from 'material-ui/lib/app-bar';
-import LeftNav                  from 'material-ui/lib/left-nav';
 import IconMenu                 from 'material-ui/lib/menus/icon-menu';
 import Menu                     from 'material-ui/lib/menus/menu';
 import MenuItem                 from 'material-ui/lib/menus/menu-item';
