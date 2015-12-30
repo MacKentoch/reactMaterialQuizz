@@ -1,3 +1,20 @@
+/**
+* COMPONENT : MdlMenu
+* WHAT FOR  : material design lite Menu
+*
+* PROPS     : 
+*   - menuId        : {string}    : REQUIRED - no default value
+*
+*   - materialIcon  : {string}    : optional - default value = 'more_vert' -> which is the vertical 3 dots icons
+*
+*   - menus         : {array of Menu_Object}  : REQUIRED - no default
+*     - Menu_Object   : {Object} :  REQUIRED - no default
+*       - Menu_Object.name        : {string}    :  REQUIRED   - no default
+*       - Menu_Object.disabled    : {bool}      :  REQUIRED   - no default
+*       - Menu_Object.onSelection : {function}  :  optionnal  - no default
+*
+**/
+
 import React from 'react';
 
 export default class MdlMenu extends React.Component{
@@ -57,11 +74,11 @@ export default class MdlMenu extends React.Component{
     return (
       <div {..others}>
         <button id={menuId}
-                class="mdl-button mdl-js-button mdl-button--icon">
-          <i class="material-icons">{materialIcon}</i>
+                className="mdl-button mdl-js-button mdl-button--icon">
+          <i className="material-icons">{materialIcon}</i>
         </button>
-        <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect"
-            for={menuId}>
+        <ul className="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect"
+            htmlFor={menuId}>
           {MenuItemsTemplate}
         </ul>
       </div>      
