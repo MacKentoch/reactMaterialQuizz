@@ -34,9 +34,10 @@ import localEN                  from '../../i18n/local_en.json!json';
 import localFR                  from '../../i18n/local_fr.json!json';
 
 
-import MdlLayoutContainer            from '../mdl/MdlLayoutContainer.jsx!jsx';
-import MdlAppToolbar            from '../mdl/MdlAppToolbar.jsx!jsx';
+import MdlLayoutContainer       from '../mdl/MdlLayoutContainer.jsx!jsx';
+import MdlAppNavBar             from '../mdl/MdlAppNavBar.jsx!jsx';
 import MdlDrawer                from '../mdl/MdlDrawer.jsx!jsx';
+import MdlMain                  from '../mdl/MdlMain.jsx!jsx';
 
 
 const HEADER_TITLE  = 'React Material Quizz';
@@ -94,9 +95,9 @@ export default class ReactMaterialQuizz extends React.Component {
 
   }
   
-  componentDidUpdate() {
-    componentHandler.upgradeDom(); // MDL - React trick This upgrades all upgradable components (i.e. with 'mdl-js-*' class)
-  }  
+  // componentDidUpdate() {
+  //   componentHandler.upgradeDom(); // MDL - React trick This upgrades all upgradable components (i.e. with 'mdl-js-*' class)
+  // }  
   
   render(){ 
     const { pathname }    = this.props.location;
@@ -106,23 +107,23 @@ export default class ReactMaterialQuizz extends React.Component {
     ];
     return (
       <MdlLayoutContainer>        
-        <MdlAppToolbar title={'test'} />
+        <MdlAppNavBar />
         <MdlDrawer 
           title={HEADER_TITLE}
           navigation={navigation}
           onSelection={()=>true}
         />
-        <main className="mdl-layout__content">
-          <div className="page-content">
-            <ReactCSSTransitionGroup
-                component="div"
-                transitionName="routeAnimated" 
-                transitionEnterTimeout={500} 
-                transitionLeaveTimeout={500}> 
-              {React.cloneElement(this.props.children, { key: pathname })}                   
-            </ReactCSSTransitionGroup>        
-          </div>
-        </main>
+      <main className="mdl-layout__content">
+        <div className="page-content">
+          <ReactCSSTransitionGroup
+              component="div"
+              transitionName="routeAnimated" 
+              transitionEnterTimeout={500} 
+              transitionLeaveTimeout={500}> 
+            {React.cloneElement(this.props.children, { key: pathname })}                   
+          </ReactCSSTransitionGroup>        
+        </div>
+      </main>
       </MdlLayoutContainer>
     );
   }
