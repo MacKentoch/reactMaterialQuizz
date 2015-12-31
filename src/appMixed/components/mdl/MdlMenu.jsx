@@ -11,12 +11,15 @@
 *     - Menu_Object   : {Object} :  REQUIRED - no default
 *       - Menu_Object.name        : {string}    :  REQUIRED   - no default
 *       - Menu_Object.disabled    : {bool}      :  REQUIRED   - no default
+*       - Menu_Object.mdlIconName : {string}    : optional    - no default
 *
 *   - onSelection : {function(event, menuId, menuItemIndex)}  :  optional  - no default
 *        
 **/
 
-import React from 'react';
+import React      from 'react';
+import MdlIcon    from './MdlIcon.jsx!jsx';
+import {styles}   from './MdlMenu.style.jsx!jsx';
 
 export default class MdlMenu extends React.Component{
   
@@ -31,15 +34,34 @@ export default class MdlMenu extends React.Component{
   }
   
   renderMenuItems(){
-    const {menuId, menus} = this.props;
+    const {
+      menuId, 
+      menus,
+      ...others
+    } = this.props;
+    
     const MenuItemsTemplate = menus.map((menuItem, menuItemIndex)=>{
+      
+      let mdlIcon = '';
+      if(typeof menuItem.mdlIconName !== 'undefined') {
+        mdlIcon = (
+          <MdlIcon
+            style={Object.assign({}, styles.menuItemIcon)} 
+            iconName={menuItem.mdlIconName} 
+          />
+        );
+      }      
+      
       if(menuItem.disabled){
         return (
           <li 
             key={menuItemIndex}
+            style={Object.assign({}, styles.menuItem)}
+            {...others}
             disabled 
             className="mdl-menu__item" 
             onClick={(e)=>this.handleMenuClick(e, menuId, menuItemIndex)}>
+            {mdlIcon}
             {menuItem.name}          
           </li>
         );        
@@ -47,8 +69,11 @@ export default class MdlMenu extends React.Component{
         return (
           <li 
             key={menuItemIndex}
+            style={Object.assign({}, styles.menuItem)}
+            {...others}
             className="mdl-menu__item" 
             onClick={(e)=>this.handleMenuClick(e, menuId, menuItemIndex)}>
+            {mdlIcon}
             {menuItem.name}          
           </li>
         );        
@@ -68,7 +93,9 @@ export default class MdlMenu extends React.Component{
     const MenuItemsTemplate = this.renderMenuItems();
     
     return (
-      <div {...others}>
+      <div 
+        {...others}
+        >
         <button 
           id={menuId}
           className="mdl-button mdl-js-button mdl-button--icon">
@@ -92,7 +119,8 @@ MdlMenu.propTypes = {
   menus         : React.PropTypes.arrayOf(
     React.PropTypes.shape({
       "name"        : React.PropTypes.string.isRequired,
-      "disabled"    : React.PropTypes.bool.isRequired
+      "disabled"    : React.PropTypes.bool.isRequired,
+      "mdlIconName" : React.PropTypes.string,
     }).isRequired
   ).isRequired,
   onSelection   : React.PropTypes.func  

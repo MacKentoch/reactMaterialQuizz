@@ -15,9 +15,12 @@ export default class MdlMain extends React.Component {
     super(props);
   }
 
-  render(){    
+  render(){ 
+    const {...others} = this.props;   
     return (
-      <main className="mdl-layout__content">
+      <main 
+        className="mdl-layout__content"
+        {...others}>
         <div className="page-content">
           {this.props.children}
        </div>

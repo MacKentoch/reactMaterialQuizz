@@ -1,12 +1,12 @@
 export const styles = {
-  navItem : {
+  menuItem : {
     display        : 'flex !important',
     flexDirection  : 'row',
     alignItems     : 'center',
     fontWeight     : '500',
-  },
-  navItemIcon : {
+  },  
+  menuItemIcon: {
     fontSize      : '24px',
-    marginRight   : '24px',    
+    marginRight   : '24px',      
   }
 };
