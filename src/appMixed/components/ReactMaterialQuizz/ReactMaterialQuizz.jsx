@@ -90,10 +90,76 @@ export default class ReactMaterialQuizz extends React.Component {
   
   navigationTo(event, selectedRoute) {
     this.props.history.pushState(null, selectedRoute); //more info on react router v1.0.0+ : http://stackoverflow.com/questions/31079081/programmatically-navigate-using-react-router      
-  }  
+  } 
+  
+  openLanguageDialog(){
+    this.setState({
+      langDialogOpened  : true,
+      snackbarOpened    : false,
+    });     
+  } 
+  
+  closeLanguageDialog(){
+    this.setState({
+      langDialogOpened: false,
+      snackbarOpened  : false,
+    });    
+  }
   
   handleDrawerNavigation(event, selectedRoute){
     this.navigationTo(event, selectedRoute);
+  }
+  
+  handleMenuItemSelected(menuKey){
+    if(menuKey === 0){
+     this.openLanguageDialog();
+    }
+    if(menuKey === 1){
+      location.href = GITHUB_LINK;
+    }
+  }
+  
+  handleCloseLanguageDialog(){
+    this.closeLanguageDialog();
+  }  
+  
+  renderLanguageDialog(){
+    let customActions = [
+      <FlatButton
+        label={this.state.translate.CANCEL_WORD}
+        secondary={false}
+        onTouchTap={()=>this.handleCloseLanguageDialog()} />,
+      <FlatButton
+        label={this.state.translate.CLOSE_WORD}
+        primary={false}
+        onTouchTap={()=>this.handleCloseLanguageDialog()} />
+    ];    
+    
+    return (
+      <Dialog
+        title={this.state.translate.CHOOSE_LANGUAGE}
+        actions={customActions}
+        width={'300px'}
+        
+        open={this.state.langDialogOpened}
+        onRequestClose={()=>this.handleCloseLanguageDialog()}>
+        
+        <RadioButtonGroup 
+          name="languageSelection" 
+          defaultSelected={this.state.language}
+          onChange={(event, selected)=>this.handleLanguageSelect(event, selected)}>
+        <RadioButton
+          value="en"
+          label={this.state.translate.ANGLAIS_WORD} 
+          style={{marginBottom:16}} />
+        <RadioButton
+          value="fr"
+          label={this.state.translate.FRANCAIS_WORD}
+          style={{marginBottom:16}}/>
+        </RadioButtonGroup>        
+        
+      </Dialog>    
+    );    
   }
   
   render(){ 
@@ -115,13 +181,15 @@ export default class ReactMaterialQuizz extends React.Component {
       };
     }); 
     
+    const LanguageDialog = this.renderLanguageDialog();
+
     return (
       <MdlLayoutContainer>        
         <MdlAppNavBar>
           <MdlMenu 
             menuId={'topMainMenu'}
             menus={menuItems}
-            onSelection={(event, menuId, menuItemIndex)=>console.info(`clicked on menu : ${menuId} at menuItemIndex :  ${menuItemIndex}`)}
+            onSelection={(event, menuId, menuItemIndex)=>this.handleMenuItemSelected(menuItemIndex)}
           />
         </MdlAppNavBar>
         <MdlDrawer 
@@ -137,7 +205,8 @@ export default class ReactMaterialQuizz extends React.Component {
               transitionLeaveTimeout={500}> 
             {React.cloneElement(this.props.children, { key: pathname })}                   
           </ReactCSSTransitionGroup>        
-        </MdlMain>    
+        </MdlMain> 
+        {LanguageDialog}   
       </MdlLayoutContainer>
     );
   }
