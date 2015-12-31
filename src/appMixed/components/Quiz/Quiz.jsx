@@ -1,4 +1,5 @@
 import React          from 'react';
+import classNames     from 'classnames';
 import _              from 'lodash';
 import Tabs           from 'material-ui/lib/tabs/tabs';
 import Tab            from 'material-ui/lib/tabs/tab';
@@ -26,7 +27,9 @@ export default class Quiz extends React.Component {
       showProgress    : false,       
       snackbarOpened  : false,
       snackbarMessage : '',
-      snackbarAction  : '',   
+      snackbarAction  : '',
+      animated          : true,
+      viewEnters        : false         
     };
   }
   
@@ -42,6 +45,20 @@ export default class Quiz extends React.Component {
       snackbarAction        : `${this.context.translate.CLOSE_WORD}`,            
     });
   }
+  
+  componentDidMount(){
+    console.info('quiz view will did mount');
+    this.setState({
+      viewEnters       : true 
+    });    
+  }
+
+  componentWillUnmount(){
+    console.info('quiz view will unmount');
+    this.setState({
+      viewEnters       : false 
+    });     
+  }  
   
   handleChangeTabs(value, e, tab){
    this.setState({
@@ -172,9 +189,16 @@ export default class Quiz extends React.Component {
   }
   
   render(){
-    console.info(`
+
+    let quizViewClasses = classNames({
+      'animatedViews'    : this.state.animated,
+      'view-enter'       : this.state.viewEnters
+    });    
     
+    console.info(`
+    ------------------------
     quiz renders now
+    ------------------------
     `);
     
     const progressTemplate       = this.getProgressTemplate(); 
@@ -182,62 +206,66 @@ export default class Quiz extends React.Component {
     const swipeableViewTemplate  = this.getSwipableViewsQuestionsTemplate();
     const tabEndIndex            = (this.state.questionMaxIndex + 1) + '';      
     return (
-      <div className="row">
-        <div 
-          className="col-xs-10 col-xs-offset-1 col-md-8 col-md-offset-2" 
-          style={Object.assign({}, styles.quiz)}>
-          <div className="row">
-            <div className="col-xs-12">
-              {progressTemplate}
+      <section 
+         key="quizView"
+         className={quizViewClasses}>        
+        <div className="row" key="quizz">
+          <div 
+            className="col-xs-10 col-xs-offset-1 col-md-8 col-md-offset-2" 
+            style={Object.assign({}, styles.quiz)}>
+            <div className="row">
+              <div className="col-xs-12">
+                {progressTemplate}
+              </div>
             </div>
-          </div>
-          <Paper zDepth={1}>                        
-            <Tabs 
-              onChange={(value, e, tab)=>this.handleChangeTabs(value, e, tab)} 
-              style={Object.assign({}, styles.tab)}    
-              value={this.state.slideIndex + ''} >
-              <Tab 
-                key="0"
-                label="Introduction"     
-                value="0" 
-              />                  
-              {tabsTemplate}                 
-              <Tab
-                key={tabEndIndex}  
-                label="Quiz end" 
-                value={tabEndIndex} 
-               />                  
-            </Tabs> 
-            <SwipeableViews 
-              index={parseInt(this.state.slideIndex, 10)} 
-              onChangeIndex={(index, fromIndex)=>this.handleChangeIndex(index, fromIndex)} >        
-              <QuizIntro 
-                key="0"
-                title={this.state.quizModel.intro.title_translate_id}
-                subtitle={this.state.quizModel.intro.content_1_translate_id}
-                body={this.state.quizModel.intro.content_2_translate_id}
-                goBtnText={this.state.quizModel.intro.go_button_text_id}
-                onStartQuizClick={(quiz)=>this.handleQuizStart(quiz)}
+            <Paper zDepth={1}>                        
+              <Tabs 
+                onChange={(value, e, tab)=>this.handleChangeTabs(value, e, tab)} 
+                style={Object.assign({}, styles.tab)}    
+                value={this.state.slideIndex + ''} >
+                <Tab 
+                  key="0"
+                  label="Introduction"     
+                  value="0" 
+                />                  
+                {tabsTemplate}                 
+                <Tab
+                  key={tabEndIndex}  
+                  label="Quiz end" 
+                  value={tabEndIndex} 
+                />                  
+              </Tabs> 
+              <SwipeableViews 
+                index={parseInt(this.state.slideIndex, 10)} 
+                onChangeIndex={(index, fromIndex)=>this.handleChangeIndex(index, fromIndex)} >        
+                <QuizIntro 
+                  key="0"
+                  title={this.state.quizModel.intro.title_translate_id}
+                  subtitle={this.state.quizModel.intro.content_1_translate_id}
+                  body={this.state.quizModel.intro.content_2_translate_id}
+                  goBtnText={this.state.quizModel.intro.go_button_text_id}
+                  onStartQuizClick={(quiz)=>this.handleQuizStart(quiz)}
+                />
+              {swipeableViewTemplate}
+              <QuizEnd 
+                key={tabEndIndex}
+                title={this.state.quizModel.end.title_translate_id}
+                questions={this.state.quizOrderedQuestions}
+                prevBtnText={this.state.quizModel.end.prev_button_text}
+                endBtnText={this.state.quizModel.end.end_button_text}
+                onValidQuizClick={()=>this.handleQuizFinished()} 
               />
-             {swipeableViewTemplate}
-             <QuizEnd 
-              key={tabEndIndex}
-              title={this.state.quizModel.end.title_translate_id}
-              questions={this.state.quizOrderedQuestions}
-              prevBtnText={this.state.quizModel.end.prev_button_text}
-              endBtnText={this.state.quizModel.end.end_button_text}
-              onValidQuizClick={()=>this.handleQuizFinished()} 
-             />
-            </SwipeableViews>                    
-          </Paper>
+              </SwipeableViews>                    
+            </Paper>
+          </div>
+          <Snackbar
+            open={this.state.snackbarOpened}
+            message={this.state.snackbarMessage}
+            action={this.state.snackbarAction}
+            autoHideDuration={1500}
+          />          
         </div>
-        <Snackbar
-          open={this.state.snackbarOpened}
-          message={this.state.snackbarMessage}
-          action={this.state.snackbarAction}
-          autoHideDuration={1500}
-         />          
-      </div>
+      </section>
     );
   }
 

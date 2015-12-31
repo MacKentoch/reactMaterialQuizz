@@ -19,6 +19,7 @@ System.config({
     "animateCss": "github:daneden/animate.css@3.5.0",
     "babel": "npm:babel-core@5.8.34",
     "babel-runtime": "npm:babel-runtime@5.8.34",
+    "classnames": "npm:classnames@2.2.1",
     "clean-css": "npm:clean-css@3.4.8",
     "core-js": "npm:core-js@1.2.6",
     "css": "github:systemjs/plugin-css@0.1.20",
@@ -223,6 +224,11 @@ System.config({
       "inherits": "npm:inherits@2.0.1",
       "stream": "github:jspm/nodelibs-stream@0.1.0",
       "string_decoder": "github:jspm/nodelibs-string_decoder@0.1.0"
+    },
+    "npm:classnames@2.2.1": {
+      "assert": "github:jspm/nodelibs-assert@0.1.0",
+      "process": "github:jspm/nodelibs-process@0.1.2",
+      "systemjs-json": "github:systemjs/plugin-json@0.1.0"
     },
     "npm:clean-css@3.4.8": {
       "buffer": "github:jspm/nodelibs-buffer@0.1.0",

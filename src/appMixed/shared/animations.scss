@@ -1,0 +1,18 @@
+.animated {
+  animation-duration: 1s;
+  animation-fill-mode: both;
+}
+
+.animatedViews {
+  animation-duration: 0.3s;
+  animation-fill-mode: both;
+}
+
+.view-enter{
+	animation: zoomIn 0.3s both ease-in;
+	z-index: 9999;	
+}
+
+.view-leave {
+	opacity: 0;
+}

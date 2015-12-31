@@ -31,9 +31,10 @@ export default class MdlLayoutContainer extends React.Component {
     componentHandler.upgradeDom(); // MDL - React trick This upgrades all upgradable components at all updates except 1st render
   }
 
-  render(){    
+  render(){  
+    const {...others} = this.props;  
     return (
-      <div className="mdl-layout__container">
+      <div className="mdl-layout__container" {...others}>
         <div className="mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header">
         {this.props.children}
        </div>
