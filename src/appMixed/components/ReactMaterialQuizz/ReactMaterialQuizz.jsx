@@ -123,6 +123,16 @@ export default class ReactMaterialQuizz extends React.Component {
     this.closeLanguageDialog();
   }  
   
+  handleLanguageSelect(event, selected){
+    this.setState({
+      language        : selected,
+      snackbarOpened  : true,
+      snackbarMessage : `${this.getTranslations(selected).SNACKBAR_CHANGE_LANG_MSG} ${selected}`,
+      snackbarAction  : `${this.getTranslations(selected).CLOSE_WORD}`,       
+      translate       : this.getTranslations(selected)             
+    });
+  }  
+  
   renderLanguageDialog(){
     let customActions = [
       <FlatButton
