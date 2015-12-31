@@ -1,42 +1,34 @@
+//React lib and vendor React lib
 import React 		               from 'react';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 import { 
   RouteHandler, 
   Link 
 }                               from 'react-router';
-import IconMenu                 from 'material-ui/lib/menus/icon-menu';
-import Menu                     from 'material-ui/lib/menus/menu';
-import MenuItem                 from 'material-ui/lib/menus/menu-item';
-import List                     from 'material-ui/lib/lists/list';
-import Divider                  from 'material-ui/lib/divider';
+//custom MDL components
+import MdlLayoutContainer       from '../mdl/MdlLayoutContainer.jsx!jsx';
+import MdlAppNavBar             from '../mdl/MdlAppNavBar.jsx!jsx';
+import MdlDrawer                from '../mdl/MdlDrawer.jsx!jsx';
+import MdlMain                  from '../mdl/MdlMain.jsx!jsx';
+import MdlMenu                  from '../mdl/MdlMenu.jsx!jsx';
+//material UI components
 import FlatButton               from 'material-ui/lib/flat-button';
-import ListItem                 from 'material-ui/lib/lists/list-item';
-import IconButton               from 'material-ui/lib/icon-button';
-import NavigationMoreVert       from 'material-ui/lib/svg-icons/navigation/more-vert';
-import FontIcon                 from 'material-ui/lib/font-icon';
 import Dialog                   from 'material-ui/lib/dialog';
 import RadioButton              from 'material-ui/lib/radio-button';
 import RadioButtonGroup         from 'material-ui/lib/radio-button-group';
 import Snackbar                 from 'material-ui/lib/snackbar';
 import ThemeManager             from 'material-ui/lib/styles/theme-manager';
 import MyRawTheme               from '../../shared/quizRawTheme.jsx!jsx';
+//other custom components
 import MarginTop                from '../MarginTop/MarginTop.jsx!jsx';
+//styles
 import {styles}                 from './ReactMaterialQuizz.style.jsx!jsx';
-
-import TranslateIcon            from 'material-ui/lib/svg-icons/action/translate';
-
+//models
 import navigationModel          from '../../models/navigationModel.json!json';
 import appNavBarMenuModel       from '../../models/appBarMenuModel.json!json';
-import Quiz                     from '../Quiz/Quiz.jsx!jsx';
 import localEN                  from '../../i18n/local_en.json!json';
 import localFR                  from '../../i18n/local_fr.json!json';
 
-
-import MdlLayoutContainer       from '../mdl/MdlLayoutContainer.jsx!jsx';
-import MdlAppNavBar             from '../mdl/MdlAppNavBar.jsx!jsx';
-import MdlDrawer                from '../mdl/MdlDrawer.jsx!jsx';
-import MdlMain                  from '../mdl/MdlMain.jsx!jsx';
-import MdlMenu                  from '../mdl/MdlMenu.jsx!jsx';
 
 
 const HEADER_TITLE  = 'ReactMaterialQuizz';
