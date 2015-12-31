@@ -5,7 +5,8 @@
     "text"          : "home",
     "translate_id"  : "HOME_WORD",
     "route"         : "/",
-    "className"     : "fa fa-home"
+    "className"     : "fa fa-home",
+    "mdlIconName"   : "home" 
   }, 
   {
     "id"            : 2,
@@ -13,6 +14,7 @@
     "text"          : "quiz",
     "translate_id"  : "QUIZZ_WORD",
     "route"         : "quiz",
-    "className"     : "fa fa-list-alt"
+    "className"     : "fa fa-list-alt",
+    "mdlIconName"   : "question_answer"
   }
 ]

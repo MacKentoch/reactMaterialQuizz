@@ -26,7 +26,7 @@ import {styles}                 from './ReactMaterialQuizz.style.jsx!jsx';
 import TranslateIcon            from 'material-ui/lib/svg-icons/action/translate';
 
 import navigationModel          from '../../models/navigationModel.json!json';
-import appBarMenuModel          from '../../models/appBarMenuModel.json!json';
+import appNavBarMenuModel       from '../../models/appBarMenuModel.json!json';
 import Quiz                     from '../Quiz/Quiz.jsx!jsx';
 import localEN                  from '../../i18n/local_en.json!json';
 import localFR                  from '../../i18n/local_fr.json!json';
@@ -64,9 +64,7 @@ export default class ReactMaterialQuizz extends React.Component {
       language                : navigatorLanguage,
       translate               : this.getTranslations(navigatorLanguage), 
       navigationList          : navigationModel,
-      appBarMenuList          : appBarMenuModel,
-      headerTitle             : HEADER_TITLE,
-      leftNavOpen             : false,
+      appNavBarMenuList       : appNavBarMenuModel,
       langDialogOpened        : false,
       snakBarAutoHideDuration : 2000,
       snackbarOpened          : false,
@@ -90,18 +88,32 @@ export default class ReactMaterialQuizz extends React.Component {
     return translation;
   }
   
+  navigationTo(event, selectedRoute) {
+    this.props.history.pushState(null, selectedRoute); //more info on react router v1.0.0+ : http://stackoverflow.com/questions/31079081/programmatically-navigate-using-react-router      
+  }  
+  
+  handleDrawerNavigation(event, selectedRoute){
+    this.navigationTo(event, selectedRoute);
+  }
+  
   render(){ 
     const { pathname }    = this.props.location;
     
-    const navigation = [
-      {label : 'home', mdlIconName: 'home'},
-      {label : 'quiz', mdlIconName: 'question_answer'}
-    ];
+    const navigation = this.state.navigationList.map((navItem, navItemIndex)=>{
+      return {
+        label       : this.state.translate[navItem.translate_id],
+        mdlIconName : navItem.mdlIconName,
+        route       : navItem.route 
+      };
+    });
     
-    const menuItems = [
-      {name: 'language',  disabled: false, mdlIconName: 'language' },
-      {name: 'github',    disabled: false, mdlIconName: 'web' }  
-    ];
+    const menuItems = this.state.appNavBarMenuList.map((menuItem, menuItemIndex)=>{
+      return {
+        name        : this.state.translate[menuItem.translate_id],
+        disabled    : menuItem.disabled,
+        mdlIconName : menuItem.mdlIconName
+      };
+    }); 
     
     return (
       <MdlLayoutContainer>        
@@ -115,7 +127,7 @@ export default class ReactMaterialQuizz extends React.Component {
         <MdlDrawer 
           title={HEADER_TITLE}
           navigation={navigation}
-          onSelection={(event, navigationItemLabel)=>console.info(`clicked on navigation item :  ${navigationItemLabel}`)}
+          onSelection={(event, navigationItemLabel, route)=>this.handleDrawerNavigation(event, route)}
         />
         <MdlMain >
           <ReactCSSTransitionGroup

@@ -9,9 +9,10 @@
 *   - navigation    : {array of NavigationItem_Object}  : REQUIRED - no default
 *     - NavigationItem_Object   : {Object} :  REQUIRED - no default
 *       - NavigationItem_Object.label         : {string}    :  REQUIRED   - no default
+*       - NavigationItem_Object.route         : {string}    : optional    - default = ''
 *       - NavigationItem_Object.mdlIconName   : {string}    : optional    - no default
 *
-*   - onSelection  : {function(event, navigationItemLabel)}  :  optional  - no default
+*   - onSelection  : {function(event, navigationItemLabel, route)}  :  optional  - no default
 *        
 **/
 
@@ -26,8 +27,9 @@ export default class MdlDrawer extends React.Component {
     super(props);
   }
 
-  handleMenuClick(event, navigationItemLabel){
-    this.props.onSelection(event, navigationItemLabel);
+  handleMenuClick(event, navigationItemLabel, navigationRoute){
+    event.preventDefault();
+    this.props.onSelection(event, navigationItemLabel, navigationRoute);
   }
 
   render(){
@@ -37,12 +39,15 @@ export default class MdlDrawer extends React.Component {
       ...others
     } = this.props;
     
+    console.dir(navigation);
+    
     return (
       <div className="mdl-layout__drawer mdl-shadow--2dp" {...others}>
         <span className="mdl-layout-title">{title}</span>
         <nav className="mdl-navigation">
           {
             navigation.map((navigationItem, navigationItemIndex)=>{
+              let navigationRoute = navigationItem.route || '';
               let mdlIcon = '';
               if(typeof navigationItem.mdlIconName !== 'undefined') {
                 mdlIcon = (
@@ -59,7 +64,7 @@ export default class MdlDrawer extends React.Component {
                   style={Object.assign({}, styles.navItem)}
                   className="mdl-navigation__link" 
                   href=""
-                  onClick={(e)=>this.handleMenuClick(e, navigationItem.label)}>
+                  onClick={(e)=>this.handleMenuClick(e, navigationItem.label, navigationRoute)}>
                   {mdlIcon}
                   {navigationItem.label}
                 </a>
@@ -78,6 +83,7 @@ MdlDrawer.propTypes = {
   navigation    : React.PropTypes.arrayOf(
     React.PropTypes.shape({
       "label"       : React.PropTypes.string.isRequired,
+      "route"       : React.PropTypes.string, 
       "mdlIconName" : React.PropTypes.string
     }).isRequired
   ).isRequired,
