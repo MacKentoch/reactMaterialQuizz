@@ -1,6 +1,7 @@
 import 'material-design-lite/material.css!'
 import '../../public/css/custom-material.min.css!'                       
 import 'material-design-lite/material'
+import './style.css!';
 
 import React                    from 'react';
 import ReactDOM                 from 'react-dom';

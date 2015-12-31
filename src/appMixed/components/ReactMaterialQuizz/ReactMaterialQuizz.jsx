@@ -207,8 +207,8 @@ export default class ReactMaterialQuizz extends React.Component {
               transitionLeaveTimeout={500}> 
             {React.cloneElement(this.props.children, { key: pathname })}                   
           </ReactCSSTransitionGroup>        
-        </MdlMain> 
-        {LanguageDialog}   
+        </MdlMain>    
+        {LanguageDialog}
       </MdlLayoutContainer>
     );
   }

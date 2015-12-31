@@ -1,0 +1,11 @@
+.mdl-menu__container{
+   right: 16px;
+    top: 44px;
+    width: 141.562px;
+    height: 160px;  
+} 
+
+.mdl-menu__container.is-visible, .mdl-menu__container.is-animating {
+    z-index: 999;
+    visibility: visible;
+}
