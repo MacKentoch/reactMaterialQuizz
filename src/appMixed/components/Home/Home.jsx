@@ -1,6 +1,8 @@
 import React                    from 'react';
 import classNames               from 'classnames';
 
+import MdlPaper                 from '../mdl/MdlPaper.jsx!jsx';
+
 import Paper                    from 'material-ui/lib/paper';
 import Card                     from 'material-ui/lib/card/card';
 import CardActions              from 'material-ui/lib/card/card-actions';
@@ -55,9 +57,11 @@ export default class Home extends React.Component {
          className={homeViewClasses}>            
         <div className="mdl-grid">
           <div className="mdl-cell mdl-cell--12-col">
-            <h2>{this.context.translate.HOME_TITRE_1_QUIZZ}</h2>
-            <h3>{this.context.translate.HOME_TITRE_2_QUIZZ}</h3>
-            <p>{this.context.translate.HOME_DETAIL_TEXT}</p>          
+            <MdlPaper>            
+              <h2>{this.context.translate.HOME_TITRE_1_QUIZZ}</h2>
+              <h3>{this.context.translate.HOME_TITRE_2_QUIZZ}</h3>
+              <p>{this.context.translate.HOME_DETAIL_TEXT}</p>
+            </MdlPaper>          
           </div>
         </div>
       </section>   

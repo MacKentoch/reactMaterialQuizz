@@ -1,6 +1,9 @@
 import React          from 'react';
 import classNames     from 'classnames';
 import _              from 'lodash';
+
+import MdlToolBar     from '../mdl/MdlToolBar.jsx!jsx';
+
 import Tabs           from 'material-ui/lib/tabs/tabs';
 import Tab            from 'material-ui/lib/tabs/tab';
 import Paper          from 'material-ui/lib/paper';
@@ -213,15 +216,15 @@ export default class Quiz extends React.Component {
       <section 
          key="quizView"
          className={quizViewClasses}>        
-        <div className="row" key="quizz">
+        <div className="mdl-grid" key="quizz">
           <div 
-            className="col-xs-10 col-xs-offset-1 col-md-8 col-md-offset-2" 
+            className="mdl-cell mdl-cell--12-col" 
             style={Object.assign({}, styles.quiz)}>
-            <div className="row">
-              <div className="col-xs-12">
+            <div className="mdl-grid">
+              <div className="mdl-cell mdl-cell--12-col">
                 {progressTemplate}
               </div>
-            </div>
+            </div>            
             <Paper zDepth={1}>                        
               <Tabs 
                 onChange={(value, e, tab)=>this.handleChangeTabs(value, e, tab)} 
