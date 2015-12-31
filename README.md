@@ -12,6 +12,7 @@ Design is now a mix of `material UI` and `material design lite` custom react com
 
 - ReactJS (> 0.14)
 - react-router (> 1.0.0)
+- JedWatson/classnames (*my preferred way to add animations rather than react-addons-css-transition-group*)
 - Material UI (>0.14.0+) (+ *react-tap-event-plugin*)
 - Material Design lite
 - flexboxgrid (reponsive layout)
