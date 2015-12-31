@@ -98,6 +98,7 @@ export default class MdlMenu extends React.Component{
         >
         <button 
           id={menuId}
+          style={Object.assign({}, styles.menuButton)}
           className="mdl-button mdl-js-button mdl-button--icon">
           <i className="material-icons">{materialIcon}</i>
         </button>

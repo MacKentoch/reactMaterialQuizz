@@ -1,6 +1,5 @@
 //React lib and vendor React lib
 import React 		                from 'react';
-import ReactCSSTransitionGroup  from 'react-addons-css-transition-group'
 import { 
   RouteHandler, 
   Link 
@@ -197,7 +196,7 @@ export default class ReactMaterialQuizz extends React.Component {
           onSelection={(event, navigationItemLabel, route)=>this.handleDrawerNavigation(event, route)}
         />
         <MdlMain style={Object.assign({}, styles.app)}>
-            {React.cloneElement(this.props.children, { key: pathname })}                           
+          {React.cloneElement(this.props.children, { key: pathname })}                           
         </MdlMain>                                     
         {LanguageDialog}
       </MdlLayoutContainer>
@@ -212,12 +211,3 @@ ReactMaterialQuizz.childContextTypes = {
   language  : React.PropTypes.string,
   translate : React.PropTypes.object
 };
- 
- 
-          //  <ReactCSSTransitionGroup
-          //     component="div"
-          //     transitionName="routeAnimated" 
-          //     transitionEnterTimeout={300} 
-          //     transitionLeaveTimeout={300}> 
-          //   {React.cloneElement(this.props.children, { key: pathname })}                   
-          // </ReactCSSTransitionGroup> 

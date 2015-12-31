@@ -202,7 +202,7 @@ export default class QuizQuestions extends React.Component{
   }
     
 	render(){
-    console.info(' |_ QuizQuestion renders now');
+    //console.info(' |_ QuizQuestion renders now');
     const currentQuestionTemplate = this.renderCurrentQuestion();
 		return (
 			<div className="row">

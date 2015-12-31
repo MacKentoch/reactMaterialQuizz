@@ -76,7 +76,7 @@ export default class QuizEnd extends React.Component{
   }
   
 	render(){
-    console.info(' |_ QuizEnd renders now');
+    //console.info(' |_ QuizEnd renders now');
     
     const answersSummary = this.getAllAnswersTemplate();
 		return (

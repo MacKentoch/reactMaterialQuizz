@@ -39,8 +39,6 @@ export default class MdlDrawer extends React.Component {
       ...others
     } = this.props;
     
-    console.dir(navigation);
-    
     return (
       <div className="mdl-layout__drawer mdl-shadow--2dp" {...others}>
         <span className="mdl-layout-title">{title}</span>

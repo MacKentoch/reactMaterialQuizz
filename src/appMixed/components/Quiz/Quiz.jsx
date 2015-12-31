@@ -44,10 +44,14 @@ export default class Quiz extends React.Component {
       quizOrderedQuestions  : orderedQuestions,
       snackbarAction        : `${this.context.translate.CLOSE_WORD}`,            
     });
+    
+    console.info('quiz view will mount');
   }
   
+
+  
   componentDidMount(){
-    console.info('quiz view will did mount');
+    console.info('quiz view did mount');
     this.setState({
       viewEnters       : true 
     });    

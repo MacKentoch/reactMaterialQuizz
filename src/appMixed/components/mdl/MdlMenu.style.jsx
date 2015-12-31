@@ -5,6 +5,9 @@ export const styles = {
     alignItems     : 'center',
     fontWeight     : '500',
   }, 
+  menuButton : {
+    marginRight : '-20px',
+  },
   menuUl : {
 
   }, 
