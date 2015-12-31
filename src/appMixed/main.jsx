@@ -1,7 +1,7 @@
 import 'material-design-lite/material.css!'
 import '../../public/css/custom-material.min.css!'                       
 import 'material-design-lite/material'
-import './style.css!';
+import './style/style.css!';
 
 import React                    from 'react';
 import ReactDOM                 from 'react-dom';
@@ -11,6 +11,3 @@ import {Routes}                 from './components/Routes/Routes.jsx!jsx';
 injectTapEventPlugin(); //needed for Material-UI click and tap event...
  
 ReactDOM.render(<Routes /> ,document.getElementById('root'));
-
-
-

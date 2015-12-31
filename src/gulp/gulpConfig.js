@@ -5,11 +5,15 @@ module.exports = {
 		'public': './public/'
 	},
 	
+  jsHint : {
+    sources : './src/appMixed/**/*.jsx'
+  },
+  
 	css  :{
-		sources : ['./src/appMixed/index.scss'],
+		sources : ['./src/appMixed/style/index.scss'],
 		dest		: {
 			filename 	: 'style.css',
-			dir				: './src/appMixed/'
+			dir				: './src/appMixed/style/'
 		}		
 	},
 	

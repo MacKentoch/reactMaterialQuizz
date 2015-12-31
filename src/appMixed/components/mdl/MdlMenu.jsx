@@ -103,6 +103,7 @@ export default class MdlMenu extends React.Component{
         </button>
         <ul 
           className="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect"
+          style={Object.assign({}, styles.menuUl)}
           htmlFor={menuId}>
           {MenuItemsTemplate}
         </ul>

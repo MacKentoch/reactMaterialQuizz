@@ -1,6 +1,6 @@
 //React lib and vendor React lib
-import React 		               from 'react';
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
+import React 		                from 'react';
+import ReactCSSTransitionGroup  from 'react-addons-css-transition-group'
 import { 
   RouteHandler, 
   Link 
@@ -142,10 +142,8 @@ export default class ReactMaterialQuizz extends React.Component {
         title={this.state.translate.CHOOSE_LANGUAGE}
         actions={customActions}
         width={'300px'}
-        
         open={this.state.langDialogOpened}
         onRequestClose={()=>this.handleCloseLanguageDialog()}>
-        
         <RadioButtonGroup 
           name="languageSelection" 
           defaultSelected={this.state.language}
@@ -159,7 +157,6 @@ export default class ReactMaterialQuizz extends React.Component {
           label={this.state.translate.FRANCAIS_WORD}
           style={{marginBottom:16}}/>
         </RadioButtonGroup>        
-        
       </Dialog>    
     );    
   }
@@ -199,7 +196,7 @@ export default class ReactMaterialQuizz extends React.Component {
           navigation={navigation}
           onSelection={(event, navigationItemLabel, route)=>this.handleDrawerNavigation(event, route)}
         />
-        <MdlMain >
+        <MdlMain>
           <ReactCSSTransitionGroup
               component="div"
               transitionName="routeAnimated" 
@@ -207,7 +204,7 @@ export default class ReactMaterialQuizz extends React.Component {
               transitionLeaveTimeout={500}> 
             {React.cloneElement(this.props.children, { key: pathname })}                   
           </ReactCSSTransitionGroup>        
-        </MdlMain>    
+        </MdlMain>                                     
         {LanguageDialog}
       </MdlLayoutContainer>
     );
@@ -221,4 +218,4 @@ ReactMaterialQuizz.childContextTypes = {
   language  : React.PropTypes.string,
   translate : React.PropTypes.object
 };
-
+ 

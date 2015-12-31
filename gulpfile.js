@@ -51,7 +51,7 @@ gulp.task('app:sass:min', function(){
  * jshint JSX and ES6
  */
 gulp.task('jshint:jsx:es6', function() {
-  return gulp.src(config.js.sources)
+  return gulp.src(config.jsHint.sources)
     .pipe(cache('jshint'))
     .pipe(react())
     .on('error', function(err) {
@@ -68,7 +68,7 @@ gulp.task('jshint:jsx:es6', function() {
  * jshint ES6
  */
 gulp.task('jshint:ES6', function(){
-  return gulp.src(config.js.sources)
+  return gulp.src(config.jsHint.sources)
     .pipe(jshint({esnext : true}))
     .pipe(jshint.reporter('default'))
 });

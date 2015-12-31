@@ -4,7 +4,10 @@ export const styles = {
     flexDirection  : 'row',
     alignItems     : 'center',
     fontWeight     : '500',
-  },  
+  }, 
+  menuUl : {
+
+  }, 
   menuItemIcon: {
     fontSize      : '24px',
     marginRight   : '24px',      
