@@ -8,7 +8,8 @@
 *
 *   - navigation    : {array of NavigationItem_Object}  : REQUIRED - no default
 *     - NavigationItem_Object   : {Object} :  REQUIRED - no default
-*       - NavigationItem_Object.label        : {string}    :  REQUIRED   - no default
+*       - NavigationItem_Object.label         : {string}    :  REQUIRED   - no default
+*       - NavigationItem_Object.mdlIconName   : {string}    : optional    - no default
 *
 *   - onSelection  : {function(event, navigationItemLabel)}  :  optional  - no default
 *        
@@ -16,6 +17,8 @@
 
 
 import React            from 'react';
+import MdlIcon          from './MdlIcon.jsx!jsx';
+import {styles}         from './MdlDrawer.style.jsx!jsx';
 
 export default class MdlDrawer extends React.Component {
 
@@ -40,12 +43,24 @@ export default class MdlDrawer extends React.Component {
         <nav className="mdl-navigation">
           {
             navigation.map((navigationItem, navigationItemIndex)=>{
+              let mdlIcon = '';
+              if(typeof navigationItem.mdlIconName !== 'undefined') {
+                mdlIcon = (
+                  <MdlIcon
+                    style={Object.assign({}, styles.navItemIcon)} 
+                    iconName={navigationItem.mdlIconName} 
+                  />
+                );
+              }
+              
               return (
                 <a 
                   key={navigationItemIndex}
+                  style={Object.assign({}, styles.navItem)}
                   className="mdl-navigation__link" 
-                  href="#"
+                  href=""
                   onClick={(e)=>this.handleMenuClick(e, navigationItem.label)}>
+                  {mdlIcon}
                   {navigationItem.label}
                 </a>
               );              
@@ -63,6 +78,7 @@ MdlDrawer.propTypes = {
   navigation    : React.PropTypes.arrayOf(
     React.PropTypes.shape({
       "label"       : React.PropTypes.string.isRequired,
+      "mdlIconName" : React.PropTypes.string
     }).isRequired
   ).isRequired,
   onSelection   : React.PropTypes.func  

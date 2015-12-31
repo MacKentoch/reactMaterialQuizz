@@ -39,7 +39,7 @@ import MdlMain                  from '../mdl/MdlMain.jsx!jsx';
 import MdlMenu                  from '../mdl/MdlMenu.jsx!jsx';
 
 
-const HEADER_TITLE  = 'React Material Quizz';
+const HEADER_TITLE  = 'ReactMaterialQuizz';
 const GITHUB_LINK   = 'https://github.com/MacKentoch/reactMaterialQuizz';
 
 
@@ -94,13 +94,13 @@ export default class ReactMaterialQuizz extends React.Component {
     const { pathname }    = this.props.location;
     
     const navigation = [
-      {label : 'home'},
-      {label : 'quiz'}
+      {label : 'home', mdlIconName: 'home'},
+      {label : 'quiz', mdlIconName: 'question_answer'}
     ];
     
     const menuItems = [
-      {name: 'language', disabled: false},
-      {name: 'github', disabled: false}  
+      {name: 'language',  disabled: false, mdlIconName: 'language' },
+      {name: 'github',    disabled: false, mdlIconName: 'web' }  
     ];
     
     return (
