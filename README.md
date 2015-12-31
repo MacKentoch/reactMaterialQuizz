@@ -1,13 +1,19 @@
 React JS material quizz
 =========
 
-This is a simple dynamic quiz in [ReactJS](https://facebook.github.io/react/) designed following [google material guidelines](https://www.google.com/design/spec/material-design/introduction.html) thanks to nice [material UI](http://www.material-ui.com)
+This is a simple dynamic quiz in [ReactJS](https://facebook.github.io/react/) designed following [google material guidelines](https://www.google.com/design/spec/material-design/introduction.html) thanks to nice [material UI](http://www.material-ui.com) and [google material design lite](http://www.getmdl.io/index.html).
+
+**NEW**
+
+Design is now a mix of `material UI` and `material design lite` custom react components.
+ 
 
 **feature :** 
 
 - ReactJS (> 0.14)
 - react-router (> 1.0.0)
 - Material UI (>0.14.0+) (+ *react-tap-event-plugin*)
+- Material Design lite
 - flexboxgrid (reponsive layout)
 - animate.css
 - font-awesome
