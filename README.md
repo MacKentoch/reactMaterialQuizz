@@ -49,7 +49,7 @@ npm install jspm -g
 1- **fast way** : just click 
 [preview here](https://rawgit.com/MacKentoch/reactMaterialQuizz/v1.0.6/public/index.html)
 
-
+>Note : this way is now obselete. Better have an eye on mixed version (MDL + material UI) 
 
 ##Launch mixed material UI and MDL app : 
 
@@ -61,6 +61,13 @@ jspm-server
 1- **fast way** : just click 
 [preview here](https://rawgit.com/MacKentoch/reactMaterialQuizz/v1.0.10/public/index.html)
 
+
+##WHAT'S NEXT
+
+- [ ] babel 6+
+- [ ] webpack version
+- [ ] hot reloading (*should be linked to webpack version*)
+- [ ] unit tests
 
 ##License
 
