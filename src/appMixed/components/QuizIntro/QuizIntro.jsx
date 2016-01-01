@@ -55,8 +55,6 @@ export default class QuizIntro extends React.Component{
           });        
         }
        );
-    
-
   }
   
   getChildContext() {
@@ -94,6 +92,7 @@ export default class QuizIntro extends React.Component{
           <div className="mdl-layout-spacer"></div>
         </MdlToolBar>
         <MdlPaper>
+        
           <section id="quizIntroBody">
             <h5 className={subTitleClasses}>
               {this.context.translate[this.props.subtitle]}
@@ -102,6 +101,7 @@ export default class QuizIntro extends React.Component{
               {this.context.translate[this.props.body]}
             </p>
           </section>
+          
           <section id="quizIntroActions">
             <div className="mdl-grid">
               <div className="mdl-layout-spacer"></div>
@@ -115,6 +115,7 @@ export default class QuizIntro extends React.Component{
               <div className="mdl-layout-spacer"></div>
             </div>          
           </section>
+          
         </MdlPaper>
      </section> 
 		);

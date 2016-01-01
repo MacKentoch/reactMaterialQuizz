@@ -1,15 +1,8 @@
 import React            from 'react';
+import MdlPaper         from '../mdl/MdlPaper.jsx!jsx';
+import MdlToolBar       from '../mdl/MdlToolBar.jsx!jsx'
 import RaisedButton     from 'material-ui/lib/raised-button';
-import Card             from 'material-ui/lib/card/card';
-import CardActions      from 'material-ui/lib/card/card-actions';
-import CardText         from 'material-ui/lib/card/card-text';
-import CardTitle        from 'material-ui/lib/card/card-title';
 import QuizQuestions    from '../QuizQuestions/QuizQuestions.jsx!jsx';
-import Toolbar          from 'material-ui/lib/toolbar/toolbar';
-import ToolbarGroup     from 'material-ui/lib/toolbar/toolbar-group';
-import ToolbarSeparator from 'material-ui/lib/toolbar/toolbar-separator';
-import ToolbarTitle     from 'material-ui/lib/toolbar/toolbar-title';
-
 import Colors           from 'material-ui/lib/styles/colors';
 import {styles}         from './quizEnd.style.jsx!jsx';
 
@@ -21,31 +14,26 @@ export default class QuizEnd extends React.Component{
 	}
 	
 	init(){
-		// console.info(`
-    // check QuizEnd init state : init twice...
-    // TODO : 
-    // - to fix (should be tab or swipeableview origin)
-    // - to remove when fixed
-    // `);
+    
 	}
   
-  componentWillMount(){ 
-    let newMuiTheme = this.context.muiTheme;
-    
-    newMuiTheme.toolbar.backgroundColor = Colors.blue800;
-    newMuiTheme.toolbar.titleColor      = '#fff';//'rgba(255,255,255,0.6)';
-    newMuiTheme.zIndex.layer            = 5;
-    newMuiTheme.zIndex.popover          = 100000;
-    newMuiTheme.leftNav.zIndex          = 10000;
-        
-    this.setState({
-      muiTheme : newMuiTheme
-    });
-  }  
+  // componentWillMount(){ 
+  //   let newMuiTheme = this.context.muiTheme;
+  //   
+  //   newMuiTheme.toolbar.backgroundColor = Colors.blue800;
+  //   newMuiTheme.toolbar.titleColor      = '#fff';//'rgba(255,255,255,0.6)';
+  //   newMuiTheme.zIndex.layer            = 5;
+  //   newMuiTheme.zIndex.popover          = 100000;
+  //   newMuiTheme.leftNav.zIndex          = 10000;
+  //       
+  //   this.setState({
+  //     muiTheme : newMuiTheme
+  //   });
+  // }  
   
   getChildContext() {
     return {
-      muiTheme: this.state.muiTheme
+      muiTheme: this.context.muiTheme
     };
   }    
   
@@ -76,41 +64,40 @@ export default class QuizEnd extends React.Component{
   }
   
 	render(){
-    //console.info(' |_ QuizEnd renders now');
     
     const answersSummary = this.getAllAnswersTemplate();
 		return (
-			<div className="row">
-				<div className="col-xs-12">
-          <Card style={Object.assign({}, styles.container)}>
-            <Toolbar>
-              <ToolbarGroup 
-                key={0} 
-                float="left">
-                <ToolbarTitle 
-                  text={this.context.translate[this.props.title]}
-                  style={Object.assign({}, styles.title)} 
-                />
-              </ToolbarGroup>
-            </Toolbar>    
-            <CardText>
-              <div>
-                {answersSummary}
+			<section>
+        
+        <MdlToolBar 
+          backgdColor={'#3F51B5'}
+          textColor={'#fff'}>
+          <span className="mdl-layout-title">
+            {this.context.translate[this.props.title]}
+          </span>
+          <div className="mdl-layout-spacer"></div>
+        </MdlToolBar>
+        <MdlPaper>
+                  
+          <section id="quizEndSumUp">
+            {answersSummary}
+          </section>          
+            
+          <section id="quizIntroActions">
+            <div className="mdl-grid">
+              <div className="mdl-layout-spacer"></div>
+              <div className="mdl-cell mdl-cell--4-col mdl-typography--text-center">
+                <RaisedButton 
+                  label={this.context.translate[this.props.endBtnText]} 
+                  primary={true}
+                  onClick={()=>this.handleEndQuizClick()} /> 
               </div>
-            </CardText>
-            <CardActions>
-              <div className="row">
-                <div className="col-xs-4 col-xs-offset-4">
-                  <RaisedButton 
-                    label={this.context.translate[this.props.endBtnText]} 
-                    primary={true}
-                    onClick={()=>this.handleEndQuizClick()} />  
-                </div>
-              </div>
-            </CardActions>            
-          </Card>
-				</div>
-			</div>
+              <div className="mdl-layout-spacer"></div>
+            </div>          
+          </section>
+
+         </MdlPaper>    
+			</section>
 		);
 	}
 }
@@ -133,3 +120,44 @@ QuizEnd.contextTypes = {
 QuizEnd.childContextTypes = {
   muiTheme  : React.PropTypes.object
 };
+
+
+
+
+			// <div className="row">
+			// 	<div className="col-xs-12">
+      //   
+      //     <Card style={Object.assign({}, styles.container)}>
+      //     
+      //       <Toolbar>
+      //         <ToolbarGroup 
+      //           key={0} 
+      //           float="left">
+      //           <ToolbarTitle 
+      //             text={this.context.translate[this.props.title]}
+      //             style={Object.assign({}, styles.title)} 
+      //           />
+      //         </ToolbarGroup>
+      //       </Toolbar>    
+      //       
+      //       
+      //       <CardText>
+      //         <div>
+      //           {answersSummary}
+      //         </div>
+      //       </CardText>
+      //       
+      //       <CardActions>
+      //         <div className="row">
+      //           <div className="col-xs-4 col-xs-offset-4">
+      //             <RaisedButton 
+      //               label={this.context.translate[this.props.endBtnText]} 
+      //               primary={true}
+      //               onClick={()=>this.handleEndQuizClick()} />  
+      //           </div>
+      //         </div>
+      //       </CardActions>            
+      //     </Card>
+      //     
+			// 	</div>
+			// </div>
