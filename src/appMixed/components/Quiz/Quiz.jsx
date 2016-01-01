@@ -194,24 +194,32 @@ export default class Quiz extends React.Component {
             </div>                       
             <SwipeableViews 
               index={parseInt(this.state.slideIndex, 10)} 
-              onChangeIndex={(index, fromIndex)=>this.handleChangeIndex(index, fromIndex)} >        
-              <QuizIntro 
-                key="0"
-                title={this.state.quizModel.intro.title_translate_id}
-                subtitle={this.state.quizModel.intro.content_1_translate_id}
-                body={this.state.quizModel.intro.content_2_translate_id}
-                goBtnText={this.state.quizModel.intro.go_button_text_id}
-                onStartQuizClick={(quiz)=>this.handleQuizStart(quiz)}
-              />
+              onChangeIndex={(index, fromIndex)=>this.handleChangeIndex(index, fromIndex)} > 
+               
+              <MdlPaper key="0">
+                <QuizIntro 
+                  title={this.state.quizModel.intro.title_translate_id}
+                  subtitle={this.state.quizModel.intro.content_1_translate_id}
+                  body={this.state.quizModel.intro.content_2_translate_id}
+                  goBtnText={this.state.quizModel.intro.go_button_text_id}
+                  onStartQuizClick={(quiz)=>this.handleQuizStart(quiz)}
+                />
+              </MdlPaper>
+                
+                
               {swipeableViewTemplate}
-              <QuizEnd 
-                key={tabEndIndex}
-                title={this.state.quizModel.end.title_translate_id}
-                questions={this.state.quizOrderedQuestions}
-                prevBtnText={this.state.quizModel.end.prev_button_text}
-                endBtnText={this.state.quizModel.end.end_button_text}
-                onValidQuizClick={()=>this.handleQuizFinished()} 
-              />
+                
+                
+              <MdlPaper key={tabEndIndex}>
+                <QuizEnd 
+                  title={this.state.quizModel.end.title_translate_id}
+                  questions={this.state.quizOrderedQuestions}
+                  prevBtnText={this.state.quizModel.end.prev_button_text}
+                  endBtnText={this.state.quizModel.end.end_button_text}
+                  onValidQuizClick={()=>this.handleQuizFinished()} 
+                />
+              </MdlPaper>
+                
             </SwipeableViews>                              
           </div>
         </div>
