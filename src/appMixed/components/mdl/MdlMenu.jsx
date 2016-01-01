@@ -62,7 +62,9 @@ export default class MdlMenu extends React.Component{
             className="mdl-menu__item" 
             onClick={(e)=>this.handleMenuClick(e, menuId, menuItemIndex)}>
             {mdlIcon}
-            {menuItem.name}          
+            <span style={Object.assign({}, styles.menuTextSpan)}>
+              {menuItem.name}
+            </span>        
           </li>
         );        
       }else{
@@ -74,7 +76,9 @@ export default class MdlMenu extends React.Component{
             className="mdl-menu__item" 
             onClick={(e)=>this.handleMenuClick(e, menuId, menuItemIndex)}>
             {mdlIcon}
-            {menuItem.name}          
+            <span style={Object.assign({}, styles.menuTextSpan)}>
+              {menuItem.name}
+            </span>          
           </li>
         );        
       }

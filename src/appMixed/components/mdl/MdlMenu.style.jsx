@@ -14,5 +14,8 @@ export const styles = {
   menuItemIcon: {
     fontSize      : '24px',
     marginRight   : '24px',      
+  },
+  menuTextSpan : {
+    marginRight : '30px'
   }
 };
