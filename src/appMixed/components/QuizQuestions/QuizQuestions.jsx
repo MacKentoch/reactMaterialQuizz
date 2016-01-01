@@ -168,10 +168,12 @@ export default class QuizQuestions extends React.Component{
     if(!this.props.isDisabled){
       questionFooter= (
         <CardActions>
-          <div className="row">
-            <div className="col-xs-8 col-xs-offset-2">
+          <div className="mdl-grid">
+            <div className="mdl-cell mdl-cell--2-col"></div>
+            <div className="mdl-cell mdl-cell--8-col">
               {actionTemplate}
             </div>
+            <div className="mdl-cell mdl-cell--2-col"></div>
           </div>
         </CardActions>        
       );
@@ -183,17 +185,21 @@ export default class QuizQuestions extends React.Component{
     return (
       <Card style={questionStyle}>
         <CardText>  
-          <div className="row">
-            <div className="col-xs-8 col-xs-offset-2">
+          <div className="mdl-grid">
+            <div className="mdl-cell mdl-cell--2-col"></div>
+            <div className="mdl-cell mdl-cell--8-col">
               <h3>{this.context.translate[this.props.question.Q_translate_id]}</h3> 
             </div>
+            <div className="mdl-cell mdl-cell--2-col"></div>
           </div>          
         </CardText>
         <CardText>
-          <div className="row">
-            <div className="col-xs-8 col-xs-offset-2">
+          <div className="mdl-grid">
+            <div className="mdl-cell mdl-cell--2-col"></div>
+            <div className="mdl-cell mdl-cell--8-col">
               {choicesTemplate}  
             </div>
+            <div className="mdl-cell mdl-cell--2-col"></div>
           </div>
         </CardText>
         {questionFooter}    
@@ -205,8 +211,8 @@ export default class QuizQuestions extends React.Component{
     //console.info(' |_ QuizQuestion renders now');
     const currentQuestionTemplate = this.renderCurrentQuestion();
 		return (
-			<div className="row">
-        <div className="col-xs-12">
+			<div className="mdl-grid">
+        <div className="mdl-cell mdl-cell--12-col">
           {currentQuestionTemplate}
 				</div>
 			</div>
