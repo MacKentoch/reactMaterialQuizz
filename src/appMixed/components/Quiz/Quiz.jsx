@@ -51,8 +51,6 @@ export default class Quiz extends React.Component {
     console.info('quiz view will mount');
   }
   
-
-  
   componentDidMount(){
     console.info('quiz view did mount');
     this.setState({
@@ -211,7 +209,8 @@ export default class Quiz extends React.Component {
     const progressTemplate       = this.getProgressTemplate(); 
     const tabsTemplate           = this.getTabQuestionsTemplate();
     const swipeableViewTemplate  = this.getSwipableViewsQuestionsTemplate();
-    const tabEndIndex            = (this.state.questionMaxIndex + 1) + '';      
+    const tabEndIndex            = (this.state.questionMaxIndex + 1) + '';  
+        
     return (
       <section 
          key="quizView"
@@ -224,7 +223,7 @@ export default class Quiz extends React.Component {
               <div className="mdl-cell mdl-cell--12-col">
                 {progressTemplate}
               </div>
-            </div>            
+            </div> 
             <Paper zDepth={1}>                        
               <Tabs 
                 onChange={(value, e, tab)=>this.handleChangeTabs(value, e, tab)} 
@@ -262,16 +261,16 @@ export default class Quiz extends React.Component {
                 endBtnText={this.state.quizModel.end.end_button_text}
                 onValidQuizClick={()=>this.handleQuizFinished()} 
               />
-              </SwipeableViews>                    
-            </Paper>
+              </SwipeableViews>                
+            </Paper>              
           </div>
-          <Snackbar
-            open={this.state.snackbarOpened}
-            message={this.state.snackbarMessage}
-            action={this.state.snackbarAction}
-            autoHideDuration={1500}
-          />          
         </div>
+        <Snackbar
+          open={this.state.snackbarOpened}
+          message={this.state.snackbarMessage}
+          action={this.state.snackbarAction}
+          autoHideDuration={1500}
+        />          
       </section>
     );
   }
@@ -282,3 +281,53 @@ export default class Quiz extends React.Component {
 Quiz.contextTypes = {
   translate : React.PropTypes.object
 };
+
+
+
+
+                     
+
+            
+            
+                      // <Snackbar
+          //   open={this.state.snackbarOpened}
+          //   message={this.state.snackbarMessage}
+          //   action={this.state.snackbarAction}
+          //   autoHideDuration={1500}
+          // />    
+          
+          
+          
+//             <div className="mdl-tabs mdl-js-tabs mdl-js-ripple-effect">
+//               <div className="mdl-tabs__tab-bar">
+//                   <a href="#starks-panel" className="mdl-tabs__tab is-active">Starks</a>
+//                   <a href="#lannisters-panel" className="mdl-tabs__tab">Lannisters</a>
+//                   <a href="#targaryens-panel" className="mdl-tabs__tab">Targaryens</a>
+//               </div>
+// 
+//               <div className="mdl-tabs__panel is-active" id="starks-panel">
+//                 <ul>
+//                   <li>Eddard</li>
+//                   <li>Catelyn</li>
+//                   <li>Robb</li>
+//                   <li>Sansa</li>
+//                   <li>Brandon</li>
+//                   <li>Arya</li>
+//                   <li>Rickon</li>
+//                 </ul>
+//               </div>
+//               <div className="mdl-tabs__panel" id="lannisters-panel">
+//                 <ul>
+//                   <li>Tywin</li>
+//                   <li>Cersei</li>
+//                   <li>Jamie</li>
+//                   <li>Tyrion</li>
+//                 </ul>
+//               </div>
+//               <div className="mdl-tabs__panel" id="targaryens-panel">
+//                 <ul>
+//                   <li>Viserys</li>
+//                   <li>Daenerys</li>
+//                 </ul>
+//               </div>
+//             </div>            

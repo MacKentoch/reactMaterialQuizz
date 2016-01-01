@@ -10,7 +10,7 @@
     "id"            : 2,
     "name"          : "quiz",
     "translate_id"  : "QUIZZ_WORD",
-    "route"         : "quiz",
+    "route"         : "/quiz",
     "mdlIconName"   : "question_answer" 
   }
 ]
