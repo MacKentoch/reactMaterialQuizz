@@ -28,9 +28,8 @@ body {
   opacity: 0.01;
   transition: opacity 300ms ease-in; }
 
-.animated {
-  animation-duration: 1s;
-  animation-fill-mode: both; }
+.invisible {
+  opacity: 0; }
 
 .animatedViews {
   animation-duration: 0.3s;

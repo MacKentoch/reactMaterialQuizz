@@ -2,7 +2,7 @@ import 'material-design-lite/material.css!'
 import '../../public/css/custom-material.min.css!'                       
 import 'material-design-lite/material'
 import './style/style.css!';
-import 'animateCss';
+import 'animateCss/animate.css!';
 
 import React                    from 'react';
 import ReactDOM                 from 'react-dom';

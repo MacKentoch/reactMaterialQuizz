@@ -1,8 +1,11 @@
-.animated {
-  animation-duration: 1s;
-  animation-fill-mode: both;
+//to hide an element
+.invisible {
+  opacity : 0;
 }
 
+
+
+// views animation
 .animatedViews {
   animation-duration: 0.3s;
   animation-fill-mode: both;
