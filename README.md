@@ -60,7 +60,7 @@ jspm-server
 
 1- **fast way** : just click 
 
-*coming soon*
+[preview here](https://rawgit.com/MacKentoch/reactMaterialQuizz/v1.0.7/public/index.html)
 
 
 ##License
