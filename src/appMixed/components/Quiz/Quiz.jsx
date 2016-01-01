@@ -126,6 +126,17 @@ export default class Quiz extends React.Component {
     });     
   }
   
+  handleReturnQuizLastQuestion(){
+    let previsousIndex        = this.state.slideIndex;
+    let percentageDone        = ((parseInt(previsousIndex, 10) - 2) / this.state.questionMaxIndex)*100;
+        
+    this.setState({
+      slideIndex            : parseInt(previsousIndex, 10) - 1,
+      pourcentageDone       : percentageDone, 
+      snackbarOpened        : false,      
+    });     
+  }
+  
   handleQuizFinished(){
     //here : should save quiz answers to database
     this.setState({ 
@@ -149,7 +160,7 @@ export default class Quiz extends React.Component {
           isLastQuestion={questionIndex === this.state.questionMaxIndex - 1 ? true : false}
           goNextBtnText={'QUIZZ_NEXT_BUTTON'}
           goPreviousBtnText={'QUIZZ_PREVIOUS_BUTTON'}
-          goFinishQuizBtnText={'QUIZZ_VALID_BUTTON'}
+          goFinishQuizBtnText={'QUIZZ_END_BUTTON_TEXT'}
         />           
       );
     });
@@ -216,6 +227,7 @@ export default class Quiz extends React.Component {
                   questions={this.state.quizOrderedQuestions}
                   prevBtnText={this.state.quizModel.end.prev_button_text}
                   endBtnText={this.state.quizModel.end.end_button_text}
+                  onPrevQuizClick={()=>this.handleReturnQuizLastQuestion()}
                   onValidQuizClick={()=>this.handleQuizFinished()} 
                 />
               </MdlPaper>

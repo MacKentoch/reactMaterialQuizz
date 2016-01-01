@@ -37,6 +37,10 @@ export default class QuizEnd extends React.Component{
     };
   }    
   
+  handlePreviousStepClick(){
+    this.props.onPrevQuizClick();
+  }
+  
   handleEndQuizClick(){
     return this.props.onValidQuizClick();
   }
@@ -86,13 +90,20 @@ export default class QuizEnd extends React.Component{
           <section id="quizIntroActions">
             <div className="mdl-grid">
               <div className="mdl-layout-spacer"></div>
-              <div className="mdl-cell mdl-cell--4-col mdl-typography--text-center">
+              <div className="mdl-cell mdl-cell--5-col">
+                
                 <RaisedButton 
+                  style={Object.assign({}, styles.buttonPrevious)}
+                  label={this.context.translate[this.props.prevBtnText]} 
+                  primary={true}
+                  onClick={()=>this.handlePreviousStepClick()} /> 
+                                  
+                <RaisedButton 
+                  style={Object.assign({}, styles.buttonFinish)}
                   label={this.context.translate[this.props.endBtnText]} 
                   primary={true}
                   onClick={()=>this.handleEndQuizClick()} /> 
               </div>
-              <div className="mdl-layout-spacer"></div>
             </div>          
           </section>
 
@@ -104,6 +115,7 @@ export default class QuizEnd extends React.Component{
 
 
 QuizEnd.propTypes = {
+  onPrevQuizClick  : React.PropTypes.func.isRequired, 
   onValidQuizClick : React.PropTypes.func.isRequired, 
   questions        : React.PropTypes.array.isRequired,
 	title	           : React.PropTypes.string.isRequired,
