@@ -3,9 +3,8 @@ import classNames     from 'classnames';
 import _              from 'lodash';
 
 import MdlToolBar     from '../mdl/MdlToolBar.jsx!jsx';
+import MdlPaper       from '../mdl/MdlPaper.jsx!jsx';
 
-import Tabs           from 'material-ui/lib/tabs/tabs';
-import Tab            from 'material-ui/lib/tabs/tab';
 import Paper          from 'material-ui/lib/paper';
 import SwipeableViews from 'react-swipeable-views';
 import QuizIntro      from '../QuizIntro/QuizIntro.jsx!jsx';
@@ -47,30 +46,19 @@ export default class Quiz extends React.Component {
       quizOrderedQuestions  : orderedQuestions,
       snackbarAction        : `${this.context.translate.CLOSE_WORD}`,            
     });
-    
-    console.info('quiz view will mount');
   }
   
   componentDidMount(){
-    console.info('quiz view did mount');
     this.setState({
       viewEnters       : true 
     });    
   }
 
   componentWillUnmount(){
-    console.info('quiz view will unmount');
     this.setState({
       viewEnters       : false 
     });     
   }  
-  
-  handleChangeTabs(value, e, tab){
-   this.setState({
-      slideIndex      : value,
-      snackbarOpened  : false,
-    });     
-  }
   
   handleChangeIndex(index, fromIndex){ 
     this.setState({
@@ -145,20 +133,7 @@ export default class Quiz extends React.Component {
     });     
     this.props.history.pushState(null, '/');   //job done so return home now 
   } 
-  
-  getTabQuestionsTemplate(){    
-    const tabsTemplate = this.state.quizOrderedQuestions.map((question, questionIndex)=>{
-      return (
-        <Tab
-          key={questionIndex}
-          label={question.Q_translate_id}     
-          value={questionIndex}          
-        />
-      );
-    });
-    return tabsTemplate;  
-  } 
-  
+    
   getSwipableViewsQuestionsTemplate(){
     const swipeableViewTemplate = this.state.quizOrderedQuestions.map((question, questionIndex)=>{
       return (
@@ -200,14 +175,7 @@ export default class Quiz extends React.Component {
       'view-enter'       : this.state.viewEnters
     });    
     
-    console.info(`
-    ------------------------
-    quiz renders now
-    ------------------------
-    `);
-    
     const progressTemplate       = this.getProgressTemplate(); 
-    const tabsTemplate           = this.getTabQuestionsTemplate();
     const swipeableViewTemplate  = this.getSwipableViewsQuestionsTemplate();
     const tabEndIndex            = (this.state.questionMaxIndex + 1) + '';  
         
@@ -223,35 +191,18 @@ export default class Quiz extends React.Component {
               <div className="mdl-cell mdl-cell--12-col">
                 {progressTemplate}
               </div>
-            </div> 
-            <Paper zDepth={1}>                        
-              <Tabs 
-                onChange={(value, e, tab)=>this.handleChangeTabs(value, e, tab)} 
-                style={Object.assign({}, styles.tab)}    
-                value={this.state.slideIndex + ''} >
-                <Tab 
-                  key="0"
-                  label="Introduction"     
-                  value="0" 
-                />                  
-                {tabsTemplate}                 
-                <Tab
-                  key={tabEndIndex}  
-                  label="Quiz end" 
-                  value={tabEndIndex} 
-                />                  
-              </Tabs> 
-              <SwipeableViews 
-                index={parseInt(this.state.slideIndex, 10)} 
-                onChangeIndex={(index, fromIndex)=>this.handleChangeIndex(index, fromIndex)} >        
-                <QuizIntro 
-                  key="0"
-                  title={this.state.quizModel.intro.title_translate_id}
-                  subtitle={this.state.quizModel.intro.content_1_translate_id}
-                  body={this.state.quizModel.intro.content_2_translate_id}
-                  goBtnText={this.state.quizModel.intro.go_button_text_id}
-                  onStartQuizClick={(quiz)=>this.handleQuizStart(quiz)}
-                />
+            </div>                       
+            <SwipeableViews 
+              index={parseInt(this.state.slideIndex, 10)} 
+              onChangeIndex={(index, fromIndex)=>this.handleChangeIndex(index, fromIndex)} >        
+              <QuizIntro 
+                key="0"
+                title={this.state.quizModel.intro.title_translate_id}
+                subtitle={this.state.quizModel.intro.content_1_translate_id}
+                body={this.state.quizModel.intro.content_2_translate_id}
+                goBtnText={this.state.quizModel.intro.go_button_text_id}
+                onStartQuizClick={(quiz)=>this.handleQuizStart(quiz)}
+              />
               {swipeableViewTemplate}
               <QuizEnd 
                 key={tabEndIndex}
@@ -261,8 +212,7 @@ export default class Quiz extends React.Component {
                 endBtnText={this.state.quizModel.end.end_button_text}
                 onValidQuizClick={()=>this.handleQuizFinished()} 
               />
-              </SwipeableViews>                
-            </Paper>              
+            </SwipeableViews>                              
           </div>
         </div>
         <Snackbar
@@ -281,53 +231,3 @@ export default class Quiz extends React.Component {
 Quiz.contextTypes = {
   translate : React.PropTypes.object
 };
-
-
-
-
-                     
-
-            
-            
-                      // <Snackbar
-          //   open={this.state.snackbarOpened}
-          //   message={this.state.snackbarMessage}
-          //   action={this.state.snackbarAction}
-          //   autoHideDuration={1500}
-          // />    
-          
-          
-          
-//             <div className="mdl-tabs mdl-js-tabs mdl-js-ripple-effect">
-//               <div className="mdl-tabs__tab-bar">
-//                   <a href="#starks-panel" className="mdl-tabs__tab is-active">Starks</a>
-//                   <a href="#lannisters-panel" className="mdl-tabs__tab">Lannisters</a>
-//                   <a href="#targaryens-panel" className="mdl-tabs__tab">Targaryens</a>
-//               </div>
-// 
-//               <div className="mdl-tabs__panel is-active" id="starks-panel">
-//                 <ul>
-//                   <li>Eddard</li>
-//                   <li>Catelyn</li>
-//                   <li>Robb</li>
-//                   <li>Sansa</li>
-//                   <li>Brandon</li>
-//                   <li>Arya</li>
-//                   <li>Rickon</li>
-//                 </ul>
-//               </div>
-//               <div className="mdl-tabs__panel" id="lannisters-panel">
-//                 <ul>
-//                   <li>Tywin</li>
-//                   <li>Cersei</li>
-//                   <li>Jamie</li>
-//                   <li>Tyrion</li>
-//                 </ul>
-//               </div>
-//               <div className="mdl-tabs__panel" id="targaryens-panel">
-//                 <ul>
-//                   <li>Viserys</li>
-//                   <li>Daenerys</li>
-//                 </ul>
-//               </div>
-//             </div>            

@@ -1,4 +1,7 @@
 import React            from 'react';
+
+import MdlPaper       from '../mdl/MdlPaper.jsx!jsx';
+
 import RaisedButton     from 'material-ui/lib/raised-button';
 import Card             from 'material-ui/lib/card/card';
 import CardActions      from 'material-ui/lib/card/card-actions';
@@ -50,9 +53,7 @@ export default class QuizIntro extends React.Component{
     this.props.onStartQuizClick({start : true});
   }
 	
-	render(){
-    //console.info(' |_ QuizIntro renders now');
-    
+	render(){    
 		return (
 			<div className="row">
 				<div className="col-xs-12">
