@@ -192,6 +192,7 @@ export default class ReactMaterialQuizz extends React.Component {
         </MdlAppNavBar>
         <MdlDrawer 
           title={HEADER_TITLE}
+          titleFontSize={18}
           navigation={navigation}
           onSelection={(event, navigationItemLabel, route)=>this.handleDrawerNavigation(event, route)}
         />

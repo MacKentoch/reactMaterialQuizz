@@ -95,9 +95,9 @@ export default class QuizIntro extends React.Component{
         </MdlToolBar>
         <MdlPaper>
           <section id="quizIntroBody">
-            <h2 className={subTitleClasses}>
+            <h5 className={subTitleClasses}>
               {this.context.translate[this.props.subtitle]}
-            </h2>
+            </h5>
             <p className={bodyClasses}>
               {this.context.translate[this.props.body]}
             </p>

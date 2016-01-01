@@ -184,6 +184,7 @@ export default class QuizQuestions extends React.Component{
 
     return (
       <Card style={questionStyle}>
+      
         <CardText>  
           <div className="mdl-grid">
             <div className="mdl-cell mdl-cell--2-col"></div>
@@ -193,6 +194,7 @@ export default class QuizQuestions extends React.Component{
             <div className="mdl-cell mdl-cell--2-col"></div>
           </div>          
         </CardText>
+        
         <CardText>
           <div className="mdl-grid">
             <div className="mdl-cell mdl-cell--2-col"></div>
@@ -202,6 +204,7 @@ export default class QuizQuestions extends React.Component{
             <div className="mdl-cell mdl-cell--2-col"></div>
           </div>
         </CardText>
+        
         {questionFooter}    
       </Card>          
     );

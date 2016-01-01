@@ -1,7 +1,7 @@
 import React                    from 'react';
 import classNames               from 'classnames';
 import PromisedTimeout          from '../../services/PromisedTimeout.jsx!jsx';
-
+import MarginTop                from '../MarginTop/MarginTop.jsx!jsx';
 import MdlPaper                 from '../mdl/MdlPaper.jsx!jsx';
 
 import Paper                    from 'material-ui/lib/paper';
@@ -111,10 +111,13 @@ export default class Home extends React.Component {
         <div className="mdl-grid">
           <div className="mdl-cell mdl-cell--12-col">
             <MdlPaper>            
-              <h2>{this.context.translate.HOME_TITRE_1_QUIZZ}</h2>
-              <h3 
+              <h3>{this.context.translate.HOME_TITRE_1_QUIZZ}</h3>
+              <MarginTop 
+                marginTopValue={80}
+                marginTopUnit={'px'} />
+              <h4 
                 ref="homeViewTitleTwo"
-                className={homeTitle2Classes}>{this.context.translate.HOME_TITRE_2_QUIZZ}</h3>
+                className={homeTitle2Classes}>{this.context.translate.HOME_TITRE_2_QUIZZ}</h4>
               <p 
                 ref="homeViewDetail"
                 className={homeDetailsClasses}>{this.context.translate.HOME_DETAIL_TEXT}</p>

@@ -4,7 +4,9 @@
 *
 * PROPS     : 
 *
-*   - title         : {string} : optional - default value = ''
+*   - title             : {string} : optional - default value = '' 
+*   - titleFontSize     : {number} : optional - default value = 20
+*   - titleFontSizeUnit : {string} : optional - default value = 'px'
 *
 *   - navigation    : {array of NavigationItem_Object}  : REQUIRED - no default
 *     - NavigationItem_Object   : {Object} :  REQUIRED - no default
@@ -35,13 +37,19 @@ export default class MdlDrawer extends React.Component {
   render(){
     const {
       title,
+      titleFontSize,
+      titleFontSizeUnit,
       navigation,
       ...others
     } = this.props;
     
+    const titleStyle = {
+      fontSize : [titleFontSize, titleFontSizeUnit].join('')
+    };
+    
     return (
       <div className="mdl-layout__drawer mdl-shadow--2dp" {...others}>
-        <span className="mdl-layout-title">{title}</span>
+        <span className="mdl-layout-title" style={titleStyle}>{title}</span>
         <nav className="mdl-navigation">
           {
             navigation.map((navigationItem, navigationItemIndex)=>{
@@ -77,7 +85,9 @@ export default class MdlDrawer extends React.Component {
 }
 
 MdlDrawer.propTypes = {
-  title         : React.PropTypes.string,
+  title             : React.PropTypes.string,
+  titleFontSize     : React.PropTypes.number,
+  titleFontSizeUnit : React.PropTypes.string,
   navigation    : React.PropTypes.arrayOf(
     React.PropTypes.shape({
       "label"       : React.PropTypes.string.isRequired,
@@ -89,5 +99,7 @@ MdlDrawer.propTypes = {
 };
 
 MdlDrawer.defaultProps = {
- title      : ''
+  title      : '',
+  titleFontSize     : 20,
+  titleFontSizeUnit : 'px'
 };
