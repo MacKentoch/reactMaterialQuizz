@@ -29,8 +29,6 @@ export default class Home extends React.Component {
   
    
   componentDidMount(){
-    console.info('home view will did mount');
-    
     this.setState({
       viewEnters                 : true,
       titleTwoAnimationActive    : false, 
@@ -70,7 +68,6 @@ export default class Home extends React.Component {
   }
 
   componentWillUnmount(){
-    console.info('home view will unmount');
     this.setState({
       viewEnters       : false ,
       titleTwoAnimationActive     : false,
@@ -96,13 +93,6 @@ export default class Home extends React.Component {
       'invisible' : !this.state.homeDetailsAnimationActive,
       'zoomIn'    : this.state.homeDetailsAnimationActive,      
     });    
-    
-    
-    console.info(`
-    ------------------------
-    home renders now
-    ------------------------
-    `);
         
     return (       
       <section 

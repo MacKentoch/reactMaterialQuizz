@@ -56,6 +56,7 @@ export default class QuizEnd extends React.Component{
           onFinishQuizClick={()=>true}
           question={question}
           questionIndex={questionIndex}
+          shouldUpdate={this.props.shouldUpdate}
           isFirstQuestion={questionIndex === 0 ? true : false}
           isLastQuestion={questionIndex=== this.props.questions.length - 1 ? true : false}
           goNextBtnText={'QUIZZ_NEXT_BUTTON'}
@@ -118,11 +119,15 @@ QuizEnd.propTypes = {
   onPrevQuizClick  : React.PropTypes.func.isRequired, 
   onValidQuizClick : React.PropTypes.func.isRequired, 
   questions        : React.PropTypes.array.isRequired,
+  shouldUpdate     : React.PropTypes.bool.isRequired,
 	title	           : React.PropTypes.string.isRequired,
   prevBtnText      : React.PropTypes.string.isRequired,
   endBtnText       : React.PropTypes.string.isRequired,
 };
 
+QuizEnd.defaultProps = {
+  shouldUpdate     : true  
+}
 
 QuizEnd.contextTypes = {
   muiTheme    : React.PropTypes.object,

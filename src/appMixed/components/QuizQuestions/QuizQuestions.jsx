@@ -28,6 +28,10 @@ export default class QuizQuestions extends React.Component{
     });
   }
   
+  shouldComponentUpdate(newProps, newState){
+    return newProps.shouldUpdate;
+  }
+  
   updateQuestionState(choiceNewValue, choiceIndex){
     let questionUpdated = Object.assign({}, this.state.question);
     questionUpdated.liste_choix[choiceIndex].saisie = choiceNewValue;
@@ -211,7 +215,7 @@ export default class QuizQuestions extends React.Component{
   }
     
 	render(){
-    //console.info(' |_ QuizQuestion renders now');
+    console.info(`renders now question at index : ${this.props.questionIndex}`);
     const currentQuestionTemplate = this.renderCurrentQuestion();
 		return (
 			<div className="mdl-grid">
@@ -229,6 +233,7 @@ QuizQuestions.propTypes = {
   onPreviousQuestionClick : React.PropTypes.func.isRequired, 
   onFinishQuizClick       : React.PropTypes.func.isRequired,
   questionIndex           : React.PropTypes.number.isRequired,
+  shouldUpdate            : React.PropTypes.bool.isRequired,
 	question                : React.PropTypes.shape({
       "numero"                : React.PropTypes.number.isRequired,
       "question"              : React.PropTypes.string.isRequired,
@@ -254,6 +259,9 @@ QuizQuestions.propTypes = {
   goFinishQuizBtnText     : React.PropTypes.string.isRequired
 };
 
+QuizQuestions.defaultProps = {
+  shouldUpdate : true
+};
 
 QuizQuestions.contextTypes = {
   translate   : React.PropTypes.object

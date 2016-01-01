@@ -41,10 +41,11 @@ export default class Quiz extends React.Component {
     const questionMaxIndex  = quizModel.questions.length;
     
     this.setState({
-      questionMaxIndex      : questionMaxIndex,
-      quizModel             : rawQuizModel, 
-      quizOrderedQuestions  : orderedQuestions,
-      snackbarAction        : `${this.context.translate.CLOSE_WORD}`,            
+      questionMaxIndex        : questionMaxIndex,
+      lastEditedQuestionIndex : 0,
+      quizModel               : rawQuizModel, 
+      quizOrderedQuestions    : orderedQuestions,
+      snackbarAction          : `${this.context.translate.CLOSE_WORD}`,            
     });
   }
   
@@ -85,11 +86,12 @@ export default class Quiz extends React.Component {
     updatedQuestionsModel[questionIndex] = question;
     
     this.setState({
-      quizOrderedQuestions  : updatedQuestionsModel,
-      slideIndex            : parseInt(previsousIndex, 10) + 1,
-      pourcentageDone       : percentageDone,
-      snackbarOpened        : true,
-      snackbarMessage       : `${this.context.translate.QUIZZ_GRATZ_PERCENT1} ${roundPercentDone}${this.context.translate.QUIZZ_GRATZ_PERCENT2}`,
+      quizOrderedQuestions    : updatedQuestionsModel,
+      lastEditedQuestionIndex : questionIndex,
+      slideIndex              : parseInt(previsousIndex, 10) + 1,
+      pourcentageDone         : percentageDone,
+      snackbarOpened          : true,
+      snackbarMessage         : `${this.context.translate.QUIZZ_GRATZ_PERCENT1} ${roundPercentDone}${this.context.translate.QUIZZ_GRATZ_PERCENT2}`,
     }); 
   }  
   
@@ -101,10 +103,11 @@ export default class Quiz extends React.Component {
     updatedQuestionsModel[questionIndex] = question;
         
     this.setState({
-      quizOrderedQuestions  : updatedQuestionsModel,
-      slideIndex            : parseInt(previsousIndex, 10) - 1,
-      pourcentageDone       : percentageDone, 
-      snackbarOpened        : false,      
+      quizOrderedQuestions    : updatedQuestionsModel,
+      lastEditedQuestionIndex : questionIndex,
+      slideIndex              : parseInt(previsousIndex, 10) - 1,
+      pourcentageDone         : percentageDone, 
+      snackbarOpened          : false,      
     }); 
   } 
   
@@ -117,12 +120,13 @@ export default class Quiz extends React.Component {
     updatedQuestionsModel[questionIndex] = question;
         
     this.setState({
-      quizOrderedQuestions  : updatedQuestionsModel,
-      slideIndex            : parseInt(previsousIndex, 10) + 1,
-      pourcentageDone       : percentageDone,
-      showProgress          : true,
-      snackbarOpened        : true,
-      snackbarMessage       : `${this.context.translate.QUIZZ_GRATZ_PERCENT3}`,      
+      quizOrderedQuestions    : updatedQuestionsModel,
+      lastEditedQuestionIndex : questionIndex,
+      slideIndex              : parseInt(previsousIndex, 10) + 1,
+      pourcentageDone         : percentageDone,
+      showProgress            : true,
+      snackbarOpened          : true,
+      snackbarMessage         : `${this.context.translate.QUIZZ_GRATZ_PERCENT3}`,      
     });     
   }
   
@@ -147,6 +151,16 @@ export default class Quiz extends React.Component {
     
   getSwipableViewsQuestionsTemplate(){
     const swipeableViewTemplate = this.state.quizOrderedQuestions.map((question, questionIndex)=>{
+      const {lastEditedQuestionIndex} = this.state;
+      
+      const _shouldUpdate = ((lastEditedQuestionIndex + 1) === questionIndex) || (lastEditedQuestionIndex === questionIndex) ? true : false
+      
+      console.dir({
+        'parseInt(this.state.slideIndex, 10)' : parseInt(this.state.slideIndex, 10),
+        'questionIndex'                       : questionIndex,
+        'lastEditedQuestionIndex'             : lastEditedQuestionIndex
+      });
+      
       return (
         <QuizQuestions 
           key={questionIndex}
@@ -156,6 +170,7 @@ export default class Quiz extends React.Component {
           onFinishQuizClick={(question, questionIndex)=>this.handleQuizEndShowSummmary(question, questionIndex)}
           question={question}
           questionIndex={questionIndex}
+          shouldUpdate={_shouldUpdate}
           isFirstQuestion={questionIndex === 0 ? true : false}
           isLastQuestion={questionIndex === this.state.questionMaxIndex - 1 ? true : false}
           goNextBtnText={'QUIZZ_NEXT_BUTTON'}
@@ -206,7 +221,6 @@ export default class Quiz extends React.Component {
             <SwipeableViews 
               index={parseInt(this.state.slideIndex, 10)} 
               onChangeIndex={(index, fromIndex)=>this.handleChangeIndex(index, fromIndex)} > 
-               
               <MdlPaper key="0">
                 <QuizIntro 
                   title={this.state.quizModel.intro.title_translate_id}
@@ -216,22 +230,18 @@ export default class Quiz extends React.Component {
                   onStartQuizClick={(quiz)=>this.handleQuizStart(quiz)}
                 />
               </MdlPaper>
-                
-                
               {swipeableViewTemplate}
-                
-                
               <MdlPaper key={tabEndIndex}>
                 <QuizEnd 
                   title={this.state.quizModel.end.title_translate_id}
                   questions={this.state.quizOrderedQuestions}
+                  shouldUpdate={parseInt(this.state.slideIndex, 10) === parseInt(tabEndIndex, 10) ? true : false}
                   prevBtnText={this.state.quizModel.end.prev_button_text}
                   endBtnText={this.state.quizModel.end.end_button_text}
                   onPrevQuizClick={()=>this.handleReturnQuizLastQuestion()}
                   onValidQuizClick={()=>this.handleQuizFinished()} 
                 />
               </MdlPaper>
-                
             </SwipeableViews>                              
           </div>
         </div>
