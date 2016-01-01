@@ -1,6 +1,6 @@
 export const styles = {
   common : {
-        color: 'rgba(0,0,0,0.54)'
+     color: 'rgba(0,0,0,0.64)'
   },
   container : {
     height : '100%',

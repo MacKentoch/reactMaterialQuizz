@@ -185,7 +185,7 @@ export default class QuizQuestions extends React.Component{
     return (
       <Card style={questionStyle}>
       
-        <CardText>  
+        <CardText style={Object.assign({}, styles.common)}>  
           <div className="mdl-grid">
             <div className="mdl-cell mdl-cell--2-col"></div>
             <div className="mdl-cell mdl-cell--8-col">
@@ -195,7 +195,7 @@ export default class QuizQuestions extends React.Component{
           </div>          
         </CardText>
         
-        <CardText>
+        <CardText style={Object.assign({}, styles.common)}>
           <div className="mdl-grid">
             <div className="mdl-cell mdl-cell--2-col"></div>
             <div className="mdl-cell mdl-cell--8-col">
