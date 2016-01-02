@@ -18,7 +18,8 @@ export default class QuizQuestions extends React.Component{
 	
 	init(){
     this.state = {
-      question : {} 
+      question  : {},
+      isValid   : false
     }
 	}
   
@@ -36,26 +37,8 @@ export default class QuizQuestions extends React.Component{
     let questionUpdated = Object.assign({}, this.state.question);
     questionUpdated.liste_choix[choiceIndex].saisie = choiceNewValue;
     
-    // const prevSaisie  = this.state.question.liste_choix[choiceIndex].saisie;
-    // 
-    //       
-    // if(questionUpdated.liste_choix[choiceIndex].type === 'checkbox'){
-    //   if(choiceNewValue){
-    //     questionUpdated.choix_saisis = questionUpdated.choix_saisis + 1;
-    //   }else{
-    //     questionUpdated.choix_saisis = questionUpdated.choix_saisis - 1;
-    //   } 
-    // }
-    // 
-    // if(questionUpdated.liste_choix[choiceIndex].type === 'textarea'){
-    //   if(choiceNewValue.length === 1){      
-    //     questionUpdated.choix_saisis = questionUpdated.choix_saisis + 1;
-    //   }
-    //   if(choiceNewValue.length === 0){
-    //     questionUpdated.choix_saisis = questionUpdated.choix_saisis - 1;
-    //   }
-    // }      
-      
+    this.validQuestion();
+          
     this.setState({
       question : questionUpdated
     });
@@ -64,7 +47,7 @@ export default class QuizQuestions extends React.Component{
     
   }
 
-  validQuestion(index){
+  validQuestion(){
     const {
       nombre_minimum_choix, 
       nombre_maximum_choix,
@@ -72,17 +55,24 @@ export default class QuizQuestions extends React.Component{
       choix_saisis
     } = this.state.question;
     
-    let nbSaisie = 0;
+    let isValidQuestion = false;
+    let nbSaisie        = 0;
+    
     liste_choix.forEach((choix, index)=>{
       if(choix.type === 'checkbox' && choix.saisie) nbSaisie++;
       if(choix.type === 'textarea' && choix.saisie.length > 0) nbSaisie++;
     });
     
     if( nbSaisie >= nombre_minimum_choix &&
-        nbSaisie <= nombre_maximum_choix    ){
-      return true;
+        nbSaisie <= nombre_maximum_choix    ){   
+      isValidQuestion = true;
     }
-    return false;
+    //update valid state to enable disable go next question
+    this.setState({
+      isValid : isValidQuestion
+    });
+     
+    return isValidQuestion;
   }
 
   handleCheckboxChanged(event, checked, index){
@@ -101,7 +91,7 @@ export default class QuizQuestions extends React.Component{
       nombre_maximum_choix
     } = this.state.question;
     //force validation before going next question
-    if(this.validQuestion()){
+    if(this.state.isValid){
       this.props.onNextQuestionClick(question, questionIndex); //updated question callbacked to parent Quiz component
     }else{
       console.warn(`answer between min : ${nombre_minimum_choix} and max : ${nombre_maximum_choix}`);
@@ -182,7 +172,9 @@ export default class QuizQuestions extends React.Component{
             style={Object.assign({}, styles.buttonsNext)}
             label={this.context.translate[this.props.goNextBtnText]} 
             primary={true}
-            onClick={()=>this.handleGoNextQuestionClick()} 
+            onClick={()=>this.handleGoNextQuestionClick()}
+            disabled={!this.state.isValid}
+            disabledLabelColor={'#F1F1F1'}             
           />
         </div>         
       );
@@ -202,6 +194,8 @@ export default class QuizQuestions extends React.Component{
             key={2}
             style={Object.assign({}, styles.buttonFinish)}
             label={this.context.translate[this.props.goFinishQuizBtnText]}
+            disabled={!this.state.isValid}
+            disabledLabelColor={'#F1F1F1'}
             primary={true}
             onClick={()=>this.handleGoFinishQuizClick()}            
           />
@@ -224,6 +218,8 @@ export default class QuizQuestions extends React.Component{
             key={2}
             style={Object.assign({}, styles.buttonsNext)}
             label={this.context.translate[this.props.goNextBtnText]} 
+            disabled={!this.state.isValid}
+            disabledLabelColor={'#F1F1F1'}
             primary={true}
             onClick={()=>this.handleGoNextQuestionClick()} 
           />
