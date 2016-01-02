@@ -64,11 +64,18 @@ export default class ReactMaterialQuizz extends React.Component {
     };
   }
   
+  componentWillReceiveProps(nextProps){
+    this.setState({
+      snackbarOpened : false //to prevent snackbar to open on route change after quiz is done
+    });
+  }
+ 
   getChildContext() {
     return {
-      muiTheme  : ThemeManager.getMuiTheme(MyRawTheme),
-      language  : this.state.language,
-      translate : this.state.translate
+      muiTheme        : ThemeManager.getMuiTheme(MyRawTheme),
+      language        : this.state.language,
+      translate       : this.state.translate,
+      displaySnackBar : (message, action)=>this.showSnackbar(message, action)
     };
   }  
   
@@ -122,7 +129,15 @@ export default class ReactMaterialQuizz extends React.Component {
       snackbarAction  : `${this.getTranslations(selected).CLOSE_WORD}`,       
       translate       : this.getTranslations(selected)             
     });
-  }  
+  } 
+  
+  showSnackbar(message = '', action= ''){
+    this.setState({
+      snackbarOpened  : true,
+      snackbarMessage : message,
+      snackbarAction  : action      
+    });
+  } 
   
   renderLanguageDialog(){
     let customActions = [
@@ -200,6 +215,12 @@ export default class ReactMaterialQuizz extends React.Component {
           {React.cloneElement(this.props.children, { key: pathname })}                           
         </MdlMain>                                     
         {LanguageDialog}
+        <Snackbar
+          open={this.state.snackbarOpened}
+          message={this.state.snackbarMessage}
+          action={this.state.snackbarAction}
+          autoHideDuration={1500}
+        />        
       </MdlLayoutContainer>
     );
   }
@@ -208,7 +229,8 @@ export default class ReactMaterialQuizz extends React.Component {
 }
 
 ReactMaterialQuizz.childContextTypes = {
-  muiTheme  : React.PropTypes.object,
-  language  : React.PropTypes.string,
-  translate : React.PropTypes.object
+  muiTheme        : React.PropTypes.object,
+  language        : React.PropTypes.string,
+  translate       : React.PropTypes.object,
+  displaySnackBar : React.PropTypes.func
 };

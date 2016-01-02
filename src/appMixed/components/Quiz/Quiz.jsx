@@ -11,7 +11,7 @@ import QuizIntro      from '../QuizIntro/QuizIntro.jsx!jsx';
 import QuizQuestions  from '../QuizQuestions/QuizQuestions.jsx!jsx';
 import QuizEnd        from '../QuizEnd/QuizEnd.jsx!jsx';
 import LinearProgress from 'material-ui/lib/linear-progress';
-import Snackbar       from 'material-ui/lib/snackbar';
+
 import {styles}       from './quiz.style.jsx!jsx';
 import quizModel      from '../../models/quizModel.json!json';
 
@@ -32,9 +32,6 @@ export default class Quiz extends React.Component {
       slideIndex      : 0, 
       pourcentageDone : 0,
       showProgress    : false,       
-      snackbarOpened  : false,
-      snackbarMessage : '',
-      snackbarAction  : '',
       animated          : true,
       viewEnters        : false         
     };
@@ -69,8 +66,7 @@ export default class Quiz extends React.Component {
   
   handleChangeIndex(index, fromIndex){ 
     this.setState({
-      slideIndex      : index,
-      snackbarOpened  : false,
+      slideIndex      : index
     });    
   }
   
@@ -78,8 +74,7 @@ export default class Quiz extends React.Component {
     let previsousIndex = this.state.slideIndex;
     this.setState({
       slideIndex      : parseInt(previsousIndex, 10) + 1,
-      showProgress    : true,
-      snackbarOpened  : false,
+      showProgress    : true
     }); 
   }
   
@@ -97,9 +92,11 @@ export default class Quiz extends React.Component {
       quizMove                : QUIZ_MOVE_GO_NEXT,
       slideIndex              : parseInt(previsousIndex, 10) + 1,
       pourcentageDone         : percentageDone,
-      snackbarOpened          : true,
-      snackbarMessage         : `${this.context.translate.QUIZZ_GRATZ_PERCENT1} ${roundPercentDone}${this.context.translate.QUIZZ_GRATZ_PERCENT2}`,
     }); 
+    
+    let message = `${this.context.translate.QUIZZ_GRATZ_PERCENT1} ${roundPercentDone}${this.context.translate.QUIZZ_GRATZ_PERCENT2}`;
+    let action  = `${this.context.translate.CLOSE_WORD}`;
+    this.context.displaySnackBar(message, action);
   }  
   
   handleQuizPreviousQuestion(question, questionIndex){ 
@@ -114,8 +111,7 @@ export default class Quiz extends React.Component {
       lastEditedQuestionIndex : questionIndex,
       quizMove                : QUIZ_MOVE_GO_PREVIOUS,
       slideIndex              : parseInt(previsousIndex, 10) - 1,
-      pourcentageDone         : percentageDone, 
-      snackbarOpened          : false,      
+      pourcentageDone         : percentageDone,       
     }); 
   } 
   
@@ -136,7 +132,11 @@ export default class Quiz extends React.Component {
       showProgress            : true,
       snackbarOpened          : true,
       snackbarMessage         : `${this.context.translate.QUIZZ_GRATZ_PERCENT3}`,      
-    });     
+    });
+    
+    let message = `${this.context.translate.QUIZZ_GRATZ_PERCENT3}`;
+    let action  = `${this.context.translate.CLOSE_WORD}`;
+    this.context.displaySnackBar(message, action);         
   }
   
   handleReturnQuizLastQuestion(){
@@ -145,16 +145,12 @@ export default class Quiz extends React.Component {
         
     this.setState({
       slideIndex            : parseInt(previsousIndex, 10) - 1,
-      pourcentageDone       : percentageDone, 
-      snackbarOpened        : false,      
+      pourcentageDone       : percentageDone     
     });     
   }
   
   handleQuizFinished(){
-    //here : should save quiz answers to database
-    this.setState({ 
-      snackbarOpened  : false      
-    });     
+    //here : should save quiz answers to database 
     this.props.history.pushState(null, '/');   //job done so return home now 
   } 
   
@@ -293,12 +289,7 @@ export default class Quiz extends React.Component {
             </SwipeableViews>                              
           </div>
         </div>
-        <Snackbar
-          open={this.state.snackbarOpened}
-          message={this.state.snackbarMessage}
-          action={this.state.snackbarAction}
-          autoHideDuration={1500}
-        />          
+          
       </section>
     );
   }
@@ -307,5 +298,6 @@ export default class Quiz extends React.Component {
 
 
 Quiz.contextTypes = {
-  translate : React.PropTypes.object
+  translate       : React.PropTypes.object,
+  displaySnackBar : React.PropTypes.func
 };
