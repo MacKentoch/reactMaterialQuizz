@@ -172,14 +172,14 @@ export default class Quiz extends React.Component {
           break;
 
         case QUIZ_MOVE_GO_NEXT :
-          if(lastEditedQuestionIndex      === questionIndex ||
+          if( //lastEditedQuestionIndex      === questionIndex ||
             (lastEditedQuestionIndex + 1) === questionIndex) {
             return true;
           }        
           break;
                     
         case QUIZ_MOVE_GO_PREVIOUS :
-          if(lastEditedQuestionIndex      === questionIndex ||
+          if( //lastEditedQuestionIndex      === questionIndex ||
             (lastEditedQuestionIndex - 1) === questionIndex) {
             return true;
           }        
@@ -239,7 +239,7 @@ export default class Quiz extends React.Component {
   }
   
   render(){
-
+    
     let quizViewClasses = classNames({
       'animatedViews'    : this.state.animated,
       'view-enter'       : this.state.viewEnters

@@ -68,8 +68,7 @@ export default class QuizEnd extends React.Component{
     return answersSummary;
   }
   
-	render(){
-    
+	render(){    
     const answersSummary = this.getAllAnswersTemplate();
 		return (
 			<section>
@@ -137,44 +136,3 @@ QuizEnd.contextTypes = {
 QuizEnd.childContextTypes = {
   muiTheme  : React.PropTypes.object
 };
-
-
-
-
-			// <div className="row">
-			// 	<div className="col-xs-12">
-      //   
-      //     <Card style={Object.assign({}, styles.container)}>
-      //     
-      //       <Toolbar>
-      //         <ToolbarGroup 
-      //           key={0} 
-      //           float="left">
-      //           <ToolbarTitle 
-      //             text={this.context.translate[this.props.title]}
-      //             style={Object.assign({}, styles.title)} 
-      //           />
-      //         </ToolbarGroup>
-      //       </Toolbar>    
-      //       
-      //       
-      //       <CardText>
-      //         <div>
-      //           {answersSummary}
-      //         </div>
-      //       </CardText>
-      //       
-      //       <CardActions>
-      //         <div className="row">
-      //           <div className="col-xs-4 col-xs-offset-4">
-      //             <RaisedButton 
-      //               label={this.context.translate[this.props.endBtnText]} 
-      //               primary={true}
-      //               onClick={()=>this.handleEndQuizClick()} />  
-      //           </div>
-      //         </div>
-      //       </CardActions>            
-      //     </Card>
-      //     
-			// 	</div>
-			// </div>
