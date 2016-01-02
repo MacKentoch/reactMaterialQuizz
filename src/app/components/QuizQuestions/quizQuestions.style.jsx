@@ -1,6 +1,6 @@
 export const styles = {
   common : {
-        color: 'rgba(0,0,0,0.54)'
+     color: 'rgba(0,0,0,0.64)'
   },
   container : {
     height : '100%',
@@ -22,10 +22,14 @@ export const styles = {
     marginLeft    : '10px'
   },
   buttonPrevious : {
-    marginRight    : '10px'
+    marginRight : '10px'
   },
   buttonFinish : {
-    marginLeft    : '10px'
+    marginLeft : '10px'
+  },
+  minMaxQuestionRule : {
+    marginTop : '25px',
+    fontSize  : '10px',
   }
 } 
   

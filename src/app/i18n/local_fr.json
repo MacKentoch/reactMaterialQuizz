@@ -31,6 +31,8 @@
 	"QUIZZ_MODIFY_BUTTON"			: "modifier",
 	"QUIZZ_VALID_BUTTON"			: "valider",
   "QUIZZ_END_BUTTON_TEXT"   : "terminer",	
+  "QUIZZ_RULE_MIN_ANSWER"   : "nombre réponse minimum",
+  "QUIZZ_RULE_MAX_ANSWER"   : "maximum",
 		
 	"NOM_APPLICATION_WORD"    : "nom de l'application",
 	"AUTRE_WORD"							: "autre",	

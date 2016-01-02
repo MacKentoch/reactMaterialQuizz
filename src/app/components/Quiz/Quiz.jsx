@@ -1,16 +1,24 @@
 import React          from 'react';
+import classNames     from 'classnames';
 import _              from 'lodash';
-import Tabs           from 'material-ui/lib/tabs/tabs';
-import Tab            from 'material-ui/lib/tabs/tab';
+
+import MdlToolBar     from '../mdl/MdlToolBar.jsx!jsx';
+import MdlPaper       from '../mdl/MdlPaper.jsx!jsx';
+
 import Paper          from 'material-ui/lib/paper';
 import SwipeableViews from 'react-swipeable-views';
 import QuizIntro      from '../QuizIntro/QuizIntro.jsx!jsx';
 import QuizQuestions  from '../QuizQuestions/QuizQuestions.jsx!jsx';
 import QuizEnd        from '../QuizEnd/QuizEnd.jsx!jsx';
 import LinearProgress from 'material-ui/lib/linear-progress';
-import Snackbar       from 'material-ui/lib/snackbar';
+
 import {styles}       from './quiz.style.jsx!jsx';
 import quizModel      from '../../models/quizModel.json!json';
+
+const QUIZ_MOVE_START       = 'START_QUESTION';
+const QUIZ_MOVE_GO_NEXT     = 'NEXT_QUESTION';
+const QUIZ_MOVE_GO_PREVIOUS = 'PREV_QUESTION';
+const QUIZ_MOVE_END         = 'END_QUESTION';
 
 export default class Quiz extends React.Component {
 
@@ -24,9 +32,8 @@ export default class Quiz extends React.Component {
       slideIndex      : 0, 
       pourcentageDone : 0,
       showProgress    : false,       
-      snackbarOpened  : false,
-      snackbarMessage : '',
-      snackbarAction  : '',   
+      animated          : true,
+      viewEnters        : false         
     };
   }
   
@@ -36,24 +43,30 @@ export default class Quiz extends React.Component {
     const questionMaxIndex  = quizModel.questions.length;
     
     this.setState({
-      questionMaxIndex      : questionMaxIndex,
-      quizModel             : rawQuizModel, 
-      quizOrderedQuestions  : orderedQuestions,
-      snackbarAction        : `${this.context.translate.CLOSE_WORD}`,            
+      questionMaxIndex        : questionMaxIndex,
+      lastEditedQuestionIndex : -1,
+      quizMove                : QUIZ_MOVE_START,
+      quizModel               : rawQuizModel, 
+      quizOrderedQuestions    : orderedQuestions,
+      snackbarAction          : `${this.context.translate.CLOSE_WORD}`,            
     });
   }
   
-  handleChangeTabs(value, e, tab){
-   this.setState({
-      slideIndex      : value,
-      snackbarOpened  : false,
-    });     
+  componentDidMount(){
+    this.setState({
+      viewEnters       : true 
+    });    
   }
+
+  componentWillUnmount(){
+    this.setState({
+      viewEnters       : false 
+    });     
+  }  
   
   handleChangeIndex(index, fromIndex){ 
     this.setState({
-      slideIndex      : index,
-      snackbarOpened  : false,
+      slideIndex      : index
     });    
   }
   
@@ -61,8 +74,7 @@ export default class Quiz extends React.Component {
     let previsousIndex = this.state.slideIndex;
     this.setState({
       slideIndex      : parseInt(previsousIndex, 10) + 1,
-      showProgress    : true,
-      snackbarOpened  : false,
+      showProgress    : true
     }); 
   }
   
@@ -75,12 +87,16 @@ export default class Quiz extends React.Component {
     updatedQuestionsModel[questionIndex] = question;
     
     this.setState({
-      quizOrderedQuestions  : updatedQuestionsModel,
-      slideIndex            : parseInt(previsousIndex, 10) + 1,
-      pourcentageDone       : percentageDone,
-      snackbarOpened        : true,
-      snackbarMessage       : `${this.context.translate.QUIZZ_GRATZ_PERCENT1} ${roundPercentDone}${this.context.translate.QUIZZ_GRATZ_PERCENT2}`,
+      quizOrderedQuestions    : updatedQuestionsModel,
+      lastEditedQuestionIndex : questionIndex,
+      quizMove                : QUIZ_MOVE_GO_NEXT,
+      slideIndex              : parseInt(previsousIndex, 10) + 1,
+      pourcentageDone         : percentageDone,
     }); 
+    
+    let message = `${this.context.translate.QUIZZ_GRATZ_PERCENT1} ${roundPercentDone}${this.context.translate.QUIZZ_GRATZ_PERCENT2}`;
+    let action  = `${this.context.translate.CLOSE_WORD}`;
+    this.context.displaySnackBar(message, action);
   }  
   
   handleQuizPreviousQuestion(question, questionIndex){ 
@@ -91,10 +107,11 @@ export default class Quiz extends React.Component {
     updatedQuestionsModel[questionIndex] = question;
         
     this.setState({
-      quizOrderedQuestions  : updatedQuestionsModel,
-      slideIndex            : parseInt(previsousIndex, 10) - 1,
-      pourcentageDone       : percentageDone, 
-      snackbarOpened        : false,      
+      quizOrderedQuestions    : updatedQuestionsModel,
+      lastEditedQuestionIndex : questionIndex,
+      quizMove                : QUIZ_MOVE_GO_PREVIOUS,
+      slideIndex              : parseInt(previsousIndex, 10) - 1,
+      pourcentageDone         : percentageDone,       
     }); 
   } 
   
@@ -107,38 +124,87 @@ export default class Quiz extends React.Component {
     updatedQuestionsModel[questionIndex] = question;
         
     this.setState({
-      quizOrderedQuestions  : updatedQuestionsModel,
-      slideIndex            : parseInt(previsousIndex, 10) + 1,
-      pourcentageDone       : percentageDone,
-      showProgress          : true,
-      snackbarOpened        : true,
-      snackbarMessage       : `${this.context.translate.QUIZZ_GRATZ_PERCENT3}`,      
+      quizOrderedQuestions    : updatedQuestionsModel,
+      lastEditedQuestionIndex : questionIndex,
+      quizMove                : QUIZ_MOVE_END,
+      slideIndex              : parseInt(previsousIndex, 10) + 1,
+      pourcentageDone         : percentageDone,
+      showProgress            : true,
+      snackbarOpened          : true,
+      snackbarMessage         : `${this.context.translate.QUIZZ_GRATZ_PERCENT3}`,      
+    });
+    
+    let message = `${this.context.translate.QUIZZ_GRATZ_PERCENT3}`;
+    let action  = `${this.context.translate.CLOSE_WORD}`;
+    this.context.displaySnackBar(message, action);         
+  }
+  
+  handleReturnQuizLastQuestion(){
+    let previsousIndex        = this.state.slideIndex;
+    let percentageDone        = ((parseInt(previsousIndex, 10) - 2) / this.state.questionMaxIndex)*100;
+        
+    this.setState({
+      slideIndex            : parseInt(previsousIndex, 10) - 1,
+      pourcentageDone       : percentageDone     
     });     
   }
   
   handleQuizFinished(){
-    //here : should save quiz answers to database
-    this.setState({ 
-      snackbarOpened  : false      
-    });     
+    //here : should save quiz answers to database 
     this.props.history.pushState(null, '/');   //job done so return home now 
   } 
   
-  getTabQuestionsTemplate(){    
-    const tabsTemplate = this.state.quizOrderedQuestions.map((question, questionIndex)=>{
-      return (
-        <Tab
-          key={questionIndex}
-          label={question.Q_translate_id}     
-          value={questionIndex}          
-        />
-      );
-    });
-    return tabsTemplate;  
-  } 
   
+  shouldRenderQuestion(questionIndex){
+      const {
+        lastEditedQuestionIndex, 
+        quizMove,
+        slideIndex
+      } = this.state;
+      
+      let _shouldUpdate = false;
+      
+      switch(quizMove){
+        case QUIZ_MOVE_START :
+          if(questionIndex === 0) {
+            return true;
+          }
+          break;
+
+        case QUIZ_MOVE_GO_NEXT :
+          if( //lastEditedQuestionIndex      === questionIndex ||
+            (lastEditedQuestionIndex + 1) === questionIndex) {
+            return true;
+          }        
+          break;
+                    
+        case QUIZ_MOVE_GO_PREVIOUS :
+          if( //lastEditedQuestionIndex      === questionIndex ||
+            (lastEditedQuestionIndex - 1) === questionIndex) {
+            return true;
+          }        
+          break;
+                
+        case QUIZ_MOVE_END :
+          if(questionIndex === lastEditedQuestionIndex) {
+            return true;
+          }
+          break;
+                                      
+        default:
+          _shouldUpdate = true;
+      }
+        
+      return _shouldUpdate;    
+  }
+  
+    
   getSwipableViewsQuestionsTemplate(){
     const swipeableViewTemplate = this.state.quizOrderedQuestions.map((question, questionIndex)=>{
+      const {lastEditedQuestionIndex} = this.state;
+      
+      let _shouldUpdate = this.shouldRenderQuestion(questionIndex);
+            
       return (
         <QuizQuestions 
           key={questionIndex}
@@ -148,11 +214,12 @@ export default class Quiz extends React.Component {
           onFinishQuizClick={(question, questionIndex)=>this.handleQuizEndShowSummmary(question, questionIndex)}
           question={question}
           questionIndex={questionIndex}
+          shouldUpdate={_shouldUpdate}
           isFirstQuestion={questionIndex === 0 ? true : false}
           isLastQuestion={questionIndex === this.state.questionMaxIndex - 1 ? true : false}
           goNextBtnText={'QUIZZ_NEXT_BUTTON'}
           goPreviousBtnText={'QUIZZ_PREVIOUS_BUTTON'}
-          goFinishQuizBtnText={'QUIZZ_VALID_BUTTON'}
+          goFinishQuizBtnText={'QUIZZ_END_BUTTON_TEXT'}
         />           
       );
     });
@@ -172,72 +239,58 @@ export default class Quiz extends React.Component {
   }
   
   render(){
-    console.info(`
     
-    quiz renders now
-    `);
+    let quizViewClasses = classNames({
+      'animatedViews'    : this.state.animated,
+      'view-enter'       : this.state.viewEnters
+    });    
     
     const progressTemplate       = this.getProgressTemplate(); 
-    const tabsTemplate           = this.getTabQuestionsTemplate();
     const swipeableViewTemplate  = this.getSwipableViewsQuestionsTemplate();
-    const tabEndIndex            = (this.state.questionMaxIndex + 1) + '';      
+    const tabEndIndex            = (this.state.questionMaxIndex + 1) + '';  
+        
     return (
-      <div className="row">
-        <div 
-          className="col-xs-10 col-xs-offset-1 col-md-8 col-md-offset-2" 
-          style={Object.assign({}, styles.quiz)}>
-          <div className="row">
-            <div className="col-xs-12">
-              {progressTemplate}
-            </div>
-          </div>
-          <Paper zDepth={1}>                        
-            <Tabs 
-              onChange={(value, e, tab)=>this.handleChangeTabs(value, e, tab)} 
-              style={Object.assign({}, styles.tab)}    
-              value={this.state.slideIndex + ''} >
-              <Tab 
-                key="0"
-                label="Introduction"     
-                value="0" 
-              />                  
-              {tabsTemplate}                 
-              <Tab
-                key={tabEndIndex}  
-                label="Quiz end" 
-                value={tabEndIndex} 
-               />                  
-            </Tabs> 
+      <section 
+         key="quizView"
+         className={quizViewClasses}>        
+        <div className="mdl-grid" key="quizz">
+          <div 
+            className="mdl-cell mdl-cell--12-col" 
+            style={Object.assign({}, styles.quiz)}>
+            <div className="mdl-grid">
+              <div className="mdl-cell mdl-cell--12-col">
+                {progressTemplate}
+              </div>
+            </div>                       
             <SwipeableViews 
               index={parseInt(this.state.slideIndex, 10)} 
-              onChangeIndex={(index, fromIndex)=>this.handleChangeIndex(index, fromIndex)} >        
-              <QuizIntro 
-                key="0"
-                title={this.state.quizModel.intro.title_translate_id}
-                subtitle={this.state.quizModel.intro.content_1_translate_id}
-                body={this.state.quizModel.intro.content_2_translate_id}
-                goBtnText={this.state.quizModel.intro.go_button_text_id}
-                onStartQuizClick={(quiz)=>this.handleQuizStart(quiz)}
-              />
-             {swipeableViewTemplate}
-             <QuizEnd 
-              key={tabEndIndex}
-              title={this.state.quizModel.end.title_translate_id}
-              questions={this.state.quizOrderedQuestions}
-              prevBtnText={this.state.quizModel.end.prev_button_text}
-              endBtnText={this.state.quizModel.end.end_button_text}
-              onValidQuizClick={()=>this.handleQuizFinished()} 
-             />
-            </SwipeableViews>                    
-          </Paper>
+              onChangeIndex={(index, fromIndex)=>this.handleChangeIndex(index, fromIndex)} > 
+              <MdlPaper key="0">
+                <QuizIntro 
+                  title={this.state.quizModel.intro.title_translate_id}
+                  subtitle={this.state.quizModel.intro.content_1_translate_id}
+                  body={this.state.quizModel.intro.content_2_translate_id}
+                  goBtnText={this.state.quizModel.intro.go_button_text_id}
+                  onStartQuizClick={(quiz)=>this.handleQuizStart(quiz)}
+                />
+              </MdlPaper>
+              {swipeableViewTemplate}
+              <MdlPaper key={tabEndIndex}>
+                <QuizEnd 
+                  title={this.state.quizModel.end.title_translate_id}
+                  questions={this.state.quizOrderedQuestions}
+                  shouldUpdate={parseInt(this.state.slideIndex, 10) === parseInt(tabEndIndex, 10) ? true : false}
+                  prevBtnText={this.state.quizModel.end.prev_button_text}
+                  endBtnText={this.state.quizModel.end.end_button_text}
+                  onPrevQuizClick={()=>this.handleReturnQuizLastQuestion()}
+                  onValidQuizClick={()=>this.handleQuizFinished()} 
+                />
+              </MdlPaper>
+            </SwipeableViews>                              
+          </div>
         </div>
-        <Snackbar
-          open={this.state.snackbarOpened}
-          message={this.state.snackbarMessage}
-          action={this.state.snackbarAction}
-          autoHideDuration={1500}
-         />          
-      </div>
+          
+      </section>
     );
   }
 
@@ -245,5 +298,6 @@ export default class Quiz extends React.Component {
 
 
 Quiz.contextTypes = {
-  translate : React.PropTypes.object
+  translate       : React.PropTypes.object,
+  displaySnackBar : React.PropTypes.func
 };

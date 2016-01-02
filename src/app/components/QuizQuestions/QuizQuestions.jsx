@@ -18,23 +18,62 @@ export default class QuizQuestions extends React.Component{
 	
 	init(){
     this.state = {
-      question : {} 
+      question  : {},
+      isValid   : false
     }
 	}
   
   componentWillReceiveProps(newProps){
-    this.setState({
-      question : newProps.question
-    });
+    //set question to this question state only if needed (=shouldUpdate === true)
+    if(newProps.shouldUpdate) {
+      this.validQuestion(newProps.question); //will set state isValid
+      this.setState({
+        question : newProps.question,
+      });      
+    }
+  }
+    
+  shouldComponentUpdate(newProps, newState){
+    return newProps.shouldUpdate;
   }
   
   updateQuestionState(choiceNewValue, choiceIndex){
     let questionUpdated = Object.assign({}, this.state.question);
     questionUpdated.liste_choix[choiceIndex].saisie = choiceNewValue;
     
+    this.validQuestion(questionUpdated);
+          
     this.setState({
       question : questionUpdated
     });
+  }
+
+  validQuestion(question){
+    const {
+      nombre_minimum_choix, 
+      nombre_maximum_choix,
+      liste_choix,
+      choix_saisis
+    } = question;
+    
+    let isValidQuestion = false;
+    let nbSaisie        = 0;
+    
+    liste_choix.forEach((choix, index)=>{
+      if(choix.type === 'checkbox' && choix.saisie) nbSaisie++;
+      if(choix.type === 'textarea' && choix.saisie.length > 0) nbSaisie++;
+    });
+    
+    if( nbSaisie >= nombre_minimum_choix &&
+        nbSaisie <= nombre_maximum_choix    ){   
+      isValidQuestion = true;
+    }
+    //update valid state to enable disable go next question
+    this.setState({
+      isValid : isValidQuestion
+    });
+     
+    return isValidQuestion;
   }
 
   handleCheckboxChanged(event, checked, index){
@@ -42,25 +81,44 @@ export default class QuizQuestions extends React.Component{
   }
     
   handleTextAreaChanged(event, index){
-    this.updateQuestionState(event.target.value, index);
+    this.updateQuestionState(event.target.value.trim(), index);
   }
       
   handleGoNextQuestionClick(){
     const question      = Object.assign({}, this.state.question);
     const questionIndex = this.props.questionIndex;
-    this.props.onNextQuestionClick(question, questionIndex); //updated question callbacked to parent Quiz component
+    const {
+      nombre_minimum_choix, 
+      nombre_maximum_choix
+    } = this.state.question;
+    //force validation before going next question
+    if(this.state.isValid){
+      this.props.onNextQuestionClick(question, questionIndex); //updated question callbacked to parent Quiz component
+    }else{
+      console.warn(`answer between min : ${nombre_minimum_choix} and max : ${nombre_maximum_choix}`);
+    }    
   }
   
   handleGoPreviousQuestionClick(){
     const question      = Object.assign({}, this.state.question);
     const questionIndex = this.props.questionIndex;
+   
     this.props.onPreviousQuestionClick(question, questionIndex);
   }
   
   handleGoFinishQuizClick(){
     const question      = Object.assign({}, this.state.question); 
     const questionIndex = this.props.questionIndex;
-    this.props.onFinishQuizClick(question, questionIndex);
+    const {
+      nombre_minimum_choix, 
+      nombre_maximum_choix
+    } = this.state.question;
+   
+    if(this.state.isValid){
+      this.props.onFinishQuizClick(question, questionIndex);
+    }else{
+      console.warn(`answer between min : ${nombre_minimum_choix} and max : ${nombre_maximum_choix}`);
+    }
   }  
   
   renderCurrentQuestion(){
@@ -115,7 +173,9 @@ export default class QuizQuestions extends React.Component{
             style={Object.assign({}, styles.buttonsNext)}
             label={this.context.translate[this.props.goNextBtnText]} 
             primary={true}
-            onClick={()=>this.handleGoNextQuestionClick()} 
+            onClick={()=>this.handleGoNextQuestionClick()}
+            disabled={!this.state.isValid}
+            disabledLabelColor={'#F1F1F1'}             
           />
         </div>         
       );
@@ -135,6 +195,8 @@ export default class QuizQuestions extends React.Component{
             key={2}
             style={Object.assign({}, styles.buttonFinish)}
             label={this.context.translate[this.props.goFinishQuizBtnText]}
+            disabled={!this.state.isValid}
+            disabledLabelColor={'#F1F1F1'}
             primary={true}
             onClick={()=>this.handleGoFinishQuizClick()}            
           />
@@ -157,6 +219,8 @@ export default class QuizQuestions extends React.Component{
             key={2}
             style={Object.assign({}, styles.buttonsNext)}
             label={this.context.translate[this.props.goNextBtnText]} 
+            disabled={!this.state.isValid}
+            disabledLabelColor={'#F1F1F1'}
             primary={true}
             onClick={()=>this.handleGoNextQuestionClick()} 
           />
@@ -168,10 +232,12 @@ export default class QuizQuestions extends React.Component{
     if(!this.props.isDisabled){
       questionFooter= (
         <CardActions>
-          <div className="row">
-            <div className="col-xs-8 col-xs-offset-2">
+          <div className="mdl-grid">
+            <div className="mdl-cell mdl-cell--2-col"></div>
+            <div className="mdl-cell mdl-cell--8-col">
               {actionTemplate}
             </div>
+            <div className="mdl-cell mdl-cell--2-col"></div>
           </div>
         </CardActions>        
       );
@@ -182,31 +248,47 @@ export default class QuizQuestions extends React.Component{
 
     return (
       <Card style={questionStyle}>
-        <CardText>  
-          <div className="row">
-            <div className="col-xs-8 col-xs-offset-2">
+      
+        <CardText style={Object.assign({}, styles.common)}>  
+          <div className="mdl-grid">
+            <div className="mdl-cell mdl-cell--2-col"></div>
+            <div className="mdl-cell mdl-cell--8-col">
               <h3>{this.context.translate[this.props.question.Q_translate_id]}</h3> 
             </div>
+            <div className="mdl-cell mdl-cell--2-col"></div>
           </div>          
         </CardText>
-        <CardText>
-          <div className="row">
-            <div className="col-xs-8 col-xs-offset-2">
+        
+        <CardText style={Object.assign({}, styles.common)}>
+          <div className="mdl-grid">
+            <div className="mdl-cell mdl-cell--2-col"></div>
+            <div className="mdl-cell mdl-cell--8-col">
               {choicesTemplate}  
             </div>
+            <div className="mdl-cell mdl-cell--2-col"></div>
+          </div>
+          <div className="mdl-grid">
+            <div className="mdl-cell mdl-cell--2-col"></div>
+            <div className="mdl-cell mdl-cell--8-col">
+              <span style={Object.assign({}, styles.minMaxQuestionRule)}>
+                {this.context.translate.QUIZZ_RULE_MIN_ANSWER} : {this.state.question.nombre_minimum_choix} - {this.context.translate.QUIZZ_RULE_MAX_ANSWER} : {this.state.question.nombre_maximum_choix}
+              </span>
+            </div>
+            <div className="mdl-cell mdl-cell--2-col"></div>
           </div>
         </CardText>
+        
         {questionFooter}    
       </Card>          
     );
   }
     
 	render(){
-    console.info(' |_ QuizQuestion renders now');
+    //console.info(`renders now question at index : ${this.props.questionIndex}`);
     const currentQuestionTemplate = this.renderCurrentQuestion();
 		return (
-			<div className="row">
-        <div className="col-xs-12">
+			<div className="mdl-grid">
+        <div className="mdl-cell mdl-cell--12-col">
           {currentQuestionTemplate}
 				</div>
 			</div>
@@ -220,6 +302,7 @@ QuizQuestions.propTypes = {
   onPreviousQuestionClick : React.PropTypes.func.isRequired, 
   onFinishQuizClick       : React.PropTypes.func.isRequired,
   questionIndex           : React.PropTypes.number.isRequired,
+  shouldUpdate            : React.PropTypes.bool.isRequired,
 	question                : React.PropTypes.shape({
       "numero"                : React.PropTypes.number.isRequired,
       "question"              : React.PropTypes.string.isRequired,
@@ -234,8 +317,7 @@ QuizQuestions.propTypes = {
           "saisie"          : React.PropTypes.any.isRequired  //can be bool or string value  
         }).isRequired).isRequired,
       "nombre_minimum_choix"  : React.PropTypes.string.isRequired,
-      "nombre_maximum_choix"  : React.PropTypes.string.isRequired,
-      "shouldUpdate"          : React.PropTypes.bool.isRequired    
+      "nombre_maximum_choix"  : React.PropTypes.string.isRequired   
   }).isRequired,
   isDisabled              : React.PropTypes.bool.isRequired,
   isFirstQuestion         : React.PropTypes.bool.isRequired,
@@ -245,6 +327,9 @@ QuizQuestions.propTypes = {
   goFinishQuizBtnText     : React.PropTypes.string.isRequired
 };
 
+QuizQuestions.defaultProps = {
+  shouldUpdate : true
+};
 
 QuizQuestions.contextTypes = {
   translate   : React.PropTypes.object

@@ -3,11 +3,6 @@ React JS material quizz
 
 This is a simple dynamic quiz in [ReactJS](https://facebook.github.io/react/) designed following [google material guidelines](https://www.google.com/design/spec/material-design/introduction.html) thanks to nice [material UI](http://www.material-ui.com) and [google material design lite](http://www.getmdl.io/index.html).
 
-**NEW**
-
-Design is now a mix of `material UI` and `material design lite` custom react components.
- 
-
 **feature :** 
 
 - ReactJS (> 0.14)
@@ -41,7 +36,7 @@ npm install jspm -g
 ```
 
 
-##Launch mixed material UI and MDL app : 
+##Launch app : 
 
 1- **warrior way** : start a server 
 ```bash
@@ -49,7 +44,7 @@ jspm-server
 ```
 
 1- **fast way** : just click 
-[preview here](https://rawgit.com/MacKentoch/reactMaterialQuizz/v1.0.16/public/index.html)
+[preview here](https://rawgit.com/MacKentoch/reactMaterialQuizz/v1.1.0/public/index.html)
 
 
 ##WHAT'S NEXT

@@ -25,6 +25,11 @@ export default class MarginTop extends React.Component {
 }
  
 MarginTop.propTypes = {
-	marginTopValue	: React.PropTypes.number.isRequired,
-	marginTopUnit		: React.PropTypes.string.isRequired,
+	marginTopValue	: React.PropTypes.number,
+	marginTopUnit		: React.PropTypes.string,
+};
+
+MarginTop.defaultProps = {
+ marginTopValue      : 20,
+ marginTopUnit       : 'px'
 };

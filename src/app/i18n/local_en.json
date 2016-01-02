@@ -28,6 +28,9 @@
 	"QUIZZ_MODIFY_BUTTON"			: "modify",
 	"QUIZZ_VALID_BUTTON"			: "valid",
   "QUIZZ_END_BUTTON_TEXT"   : "end",
+  "QUIZZ_RULE_MIN_ANSWER"   : "minium anwser",
+  "QUIZZ_RULE_MAX_ANSWER"   : "maximum",
+  
   "QUIZZ_GRATZ_PERCENT1"    : "Nice,",
   "QUIZZ_GRATZ_PERCENT2"    : "% done",		
 	"QUIZZ_GRATZ_PERCENT3"    : "Congratulations quiz is 100% done!",

@@ -1,39 +1,36 @@
-import React 		               from 'react';
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
+//React lib and vendor React lib
+import React 		                from 'react';
 import { 
   RouteHandler, 
   Link 
 }                               from 'react-router';
-import AppBar                   from 'material-ui/lib/app-bar';
-import LeftNav                  from 'material-ui/lib/left-nav';
-import IconMenu                 from 'material-ui/lib/menus/icon-menu';
-import Menu                     from 'material-ui/lib/menus/menu';
-import MenuItem                 from 'material-ui/lib/menus/menu-item';
-import List                     from 'material-ui/lib/lists/list';
-import Divider                  from 'material-ui/lib/divider';
+//custom MDL components
+import MdlLayoutContainer       from '../mdl/MdlLayoutContainer.jsx!jsx';
+import MdlAppNavBar             from '../mdl/MdlAppNavBar.jsx!jsx';
+import MdlDrawer                from '../mdl/MdlDrawer.jsx!jsx';
+import MdlMain                  from '../mdl/MdlMain.jsx!jsx';
+import MdlMenu                  from '../mdl/MdlMenu.jsx!jsx';
+//material UI components
 import FlatButton               from 'material-ui/lib/flat-button';
-import ListItem                 from 'material-ui/lib/lists/list-item';
-import IconButton               from 'material-ui/lib/icon-button';
-import NavigationMoreVert       from 'material-ui/lib/svg-icons/navigation/more-vert';
-import FontIcon                 from 'material-ui/lib/font-icon';
 import Dialog                   from 'material-ui/lib/dialog';
 import RadioButton              from 'material-ui/lib/radio-button';
 import RadioButtonGroup         from 'material-ui/lib/radio-button-group';
 import Snackbar                 from 'material-ui/lib/snackbar';
 import ThemeManager             from 'material-ui/lib/styles/theme-manager';
 import MyRawTheme               from '../../shared/quizRawTheme.jsx!jsx';
+//other custom components
 import MarginTop                from '../MarginTop/MarginTop.jsx!jsx';
+//styles
 import {styles}                 from './ReactMaterialQuizz.style.jsx!jsx';
-
-import TranslateIcon            from 'material-ui/lib/svg-icons/action/translate';
-
+//models
 import navigationModel          from '../../models/navigationModel.json!json';
-import appBarMenuModel          from '../../models/appBarMenuModel.json!json';
-import Quiz                     from '../Quiz/Quiz.jsx!jsx';
+import appNavBarMenuModel       from '../../models/appBarMenuModel.json!json';
 import localEN                  from '../../i18n/local_en.json!json';
 import localFR                  from '../../i18n/local_fr.json!json';
 
-const HEADER_TITLE  = 'React Material Quizz';
+
+
+const HEADER_TITLE  = 'ReactMaterialQuizz';
 const GITHUB_LINK   = 'https://github.com/MacKentoch/reactMaterialQuizz';
 
 
@@ -58,9 +55,7 @@ export default class ReactMaterialQuizz extends React.Component {
       language                : navigatorLanguage,
       translate               : this.getTranslations(navigatorLanguage), 
       navigationList          : navigationModel,
-      appBarMenuList          : appBarMenuModel,
-      headerTitle             : HEADER_TITLE,
-      leftNavOpen             : false,
+      appNavBarMenuList       : appNavBarMenuModel,
       langDialogOpened        : false,
       snakBarAutoHideDuration : 2000,
       snackbarOpened          : false,
@@ -69,11 +64,18 @@ export default class ReactMaterialQuizz extends React.Component {
     };
   }
   
+  componentWillReceiveProps(nextProps){
+    this.setState({
+      snackbarOpened : false //to prevent snackbar to open on route change after quiz is done
+    });
+  }
+ 
   getChildContext() {
     return {
-      muiTheme  : ThemeManager.getMuiTheme(MyRawTheme),
-      language  : this.state.language,
-      translate : this.state.translate
+      muiTheme        : ThemeManager.getMuiTheme(MyRawTheme),
+      language        : this.state.language,
+      translate       : this.state.translate,
+      displaySnackBar : (message, action)=>this.showSnackbar(message, action)
     };
   }  
   
@@ -84,21 +86,31 @@ export default class ReactMaterialQuizz extends React.Component {
     return translation;
   }
   
-  componentWillMount() {
-
+  navigationTo(event, selectedRoute) {
+    this.props.history.pushState(null, selectedRoute); //more info on react router v1.0.0+ : http://stackoverflow.com/questions/31079081/programmatically-navigate-using-react-router      
+  } 
+  
+  openLanguageDialog(){
+    this.setState({
+      langDialogOpened  : true,
+      snackbarOpened    : false,
+    });     
+  } 
+  
+  closeLanguageDialog(){
+    this.setState({
+      langDialogOpened: false,
+      snackbarOpened  : false,
+    });    
   }
   
-  handleChangeRequestLeftNav(){
-    let previousOpenState = this.state.leftNavOpen;
-    this.setState({ leftNavOpen: !previousOpenState });    
+  handleDrawerNavigation(event, selectedRoute){
+    this.navigationTo(event, selectedRoute);
   }
   
-  handleOpenLanguageDialog(menuKey){
+  handleMenuItemSelected(menuKey){
     if(menuKey === 0){
-      this.setState({
-        langDialogOpened  : true,
-        snackbarOpened    : false,
-      });      
+     this.openLanguageDialog();
     }
     if(menuKey === 1){
       location.href = GITHUB_LINK;
@@ -106,18 +118,8 @@ export default class ReactMaterialQuizz extends React.Component {
   }
   
   handleCloseLanguageDialog(){
-    this.setState({
-      langDialogOpened: false,
-      snackbarOpened  : false,
-    });
-  }   
-  
-  handleOpenSnackBarFromQuiz(message){
-      this.setState({
-        snackbarOpened  : true,
-        snackbarMessage : message,        
-      });
-  } 
+    this.closeLanguageDialog();
+  }  
   
   handleLanguageSelect(event, selected){
     this.setState({
@@ -127,19 +129,23 @@ export default class ReactMaterialQuizz extends React.Component {
       snackbarAction  : `${this.getTranslations(selected).CLOSE_WORD}`,       
       translate       : this.getTranslations(selected)             
     });
+  } 
+  
+  showSnackbar(message = '', action= ''){
+    this.setState({
+      snackbarOpened  : true,
+      snackbarMessage : message,
+      snackbarAction  : action      
+    });
   }
-   
-   
-  navigationTo(event, selectedRoute) {
-    //more info on react router v1.0.0+ : http://stackoverflow.com/questions/31079081/programmatically-navigate-using-react-router
-    this.props.history.pushState(null, selectedRoute); 
- 
-    let previousOpenState = this.state.leftNavOpen;
-    if(previousOpenState)   this.setState({ leftNavOpen: !previousOpenState });     
-  }
-
-
-  getLanguageSelectDialog(){    
+  
+  handleSnackbarRequestClose(){
+    this.setState({
+      snackbarOpened  : false
+    });
+  } 
+  
+  renderLanguageDialog(){
     let customActions = [
       <FlatButton
         label={this.state.translate.CANCEL_WORD}
@@ -156,10 +162,8 @@ export default class ReactMaterialQuizz extends React.Component {
         title={this.state.translate.CHOOSE_LANGUAGE}
         actions={customActions}
         width={'300px'}
-        
         open={this.state.langDialogOpened}
         onRequestClose={()=>this.handleCloseLanguageDialog()}>
-        
         <RadioButtonGroup 
           name="languageSelection" 
           defaultSelected={this.state.language}
@@ -173,112 +177,59 @@ export default class ReactMaterialQuizz extends React.Component {
           label={this.state.translate.FRANCAIS_WORD}
           style={{marginBottom:16}}/>
         </RadioButtonGroup>        
-        
       </Dialog>    
-    );
-  }
-
-
-  getLeftnavListTemplate(){
-    const _leftNavList = this.state.navigationList.map((navList)=>{
-      let _marginTop;
-      if((navList.id || 0) === 1){
-        _marginTop = <MarginTop marginTopValue={15} marginTopUnit={'px'}  />;
-      } 
-      
-      let _icon = <FontIcon className={navList.className} />;
-                    
-      return (        
-        <div key={navList.id}>
-          {_marginTop}
-          <ListItem
-            key={navList.id}
-            primaryText={this.state.translate[navList.translate_id]}
-            onClick={(event, navIndex)=>this.navigationTo(event, navList.route)}
-            leftIcon={_icon} />
-        </div>        
-      );             
-    });
-    return _leftNavList;  
+    );    
   }
   
-  
-  getAppBarMenuListTemplate(){
-    const _menuList = this.state.appBarMenuList.map((menu)=>{
-      let _Divider;
-      if((menu.key || 0)  > 0){
-        _Divider = <Divider inset={false}/>;
-      }
-      let _icon;
-      let menuText;
-      if(menu.text === 'github')    _icon = <FontIcon className="fa fa-github" />;
-      if(menu.text === 'language')  _icon = <TranslateIcon />;
-      
-      return (
-        <div key={menu.key}>
-          {_Divider}
-          <ListItem
-            key={menu.key}   
-            primaryText={this.state.translate[menu.translate_id]}
-            leftIcon={_icon}
-            onClick={()=>this.handleOpenLanguageDialog(menu.key)} 
-          />
-        </div>
-      );
-    });
-    return _menuList;   
-  }
-
-
   render(){ 
-    const _menuList       = this.getAppBarMenuListTemplate();
-    const _leftNavList    = this.getLeftnavListTemplate();
-    const languageDialog  = this.getLanguageSelectDialog();
-    const { pathname }    = this.props.location
+    const { pathname }    = this.props.location;
     
+    const navigation = this.state.navigationList.map((navItem, navItemIndex)=>{
+      return {
+        label       : this.state.translate[navItem.translate_id],
+        mdlIconName : navItem.mdlIconName,
+        route       : navItem.route 
+      };
+    });
+    
+    const menuItems = this.state.appNavBarMenuList.map((menuItem, menuItemIndex)=>{
+      return {
+        name        : this.state.translate[menuItem.translate_id],
+        disabled    : menuItem.disabled,
+        mdlIconName : menuItem.mdlIconName
+      };
+    }); 
+    
+    const LanguageDialog = this.renderLanguageDialog();
+
     return (
-			<div>
-        <LeftNav 
-          ref="leftNav" 
-          docked={false}
-          open={this.state.leftNavOpen}
-          onRequestChange={()=>this.handleChangeRequestLeftNav()}>
-        <MarginTop 
-          marginTopValue={60}
-          marginTopUnit={'px'}  /> 
-        <Divider inset={false}/>  
-        <List subheader={this.state.translate.NAVIGATION_WORD} >
-          {_leftNavList}
-        </List>
-        <Divider inset={false}/>   
-        </LeftNav>				
-        <AppBar
-          title={this.state.headerTitle}
-          onLeftIconButtonTouchTap={()=>this.handleChangeRequestLeftNav()}
-          isInitiallyOpen={true}
-          iconElementRight={
-          <IconMenu iconButtonElement={
-            <IconButton><NavigationMoreVert /></IconButton>}>
-            <List 
-              style={styles.iconMenuList}>
-              {_menuList}
-            </List>
-          </IconMenu>
-          } />
-        <ReactCSSTransitionGroup
-            component="div"
-            transitionName="routeAnimated" 
-            transitionEnterTimeout={500} 
-            transitionLeaveTimeout={500}> 
-          {React.cloneElement(this.props.children, { key: pathname })}                   
-        </ReactCSSTransitionGroup>
-        {languageDialog}
+      <MdlLayoutContainer>        
+        <MdlAppNavBar>
+          <MdlMenu 
+            menuId={'topMainMenu'}
+            menus={menuItems}
+            onSelection={(event, menuId, menuItemIndex)=>this.handleMenuItemSelected(menuItemIndex)}
+          />
+        </MdlAppNavBar>
+        <MdlDrawer 
+          title={HEADER_TITLE}
+          titleFontSize={18}
+          navigation={navigation}
+          closeOnNavigation={true}
+          onSelection={(event, navigationItemLabel, route)=>this.handleDrawerNavigation(event, route)}
+        />
+        <MdlMain style={Object.assign({}, styles.app)}>
+          {React.cloneElement(this.props.children, { key: pathname })}                           
+        </MdlMain>                                     
+        {LanguageDialog}
         <Snackbar
           open={this.state.snackbarOpened}
           message={this.state.snackbarMessage}
           action={this.state.snackbarAction}
-         />        
-			</div>
+          autoHideDuration={1500}
+          onRequestClose={()=>this.handleSnackbarRequestClose()}
+        />        
+      </MdlLayoutContainer>
     );
   }
 
@@ -286,8 +237,8 @@ export default class ReactMaterialQuizz extends React.Component {
 }
 
 ReactMaterialQuizz.childContextTypes = {
-  muiTheme  : React.PropTypes.object,
-  language  : React.PropTypes.string,
-  translate : React.PropTypes.object
+  muiTheme        : React.PropTypes.object,
+  language        : React.PropTypes.string,
+  translate       : React.PropTypes.object,
+  displaySnackBar : React.PropTypes.func
 };
-

@@ -1,7 +1,12 @@
 body{
 	margin: 0px;
-  color: rgba(0,0,0,.87);
+  color: rgba(0,0,0,.64);
 }
+
+//fix menu display placement
+.mdl-menu__container{
+   right: 16px !important; 
+} 
 
 
 //route animation
@@ -19,47 +24,21 @@ body{
 }
 
 
-
-
-//another (not used) route animation
-.swap-enter {
-  opacity: 0.01;
-  transform: translateX(5em);
-  transition: all .5s ease-in;
-}
-
-.swap-enter.swap-enter-active {
-  opacity: 1;
-  transform: translateX(0);
-}
-
-.swap-leave {
-  opacity: 1;
-  transform: translateX(0);
-  transition: all .5s ease-in;
-}
-
-.swap-leave.swap-leave-active {
-  opacity: 0;
-  transform: translateX(-5em);
-}
-
-
-//basic route animation (not used)
+//demo aniamtion route
 .example-enter {
   opacity: 0.01;
-  transition: opacity .5s ease-in;
 }
 
 .example-enter.example-enter-active {
   opacity: 1;
+  transition: opacity 500ms ease-in;
 }
 
 .example-leave {
   opacity: 1;
-  transition: opacity .01s ease-in;
 }
 
 .example-leave.example-leave-active {
-  opacity: 0;
+  opacity: 0.01;
+  transition: opacity 300ms ease-in;
 }

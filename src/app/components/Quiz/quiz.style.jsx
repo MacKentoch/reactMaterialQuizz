@@ -1,6 +1,5 @@
 export const styles = {
   quiz : {
-    marginTop   : '70px',
     padding     : '0px'
   },
   slide: {

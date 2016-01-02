@@ -6,19 +6,19 @@ module.exports = {
 	},
 	
   jsHint : {
-    sources : './src/appMixed/**/*.jsx'
+    sources : './src/app/**/*.jsx'
   },
   
 	css  :{
-		sources : ['./src/appMixed/style/index.scss'],
+		sources : ['./src/app/style/index.scss'],
 		dest		: {
 			filename 	: 'style.css',
-			dir				: './src/appMixed/style/'
+			dir				: './src/app/style/'
 		}		
 	},
 	
 	jspm : {
-		main : './src/appMixed/main.jsx!',
+		main : './src/app/main.jsx!',
 		dest : './public/js/appBundle.js'	
 	}
 	

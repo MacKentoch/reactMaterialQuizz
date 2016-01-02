@@ -9,7 +9,7 @@
 		"title_translate_id" 		: "QUIZZ_END_TITLE",
 		"content_translate_id" 	: "QUIZZ_END_CONTENT",
     "prev_button_text"      : "QUIZZ_PREVIOUS_BUTTON",	
-		"end_button_text"       : "QUIZZ_END_BUTTON_TEXT"
+		"end_button_text"       : "QUIZZ_VALID_BUTTON"
 	},	
 	
 	"questions" : [	
@@ -28,7 +28,7 @@
 			],
 			"nombre_minimum_choix" 	: "1",
 			"nombre_maximum_choix" 	: "6",
-      "shouldUpdate"          : true
+      "choix_saisis"          : 0
 		},
 		
 		{
@@ -42,7 +42,7 @@
 			],
 			"nombre_minimum_choix" 	: "1",
 			"nombre_maximum_choix" 	: "1",
-      "shouldUpdate"          : true
+      "choix_saisis"          : 0
 		},		
 	
 		{
@@ -50,13 +50,12 @@
 			"question" 			: "something to say",		
 			"Q_translate_id" 	: "QUIZZ_Q3",	
 			"liste_choix"			: [	
-				{"choix" : 1, "type"	: "checkbox", "nom" : "yes", 							"translateId" : "YES_WORD", 					"valeur_defaut": false, "saisie" : false},
-				{"choix" : 2, "type"	: "checkbox", "nom" : "no", 							"translateId" : "NO_WORD", 						"valeur_defaut": false, "saisie" : false},										
-				{"choix" : 3, "type"	: "textarea", "nom" : "something to say", "translateId" : "SOMETHING_2_SAY_WORD", "valeur_defaut": "", "saisie" : ""}		
+				{"choix" : 1, "type"	: "checkbox", "nom" : "no", 							"translateId" : "NO_WORD", 						"valeur_defaut": false, "saisie" : false},										
+				{"choix" : 2, "type"	: "textarea", "nom" : "something to say", "translateId" : "SOMETHING_2_SAY_WORD", "valeur_defaut": "", "saisie" : ""}		
 			],
 			"nombre_minimum_choix" 	: "1",
 			"nombre_maximum_choix" 	: "1",
-      "shouldUpdate"          : true
+      "choix_saisis"          : 0
 		}		
 		
 	]
