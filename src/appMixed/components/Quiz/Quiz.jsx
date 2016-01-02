@@ -15,6 +15,11 @@ import Snackbar       from 'material-ui/lib/snackbar';
 import {styles}       from './quiz.style.jsx!jsx';
 import quizModel      from '../../models/quizModel.json!json';
 
+const QUIZ_MOVE_START       = 'START_QUESTION';
+const QUIZ_MOVE_GO_NEXT     = 'NEXT_QUESTION';
+const QUIZ_MOVE_GO_PREVIOUS = 'PREV_QUESTION';
+const QUIZ_MOVE_END         = 'END_QUESTION';
+
 export default class Quiz extends React.Component {
 
   constructor(props) {
@@ -42,7 +47,8 @@ export default class Quiz extends React.Component {
     
     this.setState({
       questionMaxIndex        : questionMaxIndex,
-      lastEditedQuestionIndex : 0,
+      lastEditedQuestionIndex : -1,
+      quizMove                : QUIZ_MOVE_START,
       quizModel               : rawQuizModel, 
       quizOrderedQuestions    : orderedQuestions,
       snackbarAction          : `${this.context.translate.CLOSE_WORD}`,            
@@ -88,6 +94,7 @@ export default class Quiz extends React.Component {
     this.setState({
       quizOrderedQuestions    : updatedQuestionsModel,
       lastEditedQuestionIndex : questionIndex,
+      quizMove                : QUIZ_MOVE_GO_NEXT,
       slideIndex              : parseInt(previsousIndex, 10) + 1,
       pourcentageDone         : percentageDone,
       snackbarOpened          : true,
@@ -105,6 +112,7 @@ export default class Quiz extends React.Component {
     this.setState({
       quizOrderedQuestions    : updatedQuestionsModel,
       lastEditedQuestionIndex : questionIndex,
+      quizMove                : QUIZ_MOVE_GO_PREVIOUS,
       slideIndex              : parseInt(previsousIndex, 10) - 1,
       pourcentageDone         : percentageDone, 
       snackbarOpened          : false,      
@@ -122,6 +130,7 @@ export default class Quiz extends React.Component {
     this.setState({
       quizOrderedQuestions    : updatedQuestionsModel,
       lastEditedQuestionIndex : questionIndex,
+      quizMove                : QUIZ_MOVE_END,
       slideIndex              : parseInt(previsousIndex, 10) + 1,
       pourcentageDone         : percentageDone,
       showProgress            : true,
@@ -148,17 +157,63 @@ export default class Quiz extends React.Component {
     });     
     this.props.history.pushState(null, '/');   //job done so return home now 
   } 
+  
+  
+  shouldRenderQuestion(questionIndex){
+      const {
+        lastEditedQuestionIndex, 
+        quizMove,
+        slideIndex
+      } = this.state;
+      
+      let _shouldUpdate = false;
+      
+      switch(quizMove){
+        case QUIZ_MOVE_START :
+          if(questionIndex === 0) {
+            return true;
+          }
+          break;
+
+        case QUIZ_MOVE_GO_NEXT :
+          if(lastEditedQuestionIndex      === questionIndex ||
+            (lastEditedQuestionIndex + 1) === questionIndex) {
+            return true;
+          }        
+          break;
+                    
+        case QUIZ_MOVE_GO_PREVIOUS :
+          if(lastEditedQuestionIndex      === questionIndex ||
+            (lastEditedQuestionIndex - 1) === questionIndex) {
+            return true;
+          }        
+          break;
+                
+        case QUIZ_MOVE_END :
+          if(questionIndex === lastEditedQuestionIndex) {
+            return true;
+          }
+          break;
+                                      
+        default:
+          _shouldUpdate = true;
+      }
+        
+      return _shouldUpdate;    
+  }
+  
     
   getSwipableViewsQuestionsTemplate(){
     const swipeableViewTemplate = this.state.quizOrderedQuestions.map((question, questionIndex)=>{
       const {lastEditedQuestionIndex} = this.state;
       
-      const _shouldUpdate = ((lastEditedQuestionIndex + 1) === questionIndex) || (lastEditedQuestionIndex === questionIndex) ? true : false
+      let _shouldUpdate = this.shouldRenderQuestion(questionIndex);
       
       console.dir({
         'parseInt(this.state.slideIndex, 10)' : parseInt(this.state.slideIndex, 10),
         'questionIndex'                       : questionIndex,
-        'lastEditedQuestionIndex'             : lastEditedQuestionIndex
+        'lastEditedQuestionIndex'             : lastEditedQuestionIndex,
+        'quizMove'                            : this.state.quizMove
       });
       
       return (
