@@ -1,6 +1,6 @@
 {
   "name": "react-material-quizz",
-  "version": "1.0.14",
+  "version": "1.0.15",
   "description": "React JS material quizz",
   "main": "index.js",
   "scripts": {
