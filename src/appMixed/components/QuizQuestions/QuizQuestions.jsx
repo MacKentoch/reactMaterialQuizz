@@ -25,10 +25,12 @@ export default class QuizQuestions extends React.Component{
   
   componentWillReceiveProps(newProps){
     this.setState({
-      question : newProps.question
+      question : newProps.question,
     });
+    
+    this.validQuestion(newProps.question); //will set state isValid
   }
-  
+    
   shouldComponentUpdate(newProps, newState){
     return newProps.shouldUpdate;
   }
@@ -37,23 +39,20 @@ export default class QuizQuestions extends React.Component{
     let questionUpdated = Object.assign({}, this.state.question);
     questionUpdated.liste_choix[choiceIndex].saisie = choiceNewValue;
     
-    this.validQuestion();
+    this.validQuestion(questionUpdated);
           
     this.setState({
       question : questionUpdated
     });
-    
-    console.info(`saisie for this question : ${questionUpdated.choix_saisis}`);
-    
   }
 
-  validQuestion(){
+  validQuestion(question){
     const {
       nombre_minimum_choix, 
       nombre_maximum_choix,
       liste_choix,
       choix_saisis
-    } = this.state.question;
+    } = question;
     
     let isValidQuestion = false;
     let nbSaisie        = 0;
@@ -113,7 +112,7 @@ export default class QuizQuestions extends React.Component{
       nombre_maximum_choix
     } = this.state.question;
    
-    if(this.validQuestion()){
+    if(this.state.isValid){
       this.props.onFinishQuizClick(question, questionIndex);
     }else{
       console.warn(`answer between min : ${nombre_minimum_choix} and max : ${nombre_maximum_choix}`);

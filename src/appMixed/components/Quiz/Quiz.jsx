@@ -208,14 +208,7 @@ export default class Quiz extends React.Component {
       const {lastEditedQuestionIndex} = this.state;
       
       let _shouldUpdate = this.shouldRenderQuestion(questionIndex);
-      
-      console.dir({
-        'parseInt(this.state.slideIndex, 10)' : parseInt(this.state.slideIndex, 10),
-        'questionIndex'                       : questionIndex,
-        'lastEditedQuestionIndex'             : lastEditedQuestionIndex,
-        'quizMove'                            : this.state.quizMove
-      });
-      
+            
       return (
         <QuizQuestions 
           key={questionIndex}
