@@ -137,6 +137,12 @@ export default class ReactMaterialQuizz extends React.Component {
       snackbarMessage : message,
       snackbarAction  : action      
     });
+  }
+  
+  handleSnackbarRequestClose(){
+    this.setState({
+      snackbarOpened  : false
+    });
   } 
   
   renderLanguageDialog(){
@@ -220,6 +226,7 @@ export default class ReactMaterialQuizz extends React.Component {
           message={this.state.snackbarMessage}
           action={this.state.snackbarAction}
           autoHideDuration={1500}
+          onRequestClose={()=>this.handleSnackbarRequestClose()}
         />        
       </MdlLayoutContainer>
     );
