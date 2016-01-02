@@ -41,16 +41,6 @@ npm install jspm -g
 ```
 
 
-
-
-
-##Launch pure material UI app : 
-
-1- **fast way** : just click 
-[preview here](https://rawgit.com/MacKentoch/reactMaterialQuizz/v1.0.6/public/index.html)
-
->Note : this way is now obsolete. Better have an eye on mixed version (MDL + material UI) 
-
 ##Launch mixed material UI and MDL app : 
 
 1- **warrior way** : start a server 
@@ -59,7 +49,7 @@ jspm-server
 ```
 
 1- **fast way** : just click 
-[preview here](https://rawgit.com/MacKentoch/reactMaterialQuizz/v1.0.12/public/index.html)
+[preview here](https://rawgit.com/MacKentoch/reactMaterialQuizz/v1.0.13/public/index.html)
 
 
 ##WHAT'S NEXT
