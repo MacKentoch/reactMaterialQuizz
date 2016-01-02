@@ -24,11 +24,13 @@ export default class QuizQuestions extends React.Component{
 	}
   
   componentWillReceiveProps(newProps){
-    this.setState({
-      question : newProps.question,
-    });
-    
-    this.validQuestion(newProps.question); //will set state isValid
+    //set question to this question state only if needed (=shouldUpdate === true)
+    if(newProps.shouldUpdate) {
+      this.validQuestion(newProps.question); //will set state isValid
+      this.setState({
+        question : newProps.question,
+      });      
+    }
   }
     
   shouldComponentUpdate(newProps, newState){
@@ -282,7 +284,7 @@ export default class QuizQuestions extends React.Component{
   }
     
 	render(){
-    console.info(`renders now question at index : ${this.props.questionIndex}`);
+    //console.info(`renders now question at index : ${this.props.questionIndex}`);
     const currentQuestionTemplate = this.renderCurrentQuestion();
 		return (
 			<div className="mdl-grid">
