@@ -22,10 +22,14 @@ export const styles = {
     marginLeft    : '10px'
   },
   buttonPrevious : {
-    marginRight    : '10px'
+    marginRight : '10px'
   },
   buttonFinish : {
-    marginLeft    : '10px'
+    marginLeft : '10px'
+  },
+  minMaxQuestionRule : {
+    marginTop : '25px',
+    fontSize  : '10px',
   }
 } 
   

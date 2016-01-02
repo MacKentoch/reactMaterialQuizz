@@ -28,7 +28,7 @@
 			],
 			"nombre_minimum_choix" 	: "1",
 			"nombre_maximum_choix" 	: "6",
-      "shouldUpdate"          : true
+      "choix_saisis"          : 0
 		},
 		
 		{
@@ -42,7 +42,7 @@
 			],
 			"nombre_minimum_choix" 	: "1",
 			"nombre_maximum_choix" 	: "1",
-      "shouldUpdate"          : true
+      "choix_saisis"          : 0
 		},		
 	
 		{
@@ -55,8 +55,8 @@
 				{"choix" : 3, "type"	: "textarea", "nom" : "something to say", "translateId" : "SOMETHING_2_SAY_WORD", "valeur_defaut": "", "saisie" : ""}		
 			],
 			"nombre_minimum_choix" 	: "1",
-			"nombre_maximum_choix" 	: "1",
-      "shouldUpdate"          : true
+			"nombre_maximum_choix" 	: "2",
+      "choix_saisis"          : 0
 		}		
 		
 	]

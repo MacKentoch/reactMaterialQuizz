@@ -36,9 +36,53 @@ export default class QuizQuestions extends React.Component{
     let questionUpdated = Object.assign({}, this.state.question);
     questionUpdated.liste_choix[choiceIndex].saisie = choiceNewValue;
     
+    // const prevSaisie  = this.state.question.liste_choix[choiceIndex].saisie;
+    // 
+    //       
+    // if(questionUpdated.liste_choix[choiceIndex].type === 'checkbox'){
+    //   if(choiceNewValue){
+    //     questionUpdated.choix_saisis = questionUpdated.choix_saisis + 1;
+    //   }else{
+    //     questionUpdated.choix_saisis = questionUpdated.choix_saisis - 1;
+    //   } 
+    // }
+    // 
+    // if(questionUpdated.liste_choix[choiceIndex].type === 'textarea'){
+    //   if(choiceNewValue.length === 1){      
+    //     questionUpdated.choix_saisis = questionUpdated.choix_saisis + 1;
+    //   }
+    //   if(choiceNewValue.length === 0){
+    //     questionUpdated.choix_saisis = questionUpdated.choix_saisis - 1;
+    //   }
+    // }      
+      
     this.setState({
       question : questionUpdated
     });
+    
+    console.info(`saisie for this question : ${questionUpdated.choix_saisis}`);
+    
+  }
+
+  validQuestion(index){
+    const {
+      nombre_minimum_choix, 
+      nombre_maximum_choix,
+      liste_choix,
+      choix_saisis
+    } = this.state.question;
+    
+    let nbSaisie = 0;
+    liste_choix.forEach((choix, index)=>{
+      if(choix.type === 'checkbox' && choix.saisie) nbSaisie++;
+      if(choix.type === 'textarea' && choix.saisie.length > 0) nbSaisie++;
+    });
+    
+    if( nbSaisie >= nombre_minimum_choix &&
+        nbSaisie <= nombre_maximum_choix    ){
+      return true;
+    }
+    return false;
   }
 
   handleCheckboxChanged(event, checked, index){
@@ -46,25 +90,44 @@ export default class QuizQuestions extends React.Component{
   }
     
   handleTextAreaChanged(event, index){
-    this.updateQuestionState(event.target.value, index);
+    this.updateQuestionState(event.target.value.trim(), index);
   }
       
   handleGoNextQuestionClick(){
     const question      = Object.assign({}, this.state.question);
     const questionIndex = this.props.questionIndex;
-    this.props.onNextQuestionClick(question, questionIndex); //updated question callbacked to parent Quiz component
+    const {
+      nombre_minimum_choix, 
+      nombre_maximum_choix
+    } = this.state.question;
+    //force validation before going next question
+    if(this.validQuestion()){
+      this.props.onNextQuestionClick(question, questionIndex); //updated question callbacked to parent Quiz component
+    }else{
+      console.warn(`answer between min : ${nombre_minimum_choix} and max : ${nombre_maximum_choix}`);
+    }    
   }
   
   handleGoPreviousQuestionClick(){
     const question      = Object.assign({}, this.state.question);
     const questionIndex = this.props.questionIndex;
+   
     this.props.onPreviousQuestionClick(question, questionIndex);
   }
   
   handleGoFinishQuizClick(){
     const question      = Object.assign({}, this.state.question); 
     const questionIndex = this.props.questionIndex;
-    this.props.onFinishQuizClick(question, questionIndex);
+    const {
+      nombre_minimum_choix, 
+      nombre_maximum_choix
+    } = this.state.question;
+   
+    if(this.validQuestion()){
+      this.props.onFinishQuizClick(question, questionIndex);
+    }else{
+      console.warn(`answer between min : ${nombre_minimum_choix} and max : ${nombre_maximum_choix}`);
+    }
   }  
   
   renderCurrentQuestion(){
@@ -207,6 +270,15 @@ export default class QuizQuestions extends React.Component{
             </div>
             <div className="mdl-cell mdl-cell--2-col"></div>
           </div>
+          <div className="mdl-grid">
+            <div className="mdl-cell mdl-cell--2-col"></div>
+            <div className="mdl-cell mdl-cell--8-col">
+              <span style={Object.assign({}, styles.minMaxQuestionRule)}>
+                {this.context.translate.QUIZZ_RULE_MIN_ANSWER} : {this.state.question.nombre_minimum_choix} - {this.context.translate.QUIZZ_RULE_MAX_ANSWER} : {this.state.question.nombre_maximum_choix}
+              </span>
+            </div>
+            <div className="mdl-cell mdl-cell--2-col"></div>
+          </div>
         </CardText>
         
         {questionFooter}    
@@ -248,8 +320,7 @@ QuizQuestions.propTypes = {
           "saisie"          : React.PropTypes.any.isRequired  //can be bool or string value  
         }).isRequired).isRequired,
       "nombre_minimum_choix"  : React.PropTypes.string.isRequired,
-      "nombre_maximum_choix"  : React.PropTypes.string.isRequired,
-      "shouldUpdate"          : React.PropTypes.bool.isRequired    
+      "nombre_maximum_choix"  : React.PropTypes.string.isRequired   
   }).isRequired,
   isDisabled              : React.PropTypes.bool.isRequired,
   isFirstQuestion         : React.PropTypes.bool.isRequired,
