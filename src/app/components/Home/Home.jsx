@@ -3,7 +3,7 @@ import classNames               from 'classnames';
 import PromisedTimeout          from '../../services/PromisedTimeout.jsx!jsx';
 import MarginTop                from '../MarginTop/MarginTop.jsx!jsx';
 import MdlPaper                 from '../mdl/MdlPaper.jsx!jsx';
-//import {styles}                 from './home.style.jsx!jsx';
+
 
 export default class Home extends React.Component {
 
@@ -30,7 +30,7 @@ export default class Home extends React.Component {
   }
    
   componentDidMount() {
-  //// ANIMATE WITHOUT CLASSNAME - part1 -  : init (get node then init style obj)
+  // ANIMATE WITHOUT CLASSNAME - part1 -  : init (get node then init style obj)
   //   let titleTwo = this.refs.homeViewTitleTwo;    
   //   titleTwo.style.opacity            = 0;       
   //   titleTwo.style.animationDuration  = '0.3s';
@@ -39,7 +39,7 @@ export default class Home extends React.Component {
     PromisedDelay
       .delay(400)
       .then(() => {
-        //// ANIMATE WITHOUT CLASSNAME - part2 -  : set animation (manually set style object)
+        // ANIMATE WITHOUT CLASSNAME - part2 -  : set animation (manually set style object)
         // titleTwo.style.opacity = 1;
         // titleTwo.style.animation = 'fadeInUp 0.3s both ease-in';
         // titleTwo.style.zIndex = 9999;
@@ -54,13 +54,13 @@ export default class Home extends React.Component {
             this.setState({
               homeDetailsAnimationActive : true
             });            
-          })
+          });
       }); 
   }
 
-  componentWillUnmount(){
+  componentWillUnmount() {
     this.setState({
-      viewEnters       : false ,
+      viewEnters       : false,
       titleTwoAnimationActive     : false,
       homeDetailsAnimationActive  : false
     });     

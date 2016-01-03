@@ -104,7 +104,7 @@ export default class QuizQuestions extends React.Component {
   
   renderCurrentQuestion() {
     let actionTemplate;
-    const sortedChoices   = _.sortBy(this.state.question.liste_choix, 'choix'); //sort choices by "choix" property : 
+    const sortedChoices   = _.sortBy(this.state.question.liste_choix, 'choix'); // sort choices by "choix" property : 
     const choicesTemplate = sortedChoices.map((choice, index) => {
       let choiceTemplate;
       if (choice.type === 'checkbox')  {
@@ -282,21 +282,21 @@ QuizQuestions.propTypes = {
   onFinishQuizClick       : React.PropTypes.func.isRequired,
   questionIndex           : React.PropTypes.number.isRequired,
   shouldUpdate            : React.PropTypes.bool.isRequired,
-	question                : React.PropTypes.shape({
-      "numero"                : React.PropTypes.number.isRequired,
-      "question"              : React.PropTypes.string.isRequired,
-      "Q_translate_id"        : React.PropTypes.string.isRequired,
-      "liste_choix"           : React.PropTypes.arrayOf(
-        React.PropTypes.shape({
-          "choix"           : React.PropTypes.number.isRequired,
-          "type"            : React.PropTypes.oneOf(['checkbox', 'textarea']).isRequired,
-          "nom"             : React.PropTypes.string.isRequired,
-          "translateId"     : React.PropTypes.string.isRequired,
-          "valeur_defaut"   : React.PropTypes.any.isRequired, //can be bool or string value
-          "saisie"          : React.PropTypes.any.isRequired  //can be bool or string value  
-        }).isRequired).isRequired,
-      "nombre_minimum_choix"  : React.PropTypes.string.isRequired,
-      "nombre_maximum_choix"  : React.PropTypes.string.isRequired   
+  question                : React.PropTypes.shape({
+    'numero'                : React.PropTypes.number.isRequired,
+    'question'              : React.PropTypes.string.isRequired,
+    'Q_translate_id'        : React.PropTypes.string.isRequired,
+    'liste_choix'           : React.PropTypes.arrayOf(
+      React.PropTypes.shape({
+        'choix'           : React.PropTypes.number.isRequired,
+        'type'            : React.PropTypes.oneOf(['checkbox', 'textarea']).isRequired,
+        'nom'             : React.PropTypes.string.isRequired,
+        'translateId'     : React.PropTypes.string.isRequired,
+        'valeur_defaut'   : React.PropTypes.any.isRequired, // can be bool or string value
+        'saisie'          : React.PropTypes.any.isRequired  // can be bool or string value  
+      }).isRequired).isRequired,
+    'nombre_minimum_choix'  : React.PropTypes.string.isRequired,
+    'nombre_maximum_choix'  : React.PropTypes.string.isRequired   
   }).isRequired,
   isDisabled              : React.PropTypes.bool.isRequired,
   isFirstQuestion         : React.PropTypes.bool.isRequired,

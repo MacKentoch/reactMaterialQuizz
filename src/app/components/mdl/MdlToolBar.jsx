@@ -22,7 +22,7 @@ import React            from 'react';
 
 export default class MdlToolBar extends React.Component {
   
-  constructor(props){
+  constructor(props) {
     super(props);
   }
   

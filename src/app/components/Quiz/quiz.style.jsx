@@ -27,7 +27,7 @@ export const styles = {
     
     marginTop      : '10px',
     marginBottom   : '10px'   
-    //background      : '#fff'
+    // background      : '#fff'
   },
   headline: {
     color               : '#rgba(0,0,0,0.54)',

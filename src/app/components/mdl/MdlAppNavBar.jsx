@@ -40,4 +40,4 @@ MdlAppNavBar.propTypes = {
 
 MdlAppNavBar.defaultProps = {
   title      : ''
-}; 
+};

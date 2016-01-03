@@ -29,6 +29,6 @@ export const styles = {
   },
   minMaxQuestionRule : {
     marginTop : '25px',
-    fontSize  : '10px',
+    fontSize  : '10px'
   }
 }; 

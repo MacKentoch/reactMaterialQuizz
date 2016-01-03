@@ -21,19 +21,19 @@ import React      from 'react';
 import MdlIcon    from './MdlIcon.jsx!jsx';
 import {styles}   from './MdlMenu.style.jsx!jsx';
 
-export default class MdlMenu extends React.Component{
+export default class MdlMenu extends React.Component {
   
   constructor(props) {
     super(props);
   }
   
-  handleMenuClick(event, menuId, menuItemIndex){
+  handleMenuClick(event, menuId, menuItemIndex) {
     if (typeof this.props.onSelection !== 'undefined') {
       this.props.onSelection(event, menuId, menuItemIndex);
     }
   }
-  
-  renderMenuItems(){
+
+  renderMenuItems() {
     const {
       menuId, 
       menus,
@@ -85,7 +85,7 @@ export default class MdlMenu extends React.Component{
     return MenuItemsTemplate;    
   }
   
-  render(){
+  render() {
     const {
       menuId,
       materialIcon,

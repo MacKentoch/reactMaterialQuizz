@@ -54,13 +54,13 @@ export default class Quiz extends React.Component {
     });     
   }  
   
-  handleChangeIndex(index, fromIndex) { 
+  handleChangeIndex(index) { 
     this.setState({
       slideIndex      : index
     });    
   }
   
-  handleQuizStart(quiz) { 
+  handleQuizStart() { 
     let previsousIndex = this.state.slideIndex;
     this.setState({
       slideIndex      : parseInt(previsousIndex, 10) + 1,
@@ -130,7 +130,7 @@ export default class Quiz extends React.Component {
     this.context.displaySnackBar(message, action);         
   }
   
-  handleReturnQuizLastQuestion(){
+  handleReturnQuizLastQuestion() {
     let previsousIndex        = this.state.slideIndex;
     let percentageDone        = ((parseInt(previsousIndex, 10) - 2) / this.state.questionMaxIndex)*100;
         
@@ -141,7 +141,7 @@ export default class Quiz extends React.Component {
   }
   
   handleQuizFinished() {
-    //here : should save quiz answers to database 
+    // here : should save quiz answers to database 
     this.props.history.pushState(null, '/');   // job done so return home now 
   } 
   

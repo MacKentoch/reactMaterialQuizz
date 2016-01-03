@@ -32,8 +32,7 @@ const IS_DRAWER_OPEN_CLASSNAME  = 'is-visible';
 export default class MdlDrawer extends React.Component {
 
   constructor(props) {
-    super(props);
-    
+    super(props); 
   }
 
   forceDrawerClose() {

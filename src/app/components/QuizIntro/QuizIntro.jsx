@@ -2,7 +2,7 @@ import React            from 'react';
 import classNames       from 'classnames';
 import PromisedTimeout  from '../../services/PromisedTimeout.jsx!jsx'; 
 import MdlPaper         from '../mdl/MdlPaper.jsx!jsx';
-import MdlToolBar       from '../mdl/MdlToolBar.jsx!jsx'
+import MdlToolBar       from '../mdl/MdlToolBar.jsx!jsx';
 import RaisedButton     from 'material-ui/lib/raised-button';
 
 // import Colors           from 'material-ui/lib/styles/colors';

@@ -82,31 +82,31 @@ export default class ReactMaterialQuizz extends React.Component {
     });     
   } 
   
-  closeLanguageDialog(){
+  closeLanguageDialog() {
     this.setState({
       langDialogOpened: false,
       snackbarOpened  : false
     });    
   }
   
-  handleDrawerNavigation(event, selectedRoute){
+  handleDrawerNavigation(event, selectedRoute) {
     this.navigationTo(event, selectedRoute);
   }
   
   handleMenuItemSelected(menuKey) {
     if (menuKey === 0) {
-     this.openLanguageDialog();
+      this.openLanguageDialog();
     }
     if (menuKey === 1) {
       location.href = GITHUB_LINK;
     }
   }
   
-  handleCloseLanguageDialog(){
+  handleCloseLanguageDialog() {
     this.closeLanguageDialog();
   }  
   
-  handleLanguageSelect(event, selected){
+  handleLanguageSelect(event, selected) {
     this.setState({
       language        : selected,
       snackbarOpened  : true,
@@ -116,7 +116,7 @@ export default class ReactMaterialQuizz extends React.Component {
     });
   } 
   
-  showSnackbar(message = '', action= ''){
+  showSnackbar(message = '', action= '') {
     this.setState({
       snackbarOpened  : true,
       snackbarMessage : message,
