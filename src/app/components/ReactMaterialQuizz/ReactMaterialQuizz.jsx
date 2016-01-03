@@ -1,16 +1,9 @@
-//React lib and vendor React lib
 import React 		                from 'react';
-import { 
-  RouteHandler, 
-  Link 
-}                               from 'react-router';
-//custom MDL components
 import MdlLayoutContainer       from '../mdl/MdlLayoutContainer.jsx!jsx';
 import MdlAppNavBar             from '../mdl/MdlAppNavBar.jsx!jsx';
 import MdlDrawer                from '../mdl/MdlDrawer.jsx!jsx';
 import MdlMain                  from '../mdl/MdlMain.jsx!jsx';
 import MdlMenu                  from '../mdl/MdlMenu.jsx!jsx';
-//material UI components
 import FlatButton               from 'material-ui/lib/flat-button';
 import Dialog                   from 'material-ui/lib/dialog';
 import RadioButton              from 'material-ui/lib/radio-button';
@@ -18,38 +11,31 @@ import RadioButtonGroup         from 'material-ui/lib/radio-button-group';
 import Snackbar                 from 'material-ui/lib/snackbar';
 import ThemeManager             from 'material-ui/lib/styles/theme-manager';
 import MyRawTheme               from '../../shared/quizRawTheme.jsx!jsx';
-//other custom components
-import MarginTop                from '../MarginTop/MarginTop.jsx!jsx';
-//styles
 import {styles}                 from './ReactMaterialQuizz.style.jsx!jsx';
-//models
 import navigationModel          from '../../models/navigationModel.json!json';
 import appNavBarMenuModel       from '../../models/appBarMenuModel.json!json';
 import localEN                  from '../../i18n/local_en.json!json';
 import localFR                  from '../../i18n/local_fr.json!json';
 
-
-
 const HEADER_TITLE  = 'ReactMaterialQuizz';
 const GITHUB_LINK   = 'https://github.com/MacKentoch/reactMaterialQuizz';
 
-
 export default class ReactMaterialQuizz extends React.Component {
   
-  //in pure ES6 go end class definition or in ES6+ you can use static :
-  //You could even use ES7 decorator see : material-ui/lib/styles/theme-decorator
-  // static childContextTypes = {
-  //   muiTheme: React.PropTypes.object,
-  //   language: React.PropTypes.string 
-  // }
+  // in pure ES6 go end class definition or in ES6+ you can use static :
+  // You could even use ES7 decorator see : material-ui/lib/styles/theme-decorator
+  //  static childContextTypes = {
+  //    muiTheme: React.PropTypes.object,
+  //    language: React.PropTypes.string 
+  //  }
   
   constructor(props) {
     super(props);
     this.init();
   }
 
-  init(){
-    const navigatorLanguage = (navigator.language || navigator.browserLanguage).split('-')[0] || 'en'; //en is fallback language
+  init() {
+    const navigatorLanguage = (navigator.language || navigator.browserLanguage).split('-')[0] || 'en'; // en is fallback language
     
     this.state = {
       language                : navigatorLanguage,
@@ -63,12 +49,6 @@ export default class ReactMaterialQuizz extends React.Component {
       snackbarAction          : ''  
     };
   }
-  
-  componentWillReceiveProps(nextProps){
-    this.setState({
-      snackbarOpened : false //to prevent snackbar to open on route change after quiz is done
-    });
-  }
  
   getChildContext() {
     return {
@@ -79,28 +59,33 @@ export default class ReactMaterialQuizz extends React.Component {
     };
   }  
   
-  getTranslations(currentLanguage){
-    let translation = Object.assign({}, localEN); //fallback language is En
-    if(currentLanguage === 'en') translation = Object.assign({}, localEN);
-    if(currentLanguage === 'fr') translation = Object.assign({}, localFR);
+  getTranslations(currentLanguage) {
+    let translation = Object.assign({}, localEN); // fallback language is En
+    if (currentLanguage === 'en') {
+      translation = Object.assign({}, localEN);
+    }
+    if (currentLanguage === 'fr') {
+      translation = Object.assign({}, localFR);
+    }
     return translation;
   }
   
   navigationTo(event, selectedRoute) {
-    this.props.history.pushState(null, selectedRoute); //more info on react router v1.0.0+ : http://stackoverflow.com/questions/31079081/programmatically-navigate-using-react-router      
+    // more info on react router v1.0.0+ : http://stackoverflow.com/questions/31079081/programmatically-navigate-using-react-router
+    this.props.history.pushState(null, selectedRoute);       
   } 
   
-  openLanguageDialog(){
+  openLanguageDialog() {
     this.setState({
       langDialogOpened  : true,
-      snackbarOpened    : false,
+      snackbarOpened    : false
     });     
   } 
   
   closeLanguageDialog(){
     this.setState({
       langDialogOpened: false,
-      snackbarOpened  : false,
+      snackbarOpened  : false
     });    
   }
   
@@ -108,11 +93,11 @@ export default class ReactMaterialQuizz extends React.Component {
     this.navigationTo(event, selectedRoute);
   }
   
-  handleMenuItemSelected(menuKey){
-    if(menuKey === 0){
+  handleMenuItemSelected(menuKey) {
+    if (menuKey === 0) {
      this.openLanguageDialog();
     }
-    if(menuKey === 1){
+    if (menuKey === 1) {
       location.href = GITHUB_LINK;
     }
   }
@@ -139,13 +124,13 @@ export default class ReactMaterialQuizz extends React.Component {
     });
   }
   
-  handleSnackbarRequestClose(){
+  handleSnackbarRequestClose() {
     this.setState({
       snackbarOpened  : false
     });
   } 
   
-  renderLanguageDialog(){
+  renderLanguageDialog() {
     let customActions = [
       <FlatButton
         label={this.state.translate.CANCEL_WORD}
@@ -156,7 +141,6 @@ export default class ReactMaterialQuizz extends React.Component {
         primary={false}
         onTouchTap={()=>this.handleCloseLanguageDialog()} />
     ];    
-    
     return (
       <Dialog
         title={this.state.translate.CHOOSE_LANGUAGE}
@@ -181,27 +165,23 @@ export default class ReactMaterialQuizz extends React.Component {
     );    
   }
   
-  render(){ 
-    const { pathname }    = this.props.location;
-    
-    const navigation = this.state.navigationList.map((navItem, navItemIndex)=>{
+  render() { 
+    const { pathname }  = this.props.location;
+    const navigation    = this.state.navigationList.map((navItem) => {
       return {
         label       : this.state.translate[navItem.translate_id],
         mdlIconName : navItem.mdlIconName,
         route       : navItem.route 
       };
     });
-    
-    const menuItems = this.state.appNavBarMenuList.map((menuItem, menuItemIndex)=>{
+    const menuItems   = this.state.appNavBarMenuList.map((menuItem) => {
       return {
         name        : this.state.translate[menuItem.translate_id],
         disabled    : menuItem.disabled,
         mdlIconName : menuItem.mdlIconName
       };
     }); 
-    
     const LanguageDialog = this.renderLanguageDialog();
-
     return (
       <MdlLayoutContainer>        
         <MdlAppNavBar>
@@ -233,8 +213,12 @@ export default class ReactMaterialQuizz extends React.Component {
     );
   }
 
- 
 }
+
+ReactMaterialQuizz.propTypes = {
+  history   : React.PropTypes.object,
+  location  : React.PropTypes.object
+};
 
 ReactMaterialQuizz.childContextTypes = {
   muiTheme        : React.PropTypes.object,

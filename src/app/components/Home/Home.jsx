@@ -105,7 +105,6 @@ export default class Home extends React.Component {
     );
   }
 
-
 }
 
 Home.contextTypes = {
