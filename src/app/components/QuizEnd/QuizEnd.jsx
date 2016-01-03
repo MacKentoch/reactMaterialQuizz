@@ -1,51 +1,26 @@
 import React            from 'react';
 import MdlPaper         from '../mdl/MdlPaper.jsx!jsx';
-import MdlToolBar       from '../mdl/MdlToolBar.jsx!jsx'
+import MdlToolBar       from '../mdl/MdlToolBar.jsx!jsx';
 import RaisedButton     from 'material-ui/lib/raised-button';
 import QuizQuestions    from '../QuizQuestions/QuizQuestions.jsx!jsx';
-import Colors           from 'material-ui/lib/styles/colors';
+// import Colors           from 'material-ui/lib/styles/colors';
 import {styles}         from './quizEnd.style.jsx!jsx';
 
-export default class QuizEnd extends React.Component{
+export default class QuizEnd extends React.Component {
 	
-	constructor(props){
-		super(props);
-		this.init();
-	}
-	
-	init(){
+  constructor(props) {
+    super(props);
+  }
     
-	}
-  
-  // componentWillMount(){ 
-  //   let newMuiTheme = this.context.muiTheme;
-  //   
-  //   newMuiTheme.toolbar.backgroundColor = Colors.blue800;
-  //   newMuiTheme.toolbar.titleColor      = '#fff';//'rgba(255,255,255,0.6)';
-  //   newMuiTheme.zIndex.layer            = 5;
-  //   newMuiTheme.zIndex.popover          = 100000;
-  //   newMuiTheme.leftNav.zIndex          = 10000;
-  //       
-  //   this.setState({
-  //     muiTheme : newMuiTheme
-  //   });
-  // }  
-  
-  getChildContext() {
-    return {
-      muiTheme: this.context.muiTheme
-    };
-  }    
-  
-  handlePreviousStepClick(){
+  handlePreviousStepClick() {
     this.props.onPrevQuizClick();
   }
   
-  handleEndQuizClick(){
+  handleEndQuizClick() {
     return this.props.onValidQuizClick();
   }
 	
-  getAllAnswersTemplate(){
+  getAllAnswersTemplate() {
     const answersSummary = this.props.questions.map((question, questionIndex)=>{
       return (
         <QuizQuestions 
@@ -68,11 +43,10 @@ export default class QuizEnd extends React.Component{
     return answersSummary;
   }
   
-	render(){    
+  render() {    
     const answersSummary = this.getAllAnswersTemplate();
-		return (
-			<section>
-        
+    return (
+      <section>
         <MdlToolBar 
           backgdColor={'#3F51B5'}
           textColor={'#fff'}>
@@ -81,23 +55,19 @@ export default class QuizEnd extends React.Component{
           </span>
           <div className="mdl-layout-spacer"></div>
         </MdlToolBar>
-        <MdlPaper>
-                  
+        <MdlPaper>    
           <section id="quizEndSumUp">
             {answersSummary}
           </section>          
-            
           <section id="quizIntroActions">
             <div className="mdl-grid">
               <div className="mdl-layout-spacer"></div>
               <div className="mdl-cell mdl-cell--5-col">
-                
                 <RaisedButton 
                   style={Object.assign({}, styles.buttonPrevious)}
                   label={this.context.translate[this.props.prevBtnText]} 
                   primary={true}
                   onClick={()=>this.handlePreviousStepClick()} /> 
-                                  
                 <RaisedButton 
                   style={Object.assign({}, styles.buttonFinish)}
                   label={this.context.translate[this.props.endBtnText]} 
@@ -106,11 +76,10 @@ export default class QuizEnd extends React.Component{
               </div>
             </div>          
           </section>
-
-         </MdlPaper>    
-			</section>
-		);
-	}
+          </MdlPaper>    
+      </section>
+    );
+  }
 }
 
 
@@ -119,20 +88,15 @@ QuizEnd.propTypes = {
   onValidQuizClick : React.PropTypes.func.isRequired, 
   questions        : React.PropTypes.array.isRequired,
   shouldUpdate     : React.PropTypes.bool.isRequired,
-	title	           : React.PropTypes.string.isRequired,
+  title	           : React.PropTypes.string.isRequired,
   prevBtnText      : React.PropTypes.string.isRequired,
-  endBtnText       : React.PropTypes.string.isRequired,
+  endBtnText       : React.PropTypes.string.isRequired
 };
 
 QuizEnd.defaultProps = {
   shouldUpdate     : true  
-}
-
-QuizEnd.contextTypes = {
-  muiTheme    : React.PropTypes.object,
-  translate   : React.PropTypes.object
 };
 
-QuizEnd.childContextTypes = {
-  muiTheme  : React.PropTypes.object
+QuizEnd.contextTypes = {
+  translate   : React.PropTypes.object
 };

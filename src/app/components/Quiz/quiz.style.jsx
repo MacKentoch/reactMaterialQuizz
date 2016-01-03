@@ -7,10 +7,10 @@ export const styles = {
     width   : '100%'
   },
   tab : {
-     height           : '0px',
-     borderWidth      : '0px',
-     backgroundColor  : '#fff',
-     borderColor      : '#fff'
+    height           : '0px',
+    borderWidth      : '0px',
+    backgroundColor  : '#fff',
+    borderColor      : '#fff'
   },
   intro: {
     background : '#fff'
@@ -26,7 +26,7 @@ export const styles = {
     // paddingBottom   : '10px',
     
     marginTop      : '10px',
-    marginBottom   : '10px',    
+    marginBottom   : '10px'   
     //background      : '#fff'
   },
   headline: {
