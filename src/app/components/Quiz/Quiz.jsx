@@ -250,6 +250,7 @@ export default class Quiz extends React.Component {
             </div>                       
             <SwipeableViews 
               index={parseInt(this.state.slideIndex, 10)} 
+              disabled={true}
               onChangeIndex={(index, fromIndex)=>this.handleChangeIndex(index, fromIndex)} > 
               <MdlPaper key="0">
                 <QuizIntro 

@@ -15,7 +15,7 @@ This is a simple dynamic quiz in [ReactJS](https://facebook.github.io/react/) de
 - font-awesome
 - ES6
 - jspm 
-- babel (<6)
+- babel (< 6)
 - gulp 
 
 
