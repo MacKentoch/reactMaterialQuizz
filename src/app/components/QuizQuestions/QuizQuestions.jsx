@@ -3,131 +3,111 @@ import _              from 'lodash';
 import Card           from 'material-ui/lib/card/card';
 import CardActions    from 'material-ui/lib/card/card-actions';
 import CardText       from 'material-ui/lib/card/card-text';
-import CardTitle      from 'material-ui/lib/card/card-title';
 import TextField      from 'material-ui/lib/text-field';
 import RaisedButton   from 'material-ui/lib/raised-button';
 import Checkbox       from 'material-ui/lib/checkbox';
 import {styles}       from './quizQuestions.style.jsx!jsx';
 
-export default class QuizQuestions extends React.Component{
+export default class QuizQuestions extends React.Component {
 	
-	constructor(props){
-		super(props);
-		this.init();
-	}
-	
-	init(){
+  constructor(props) {
+    super(props);
+    this.init();
+  }
+
+  init() {
     this.state = {
       question  : {},
       isValid   : false
-    }
-	}
+    };
+  }
   
-  componentWillReceiveProps(newProps){
-    //set question to this question state only if needed (=shouldUpdate === true)
-    if(newProps.shouldUpdate) {
-      this.validQuestion(newProps.question); //will set state isValid
+  componentWillReceiveProps(newProps) {
+    // set question to this question state only if needed (=shouldUpdate === true)
+    if (newProps.shouldUpdate) {
+      this.validQuestion(newProps.question); // will set state isValid
       this.setState({
-        question : newProps.question,
+        question : newProps.question
       });      
     }
   }
     
-  shouldComponentUpdate(newProps, newState){
+  shouldComponentUpdate(newProps) {
     return newProps.shouldUpdate;
   }
   
-  updateQuestionState(choiceNewValue, choiceIndex){
+  updateQuestionState(choiceNewValue, choiceIndex) {
     let questionUpdated = Object.assign({}, this.state.question);
     questionUpdated.liste_choix[choiceIndex].saisie = choiceNewValue;
-    
     this.validQuestion(questionUpdated);
-          
     this.setState({
       question : questionUpdated
     });
   }
 
-  validQuestion(question){
+  validQuestion(question) {
     const {
       nombre_minimum_choix, 
       nombre_maximum_choix,
-      liste_choix,
-      choix_saisis
+      liste_choix
     } = question;
-    
     let isValidQuestion = false;
     let nbSaisie        = 0;
-    
-    liste_choix.forEach((choix, index)=>{
-      if(choix.type === 'checkbox' && choix.saisie) nbSaisie++;
-      if(choix.type === 'textarea' && choix.saisie.length > 0) nbSaisie++;
+    liste_choix.forEach((choix) => {
+      if (choix.type === 'checkbox' && choix.saisie) {
+        nbSaisie=nbSaisie+1;
+      }
+      if (choix.type === 'textarea' && choix.saisie.length > 0) {
+        nbSaisie=nbSaisie+1;
+      }
     });
-    
-    if( nbSaisie >= nombre_minimum_choix &&
-        nbSaisie <= nombre_maximum_choix    ){   
+    if ((nbSaisie >= nombre_minimum_choix) && (nbSaisie <= nombre_maximum_choix)) {   
       isValidQuestion = true;
     }
-    //update valid state to enable disable go next question
+    // update valid state to enable disable go next question
     this.setState({
       isValid : isValidQuestion
     });
-     
     return isValidQuestion;
   }
 
-  handleCheckboxChanged(event, checked, index){
+  handleCheckboxChanged(event, checked, index) {
     this.updateQuestionState(checked, index);
   }
     
-  handleTextAreaChanged(event, index){
+  handleTextAreaChanged(event, index) {
     this.updateQuestionState(event.target.value.trim(), index);
   }
       
-  handleGoNextQuestionClick(){
+  handleGoNextQuestionClick() {
     const question      = Object.assign({}, this.state.question);
     const questionIndex = this.props.questionIndex;
-    const {
-      nombre_minimum_choix, 
-      nombre_maximum_choix
-    } = this.state.question;
-    //force validation before going next question
-    if(this.state.isValid){
-      this.props.onNextQuestionClick(question, questionIndex); //updated question callbacked to parent Quiz component
-    }else{
-      console.warn(`answer between min : ${nombre_minimum_choix} and max : ${nombre_maximum_choix}`);
+    // force validation before going next question
+    if (this.state.isValid) {
+      this.props.onNextQuestionClick(question, questionIndex); // updated question callbacked to parent Quiz component
     }    
   }
   
-  handleGoPreviousQuestionClick(){
+  handleGoPreviousQuestionClick() {
     const question      = Object.assign({}, this.state.question);
     const questionIndex = this.props.questionIndex;
-   
     this.props.onPreviousQuestionClick(question, questionIndex);
   }
   
-  handleGoFinishQuizClick(){
+  handleGoFinishQuizClick() {
     const question      = Object.assign({}, this.state.question); 
     const questionIndex = this.props.questionIndex;
-    const {
-      nombre_minimum_choix, 
-      nombre_maximum_choix
-    } = this.state.question;
-   
-    if(this.state.isValid){
+    if (this.state.isValid) {
       this.props.onFinishQuizClick(question, questionIndex);
-    }else{
-      console.warn(`answer between min : ${nombre_minimum_choix} and max : ${nombre_maximum_choix}`);
     }
   }  
   
-  renderCurrentQuestion(){
+  renderCurrentQuestion() {
     let actionTemplate;
     const sortedChoices   = _.sortBy(this.state.question.liste_choix, 'choix'); //sort choices by "choix" property : 
-    const choicesTemplate = sortedChoices.map((choice, index)=>{
-      
+    const choicesTemplate = sortedChoices.map((choice, index) => {
       let choiceTemplate;
-      if(choice.type === 'checkbox')  {
+      if (choice.type === 'checkbox')  {
         choiceTemplate= (
           <Checkbox
             key={index + 'checkbox'} 
@@ -142,7 +122,7 @@ export default class QuizQuestions extends React.Component{
           />
         );
       }
-      if(choice.type === 'textarea')  {
+      if (choice.type === 'textarea')  {
         choiceTemplate= (
           <TextField
             key={index+'textarea'}
@@ -165,7 +145,7 @@ export default class QuizQuestions extends React.Component{
       );
     });
     
-    if(this.props.isFirstQuestion) {
+    if (this.props.isFirstQuestion) {
       actionTemplate = (
         <div key={'actionBtn'}>
           <RaisedButton 
@@ -181,7 +161,7 @@ export default class QuizQuestions extends React.Component{
       );
     }
 
-    if(this.props.isLastQuestion) {
+    if (this.props.isLastQuestion) {
       actionTemplate = (
         <div key={'actionBtn'}>        
           <RaisedButton 
@@ -204,7 +184,7 @@ export default class QuizQuestions extends React.Component{
       );
     }
 
-    if(!this.props.isFirstQuestion && 
+    if (!this.props.isFirstQuestion && 
        !this.props.isLastQuestion) {
       actionTemplate = (
         <div key={'actionBtn'}>                 
@@ -229,7 +209,7 @@ export default class QuizQuestions extends React.Component{
     }
     
     let questionFooter = '';
-    if(!this.props.isDisabled){
+    if (!this.props.isDisabled) {
       questionFooter= (
         <CardActions>
           <div className="mdl-grid">
@@ -243,12 +223,12 @@ export default class QuizQuestions extends React.Component{
       );
     }
 
-    let questionStyle = Object.assign({}, styles.common)
-    if(!this.props.isDisabled) questionStyle = Object.assign({}, questionStyle, styles.container)
-
+    let questionStyle = Object.assign({}, styles.common);
+    if (!this.props.isDisabled) {
+      questionStyle = Object.assign({}, questionStyle, styles.container);
+    }
     return (
       <Card style={questionStyle}>
-      
         <CardText style={Object.assign({}, styles.common)}>  
           <div className="mdl-grid">
             <div className="mdl-cell mdl-cell--2-col"></div>
@@ -258,7 +238,6 @@ export default class QuizQuestions extends React.Component{
             <div className="mdl-cell mdl-cell--2-col"></div>
           </div>          
         </CardText>
-        
         <CardText style={Object.assign({}, styles.common)}>
           <div className="mdl-grid">
             <div className="mdl-cell mdl-cell--2-col"></div>
@@ -277,23 +256,23 @@ export default class QuizQuestions extends React.Component{
             <div className="mdl-cell mdl-cell--2-col"></div>
           </div>
         </CardText>
-        
         {questionFooter}    
       </Card>          
     );
   }
     
-	render(){
-    //console.info(`renders now question at index : ${this.props.questionIndex}`);
+  render() {
+    // console.info(`renders now question at index : ${this.props.questionIndex}`);
     const currentQuestionTemplate = this.renderCurrentQuestion();
-		return (
-			<div className="mdl-grid">
+    return (
+      <div className="mdl-grid">
         <div className="mdl-cell mdl-cell--12-col">
           {currentQuestionTemplate}
-				</div>
-			</div>
-		);
-	}
+        </div>
+      </div>
+    );
+  }
+  
 }
 
 
@@ -333,4 +312,4 @@ QuizQuestions.defaultProps = {
 
 QuizQuestions.contextTypes = {
   translate   : React.PropTypes.object
-}
+};

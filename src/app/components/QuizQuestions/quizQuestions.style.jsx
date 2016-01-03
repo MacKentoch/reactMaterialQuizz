@@ -1,6 +1,6 @@
 export const styles = {
   common : {
-     color: 'rgba(0,0,0,0.64)'
+    color: 'rgba(0,0,0,0.64)'
   },
   container : {
     height : '100%',
@@ -31,6 +31,4 @@ export const styles = {
     marginTop : '25px',
     fontSize  : '10px',
   }
-} 
-  
-  
+}; 
