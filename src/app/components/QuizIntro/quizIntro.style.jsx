@@ -6,6 +6,4 @@ export const styles = {
   title : {
     color : '#fff'
   }
-} 
-  
-  
+};
