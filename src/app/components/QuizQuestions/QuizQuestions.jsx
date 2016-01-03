@@ -1,5 +1,5 @@
 import React          from 'react';
-import _              from 'lodash';
+// import _              from 'lodash';
 import Card           from 'material-ui/lib/card/card';
 import CardActions    from 'material-ui/lib/card/card-actions';
 import CardText       from 'material-ui/lib/card/card-text';
@@ -104,165 +104,171 @@ export default class QuizQuestions extends React.Component {
   
   renderCurrentQuestion() {
     let actionTemplate;
-    const sortedChoices   = _.sortBy(this.state.question.liste_choix, 'choix'); // sort choices by "choix" property : 
-    const choicesTemplate = sortedChoices.map((choice, index) => {
-      let choiceTemplate;
-      if (choice.type === 'checkbox')  {
-        choiceTemplate= (
-          <Checkbox
-            key={index + 'checkbox'} 
-            style={Object.assign({}, styles.checkbox)}
-            choiceIndex={choice.choix}
-            name={choice.nom + '-' + choice.choix}
-            checked={choice.saisie === true? true : false}
-            disabled={this.props.isDisabled}
-            onCheck={(event, checked)=>this.handleCheckboxChanged(event, checked, index)}
-            label={this.context.translate[choice.translateId]}
-            defaultChecked={choice.valeur_defaut} 
-          />
+    //const sortedChoices   = _.sortBy(this.state.question.liste_choix, 'choix'); // sort choices by "choix" property :
+    
+    if (!this.state.question.liste_choix) {
+      return <div></div>;
+    } else {        
+      const choicesTemplate = this.state.question.liste_choix.map((choice, index) => {
+        let choiceTemplate;
+        if (choice.type === 'checkbox')  {
+          choiceTemplate= (
+            <Checkbox
+              key={index + 'checkbox'} 
+              style={Object.assign({}, styles.checkbox)}
+              choiceIndex={choice.choix}
+              name={choice.nom + '-' + choice.choix}
+              checked={choice.saisie === true? true : false}
+              disabled={this.props.isDisabled}
+              onCheck={(event, checked)=>this.handleCheckboxChanged(event, checked, index)}
+              label={this.context.translate[choice.translateId]}
+              defaultChecked={choice.valeur_defaut} 
+            />
+          );
+        }
+        if (choice.type === 'textarea')  {
+          choiceTemplate= (
+            <TextField
+              key={index+'textarea'}
+              style={Object.assign({}, styles.textarea)}
+              choiceIndex={choice.choix}
+              value={choice.saisie}
+              disabled={this.props.isDisabled}
+              onChange={(e)=>this.handleTextAreaChanged(e, index)}
+              hintText={this.context.translate[choice.translateId]}
+              floatingLabelText={this.context.translate[choice.translateId]}
+              multiLine={true} 
+              rows={4}
+            />          
+          );
+        }
+        return (
+          <div key={index}>
+            {choiceTemplate}
+          </div>
+        );
+      });
+      
+      if (this.props.isFirstQuestion) {
+        actionTemplate = (
+          <div key={'actionBtn'}>
+            <RaisedButton 
+              key={1}
+              style={Object.assign({}, styles.buttonsNext)}
+              label={this.context.translate[this.props.goNextBtnText]} 
+              primary={true}
+              onClick={()=>this.handleGoNextQuestionClick()}
+              disabled={!this.state.isValid}
+              disabledLabelColor={'#F1F1F1'}             
+            />
+          </div>         
         );
       }
-      if (choice.type === 'textarea')  {
-        choiceTemplate= (
-          <TextField
-            key={index+'textarea'}
-            style={Object.assign({}, styles.textarea)}
-            choiceIndex={choice.choix}
-            value={choice.saisie}
-            disabled={this.props.isDisabled}
-            onChange={(e)=>this.handleTextAreaChanged(e, index)}
-            hintText={this.context.translate[choice.translateId]}
-            floatingLabelText={this.context.translate[choice.translateId]}
-            multiLine={true} 
-            rows={4}
-          />          
+
+      if (this.props.isLastQuestion) {
+        actionTemplate = (
+          <div key={'actionBtn'}>        
+            <RaisedButton 
+              key={1}
+              style={Object.assign({}, styles.buttonPrevious)}
+              label={this.context.translate[this.props.goPreviousBtnText]} 
+              primary={true}
+              onClick={()=>this.handleGoPreviousQuestionClick()} 
+            />
+            <RaisedButton 
+              key={2}
+              style={Object.assign({}, styles.buttonFinish)}
+              label={this.context.translate[this.props.goFinishQuizBtnText]}
+              disabled={!this.state.isValid}
+              disabledLabelColor={'#F1F1F1'}
+              primary={true}
+              onClick={()=>this.handleGoFinishQuizClick()}            
+            />
+          </div>                   
         );
+      }
+
+      if (!this.props.isFirstQuestion && 
+        !this.props.isLastQuestion) {
+        actionTemplate = (
+          <div key={'actionBtn'}>                 
+            <RaisedButton
+              key={1} 
+              style={Object.assign({}, styles.buttonPrevious)}
+              label={this.context.translate[this.props.goPreviousBtnText]} 
+              primary={true}
+              onClick={()=>this.handleGoPreviousQuestionClick()} 
+            />
+            <RaisedButton 
+              key={2}
+              style={Object.assign({}, styles.buttonsNext)}
+              label={this.context.translate[this.props.goNextBtnText]} 
+              disabled={!this.state.isValid}
+              disabledLabelColor={'#F1F1F1'}
+              primary={true}
+              onClick={()=>this.handleGoNextQuestionClick()} 
+            />
+          </div>                            
+        );
+      }
+      
+      let questionFooter = '';
+      if (!this.props.isDisabled) {
+        questionFooter= (
+          <CardActions>
+            <div className="mdl-grid">
+              <div className="mdl-cell mdl-cell--2-col"></div>
+              <div className="mdl-cell mdl-cell--8-col">
+                {actionTemplate}
+              </div>
+              <div className="mdl-cell mdl-cell--2-col"></div>
+            </div>
+          </CardActions>        
+        );
+      }
+
+      let questionStyle = Object.assign({}, styles.common);
+      if (!this.props.isDisabled) {
+        questionStyle = Object.assign({}, questionStyle, styles.container);
       }
       return (
-        <div key={index}>
-          {choiceTemplate}
-        </div>
-      );
-    });
-    
-    if (this.props.isFirstQuestion) {
-      actionTemplate = (
-        <div key={'actionBtn'}>
-          <RaisedButton 
-            key={1}
-            style={Object.assign({}, styles.buttonsNext)}
-            label={this.context.translate[this.props.goNextBtnText]} 
-            primary={true}
-            onClick={()=>this.handleGoNextQuestionClick()}
-            disabled={!this.state.isValid}
-            disabledLabelColor={'#F1F1F1'}             
-          />
-        </div>         
-      );
-    }
-
-    if (this.props.isLastQuestion) {
-      actionTemplate = (
-        <div key={'actionBtn'}>        
-          <RaisedButton 
-            key={1}
-            style={Object.assign({}, styles.buttonPrevious)}
-            label={this.context.translate[this.props.goPreviousBtnText]} 
-            primary={true}
-            onClick={()=>this.handleGoPreviousQuestionClick()} 
-          />
-          <RaisedButton 
-            key={2}
-            style={Object.assign({}, styles.buttonFinish)}
-            label={this.context.translate[this.props.goFinishQuizBtnText]}
-            disabled={!this.state.isValid}
-            disabledLabelColor={'#F1F1F1'}
-            primary={true}
-            onClick={()=>this.handleGoFinishQuizClick()}            
-          />
-        </div>                   
-      );
-    }
-
-    if (!this.props.isFirstQuestion && 
-       !this.props.isLastQuestion) {
-      actionTemplate = (
-        <div key={'actionBtn'}>                 
-          <RaisedButton
-            key={1} 
-            style={Object.assign({}, styles.buttonPrevious)}
-            label={this.context.translate[this.props.goPreviousBtnText]} 
-            primary={true}
-            onClick={()=>this.handleGoPreviousQuestionClick()} 
-          />
-          <RaisedButton 
-            key={2}
-            style={Object.assign({}, styles.buttonsNext)}
-            label={this.context.translate[this.props.goNextBtnText]} 
-            disabled={!this.state.isValid}
-            disabledLabelColor={'#F1F1F1'}
-            primary={true}
-            onClick={()=>this.handleGoNextQuestionClick()} 
-          />
-        </div>                            
-      );
-    }
-    
-    let questionFooter = '';
-    if (!this.props.isDisabled) {
-      questionFooter= (
-        <CardActions>
-          <div className="mdl-grid">
-            <div className="mdl-cell mdl-cell--2-col"></div>
-            <div className="mdl-cell mdl-cell--8-col">
-              {actionTemplate}
+        <Card style={questionStyle}>
+          <CardText style={Object.assign({}, styles.common)}>  
+            <div className="mdl-grid">
+              <div className="mdl-cell mdl-cell--2-col"></div>
+              <div className="mdl-cell mdl-cell--8-col">
+                <h3>{this.context.translate[this.props.question.Q_translate_id]}</h3> 
+              </div>
+              <div className="mdl-cell mdl-cell--2-col"></div>
+            </div>          
+          </CardText>
+          <CardText style={Object.assign({}, styles.common)}>
+            <div className="mdl-grid">
+              <div className="mdl-cell mdl-cell--2-col"></div>
+              <div className="mdl-cell mdl-cell--8-col">
+                {choicesTemplate}  
+              </div>
+              <div className="mdl-cell mdl-cell--2-col"></div>
             </div>
-            <div className="mdl-cell mdl-cell--2-col"></div>
-          </div>
-        </CardActions>        
+            <div className="mdl-grid">
+              <div className="mdl-cell mdl-cell--2-col"></div>
+              <div className="mdl-cell mdl-cell--8-col">
+                <span style={Object.assign({}, styles.minMaxQuestionRule)}>
+                  {this.context.translate.QUIZZ_RULE_MIN_ANSWER} : {this.state.question.nombre_minimum_choix} - {this.context.translate.QUIZZ_RULE_MAX_ANSWER} : {this.state.question.nombre_maximum_choix}
+                </span>
+              </div>
+              <div className="mdl-cell mdl-cell--2-col"></div>
+            </div>
+          </CardText>
+          {questionFooter}    
+        </Card>          
       );
     }
-
-    let questionStyle = Object.assign({}, styles.common);
-    if (!this.props.isDisabled) {
-      questionStyle = Object.assign({}, questionStyle, styles.container);
-    }
-    return (
-      <Card style={questionStyle}>
-        <CardText style={Object.assign({}, styles.common)}>  
-          <div className="mdl-grid">
-            <div className="mdl-cell mdl-cell--2-col"></div>
-            <div className="mdl-cell mdl-cell--8-col">
-              <h3>{this.context.translate[this.props.question.Q_translate_id]}</h3> 
-            </div>
-            <div className="mdl-cell mdl-cell--2-col"></div>
-          </div>          
-        </CardText>
-        <CardText style={Object.assign({}, styles.common)}>
-          <div className="mdl-grid">
-            <div className="mdl-cell mdl-cell--2-col"></div>
-            <div className="mdl-cell mdl-cell--8-col">
-              {choicesTemplate}  
-            </div>
-            <div className="mdl-cell mdl-cell--2-col"></div>
-          </div>
-          <div className="mdl-grid">
-            <div className="mdl-cell mdl-cell--2-col"></div>
-            <div className="mdl-cell mdl-cell--8-col">
-              <span style={Object.assign({}, styles.minMaxQuestionRule)}>
-                {this.context.translate.QUIZZ_RULE_MIN_ANSWER} : {this.state.question.nombre_minimum_choix} - {this.context.translate.QUIZZ_RULE_MAX_ANSWER} : {this.state.question.nombre_maximum_choix}
-              </span>
-            </div>
-            <div className="mdl-cell mdl-cell--2-col"></div>
-          </div>
-        </CardText>
-        {questionFooter}    
-      </Card>          
-    );
   }
     
   render() {
-    // console.info(`renders now question at index : ${this.props.questionIndex}`);
+    console.info(`--> renders now question at index : ${this.props.questionIndex}`);
+    
     const currentQuestionTemplate = this.renderCurrentQuestion();
     return (
       <div className="mdl-grid">

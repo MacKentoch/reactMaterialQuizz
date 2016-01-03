@@ -44,7 +44,8 @@ export default class Quiz extends React.Component {
       quizMove                : QUIZ_MOVE_START,
       quizModel               : rawQuizModel, 
       quizOrderedQuestions    : orderedQuestions,
-      snackbarAction          : `${this.context.translate.CLOSE_WORD}`           
+      snackbarAction          : `${this.context.translate.CLOSE_WORD}`,
+      showQuizEnd             : false           
     });
   }
   
@@ -122,6 +123,7 @@ export default class Quiz extends React.Component {
       pourcentageDone         : roundPercentDone,
       showProgress            : true,
       snackbarOpened          : true,
+      showQuizEnd             : true,
       snackbarMessage         : `${this.context.translate.QUIZZ_GRATZ_PERCENT3}`     
     });
     
@@ -247,7 +249,7 @@ export default class Quiz extends React.Component {
               <div className="mdl-cell mdl-cell--12-col">
                 {progressTemplate}
               </div>
-            </div>                       
+            </div>         
             <SwipeableViews 
               index={parseInt(this.state.slideIndex, 10)} 
               disabled={true}
@@ -266,6 +268,7 @@ export default class Quiz extends React.Component {
                 <QuizEnd 
                   title={this.state.quizModel.end.title_translate_id}
                   questions={this.state.quizOrderedQuestions}
+                  showQuizEnd={this.state.showQuizEnd}
                   shouldUpdate={parseInt(this.state.slideIndex, 10) === parseInt(tabEndIndex, 10) ? true : false}
                   prevBtnText={this.state.quizModel.end.prev_button_text}
                   endBtnText={this.state.quizModel.end.end_button_text}
@@ -273,7 +276,9 @@ export default class Quiz extends React.Component {
                   onValidQuizClick={()=>this.handleQuizFinished()} 
                 />
               </MdlPaper>
-            </SwipeableViews>                              
+            </SwipeableViews>
+            
+                                          
           </div>
         </div>
           

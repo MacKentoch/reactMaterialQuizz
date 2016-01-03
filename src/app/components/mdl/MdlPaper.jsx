@@ -18,7 +18,6 @@ export default class MdlPaper extends React.Component {
     super(props);
   }
   
-
   render() {    
     const {
       children,
