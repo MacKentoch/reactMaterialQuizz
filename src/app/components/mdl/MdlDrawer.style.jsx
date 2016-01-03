@@ -3,10 +3,10 @@ export const styles = {
     display        : 'flex !important',
     flexDirection  : 'row',
     alignItems     : 'center',
-    fontWeight     : '500',
+    fontWeight     : '500'
   },
   navItemIcon : {
     fontSize      : '24px',
-    marginRight   : '24px',    
+    marginRight   : '24px'    
   }
 };

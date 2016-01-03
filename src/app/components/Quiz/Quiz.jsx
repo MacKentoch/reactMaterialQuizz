@@ -1,17 +1,12 @@
 import React          from 'react';
 import classNames     from 'classnames';
 import _              from 'lodash';
-
-import MdlToolBar     from '../mdl/MdlToolBar.jsx!jsx';
 import MdlPaper       from '../mdl/MdlPaper.jsx!jsx';
-
-import Paper          from 'material-ui/lib/paper';
 import SwipeableViews from 'react-swipeable-views';
 import QuizIntro      from '../QuizIntro/QuizIntro.jsx!jsx';
 import QuizQuestions  from '../QuizQuestions/QuizQuestions.jsx!jsx';
 import QuizEnd        from '../QuizEnd/QuizEnd.jsx!jsx';
 import LinearProgress from 'material-ui/lib/linear-progress';
-
 import {styles}       from './quiz.style.jsx!jsx';
 import quizModel      from '../../models/quizModel.json!json';
 
@@ -27,50 +22,45 @@ export default class Quiz extends React.Component {
     this.init();
   }
   
-  init(){
+  init() {
     this.state ={
       slideIndex      : 0, 
       pourcentageDone : 0,
       showProgress    : false,       
-      animated          : true,
-      viewEnters        : false         
+      animated        : true,
+      viewEnters      : false         
     };
   }
   
-  componentWillMount(){
+  componentWillMount() {
     const rawQuizModel      = Object.assign({}, quizModel);
-    const orderedQuestions  = _.sortBy(quizModel.questions, 'numero'); //sort questions by "numero" property
+    const orderedQuestions  = _.sortBy(quizModel.questions, 'numero');
     const questionMaxIndex  = quizModel.questions.length;
     
     this.setState({
+      viewEnters              : true,
       questionMaxIndex        : questionMaxIndex,
       lastEditedQuestionIndex : -1,
       quizMove                : QUIZ_MOVE_START,
       quizModel               : rawQuizModel, 
       quizOrderedQuestions    : orderedQuestions,
-      snackbarAction          : `${this.context.translate.CLOSE_WORD}`,            
+      snackbarAction          : `${this.context.translate.CLOSE_WORD}`           
     });
   }
   
-  componentDidMount(){
-    this.setState({
-      viewEnters       : true 
-    });    
-  }
-
-  componentWillUnmount(){
+  componentWillUnmount() {
     this.setState({
       viewEnters       : false 
     });     
   }  
   
-  handleChangeIndex(index, fromIndex){ 
+  handleChangeIndex(index, fromIndex) { 
     this.setState({
       slideIndex      : index
     });    
   }
   
-  handleQuizStart(quiz){ 
+  handleQuizStart(quiz) { 
     let previsousIndex = this.state.slideIndex;
     this.setState({
       slideIndex      : parseInt(previsousIndex, 10) + 1,
@@ -78,7 +68,7 @@ export default class Quiz extends React.Component {
     }); 
   }
   
-  handleQuizNextQuestion(question, questionIndex){ 
+  handleQuizNextQuestion(question, questionIndex) { 
     let previsousIndex        = this.state.slideIndex;
     let percentageDone        = ((parseInt(previsousIndex, 10)) / this.state.questionMaxIndex)*100;
     let roundPercentDone      = Math.round(percentageDone);
@@ -91,7 +81,7 @@ export default class Quiz extends React.Component {
       lastEditedQuestionIndex : questionIndex,
       quizMove                : QUIZ_MOVE_GO_NEXT,
       slideIndex              : parseInt(previsousIndex, 10) + 1,
-      pourcentageDone         : percentageDone,
+      pourcentageDone         : roundPercentDone
     }); 
     
     let message = `${this.context.translate.QUIZZ_GRATZ_PERCENT1} ${roundPercentDone}${this.context.translate.QUIZZ_GRATZ_PERCENT2}`;
@@ -99,9 +89,10 @@ export default class Quiz extends React.Component {
     this.context.displaySnackBar(message, action);
   }  
   
-  handleQuizPreviousQuestion(question, questionIndex){ 
+  handleQuizPreviousQuestion(question, questionIndex) { 
     let previsousIndex        = this.state.slideIndex;
     let percentageDone        = ((parseInt(previsousIndex, 10) - 2) / this.state.questionMaxIndex)*100;
+    let roundPercentDone      = Math.round(percentageDone);
     let updatedQuestionsModel = [].concat(this.state.quizOrderedQuestions);
     
     updatedQuestionsModel[questionIndex] = question;
@@ -111,11 +102,11 @@ export default class Quiz extends React.Component {
       lastEditedQuestionIndex : questionIndex,
       quizMove                : QUIZ_MOVE_GO_PREVIOUS,
       slideIndex              : parseInt(previsousIndex, 10) - 1,
-      pourcentageDone         : percentageDone,       
+      pourcentageDone         : roundPercentDone       
     }); 
   } 
   
-  handleQuizEndShowSummmary(question, questionIndex){
+  handleQuizEndShowSummmary(question, questionIndex) {
     let previsousIndex        = this.state.slideIndex;
     let percentageDone        = ((parseInt(previsousIndex, 10)) / this.state.questionMaxIndex)*100;
     let roundPercentDone      = Math.round(percentageDone);
@@ -128,10 +119,10 @@ export default class Quiz extends React.Component {
       lastEditedQuestionIndex : questionIndex,
       quizMove                : QUIZ_MOVE_END,
       slideIndex              : parseInt(previsousIndex, 10) + 1,
-      pourcentageDone         : percentageDone,
+      pourcentageDone         : roundPercentDone,
       showProgress            : true,
       snackbarOpened          : true,
-      snackbarMessage         : `${this.context.translate.QUIZZ_GRATZ_PERCENT3}`,      
+      snackbarMessage         : `${this.context.translate.QUIZZ_GRATZ_PERCENT3}`     
     });
     
     let message = `${this.context.translate.QUIZZ_GRATZ_PERCENT3}`;
@@ -149,59 +140,51 @@ export default class Quiz extends React.Component {
     });     
   }
   
-  handleQuizFinished(){
+  handleQuizFinished() {
     //here : should save quiz answers to database 
-    this.props.history.pushState(null, '/');   //job done so return home now 
+    this.props.history.pushState(null, '/');   // job done so return home now 
   } 
   
   
-  shouldRenderQuestion(questionIndex){
-      const {
-        lastEditedQuestionIndex, 
-        quizMove,
-        slideIndex
-      } = this.state;
+  shouldRenderQuestion(questionIndex) {
+    const {
+      lastEditedQuestionIndex, 
+      quizMove
+    } = this.state;
       
-      let _shouldUpdate = false;
+    let _shouldUpdate = false;
       
-      switch(quizMove){
-        case QUIZ_MOVE_START :
-          if(questionIndex === 0) {
-            return true;
-          }
-          break;
-
-        case QUIZ_MOVE_GO_NEXT :
-          if( //lastEditedQuestionIndex      === questionIndex ||
-            (lastEditedQuestionIndex + 1) === questionIndex) {
-            return true;
-          }        
-          break;
-                    
-        case QUIZ_MOVE_GO_PREVIOUS :
-          if( //lastEditedQuestionIndex      === questionIndex ||
-            (lastEditedQuestionIndex - 1) === questionIndex) {
-            return true;
-          }        
-          break;
-                
-        case QUIZ_MOVE_END :
-          if(questionIndex === lastEditedQuestionIndex) {
-            return true;
-          }
-          break;
-                                      
-        default:
-          _shouldUpdate = true;
+    switch (quizMove) {
+    case QUIZ_MOVE_START :
+      if (questionIndex === 0) {
+        return true;
       }
-        
-      return _shouldUpdate;    
+      break;
+    case QUIZ_MOVE_GO_NEXT :
+      if ((lastEditedQuestionIndex + 1) === questionIndex) {
+        return true;
+      }        
+      break;    
+    case QUIZ_MOVE_GO_PREVIOUS :
+      if ((lastEditedQuestionIndex - 1) === questionIndex) {
+        return true;
+      }        
+      break;   
+    case QUIZ_MOVE_END :
+      if (questionIndex === lastEditedQuestionIndex) {
+        return true;
+      }
+      break;                      
+    default:
+      _shouldUpdate = true;
+    }
+    return _shouldUpdate;    
   }
   
     
-  getSwipableViewsQuestionsTemplate(){
+  getSwipableViewsQuestionsTemplate() {
     const swipeableViewTemplate = this.state.quizOrderedQuestions.map((question, questionIndex)=>{
-      const {lastEditedQuestionIndex} = this.state;
+      // const { lastEditedQuestionIndex } = this.state;
       
       let _shouldUpdate = this.shouldRenderQuestion(questionIndex);
             
@@ -209,9 +192,9 @@ export default class Quiz extends React.Component {
         <QuizQuestions 
           key={questionIndex}
           isDisabled={false}
-          onNextQuestionClick={(question, questionIndex)=>this.handleQuizNextQuestion(question, questionIndex)}
-          onPreviousQuestionClick={(question, questionIndex)=>this.handleQuizPreviousQuestion(question, questionIndex)}
-          onFinishQuizClick={(question, questionIndex)=>this.handleQuizEndShowSummmary(question, questionIndex)}
+          onNextQuestionClick={(inQuestion, inQuestionIndex)=>this.handleQuizNextQuestion(inQuestion, inQuestionIndex)}
+          onPreviousQuestionClick={(inQuestion, inQuestionIndex)=>this.handleQuizPreviousQuestion(inQuestion, inQuestionIndex)}
+          onFinishQuizClick={(inQuestion, inQuestionIndex)=>this.handleQuizEndShowSummmary(inQuestion, inQuestionIndex)}
           question={question}
           questionIndex={questionIndex}
           shouldUpdate={_shouldUpdate}
@@ -226,7 +209,7 @@ export default class Quiz extends React.Component {
     return swipeableViewTemplate;
   }
   
-  getProgressTemplate(){
+  getProgressTemplate() {
     let template = (
       <LinearProgress 
         style={Object.assign({}, styles.percentageBarContainer)}
@@ -234,12 +217,15 @@ export default class Quiz extends React.Component {
         value={this.state.pourcentageDone} 
       />       
     );
-    if(this.state.showProgress)   return template;
-    if(!this.state.showProgress)  return <div></div>
+    if (this.state.showProgress) {
+      return template;
+    }
+    if (!this.state.showProgress) {
+      return <div></div>;
+    } 
   }
   
-  render(){
-    
+  render() {
     let quizViewClasses = classNames({
       'animatedViews'    : this.state.animated,
       'view-enter'       : this.state.viewEnters
@@ -296,6 +282,10 @@ export default class Quiz extends React.Component {
 
 }
 
+
+Quiz.propTypes = {
+  history : React.PropTypes.object
+};
 
 Quiz.contextTypes = {
   translate       : React.PropTypes.object,

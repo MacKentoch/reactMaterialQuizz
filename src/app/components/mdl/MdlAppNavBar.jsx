@@ -15,24 +15,22 @@ export default class MdlAppNavBar extends React.Component {
     super(props);
   }
   
-  render(){
+  render() {
     const {
       title,
       children,
       ...others
     } = this.props;
-    
     return (
-      <header className="mdl-layout__header" {...others}>    
+      <header className="mdl-layout__header" {...others}>
         <div className="mdl-layout__header-row">
           <span className="mdl-layout-title">{title}</span>
-          <div className="mdl-layout-spacer"></div>          
+          <div className="mdl-layout-spacer"></div>
           {children}
         </div>
       </header>
     );
   }
-
 }
 
 MdlAppNavBar.propTypes = {
@@ -41,11 +39,5 @@ MdlAppNavBar.propTypes = {
 };
 
 MdlAppNavBar.defaultProps = {
- title      : ''
-};
-
-
-
-// <div class="mdl-layout__drawer-button">
-//   <i class="material-icons">menu</i>
-// </div>  
+  title      : ''
+}; 

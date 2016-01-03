@@ -18,13 +18,11 @@ export default class MdlIcon extends React.Component {
     super(props);
   }
   
-
-  render(){    
+  render() {    
     const {
       iconName,
       ...others
     } = this.props;
-    
     return (
       <i 
         className="material-icons"

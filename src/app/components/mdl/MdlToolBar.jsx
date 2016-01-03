@@ -20,14 +20,13 @@
 
 import React            from 'react';
 
-
 export default class MdlToolBar extends React.Component {
   
   constructor(props){
     super(props);
   }
   
-  render(){
+  render() {
     const {
       backgdColor,
       textColor,
@@ -36,13 +35,13 @@ export default class MdlToolBar extends React.Component {
     } = this.props;
     
     const toolbarStyle = {
-        boxSizing: 'border-box',
-        position: 'relative',
-        background: backgdColor,
-        color: textColor,
-        height: '64px',
-        width: '100%',
-        padding: '16px'
+      boxSizing   : 'border-box',
+      position    : 'relative',
+      background  : backgdColor,
+      color       : textColor,
+      height      : '64px',
+      width       : '100%',
+      padding     : '16px'
     };
     
     return (
@@ -62,9 +61,10 @@ MdlToolBar.propTypes = {
   backgdColor : React.PropTypes.string,
   textColor   : React.PropTypes.string,
   children    : React.PropTypes.node
-}
+};
 
 MdlToolBar.defaultProps = {
- backgdColor      : '#3F51B5',
- textColor        : '#fff'
+  backgdColor      : '#3F51B5',
+  textColor        : '#fff'
 };
+

@@ -14,9 +14,9 @@ export default class MdlSpacer extends React.Component {
     super(props);
   }
 
-  render(){    
+  render() {    
+    const {...others} = this.props;
     return (
-      const {...others} = this.props;
       <div 
         className="mdl-layout-spacer"
         {...others}>

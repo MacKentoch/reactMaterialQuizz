@@ -36,28 +36,26 @@ export default class MdlDrawer extends React.Component {
     
   }
 
-  forceDrawerClose(){
+  forceDrawerClose() {
     let rootMdlDrawer = document.querySelector(['.', ROOT_MDL_DRAWER_CLASSNAME].join(''));
     let obfuscator    = document.querySelector(['.', OBFUSCATOR_CLASSNAME].join('')); 
-    if(rootMdlDrawer && obfuscator){
-      if(rootMdlDrawer.classList.contains(IS_DRAWER_OPEN_CLASSNAME)){
+    if (rootMdlDrawer && obfuscator) {
+      if (rootMdlDrawer.classList.contains(IS_DRAWER_OPEN_CLASSNAME)) {
         rootMdlDrawer.classList.toggle(IS_DRAWER_OPEN_CLASSNAME);
         obfuscator.classList.toggle(IS_DRAWER_OPEN_CLASSNAME);        
       }
     } 
   }
 
-  handleMenuClick(event, navigationItemLabel, navigationRoute){
+  handleMenuClick(event, navigationItemLabel, navigationRoute) {
     event.preventDefault();
-    if(this.props.closeOnNavigation) this.forceDrawerClose();
+    if (this.props.closeOnNavigation) {
+      this.forceDrawerClose();
+    }
     this.props.onSelection(event, navigationItemLabel, navigationRoute);
   }
 
-  componentWillReceiveProps(newProps, newState){
-
-  }
-
-  render(){
+  render() {
     const {
       title,
       titleFontSize,
@@ -78,7 +76,7 @@ export default class MdlDrawer extends React.Component {
             navigation.map((navigationItem, navigationItemIndex)=>{
               let navigationRoute = navigationItem.route || '';
               let mdlIcon = '';
-              if(typeof navigationItem.mdlIconName !== 'undefined') {
+              if (typeof navigationItem.mdlIconName !== 'undefined') {
                 mdlIcon = (
                   <MdlIcon
                     style={Object.assign({}, styles.navItemIcon)} 
@@ -113,9 +111,9 @@ MdlDrawer.propTypes = {
   titleFontSizeUnit   : React.PropTypes.string,
   navigation          : React.PropTypes.arrayOf(
     React.PropTypes.shape({
-      "label"       : React.PropTypes.string.isRequired,
-      "route"       : React.PropTypes.string, 
-      "mdlIconName" : React.PropTypes.string
+      'label'       : React.PropTypes.string.isRequired,
+      'route'       : React.PropTypes.string, 
+      'mdlIconName' : React.PropTypes.string
     }).isRequired
   ).isRequired,
   closeOnNavigation   : React.PropTypes.bool,

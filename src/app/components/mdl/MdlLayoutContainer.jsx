@@ -1,4 +1,6 @@
-//TODO : to add more customisations to change application layout (fixed nav, fixed sidenav...)
+/*  global componentHandler  */
+
+// TODO : to add more customisations to change application layout (fixed nav, fixed sidenav...)
 
 /**
 **********************************************************************
@@ -24,14 +26,15 @@ export default class MdlLayoutContainer extends React.Component {
   }
   
   componentDidMount() {
-    componentHandler.upgradeDom(); // MDL - React trick This upgrades all upgradable components at 1st render   
+    // MDL - React trick This upgrades all upgradable components at 1st render
+    componentHandler.upgradeDom();    
   }
 
   componentDidUpdate() {
-    componentHandler.upgradeDom(); // MDL - React trick This upgrades all upgradable components at all updates except 1st render
+    componentHandler.upgradeDom(); 
   }
 
-  render(){  
+  render() {  
     const {...others} = this.props;  
     return (
       <div className="mdl-layout__container" {...others}>

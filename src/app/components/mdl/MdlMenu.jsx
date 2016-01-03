@@ -23,12 +23,12 @@ import {styles}   from './MdlMenu.style.jsx!jsx';
 
 export default class MdlMenu extends React.Component{
   
-  constructor(props){
+  constructor(props) {
     super(props);
   }
   
   handleMenuClick(event, menuId, menuItemIndex){
-    if(typeof this.props.onSelection !== 'undefined'){
+    if (typeof this.props.onSelection !== 'undefined') {
       this.props.onSelection(event, menuId, menuItemIndex);
     }
   }
@@ -40,10 +40,9 @@ export default class MdlMenu extends React.Component{
       ...others
     } = this.props;
     
-    const MenuItemsTemplate = menus.map((menuItem, menuItemIndex)=>{
-      
+    const MenuItemsTemplate = menus.map((menuItem, menuItemIndex) => {
       let mdlIcon = '';
-      if(typeof menuItem.mdlIconName !== 'undefined') {
+      if (typeof menuItem.mdlIconName !== 'undefined') {
         mdlIcon = (
           <MdlIcon
             style={Object.assign({}, styles.menuItemIcon)} 
@@ -52,7 +51,7 @@ export default class MdlMenu extends React.Component{
         );
       }      
       
-      if(menuItem.disabled){
+      if (menuItem.disabled) {
         return (
           <li 
             key={menuItemIndex}
@@ -67,7 +66,7 @@ export default class MdlMenu extends React.Component{
             </span>        
           </li>
         );        
-      }else{
+      } else {
         return (
           <li 
             key={menuItemIndex}
@@ -93,9 +92,7 @@ export default class MdlMenu extends React.Component{
       menus,
       ...others
     } = this.props;
-    
     const MenuItemsTemplate = this.renderMenuItems();
-    
     return (
       <div 
         {...others}
@@ -124,14 +121,14 @@ MdlMenu.propTypes = {
   materialIcon  : React.PropTypes.string,
   menus         : React.PropTypes.arrayOf(
     React.PropTypes.shape({
-      "name"        : React.PropTypes.string.isRequired,
-      "disabled"    : React.PropTypes.bool.isRequired,
-      "mdlIconName" : React.PropTypes.string,
+      'name'        : React.PropTypes.string.isRequired,
+      'disabled'    : React.PropTypes.bool.isRequired,
+      'mdlIconName' : React.PropTypes.string
     }).isRequired
   ).isRequired,
   onSelection   : React.PropTypes.func  
 };
 
 MdlMenu.defaultProps = {
- materialIcon      : 'more_vert'
+  materialIcon      : 'more_vert'
 };
