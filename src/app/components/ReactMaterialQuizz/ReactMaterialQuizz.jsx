@@ -216,6 +216,7 @@ export default class ReactMaterialQuizz extends React.Component {
 }
 
 ReactMaterialQuizz.propTypes = {
+  children  : React.PropTypes.node,
   history   : React.PropTypes.object,
   location  : React.PropTypes.object
 };

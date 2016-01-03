@@ -3,14 +3,16 @@
 *
 **/
 
-export default class PromisedTimeout{
-  constructor(){
+export default class PromisedTimeout {
+  constructor() {
     
   }
   
   delay(timeToWait){
     let promise = new Promise((resolve, reject)=>{
-      if(!this.isNumber(timeToWait)) reject('timeToWait parameter is NaN');
+      if (!this.isNumber(timeToWait)) {
+        reject('timeToWait parameter is NaN');
+      }
       setTimeout(()=>resolve(), timeToWait);
     }); 
     return promise;   

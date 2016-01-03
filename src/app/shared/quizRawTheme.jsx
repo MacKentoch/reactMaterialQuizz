@@ -8,7 +8,7 @@ export default {
   fontFamily  : 'Roboto, sans-serif',
   zIndex      : {
     layer   : 20,
-    popover : 20,
+    popover : 20
   },
   palette     : {
     primary1Color     : Colors.blue800,
@@ -23,6 +23,6 @@ export default {
     borderColor       : Colors.grey300,
     disabledColor     : ColorManipulator.fade(Colors.darkBlack, 0.3),
     pickerHeaderColor : Colors.blue500,
-    clockCircleColor  : ColorManipulator.fade(Colors.darkBlack, 0.07),
-  },
+    clockCircleColor  : ColorManipulator.fade(Colors.darkBlack, 0.07)
+  }
 };
