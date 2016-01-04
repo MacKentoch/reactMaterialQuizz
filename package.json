@@ -1,6 +1,6 @@
 {
   "name": "react-material-quizz",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "React JS material quizz",
   "main": "src/app/main.jsx",
   "scripts": {
@@ -27,7 +27,6 @@
       "classnames": "npm:classnames@^2.2.1",
       "clean-css": "npm:clean-css@^3.4.8",
       "css": "github:systemjs/plugin-css@^0.1.20",
-      "flexboxgrid": "github:kristoferjoseph/flexboxgrid@^6.3.0",
       "font-awesome": "npm:font-awesome@^4.5.0",
       "history": "npm:history@^1.16.0",
       "json": "github:systemjs/plugin-json@^0.1.0",

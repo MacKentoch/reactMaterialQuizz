@@ -23,7 +23,6 @@ System.config({
     "clean-css": "npm:clean-css@3.4.8",
     "core-js": "npm:core-js@1.2.6",
     "css": "github:systemjs/plugin-css@0.1.20",
-    "flexboxgrid": "github:kristoferjoseph/flexboxgrid@6.3.0",
     "font-awesome": "npm:font-awesome@4.5.0",
     "history": "npm:history@1.16.0",
     "json": "github:systemjs/plugin-json@0.1.0",

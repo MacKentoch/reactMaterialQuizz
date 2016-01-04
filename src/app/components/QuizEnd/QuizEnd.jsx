@@ -8,7 +8,7 @@ import PromisedTimeout  from '../../services/PromisedTimeout.jsx!jsx';
 import {styles}         from './quizEnd.style.jsx!jsx';
 
 
-const ENTRANCE_ANIMATION_DELAY = 5;
+const ENTRANCE_ANIMATION_DELAY = 500;
 
 export default class QuizEnd extends React.Component {
 	

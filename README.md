@@ -10,7 +10,6 @@ This is a simple dynamic quiz in [ReactJS](https://facebook.github.io/react/) de
 - JedWatson/classnames (*my preferred way to add animations rather than react-addons-css-transition-group*)
 - Material UI (>0.14.0+) (+ *react-tap-event-plugin*)
 - Material Design lite
-- flexboxgrid (reponsive layout)
 - animate.css
 - font-awesome
 - ES6
@@ -44,7 +43,7 @@ jspm-server
 ```
 
 1- **fast way** : just click 
-[preview here](https://rawgit.com/MacKentoch/reactMaterialQuizz/v1.1.1/public/index.html)
+[preview here](https://rawgit.com/MacKentoch/reactMaterialQuizz/v1.1.2/public/index.html)
 
 
 ##WHAT'S NEXT
