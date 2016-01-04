@@ -1,6 +1,8 @@
 React JS material quizz
 =========
 
+[![GitHub version](https://badge.fury.io/gh/MacKentoch%2FreactMaterialQuizz.svg)](https://badge.fury.io/gh/MacKentoch%2FreactMaterialQuizz)
+
 This is a simple dynamic quiz in [ReactJS](https://facebook.github.io/react/) designed following [google material guidelines](https://www.google.com/design/spec/material-design/introduction.html) thanks to nice [material UI](http://www.material-ui.com) and [google material design lite](http://www.getmdl.io/index.html).
 
 **feature :** 
