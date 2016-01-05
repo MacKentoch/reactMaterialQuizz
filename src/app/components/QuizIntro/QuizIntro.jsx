@@ -5,9 +5,6 @@ import MdlPaper         from '../mdl/MdlPaper.jsx!jsx';
 import MdlToolBar       from '../mdl/MdlToolBar.jsx!jsx';
 import RaisedButton     from 'material-ui/lib/raised-button';
 
-// import Colors           from 'material-ui/lib/styles/colors';
-// import {styles}         from './quizIntro.style.jsx!jsx';
-
 
 export default class QuizIntro extends React.Component {
 	

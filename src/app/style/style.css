@@ -5,11 +5,6 @@ body {
 .mdl-menu__container {
   right: 16px !important; }
 
-.reactMaterialImg {
-  color: #000;
-  height: 450px;
-  background: url("https://raw.githubusercontent.com/MacKentoch/reactMaterialQuizz/master/public/img/reactMaterialQuizz.png") center/cover; }
-
 .routeAnimated-enter {
   animation: zoomIn 0.3s both ease-in;
   z-index: 9999; }
@@ -50,3 +45,13 @@ body {
 
 .view-leave {
   opacity: 0; }
+
+.homeTitleContainer {
+  background-color: #000; }
+  .homeTitleContainer .reactMaterialImg {
+    color: #000;
+    height: 310px;
+    width: 310px;
+    background: url("https://raw.githubusercontent.com/MacKentoch/reactMaterialQuizz/master/public/img/reactjs.png") center/cover; }
+  .homeTitleContainer .titleText {
+    color: #61DAFB; }

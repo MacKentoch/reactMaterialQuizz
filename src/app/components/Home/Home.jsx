@@ -88,7 +88,19 @@ export default class Home extends React.Component {
         <div className="mdl-grid">
           <div className="mdl-cell mdl-cell--12-col">
             <MdlPaper>
-              <div className="reactMaterialImg"></div>
+              <div className="homeTitleContainer">
+                <div className="mdl-grid">
+                  <div className="mdl-layout-spacer"></div>
+                  <div className="reactMaterialImg"></div>
+                  <div className="mdl-layout-spacer"></div>
+                </div>
+                <div className="mdl-grid">
+                  <div className="mdl-layout-spacer"></div>
+                  <h2 className="titleText">{this.context.translate.HOME_TITRE_1_QUIZZ}</h2>
+                  <div className="mdl-layout-spacer"></div>
+                </div>
+                
+              </div>  
               <MarginTop
                 marginTopValue={80}
                 marginTopUnit={'px'} />

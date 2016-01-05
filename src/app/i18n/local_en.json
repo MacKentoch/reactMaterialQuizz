@@ -12,7 +12,7 @@
 	"CHOOSE_LANGUAGE"          : "Choose language",
 	"LAYOUT_THANK_YOU"				 : "thank you",
 	"PROGRESSION_WORD"				 : "Progress",
-	"HOME_TITRE_1_QUIZZ" 			 : "reactMaterialQuizz",
+	"HOME_TITRE_1_QUIZZ" 			 : "react Material Quizz",
 	"HOME_TITRE_2_QUIZZ" 			 : "a nice ReactJS quiz material designed (material UI)",
 	"HOME_DETAIL_TEXT"				 : "So easy : just update the JSON model quiz then you are done",
 	
