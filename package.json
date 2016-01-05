@@ -6,6 +6,10 @@
   "scripts": {
     "test": "exit 0"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MacKentoch/reactMaterialQuizz.git"
+  },
   "keywords": [
     "React",
     "ReactJS",
@@ -21,7 +25,6 @@
   "author": "Erwan DATIN (MacKentoch)",
   "license": "MIT",
   "jspm": {
-    "directories": {},
     "dependencies": {
       "animateCss": "github:daneden/animate.css@^3.5.0",
       "classnames": "npm:classnames@^2.2.1",
@@ -49,11 +52,6 @@
       "babel": "npm:babel-core@^5.8.22",
       "babel-runtime": "npm:babel-runtime@^5.8.20",
       "core-js": "npm:core-js@^1.1.0"
-    },
-    "overrides": {
-      "github:callemall/material-ui@master": {
-        "registry": "npm"
-      }
     }
   },
   "devDependencies": {

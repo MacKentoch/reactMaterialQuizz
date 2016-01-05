@@ -5,6 +5,11 @@ body {
 .mdl-menu__container {
   right: 16px !important; }
 
+.reactMaterialImg {
+  color: #000;
+  height: 450px;
+  background: url("../img/reactMaterialQuizz.png") center/cover; }
+
 .routeAnimated-enter {
   animation: zoomIn 0.3s both ease-in;
   z-index: 9999; }

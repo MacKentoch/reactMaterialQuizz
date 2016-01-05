@@ -8,6 +8,11 @@ body{
    right: 16px !important; 
 } 
 
+.reactMaterialImg {
+  color: #000;
+  height: 450px;
+  background: url('../img/reactMaterialQuizz.png') center / cover;
+}
 
 //route animation
 .routeAnimated-enter{

@@ -88,7 +88,7 @@ export default class Home extends React.Component {
         <div className="mdl-grid">
           <div className="mdl-cell mdl-cell--12-col">
             <MdlPaper>
-              <h3>{this.context.translate.HOME_TITRE_1_QUIZZ}</h3>
+              <div className="reactMaterialImg"></div>
               <MarginTop
                 marginTopValue={80}
                 marginTopUnit={'px'} />
