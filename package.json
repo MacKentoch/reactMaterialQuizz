@@ -47,12 +47,12 @@
       "react-swipeable-views": "npm:react-swipeable-views@0.3.5",
       "react-tap-event-plugin": "npm:react-tap-event-plugin@^0.2.1",
       "text": "github:systemjs/plugin-text@^0.0.4"
+    },
+    "devDependencies": {
+      "babel": "npm:babel-core@^5.8.34",
+      "babel-runtime": "npm:babel-runtime@^5.8.34",
+      "core-js": "npm:core-js@^1.1.0"
     }
-    // "devDependencies": {
-    //   "babel": "npm:babel-core@^6.3.10",
-    //   "babel-runtime": "npm:babel-runtime@^6.3.10",
-    //   "core-js": "npm:core-js@^1.1.4"
-    // }
   },
   "devDependencies": {
     "babel-cli": "^6.3.17",

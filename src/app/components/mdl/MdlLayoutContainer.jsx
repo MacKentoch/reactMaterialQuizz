@@ -35,7 +35,10 @@ export default class MdlLayoutContainer extends React.Component {
   }
 
   render() {  
-    const {...others} = this.props;  
+    const {
+      ...others
+    } = this.props;  
+    
     return (
       <div className="mdl-layout__container" {...others}>
         <div className="mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header">
