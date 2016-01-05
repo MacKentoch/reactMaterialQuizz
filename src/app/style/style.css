@@ -8,7 +8,7 @@ body {
 .reactMaterialImg {
   color: #000;
   height: 450px;
-  background: url("../img/reactMaterialQuizz.png") center/cover; }
+  background: url("https://raw.githubusercontent.com/MacKentoch/reactMaterialQuizz/master/public/img/reactMaterialQuizz.png") center/cover; }
 
 .routeAnimated-enter {
   animation: zoomIn 0.3s both ease-in;
