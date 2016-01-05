@@ -49,13 +49,16 @@
       "text": "github:systemjs/plugin-text@^0.0.4"
     },
     "devDependencies": {
-      "babel": "npm:babel-core@^5.8.22",
-      "babel-runtime": "npm:babel-runtime@^5.8.20",
-      "core-js": "npm:core-js@^1.1.0"
+      "babel": "npm:babel-core@^6.3.10",
+      "babel-runtime": "npm:babel-runtime@^6.3.10",
+      "core-js": "npm:core-js@^1.1.4"
     }
   },
   "devDependencies": {
     "babel-eslint": "^5.0.0-beta6",
+    "babel-preset-es2015": "^6.3.13",
+    "babel-preset-react": "^6.3.13",
+    "babel-preset-stage-2": "^6.3.13",
     "eslint": "^1.10.3",
     "eslint-plugin-react": "^3.13.1",
     "gulp": "^3.9.0",
