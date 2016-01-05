@@ -45,7 +45,7 @@ jspm-server
 ```
 
 1- **fast way** : just click 
-[preview here](https://rawgit.com/MacKentoch/reactMaterialQuizz/v1.2.1/public/index.html)
+[preview here](https://rawgit.com/MacKentoch/reactMaterialQuizz/v1.2.2/public/index.html)
 
 
 ##WHAT'S NEXT

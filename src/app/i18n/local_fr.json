@@ -13,7 +13,7 @@
 	"LAYOUT_THANK_YOU"				: "merci",
 	"PROGRESSION_WORD"				: "Progression",
 	"HOME_TITRE_1_QUIZZ" 			: "react Material Quizz",
-	"HOME_TITRE_2_QUIZZ" 			: "un magnifique quiz ReactJS en material design (material UI)",
+	"HOME_TITRE_2_QUIZZ" 			: "un magnifique quiz ReactJS en material design (material UI + material design lite)",
 	"HOME_DETAIL_TEXT"				: "Il suffit juste de modifier le modèle JSON pour personnaliser le quiz.",
 	
 	"QUIZZ_START_BUTTON_TEXT"	: "démarrer le quiz",
