@@ -55,6 +55,13 @@ jspm-server
 - [ ] hot reloading (*should be linked to webpack version*)
 - [ ] unit tests
 
+
+Note : jspm v0.17.x should be 
+- compatible with babel 6+
+- able to offer hot reload
+
+>If so, considering how simple and fast it is set up and future orientated nature (*with http2 we would have no more need to bundle*), JSPM may stay my preferred tool in my workflows. I don't mean webpack is bad. Webpack is powerfull the most widespread and offers more today. But imagine a new comer in javascript dev world, which one would he choose between webpack and jspm to give the same result? 
+
 ##License
 
 The MIT License (MIT)
