@@ -4,7 +4,7 @@
   "description": "React JS material quizz",
   "main": "src/app/main.jsx",
   "scripts": {
-    "test": "exit 0"
+    "test": "mocha --compilers js:babel-core/register --recursive"
   },
   "repository": {
     "type": "git",
@@ -72,7 +72,9 @@
     "gulp-react": "^3.1.0",
     "gulp-sass": "^2.1.1",
     "gulp-sourcemaps": "^1.6.0",
+    "jsdom": "^7.2.2",
     "jshint": "^2.8.0",
+    "mocha": "^2.3.4",
     "webpack": "^1.12.9",
     "webpack-dev-server": "^1.14.0"
   }
