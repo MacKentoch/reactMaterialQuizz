@@ -53,7 +53,7 @@ jspm-server
 - [ ] babel 6+
 - [ ] webpack version
 - [ ] hot reloading (*should be linked to webpack version*)
-- [ ] unit tests
+- [x] unit tests (*currently implementing*)
 
 
 Note : jspm v0.17.x should be 
