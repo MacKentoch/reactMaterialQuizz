@@ -32,8 +32,9 @@ System.config({
     "material-design-icons": "github:google/material-design-icons@2.1.1",
     "material-design-lite": "github:google/material-design-lite@1.0.6",
     "material-ui": "npm:material-ui@0.14.0",
-    "react": "npm:react@0.14.3",
+    "react": "npm:react@0.14.5",
     "react-addons-css-transition-group": "npm:react-addons-css-transition-group@0.14.3",
+    "react-addons-test-utils": "npm:react-addons-test-utils@0.14.5",
     "react-dom": "npm:react-dom@0.14.3",
     "react-router": "npm:react-router@1.0.2",
     "react-static-container": "npm:react-static-container@1.0.0",
@@ -384,7 +385,7 @@ System.config({
       "promise": "npm:promise@7.1.1",
       "whatwg-fetch": "npm:whatwg-fetch@0.9.0"
     },
-    "npm:fbjs@0.3.2": {
+    "npm:fbjs@0.6.0": {
       "core-js": "npm:core-js@1.2.6",
       "loose-envify": "npm:loose-envify@1.1.0",
       "process": "github:jspm/nodelibs-process@0.1.2",
@@ -573,7 +574,7 @@ System.config({
       "lodash.merge": "npm:lodash.merge@3.3.2",
       "lodash.throttle": "npm:lodash.throttle@3.0.4",
       "process": "github:jspm/nodelibs-process@0.1.2",
-      "react": "npm:react@0.14.3",
+      "react": "npm:react@0.14.5",
       "react-addons-create-fragment": "npm:react-addons-create-fragment@0.14.3",
       "react-addons-pure-render-mixin": "npm:react-addons-pure-render-mixin@0.14.3",
       "react-addons-transition-group": "npm:react-addons-transition-group@0.14.3",
@@ -664,28 +665,31 @@ System.config({
       "process": "github:jspm/nodelibs-process@0.1.2"
     },
     "npm:react-addons-create-fragment@0.14.3": {
-      "react": "npm:react@0.14.3"
+      "react": "npm:react@0.14.5"
     },
     "npm:react-addons-css-transition-group@0.14.3": {
-      "react": "npm:react@0.14.3"
+      "react": "npm:react@0.14.5"
     },
     "npm:react-addons-pure-render-mixin@0.14.3": {
-      "react": "npm:react@0.14.3"
+      "react": "npm:react@0.14.5"
+    },
+    "npm:react-addons-test-utils@0.14.5": {
+      "react": "npm:react@0.14.5"
     },
     "npm:react-addons-transition-group@0.14.3": {
-      "react": "npm:react@0.14.3"
+      "react": "npm:react@0.14.5"
     },
     "npm:react-addons-update@0.14.3": {
-      "react": "npm:react@0.14.3"
+      "react": "npm:react@0.14.5"
     },
     "npm:react-dom@0.14.3": {
-      "react": "npm:react@0.14.3"
+      "react": "npm:react@0.14.5"
     },
     "npm:react-motion@0.3.1": {
       "performance-now": "npm:performance-now@0.2.0",
       "process": "github:jspm/nodelibs-process@0.1.2",
       "raf": "npm:raf@3.1.0",
-      "react": "npm:react@0.14.3"
+      "react": "npm:react@0.14.5"
     },
     "npm:react-router@1.0.2": {
       "child_process": "github:jspm/nodelibs-child_process@0.1.0",
@@ -697,20 +701,20 @@ System.config({
     },
     "npm:react-static-container@1.0.0": {
       "process": "github:jspm/nodelibs-process@0.1.2",
-      "react": "npm:react@0.14.3"
+      "react": "npm:react@0.14.5"
     },
     "npm:react-swipeable-views@0.3.5": {
       "object-assign": "npm:object-assign@4.0.1",
       "path": "github:jspm/nodelibs-path@0.1.0",
       "process": "github:jspm/nodelibs-process@0.1.2",
-      "react": "npm:react@0.14.3",
+      "react": "npm:react@0.14.5",
       "react-addons-pure-render-mixin": "npm:react-addons-pure-render-mixin@0.14.3",
       "react-dom": "npm:react-dom@0.14.3",
       "react-motion": "npm:react-motion@0.3.1"
     },
     "npm:react-tap-event-plugin@0.2.1": {
       "fbjs": "npm:fbjs@0.2.1",
-      "react": "npm:react@0.14.3"
+      "react": "npm:react@0.14.5"
     },
     "npm:react-tools@0.13.3": {
       "buffer": "github:jspm/nodelibs-buffer@0.1.0",
@@ -718,9 +722,9 @@ System.config({
       "jstransform": "npm:jstransform@10.1.0",
       "process": "github:jspm/nodelibs-process@0.1.2"
     },
-    "npm:react@0.14.3": {
+    "npm:react@0.14.5": {
       "envify": "npm:envify@3.4.0",
-      "fbjs": "npm:fbjs@0.3.2",
+      "fbjs": "npm:fbjs@0.6.0",
       "process": "github:jspm/nodelibs-process@0.1.2"
     },
     "npm:readable-stream@1.1.13": {
