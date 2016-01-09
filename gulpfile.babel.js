@@ -20,6 +20,7 @@ import gulp         from 'gulp';
 import react				from 'gulp-react';
 import cache				from 'gulp-cached';
 import jshint 			from 'gulp-jshint';
+import jshintJsx   from  'jshint-jsx'
 import concat 			from 'gulp-concat';
 import cssmin 			from 'gulp-cssmin';
 import sass 				from 'gulp-sass';
@@ -57,7 +58,7 @@ gulp.task('app:sass:min', () => {
  */
 gulp.task('jshint:jsx:es6', () => {
   return gulp.src(config.jsHint.sources)
-    .pipe(cache('jshint'))
+    .pipe(jshint({ linter: jshintJsx.JSXHINT }))
     .pipe(react())
     .on('error', err => {
       console.error('JSX ERROR in ' + err.fileName);

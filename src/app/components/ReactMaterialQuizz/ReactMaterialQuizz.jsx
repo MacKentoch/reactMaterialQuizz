@@ -91,7 +91,7 @@ export default class ReactMaterialQuizz extends React.Component {
   
   handleDrawerNavigation(event, selectedRoute) {
     this.navigationTo(event, selectedRoute);
-  }
+  } 
   
   handleMenuItemSelected(menuKey) {
     if (menuKey === 0) {
