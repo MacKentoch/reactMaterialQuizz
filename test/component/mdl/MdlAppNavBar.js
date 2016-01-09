@@ -25,15 +25,4 @@ describe('MdlAppNavBar', () => {
    });
   
   
-   describe('header', ()=> {
-    it(`header should have only 1 attribute (className only since no others specified)`, () => {
-        renderedMdlAppNavBar = TestUtils.renderIntoDocument(<MdlAppNavBar  />);
-        let header = TestUtils.findRenderedDOMComponentWithClass(renderedMdlAppNavBar, 'mdl-layout__header');
-        //expect(Object.keys(header.attributes).length).to.eql(1);
-        expect(header.attributes).to.have.length(1);
-      });
-      
-    });  
-
-  
 });
