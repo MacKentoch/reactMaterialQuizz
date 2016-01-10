@@ -70,6 +70,7 @@
     "gulp-concat": "^2.6.0",
     "gulp-connect": "^2.3.1",
     "gulp-cssmin": "^0.1.7",
+    "gulp-eslint": "^1.1.1",
     "gulp-jshint": "^2.0.0",
     "gulp-notify": "^2.2.0",
     "gulp-react": "^3.1.0",

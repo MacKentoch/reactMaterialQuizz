@@ -20,7 +20,8 @@ import gulp         from 'gulp';
 import react				from 'gulp-react';
 import cache				from 'gulp-cached';
 import jshint 			from 'gulp-jshint';
-import jshintJsx   from  'jshint-jsx'
+import jshintJsx    from  'jshint-jsx'
+import eslint       from 'gulp-eslint';
 import concat 			from 'gulp-concat';
 import cssmin 			from 'gulp-cssmin';
 import sass 				from 'gulp-sass';
@@ -54,35 +55,20 @@ gulp.task('app:sass:min', () => {
 
 
 /**
- * jshint JSX and ES6
+ * eslint JSX and ES6   - uses .eslintrc file
  */
-gulp.task('jshint:jsx:es6', () => {
+gulp.task('eslint:jsx:es6', () => {
   return gulp.src(config.jsHint.sources)
-    .pipe(jshint({ linter: jshintJsx.JSXHINT }))
-    .pipe(react())
-    .on('error', err => {
-      console.error('JSX ERROR in ' + err.fileName);
-      console.error(err.message);
-      this.end();
-    })
-    .pipe(jshint())
-    .pipe(jshint.reporter('default'));
+    .pipe(eslint({ useEslintrc: true }))
+    .pipe(eslint.format())
+    .pipe(eslint.failAfterError());
 });
 
-
-/**
- * jshint ES6
- */
-gulp.task('jshint:ES6', () => {
-  return gulp.src(config.jsHint.sources)
-    .pipe(jshint({esnext : true}))
-    .pipe(jshint.reporter('default'))
-});
 
 /**
  * jspm bundle sfx (non minified)
  */
-gulp.task('app:bundle:sfx', [ 'app:sass'],  cb => {
+gulp.task('app:bundle:sfx', ['eslint:jsx:es6', 'app:sass'],  cb => {
   exec([
 		'jspm bundle-sfx ', 
 		config.jspm.main,
@@ -96,7 +82,7 @@ gulp.task('app:bundle:sfx', [ 'app:sass'],  cb => {
 /**
  * jspm bundle sfx (minified)
  */
-gulp.task('app:bundle:sfx:min', ['jshint:jsx:es6', 'app:sass'],  cb => {
+gulp.task('app:bundle:sfx:min', ['eslint:jsx:es6', 'app:sass'],  cb => {
   exec([
 		'jspm bundle-sfx ', 
 		config.jspm.main,
@@ -116,7 +102,7 @@ gulp.task('app:bundle:sfx:min', ['jshint:jsx:es6', 'app:sass'],  cb => {
  * default task
  */
 gulp.task('default', [
-  'jshint:jsx:es6', 
+  'eslint:jsx:es6', 
 	'app:sass',
 	'app:bundle:sfx',
 ]);
@@ -126,7 +112,7 @@ gulp.task('default', [
  * dev task
  */
 gulp.task('dev', [
-	'jshint:jsx:es6', 
+	'eslint:jsx:es6', 
 	'app:sass'
 ]);
 
