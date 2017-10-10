@@ -3,6 +3,10 @@ React JS material quizz
 
 [![GitHub version](https://badge.fury.io/gh/MacKentoch%2FreactMaterialQuizz.svg)](https://badge.fury.io/gh/MacKentoch%2FreactMaterialQuizz)
 
+<a target='_blank' rel='nofollow' href='https://app.codesponsor.io/link/Mp96tCWH2KdajZuBzqB6jwj8/MacKentoch/reactMaterialQuizz'>
+  <img alt='Sponsor' width='888' height='68' src='https://app.codesponsor.io/embed/Mp96tCWH2KdajZuBzqB6jwj8/MacKentoch/reactMaterialQuizz.svg' />
+</a>
+
 This is a simple dynamic quiz in [ReactJS](https://facebook.github.io/react/) designed following [google material guidelines](https://www.google.com/design/spec/material-design/introduction.html) thanks to nice [material UI](http://www.material-ui.com) and [google material design lite](http://www.getmdl.io/index.html).
 
 **feature :** 
@@ -20,7 +24,7 @@ This is a simple dynamic quiz in [ReactJS](https://facebook.github.io/react/) de
 - gulp 
 
 
-##Intallation :
+## Intallation :
 
 Clone or download then :
 
@@ -37,7 +41,7 @@ npm install jspm -g
 ```
 
 
-##Launch app : 
+## Launch app : 
 
 1- **warrior way** : start a server 
 ```bash
@@ -48,7 +52,7 @@ jspm-server
 [preview here](https://rawgit.com/MacKentoch/reactMaterialQuizz/v1.3.0/public/index.html)
 
 
-##WHAT'S NEXT
+## WHAT'S NEXT
 
 - [ ] babel 6+
 - [ ] webpack version
@@ -62,7 +66,7 @@ Note : jspm v0.17.x should be
 
 >If so, considering how simple and fast it is set up and future orientated nature (*with http2 we would have no more need to bundle*), JSPM may stay my preferred tool in my workflows. I don't mean webpack is bad. Webpack is powerfull the most widespread and offers more today. But imagine a new comer in javascript dev world, which one would he choose between webpack and jspm to give the same result? 
 
-##License
+## License
 
 The MIT License (MIT)
 
